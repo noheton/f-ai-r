@@ -68,8 +68,10 @@ TEMPLATE = """<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+<meta name="build-version" content="{cache_bust}">
 <title>{title} - F(AI)²R</title>
-<link rel="stylesheet" href="static/style.css">
+<link rel="stylesheet" href="static/style.css?v={cache_bust}">
 <script type="module">
   import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
   mermaid.initialize({{ startOnLoad: true, theme: 'neutral' }});
@@ -109,6 +111,7 @@ TEMPLATE = """<!doctype html>
     <h4>External</h4>
     <ul>
       <li><a href="https://github.com/noheton/f-ai-r">GitHub repository</a></li>
+      <li><a href="https://github.com/noheton/f-ai-r/releases/download/latest-draft/main.pdf">Latest draft (PDF)</a></li>
       <li><a href="https://orcid.org/0000-0001-6033-801X">ORCID 0000-0001-6033-801X</a></li>
       <li><a href="https://www.dlr.de/zlp">DLR ZLP Augsburg</a></li>
     </ul>
@@ -121,7 +124,8 @@ TEMPLATE = """<!doctype html>
       <h4>F(AI)²R</h4>
       <p>FAIR research with AI in the loop, twice. Working paper plus
          reproducible writing pipeline. Built {built} from
-         <a href="https://github.com/noheton/f-ai-r">noheton/f-ai-r</a>.</p>
+         <a href="https://github.com/noheton/f-ai-r">noheton/f-ai-r</a>
+         (build {cache_bust}).</p>
     </div>
     <div>
       <h4>Imprint</h4>
@@ -191,6 +195,9 @@ def sidebar_html(active: str) -> str:
     return "".join(parts)
 
 
+_CACHE_BUST = ""  # Set by main() once per build.
+
+
 def write_page(slug: str, title: str, body_html: str, eyebrow: str = "F(AI)²R") -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     out = OUT / f"{slug}.html"
@@ -203,6 +210,7 @@ def write_page(slug: str, title: str, body_html: str, eyebrow: str = "F(AI)²R")
             nav=nav_html(slug),
             sidebar=sidebar_html(slug),
             built=_dt.date.today().isoformat(),
+            cache_bust=_CACHE_BUST,
         ),
         encoding="utf-8",
     )
@@ -366,7 +374,31 @@ def export_provenance_json(g: Graph, out_path: Path) -> None:
     out_path.write_text(json.dumps(out, indent=2), encoding="utf-8")
 
 
+def _compute_cache_bust() -> str:
+    """Hash the inputs that affect rendered pages so the build emits a
+    fresh asset version per content change. The version is appended to
+    every internal asset URL (style.css, provenance.json) so a stale
+    GitHub-Pages CDN cache cannot serve an outdated bundle to a reader.
+    """
+    import hashlib
+    h = hashlib.sha1()
+    candidates: list[Path] = [
+        SITE_SRC / "static" / "style.css",
+        TTL,
+        ROOT / "site" / "index.md",
+        SITE_SRC / "provenance-explorer.md",
+    ]
+    for p in candidates:
+        if p.is_file():
+            h.update(p.read_bytes())
+    return h.hexdigest()[:10]
+
+
 def main(argv: Iterable[str]) -> int:
+    global _CACHE_BUST
+    _CACHE_BUST = _compute_cache_bust()
+    print(f"Build cache-bust version: {_CACHE_BUST}")
+
     if OUT.exists():
         shutil.rmtree(OUT)
     OUT.mkdir(parents=True, exist_ok=True)
