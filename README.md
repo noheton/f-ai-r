@@ -3,7 +3,16 @@
 > **FAIR research, with AI in the loop — twice.**
 > A short-form working paper and a reproducible writing pipeline.
 
-- **Site (GitHub Pages):** <https://noheton.github.io/f-ai-r/>
+## Read on the web
+
+**[https://noheton.github.io/f-ai-r/](https://noheton.github.io/f-ai-r/)**
+
+The full site renders the methodology, the agent prompts, the logbook,
+the PROV-O graph (as grouped tables and as a Mermaid topology), and the
+submission plan, all under the DLR Corporate Design.
+
+---
+
 - **Repository:** <https://github.com/noheton/f-ai-r>
 - **Author:** Florian Krebs · ORCID [0000-0001-6033-801X](https://orcid.org/0000-0001-6033-801X) · DLR Zentrum für Leichtbauproduktionstechnologie (ZLP), Augsburg
 - **Affiliations:** Helmholtz-Gemeinschaft · NFDI4Ing · HMC (Helmholtz Metadata Collaboration)

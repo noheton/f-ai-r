@@ -198,3 +198,19 @@ is verified locally: `_site/provenance-graph.html` now contains raw
 `"` and `<br/>` inside the Mermaid block, which Mermaid's CDN
 loader can parse.
 *Next:* Visual confirmation on the deployed Pages site after merge.
+
+## 2026-05-06 — Promote the GitHub Pages URL to a top-of-README callout
+*Author:* claude-opus-4-7 (under direction of repo owner)
+*Touched:* `README.md`.
+*Decision / outcome:* The Pages URL was already at line 6 of
+`README.md`, tucked into a structured contact list. Researcher
+reported it as missing — the structural placement made it easy to
+miss. Promoted to a dedicated "Read on the web" section directly
+under the tagline, with the URL rendered as a large markdown link.
+The horizontal rule below the section preserves the structured
+contact list that follows.
+A first edit included a globe emoji (🌐) in the heading; immediately
+reverted to obey the DLR voice rule "No emoji. Anywhere." that the
+Scientific Writer prompt now binds.
+*Next:* If the Pages URL is still not where the researcher expects,
+fix it in one more pass.
