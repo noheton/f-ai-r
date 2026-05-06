@@ -1438,6 +1438,29 @@ act:rev-research-infrastructure  a prov:Activity ;
 ent:section-pattern-research-infrastructure  prov:wasGeneratedBy act:rev-research-infrastructure ;
                                              prov:wasAttributedTo agent:scientific-writer , agent:human-author .
 
+# The future-research-infrastructure claim now also lands in the
+# Conclusion's call-to-action; revising the section attribution.
+act:rev-conclusion-longer-arc  a prov:Activity ;
+    rdfs:label "Promote claim:future-research-infrastructure into the Conclusion's 'The longer arc' paragraph"@en ;
+    prov:startedAtTime "2026-05-06T00:00:00Z"^^xsd:dateTime ;
+    prov:endedAtTime   "2026-05-06T00:00:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith agent:claude-opus-4-7 ;
+    prov:wasAssociatedWith agent:human-author ;
+    prov:used src:ashburner2000go , src:curdt2025hmc .
+
+ent:section-conclusion         prov:wasGeneratedBy act:rev-conclusion-longer-arc .
+
+claim:future-research-infrastructure  prov:wasGeneratedBy act:rev-conclusion-longer-arc .
+
+hc:promote-longer-arc          a fair2r:HumanContribution ;
+    rdfs:label "Researcher endorsement: promote the future-research-infrastructure claim into the Conclusion's call-to-action"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "structural-decision" ;
+    fair2r:contributionLeverage "medium" ;
+    rdfs:comment "After §3.6 was added, the model offered to promote the future-research-infrastructure claim into the Conclusion so the position-paper closer carries the forward-looking argument; researcher endorsed with 'yes'. New 'The longer arc' paragraph in conclusion.tex now restates the claim with a reference back to §3.6 and the Helmholtz cross-centre graph. The position-paper closer ends on the forward-looking note before the closing aphorism."@en ;
+    dcterms:created "2026-05-06"^^xsd:date ;
+    prov:influenced ent:section-conclusion .
+
 hc:research-infrastructure      a fair2r:HumanContribution ;
     rdfs:label "Researcher claims: bioinformatics precedent + future-research-infrastructure vision"@en ;
     fair2r:contributedBy agent:human-author ;

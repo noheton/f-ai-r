@@ -279,6 +279,20 @@ primary-artefact consistency invariant.
 `agents/orchestrator.md`.
 *Provenance IRI:* `fair2r:hc-contribution-rule`
 
+### 2026-05-06 --- "yes" --- promote the longer-arc paragraph into the Conclusion
+*Type:* `structural-decision`
+*Leverage:* medium
+*Triggered:* New "The longer arc" paragraph in
+`paper/sections/conclusion.tex` restating
+`claim:future-research-infrastructure` with reference back to §3.6 and
+the Helmholtz cross-centre graph (`curdt2025hmc`). The position-paper
+closer now ends on the forward-looking note before the closing
+aphorism.
+*Artefacts touched:* `paper/sections/conclusion.tex`,
+`doc/provenance.ttl`, `doc/user-contributions.md`,
+`doc/logbook.md`.
+*Provenance IRI:* `fair2r:hc-promote-longer-arc`
+
 ### 2026-05-06 --- Forward-looking pair: bioinformatics precedent + research-infrastructure vision
 *Type:* `content-prompt`
 *Leverage:* high
