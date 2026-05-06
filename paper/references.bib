@@ -158,6 +158,93 @@
   note    = {Editorial-level overview of the year's AI/science landscape; cited here as a backdrop reference. Verified at lit-retrieved by source-analyzer; advance to lit-read on human review.}
 }
 
+% --- Third-pass additions: reproducibility-crisis literature, reviewer-side
+% AI policies. All identifier-verified in spirit; flagged TODO-VERIFY at
+% lit-read until the human author has read them in full.
+
+@article{ioannidis2005,
+  title   = {Why Most Published Research Findings Are False},
+  author  = {Ioannidis, John P. A.},
+  journal = {PLOS Medicine},
+  volume  = {2},
+  number  = {8},
+  pages   = {e124},
+  year    = {2005},
+  doi     = {10.1371/journal.pmed.0020124},
+  note    = {Canonical anchor for the reproducibility-crisis framing. Cited in §1 as motivating context (TODO-VERIFY at lit-read).}
+}
+
+@article{pineau2021reproducibility,
+  title   = {Improving Reproducibility in Machine Learning Research (a Report from the {NeurIPS} 2019 Reproducibility Program)},
+  author  = {Pineau, Joelle and Vincent-Lamarre, Philippe and Sinha, Koustuv and Larivi\`{e}re, Vincent and Beygelzimer, Alina and d'Alch\'{e}-Buc, Florence and Fox, Emily and Larochelle, Hugo},
+  journal = {Journal of Machine Learning Research},
+  volume  = {22},
+  number  = {164},
+  pages   = {1--20},
+  year    = {2021},
+  url     = {https://jmlr.org/papers/v22/20-303.html},
+  note    = {ML-specific reproducibility report from NeurIPS 2019; cited in §1 alongside Ioannidis as the empirical anchor for the discipline-specific reproducibility argument (TODO-VERIFY at lit-read).}
+}
+
+@misc{neurips_llm_policy,
+  title        = {{NeurIPS} policy on the use of {Large Language Models}},
+  author       = {{NeurIPS}},
+  year         = {2024},
+  howpublished = {Conference policy page},
+  url          = {https://neurips.cc/},
+  note         = {Cited in §2 as a reviewer-and-author AI-use policy at a major ML venue. Specific policy version varies year-to-year; URL kept stable; TODO-VERIFY the exact policy URL for the relevant submission cycle at lit-read.}
+}
+
+@misc{iclr_llm_policy,
+  title        = {{ICLR} author and reviewer guidelines on the use of {AI} tools},
+  author       = {{ICLR}},
+  year         = {2024},
+  howpublished = {Conference author and reviewer guide},
+  url          = {https://iclr.cc/},
+  note         = {Cited in §2 as a sibling policy to neurips\_llm\_policy. URL kept stable; TODO-VERIFY the exact policy URL at lit-read.}
+}
+
+@misc{aclrr_llm_policy,
+  title        = {{ACL Rolling Review} policy on the use of {LLMs} in submissions and reviews},
+  author       = {{ACL Rolling Review}},
+  year         = {2024},
+  howpublished = {ACL ARR call for papers and reviewer guide},
+  url          = {https://aclrollingreview.org/cfp},
+  note         = {Cited in §2 alongside neurips\_llm\_policy and iclr\_llm\_policy as the third major venue-side AI policy in the submission-and-review pipeline. TODO-VERIFY the exact policy version at lit-read.}
+}
+
+@article{janowicz2019sosa,
+  title   = {{SOSA}: A lightweight ontology for sensors, observations, samples, and actuators},
+  author  = {Janowicz, Krzysztof and Haller, Armin and Cox, Simon J. D. and {Le Phuoc}, Danh and Lefran\c{c}ois, Maxime},
+  journal = {Journal of Web Semantics},
+  volume  = {56},
+  pages   = {1--10},
+  year    = {2019},
+  doi     = {10.1016/j.websem.2018.06.003},
+  note    = {The lightweight core of the W3C Semantic Sensor Network (SSN) ontology. Cited in §3.5 as a candidate domain ontology for plugging measurement claims into the F(AI)^2R schema (TODO-VERIFY at lit-read).}
+}
+
+@article{rijgersberg2013om,
+  title   = {Ontology of units of {Measure} and related concepts},
+  author  = {Rijgersberg, Hajo and {van Assem}, Mark and Top, Jan},
+  journal = {Semantic Web},
+  volume  = {4},
+  number  = {1},
+  pages   = {3--13},
+  year    = {2013},
+  doi     = {10.3233/SW-2012-0069},
+  note    = {OM-2 ontology for units of measure. Cited in §3.5 as a candidate domain ontology for grounding numeric values in the F(AI)^2R schema (TODO-VERIFY at lit-read).}
+}
+
+@misc{qudt,
+  title        = {{QUDT}: Quantities, Units, Dimensions and Types ontology},
+  author       = {{QUDT.org}},
+  year         = {2024},
+  howpublished = {Linked-data vocabulary},
+  url          = {https://www.qudt.org/},
+  note         = {Vocabulary maintained by the QUDT consortium for quantity, unit, and dimension semantics on the linked-data web. Cited in §3.5 alongside OM-2 (TODO-VERIFY at lit-read).}
+}
+
 @misc{krebs2026obscurity,
   title        = {Obscurity Is Dead: a methodology repository},
   author       = {Krebs, Florian},

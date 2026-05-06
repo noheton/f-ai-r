@@ -640,3 +640,63 @@ visual confirmation; advance the eleven new `lit-retrieved`
 entries to `lit-read` once the human author has read them; on
 endorsement, draft a companion `doc/ai-contributions.md` so the
 partition the Author's Note describes is symmetric.
+
+## 2026-05-06 — Domain-ontologies extension + reproducibility-crisis + reviewer-AI policies + reading-queue generator
+*Author:* claude-opus-4-7 (under direction of repo owner)
+*Touched:* new §3.5 in `paper/sections/pattern.tex`
+*Extensibility through domain ontologies* (citing SOSA / SSN, OM-2,
+QUDT; carries the German fragment "konkrete standardisierte Methode"
+as a load-bearing technical term in the source-author voice);
+`paper/sections/intro.tex` (`\cite{ioannidis2005,pineau2021reproducibility}`
+for the reproducibility-baseline anchor);
+`paper/sections/background.tex` (`\cite{neurips_llm_policy,iclr_llm_policy,aclrr_llm_policy}`
+for the reviewer-side AI policies); `paper/references.bib` (8 new
+entries: 3 ontologies, 2 reproducibility-crisis,
+3 venue policies); `doc/provenance.ttl` (8 new
+`fair2r:Source` entities; 3 new `fair2r:Claim` entities;
+`hc:domain-ontologies`,
+`hc:gap-fill-reproducibility-and-policies`,
+`hc:reading-queue` HumanContributions); new
+`scripts/build_reading_queue.py` (auto-generates
+`doc/reading-queue.md` from the graph plus the bib, sorted by
+load-bearing weight); new auto-generated `doc/reading-queue.md` (44
+entries); `paper/Makefile` `provenance` target now also runs the
+queue generator; `.github/workflows/build-paper.yml` regenerates
+both fragments and the queue;
+`scripts/build_provenance_site.py` adds the *Reading queue* page
+to the public site nav.
+*Decision / outcome:* Researcher proposed a new claim:
+"ontologies might actually help to make this process more efficient
+and reproducible (first example prov, but for example sensor data
+and OM-2 (units of measure) ontology --- konkrete standardisierte
+methoden ... potential)". The claim graduated to paper text as a
+new subsection §3.5 in pattern.tex. Three sources cited with
+`\todo[inline]{verify}`; bib entries added with TODO-VERIFY notes;
+new fair2r:Claim
+`claim:domain-ontologies-extension` recorded at
+`human-confirmed`. The German fragment was carried over verbatim
+to keep the voice consistent with the source author's house style.
+The same researcher endorsed two of the three gaps the model had
+flagged earlier (reviewer-side AI policies; reproducibility-crisis
+literature). Five further bib entries added; citations inserted
+into intro.tex and background.tex. Two further fair2r:Claim
+entities recorded.
+The researcher then asked: "do we have a list of reading tasks for
+the researcher?". A new generator
+`scripts/build_reading_queue.py` was written; it reads
+`doc/provenance.ttl` and `paper/references.bib`, finds every source
+not yet at `lit-read`, sorts by the number of dependent
+`fair2r:Claim` entries, and emits
+`doc/reading-queue.md`. The queue currently lists 44 entries: 32 at
+`lit-retrieved`, 10 at `ai-confirmed`, 2 graph-cleanliness defects
+without rungs. The queue is wired into the build pipeline (Makefile
++ CI) and surfaced as a tab on the public site so the researcher
+always has a current, prioritised list.
+Local smoke test: provenance.ttl parses to **1184 triples** (up
+from 1096); reading-queue.md regenerates cleanly with 44 entries;
+8 new bib entries, all `lit-retrieved` and identifier-verified to
+the extent possible without full-text reading.
+*Next:* Trigger build-paper on `main`; await visual confirmation
+of the new §3.5 and the additional citations; advance the 24
+`lit-retrieved` entries the human author has time to read; fix the
+2 graph-cleanliness defects (sources without rungs).
