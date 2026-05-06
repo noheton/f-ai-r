@@ -20,8 +20,11 @@ published version is explicitly authorised. Replay it locally with
 ## Slide decks
 
 Two Marp-rendered slide decks ship as primary artefacts alongside the
-manuscript, on the **DLR Corporate Design** Marp theme. Both auto-build
-on every push to <code>main</code> and live on the
+manuscript, on the **DLR Corporate Design** Marp theme (rendered via
+the asset-inlining preprocessor `scripts/build_slides.py`, the Python
+port of marp-dlr's `run-marp.mjs`, so the DLR background plates and
+logos actually load in headless Chromium). Both auto-build on every
+push to <code>main</code> and live on the
 <code>latest-draft-slides</code> release.
 
 <div class="cta-row">

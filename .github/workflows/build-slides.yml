@@ -5,10 +5,12 @@ on:
     branches: ["**"]
     paths:
       - "slides/**"
+      - "scripts/build_slides.py"
       - ".github/workflows/build-slides.yml"
   pull_request:
     paths:
       - "slides/**"
+      - "scripts/build_slides.py"
       - ".github/workflows/build-slides.yml"
   workflow_dispatch:
 
@@ -30,6 +32,11 @@ jobs:
         with:
           node-version: "20"
 
+      - name: Set up Python (used by scripts/build_slides.py)
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
       - name: Install Marp CLI
         run: npm install -g @marp-team/marp-cli
 
@@ -41,18 +48,16 @@ jobs:
           sudo apt-get install -y --no-install-recommends \
             chromium fonts-noto fonts-liberation
 
-      - name: Render decks to PDF + PPTX + HTML
-        working-directory: slides
+      - name: Render decks via the asset-inlining preprocessor
         env:
+          # The marp-dlr framework's preprocessor inlines theme asset
+          # URLs as base64 data: URIs; this is what makes the DLR
+          # background plates and logos actually render in Chromium.
+          # scripts/build_slides.py is the Python port of that step.
           CHROME_PATH: /usr/bin/chromium-browser
         run: |
-          mkdir -p dist
-          for deck in pitch-5min conference-30min; do
-            marp --theme static/dlr/dlr.css --pdf  -o dist/${deck}.pdf  ${deck}.md
-            marp --theme static/dlr/dlr.css --pptx -o dist/${deck}.pptx ${deck}.md || true
-            marp --theme static/dlr/dlr.css --html -o dist/${deck}.html ${deck}.md
-          done
-          ls -la dist/
+          python scripts/build_slides.py
+          ls -la slides/dist/
 
       - name: Upload decks as workflow artefact
         uses: actions/upload-artifact@v4
@@ -79,6 +84,9 @@ jobs:
             Auto-built from commit ${{ github.sha }}.
             Pitch deck (5 min) and conference deck (25+5 min), DLR Corporate
             Design (Marp). DRAFT until publication consent is recorded.
+            Theme assets inlined as base64 data URIs via
+            scripts/build_slides.py (the Python port of marp-dlr's
+            run-marp.mjs preprocessor).
             Site: https://noheton.github.io/f-ai-r/
           files: |
             slides/dist/pitch-5min.pdf

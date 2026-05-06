@@ -279,6 +279,28 @@ primary-artefact consistency invariant.
 `agents/orchestrator.md`.
 *Provenance IRI:* `fair2r:hc-contribution-rule`
 
+### 2026-05-06 --- Fix slide rendering (DLR theme) + trigger Pages rebuild
+*Type:* `corrective-intervention`
+*Leverage:* high
+*Triggered:* New `scripts/build_slides.py` ports the marp-dlr
+framework's `scripts/run-marp.mjs` asset-inlining preprocessor to
+Python: the DLR theme's `url('./assets/...')` references are
+replaced with base64 data URIs before Marp ever sees them, so the
+title and section-divider background plates plus the DLR logos
+actually load in headless Chromium. `slides/Makefile` and
+`.github/workflows/build-slides.yml` now invoke the Python
+preprocessor instead of calling Marp directly. `site/index.md`
+gains a one-line note about the preprocessor, which has the
+side effect of triggering `pages.yml` (whose path filter the
+slide-only commits did not match), so the deploy refreshes and
+busts the CDN cache that made the site look "back to the old
+page".
+*Artefacts touched:* `scripts/build_slides.py`, `slides/Makefile`,
+`.github/workflows/build-slides.yml`, `site/index.md`,
+`doc/provenance.ttl`, `doc/user-contributions.md`,
+`doc/logbook.md`, `doc/user-observations-log.md`.
+*Provenance IRI:* `fair2r:hc-fix-slide-rendering`
+
 ### 2026-05-06 --- Two slide decks + presentation agent + slides as fourth primary artefact
 *Type:* `structural-decision`
 *Leverage:* high
