@@ -750,3 +750,30 @@ future-research-infrastructure claims into the Conclusion's
 call-to-action if the researcher endorses; advance
 `ashburner2000go` and `curdt2025hmc` to `lit-read` once the human
 author has read them in full.
+
+## 2026-05-06 — "The longer arc" paragraph promoted into the Conclusion
+*Author:* claude-opus-4-7 (under direction of repo owner)
+*Touched:* `paper/sections/conclusion.tex`, `doc/provenance.ttl`,
+`doc/user-contributions.md`, `doc/logbook.md`.
+*Decision / outcome:* Researcher endorsed (with "yes") the model's
+proposal to promote `claim:future-research-infrastructure` into the
+Conclusion. New paragraph "The longer arc" inserted between the
+"Call to action" and the closing aphorism. The paragraph restates
+the bioinformatics-precedent / forward-research-infrastructure
+argument from §3.6 in compressed form, names the three properties
+the schema is designed to support (provenance models for
+hypothesis development; graph interconnectivity across institutional
+knowledge graphs; clever experimental validation against the
+graph), and frames F(AI)\textsuperscript{2}R as "the entry ticket,
+not the destination".
+The graph carries a new `act:rev-conclusion-longer-arc` activity
+linking the claim to its second appearance (the conclusion section,
+in addition to its primary home in §3.6); a new
+`hc:promote-longer-arc` HumanContribution records the researcher
+endorsement. The position-paper closer now ends on the forward-
+looking note before the aphorism, which strengthens the
+position-paper register asked for two sessions ago.
+Local smoke test: provenance.ttl parses to **1262 triples** (up
+from 1250); reading queue stable at 45 entries.
+*Next:* Trigger build-paper on `main` to refresh the
+`latest-draft` PDF with the new Conclusion paragraph.
