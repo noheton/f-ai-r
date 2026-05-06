@@ -1,0 +1,29 @@
+{
+  "title": "F(AI²)R: FAIR research with AI in the loop, twice",
+  "description": "Working paper and reproducible LLM-assisted writing pipeline. Manuscript, agent prompts, methodology, logbook, and a PROV-O provenance graph are versioned together.",
+  "license": "MIT",
+  "upload_type": "publication",
+  "publication_type": "preprint",
+  "access_right": "open",
+  "keywords": [
+    "FAIR",
+    "PROV-O",
+    "LLM",
+    "reproducibility",
+    "scholarly communication",
+    "provenance"
+  ],
+  "creators": [
+    {
+      "name": "TBD, TBD",
+      "affiliation": "TBD"
+    }
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/noheton/f-ai-r",
+      "relation": "isSupplementTo",
+      "scheme": "url"
+    }
+  ]
+}

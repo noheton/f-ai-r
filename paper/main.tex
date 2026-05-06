@@ -1,0 +1,77 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage[hidelinks]{hyperref}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage[backend=biber,style=numeric,sorting=none]{biblatex}
+\usepackage{todonotes}
+
+\addbibresource{references.bib}
+
+\title{F(AI\textsuperscript{2})R: FAIR Research with AI in the Loop, Twice}
+\author{TBD\thanks{TBD}}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+The FAIR principles (Findable, Accessible, Interoperable, Reusable) were
+formulated in an era when scholarly artefacts were authored by humans and
+consumed, eventually, by other humans. Generative AI has changed both ends
+of that pipe: Large Language Models now help author papers and will, soon,
+be the dominant first-pass readers of them. We argue that FAIR therefore
+needs a second copy of AI inside the loop --- once as \emph{assistant} in
+authoring, once as \emph{auditor} of provenance --- and we sketch a
+working pattern, F(AI\textsuperscript{2})R, in which both passes are
+captured in a PROV-O graph that ships with the manuscript. We demonstrate
+the pattern on this very paper: every section, figure, and citation is
+linked, by Turtle triple, to the agent (human or model) that produced it
+and to the source it draws on. We discuss what this buys (replayability,
+contestability, machine-grade attribution) and what it costs
+(prompt drift, hallucinated citations, the temptation to launder uncertainty
+through provenance metadata).
+\end{abstract}
+
+\section{Introduction}
+\label{sec:intro}
+\todo[inline]{Motivate: FAIR is fifteen years old; LLMs broke the
+authorship/readership symmetry; we need a refresh, not a replacement.}
+
+\section{Background: FAIR and PROV-O}
+\label{sec:background}
+\todo[inline]{Recap FAIR (Wilkinson et al., 2016) and PROV-O. Position
+F(AI\textsuperscript{2})R as additive, not revisionist.}
+
+\section{The F(AI\textsuperscript{2})R Pattern}
+\label{sec:pattern}
+\todo[inline]{Two AI passes: assistant and auditor. Roles, prompts,
+artefacts. Show diagram.}
+
+\section{Implementation in This Repository}
+\label{sec:impl}
+\todo[inline]{Describe directory layout, agent set, Makefile, CI, the
+provenance graph, the logbook.}
+
+\section{Discussion}
+\label{sec:discussion}
+\todo[inline]{Limitations: prompt drift, hallucinated citations, the
+``provenance theatre'' failure mode.}
+
+\section{Related Work}
+\label{sec:related}
+\todo[inline]{Provenance-aware writing tools, FAIR-for-software, model
+cards, datasheets, the recent literature on AI co-authorship.}
+
+\section{Conclusion}
+\label{sec:conclusion}
+\todo[inline]{Summarise; release this repository as the worked example.}
+
+\printbibliography
+
+\end{document}

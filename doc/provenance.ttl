@@ -1,0 +1,284 @@
+@prefix prov:    <http://www.w3.org/ns/prov#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix foaf:    <http://xmlns.com/foaf/0.1/> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+
+# Project namespaces
+@prefix fair2r:  <https://noheton.org/f-ai-r/ns#> .
+@prefix agent:   <https://noheton.org/f-ai-r/agent/> .
+@prefix act:     <https://noheton.org/f-ai-r/activity/> .
+@prefix ent:     <https://noheton.org/f-ai-r/entity/> .
+@prefix claim:   <https://noheton.org/f-ai-r/claim/> .
+@prefix src:     <https://noheton.org/f-ai-r/source/> .
+@prefix verif:   <https://noheton.org/f-ai-r/verification/> .
+
+#-------------------------------------------------------------------------
+# Vocabulary: F(AI^2)R extensions to PROV-O
+#-------------------------------------------------------------------------
+
+fair2r:AIAgent          a owl:Class ; rdfs:subClassOf prov:SoftwareAgent ;
+    rdfs:label "AI agent"@en ;
+    rdfs:comment "An LLM-driven agent participating in the writing pipeline."@en .
+
+fair2r:HumanResearcher  a owl:Class ; rdfs:subClassOf prov:Person ;
+    rdfs:label "Human researcher"@en .
+
+fair2r:Claim            a owl:Class ; rdfs:subClassOf prov:Entity ;
+    rdfs:label "Claim"@en ;
+    rdfs:comment "An assertion made in the manuscript that warrants attribution."@en .
+
+fair2r:Source           a owl:Class ; rdfs:subClassOf prov:Entity ;
+    rdfs:label "Source"@en .
+
+fair2r:Manuscript       a owl:Class ; rdfs:subClassOf prov:Entity ;
+    rdfs:label "Manuscript"@en .
+
+fair2r:Section          a owl:Class ; rdfs:subClassOf prov:Entity .
+fair2r:Figure           a owl:Class ; rdfs:subClassOf prov:Entity .
+fair2r:Prompt           a owl:Class ; rdfs:subClassOf prov:Plan .
+fair2r:Build            a owl:Class ; rdfs:subClassOf prov:Activity .
+fair2r:AuthoringPass    a owl:Class ; rdfs:subClassOf prov:Activity .
+fair2r:AuditPass        a owl:Class ; rdfs:subClassOf prov:Activity .
+
+fair2r:verificationState a owl:ObjectProperty ;
+    rdfs:domain fair2r:Claim ;
+    rdfs:range  fair2r:VerificationState .
+
+fair2r:VerificationState a owl:Class .
+fair2r:contradicts       a owl:ObjectProperty ;
+    rdfs:domain fair2r:Claim ; rdfs:range fair2r:Claim .
+
+# Verification ladder (rungs as individuals)
+verif:unverified       a fair2r:VerificationState ; rdfs:label "unverified"@en .
+verif:needs-research   a fair2r:VerificationState ; rdfs:label "needs research"@en .
+verif:ai-confirmed     a fair2r:VerificationState ; rdfs:label "AI-confirmed"@en .
+verif:human-confirmed  a fair2r:VerificationState ; rdfs:label "human-confirmed"@en .
+verif:source-vendored  a fair2r:VerificationState ; rdfs:label "source vendored"@en .
+
+#-------------------------------------------------------------------------
+# Agents
+#-------------------------------------------------------------------------
+
+agent:human-author       a fair2r:HumanResearcher ;
+    foaf:name "TBD" ;
+    rdfs:comment "Placeholder; replace with ORCID-bearing author records." .
+
+agent:claude-opus-4-7    a fair2r:AIAgent ;
+    foaf:name "Claude Opus 4.7" ;
+    rdfs:comment "Anthropic LLM, invoked via Claude Code." .
+
+agent:orchestrator       a fair2r:AIAgent ;
+    foaf:name "Orchestrator" ;
+    prov:actedOnBehalfOf agent:human-author .
+
+agent:scientific-writer  a fair2r:AIAgent ;
+    foaf:name "Scientific Writer" ;
+    prov:actedOnBehalfOf agent:human-author .
+
+agent:source-analyzer    a fair2r:AIAgent ;
+    foaf:name "Source Analyzer" ;
+    prov:actedOnBehalfOf agent:human-author .
+
+agent:fair-aligner       a fair2r:AIAgent ;
+    foaf:name "FAIR Aligner" ;
+    prov:actedOnBehalfOf agent:human-author .
+
+agent:provenance-curator a fair2r:AIAgent ;
+    foaf:name "Provenance Curator" ;
+    prov:actedOnBehalfOf agent:human-author .
+
+agent:layout-scrutinizer a fair2r:AIAgent ;
+    foaf:name "Layout Scrutinizer" ;
+    prov:actedOnBehalfOf agent:human-author .
+
+agent:readability-reviewer a fair2r:AIAgent ;
+    foaf:name "Readability Reviewer" ;
+    prov:actedOnBehalfOf agent:human-author .
+
+agent:illustration       a fair2r:AIAgent ;
+    foaf:name "Illustration" ;
+    prov:actedOnBehalfOf agent:human-author .
+
+agent:condenser          a fair2r:AIAgent ;
+    foaf:name "Condenser" ;
+    prov:actedOnBehalfOf agent:human-author .
+
+agent:research-protocol  a fair2r:AIAgent ;
+    foaf:name "Research Protocol" ;
+    prov:actedOnBehalfOf agent:human-author .
+
+#-------------------------------------------------------------------------
+# Plans (the prompts in agents/ are PROV-O Plans)
+#-------------------------------------------------------------------------
+
+ent:prompt-orchestrator        a fair2r:Prompt ; dcterms:source <agents/orchestrator.md> .
+ent:prompt-scientific-writer   a fair2r:Prompt ; dcterms:source <agents/scientific-writer.md> .
+ent:prompt-source-analyzer     a fair2r:Prompt ; dcterms:source <agents/source-analyzer.md> .
+ent:prompt-fair-aligner        a fair2r:Prompt ; dcterms:source <agents/fair-aligner.md> .
+ent:prompt-provenance-curator  a fair2r:Prompt ; dcterms:source <agents/provenance-curator.md> .
+ent:prompt-layout-scrutinizer  a fair2r:Prompt ; dcterms:source <agents/layout-scrutinizer.md> .
+ent:prompt-readability-reviewer a fair2r:Prompt ; dcterms:source <agents/readability-reviewer.md> .
+ent:prompt-illustration        a fair2r:Prompt ; dcterms:source <agents/illustration.md> .
+ent:prompt-condenser           a fair2r:Prompt ; dcterms:source <agents/condenser.md> .
+ent:prompt-research-protocol   a fair2r:Prompt ; dcterms:source <agents/research-protocol.md> .
+
+#-------------------------------------------------------------------------
+# The manuscript and its parts (entities)
+#-------------------------------------------------------------------------
+
+ent:manuscript            a fair2r:Manuscript ;
+    rdfs:label "F(AI^2)R manuscript (long form)"@en ;
+    dcterms:source <paper/main.tex> .
+
+ent:manuscript-condensed  a fair2r:Manuscript ;
+    rdfs:label "F(AI^2)R manuscript (condensed)"@en ;
+    dcterms:source <paper/main-condensed.tex> .
+
+ent:section-intro         a fair2r:Section ; rdfs:label "Introduction"@en ;
+    prov:hadPrimarySource ent:manuscript .
+ent:section-background    a fair2r:Section ; rdfs:label "Background"@en ;
+    prov:hadPrimarySource ent:manuscript .
+ent:section-pattern       a fair2r:Section ; rdfs:label "The F(AI^2)R Pattern"@en ;
+    prov:hadPrimarySource ent:manuscript .
+ent:section-impl          a fair2r:Section ; rdfs:label "Implementation"@en ;
+    prov:hadPrimarySource ent:manuscript .
+ent:section-discussion    a fair2r:Section ; rdfs:label "Discussion"@en ;
+    prov:hadPrimarySource ent:manuscript .
+ent:section-related       a fair2r:Section ; rdfs:label "Related Work"@en ;
+    prov:hadPrimarySource ent:manuscript .
+ent:section-conclusion    a fair2r:Section ; rdfs:label "Conclusion"@en ;
+    prov:hadPrimarySource ent:manuscript .
+
+#-------------------------------------------------------------------------
+# Sources cited (entities)
+#-------------------------------------------------------------------------
+
+src:wilkinson2016fair  a fair2r:Source ;
+    dcterms:title "The FAIR Guiding Principles for scientific data management and stewardship"@en ;
+    dcterms:identifier "doi:10.1038/sdata.2016.18" ;
+    dcterms:date "2016-03-15"^^xsd:date .
+
+src:w3c2013provo  a fair2r:Source ;
+    dcterms:title "PROV-O: The PROV Ontology"@en ;
+    dcterms:identifier <https://www.w3.org/TR/prov-o/> ;
+    dcterms:date "2013-04-30"^^xsd:date .
+
+#-------------------------------------------------------------------------
+# Activities — the creation of the paper, narrated as PROV
+#-------------------------------------------------------------------------
+
+# 1. Repository bootstrap
+act:bootstrap  a prov:Activity ;
+    rdfs:label "Bootstrap the F(AI^2)R repository"@en ;
+    prov:startedAtTime "2026-05-06T00:00:00Z"^^xsd:dateTime ;
+    prov:endedAtTime   "2026-05-06T00:00:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith agent:claude-opus-4-7 ;
+    prov:wasAssociatedWith agent:human-author ;
+    prov:used src:wilkinson2016fair , src:w3c2013provo .
+
+ent:manuscript            prov:wasGeneratedBy   act:bootstrap ;
+                          prov:wasAttributedTo  agent:claude-opus-4-7 ,
+                                                agent:human-author ;
+                          dcterms:created       "2026-05-06"^^xsd:date .
+
+ent:manuscript-condensed  prov:wasGeneratedBy   act:bootstrap ;
+                          prov:wasAttributedTo  agent:claude-opus-4-7 ,
+                                                agent:human-author ;
+                          dcterms:created       "2026-05-06"^^xsd:date .
+
+# 2. Authoring pass — placeholder activity, one per section
+act:author-intro  a fair2r:AuthoringPass ;
+    rdfs:label "Draft the introduction"@en ;
+    prov:wasAssociatedWith agent:scientific-writer ;
+    prov:qualifiedAssociation [
+        a prov:Association ;
+        prov:agent agent:scientific-writer ;
+        prov:hadPlan ent:prompt-scientific-writer
+    ] ;
+    prov:used src:wilkinson2016fair .
+
+ent:section-intro         prov:wasGeneratedBy  act:author-intro ;
+                          prov:wasAttributedTo agent:scientific-writer ,
+                                               agent:human-author .
+
+# 3. Audit pass — placeholder activities
+act:audit-fair  a fair2r:AuditPass ;
+    rdfs:label "FAIR alignment audit"@en ;
+    prov:wasAssociatedWith agent:fair-aligner ;
+    prov:qualifiedAssociation [
+        a prov:Association ;
+        prov:agent agent:fair-aligner ;
+        prov:hadPlan ent:prompt-fair-aligner
+    ] .
+
+act:audit-layout  a fair2r:AuditPass ;
+    rdfs:label "Layout audit"@en ;
+    prov:wasAssociatedWith agent:layout-scrutinizer ;
+    prov:qualifiedAssociation [
+        a prov:Association ;
+        prov:agent agent:layout-scrutinizer ;
+        prov:hadPlan ent:prompt-layout-scrutinizer
+    ] .
+
+act:audit-readability  a fair2r:AuditPass ;
+    rdfs:label "Readability audit"@en ;
+    prov:wasAssociatedWith agent:readability-reviewer ;
+    prov:qualifiedAssociation [
+        a prov:Association ;
+        prov:agent agent:readability-reviewer ;
+        prov:hadPlan ent:prompt-readability-reviewer
+    ] .
+
+# 4. Provenance curation — the one activity that may write to this file
+act:curate-provenance  a prov:Activity ;
+    rdfs:label "Curate the provenance graph"@en ;
+    prov:wasAssociatedWith agent:provenance-curator ;
+    prov:qualifiedAssociation [
+        a prov:Association ;
+        prov:agent agent:provenance-curator ;
+        prov:hadPlan ent:prompt-provenance-curator
+    ] ;
+    prov:generated <doc/provenance.ttl> .
+
+# 5. Build — the PDF is itself an entity with provenance
+act:build-pdf  a fair2r:Build ;
+    rdfs:label "Compile the long-form PDF via latexmk"@en ;
+    prov:used ent:manuscript .
+
+ent:pdf-long  a prov:Entity ;
+    rdfs:label "Compiled long-form PDF"@en ;
+    prov:wasGeneratedBy act:build-pdf ;
+    prov:wasDerivedFrom ent:manuscript .
+
+#-------------------------------------------------------------------------
+# Seed claims — the contribution claims of the paper
+# These are stubs. As sections are drafted, scientific-writer proposes
+# additional fair2r:Claim entities; provenance-curator validates and adds.
+#-------------------------------------------------------------------------
+
+claim:fair-needs-second-ai  a fair2r:Claim ;
+    rdfs:label "FAIR needs a second AI pass — auditing — to remain meaningful in the LLM era."@en ;
+    prov:wasAttributedTo agent:human-author ;
+    prov:wasGeneratedBy  act:author-intro ;
+    fair2r:verificationState verif:needs-research ;
+    dcterms:created "2026-05-06"^^xsd:date .
+
+claim:provenance-as-spine  a fair2r:Claim ;
+    rdfs:label "A PROV-O graph that ships with the manuscript is the simplest viable spine for AI-mediated scholarly attribution."@en ;
+    prov:wasAttributedTo agent:human-author ;
+    prov:wasGeneratedBy  act:author-intro ;
+    fair2r:verificationState verif:needs-research ;
+    dcterms:created "2026-05-06"^^xsd:date .
+
+claim:two-passes  a fair2r:Claim ;
+    rdfs:label "AI participates twice in the F(AI^2)R loop: once as assistant in authoring, once as auditor of provenance."@en ;
+    prov:wasAttributedTo agent:human-author ;
+    prov:wasGeneratedBy  act:author-intro ;
+    fair2r:verificationState verif:human-confirmed ;
+    dcterms:created "2026-05-06"^^xsd:date .
+
+#-------------------------------------------------------------------------
+# End of seed graph. Append, do not rewrite.
+#-------------------------------------------------------------------------

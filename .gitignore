@@ -1,0 +1,41 @@
+# LaTeX intermediate / output
+*.aux
+*.log
+*.out
+*.toc
+*.bbl
+*.blg
+*.bcf
+*.run.xml
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.nav
+*.snm
+*.vrb
+*.lof
+*.lot
+*.idx
+*.ilg
+*.ind
+
+# Built artefacts (PDFs are reproduced from source)
+paper/main.pdf
+paper/main-condensed.pdf
+paper/build/
+
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*~
+
+# Python (for scripts/)
+__pycache__/
+*.pyc
+.venv/
+
+# Local secrets / scratch
+.env
+scratch/
