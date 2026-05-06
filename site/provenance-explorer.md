@@ -31,7 +31,12 @@ Click a node above to see its label, type, and outgoing edges.
 <script src="https://unpkg.com/vis-network@9.1.9/standalone/umd/vis-network.min.js"></script>
 <script>
 (async function() {
-  const res = await fetch('static/provenance.json');
+  // Read the build version from the meta tag the site builder emits, so
+  // the JSON fetch participates in the same cache-busting scheme as the
+  // CSS. Falls back to a Date-based cachebreaker if the meta is absent.
+  const buildMeta = document.querySelector('meta[name="build-version"]');
+  const v = buildMeta ? buildMeta.getAttribute('content') : Date.now();
+  const res = await fetch('static/provenance.json?v=' + v);
   if (!res.ok) {
     document.getElementById('prov-explorer').innerHTML =
       '<p style="padding:24px">Provenance graph data not available. Rebuild the site with <code>python scripts/build_provenance_site.py</code>.</p>';

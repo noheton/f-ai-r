@@ -803,5 +803,34 @@ ent:src-ravi-corrected  a prov:Entity ;
     prov:wasGeneratedBy act:research-sources .
 
 #-------------------------------------------------------------------------
+# Revision: site cache-busting + Consensus/Scholar mandate in source workflow
+#-------------------------------------------------------------------------
+
+act:rev-cache-bust-and-search-tools  a prov:Activity ;
+    rdfs:label "Add build-time cache-bust to the site; mandate Consensus/Scholar tools in the source workflow"@en ;
+    prov:startedAtTime "2026-05-06T00:00:00Z"^^xsd:dateTime ;
+    prov:endedAtTime   "2026-05-06T00:00:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith agent:claude-opus-4-7 ;
+    prov:wasAssociatedWith agent:human-author .
+
+ent:script-build-provenance-site  prov:wasGeneratedBy act:rev-cache-bust-and-search-tools .
+ent:page-prov-explorer            prov:wasGeneratedBy act:rev-cache-bust-and-search-tools .
+ent:prompt-source-analyzer        prov:wasGeneratedBy act:rev-cache-bust-and-search-tools .
+
+claim:cache-bust-versioning  a fair2r:Claim ;
+    rdfs:label "Each rendered site page references its CSS via a SHA-1-keyed query string and embeds the same hash in a meta tag, so a stale CDN or browser cache cannot serve an outdated bundle."@en ;
+    prov:wasAttributedTo agent:human-author ;
+    prov:wasGeneratedBy  act:rev-cache-bust-and-search-tools ;
+    fair2r:verificationState verif:human-confirmed ;
+    dcterms:created "2026-05-06"^^xsd:date .
+
+claim:consensus-scholar-default  a fair2r:Claim ;
+    rdfs:label "Scientific sources are searched first via the Consensus/Scholar peer-reviewed corpus tool (Semantic Scholar / PubMed / Scopus / arXiv); web search is the fallback for grey-literature sources."@en ;
+    prov:wasAttributedTo agent:human-author ;
+    prov:wasGeneratedBy  act:rev-cache-bust-and-search-tools ;
+    fair2r:verificationState verif:human-confirmed ;
+    dcterms:created "2026-05-06"^^xsd:date .
+
+#-------------------------------------------------------------------------
 # End of seed graph. Append, do not rewrite.
 #-------------------------------------------------------------------------

@@ -3,13 +3,40 @@
 Owned by `agents/research-protocol.md`. Documents how literature is searched
 and screened for this paper.
 
+## Search tools (binding)
+
+Scientific sources are searched, in priority order:
+
+1. **Consensus / Scholar** (the harness's
+   `mcp__…__search` tool) — over 200 M peer-reviewed papers across
+   Semantic Scholar, PubMed, Scopus, and arXiv. **Default tool for
+   peer-reviewed citations.** Filters (`year_min`, `exclude_preprints`,
+   `study_types`, `medical_mode`) are used only when the question
+   requires them.
+2. **Semantic Scholar / OpenAlex / arXiv direct** — fallbacks for
+   bibliographic cross-checks and for fields under-covered by
+   Consensus.
+3. **Google Scholar** — for orientation and citation-graph traversal,
+   not as the primary record (its identifiers are not always stable).
+4. **Web search** (`WebSearch`, `web_search_exa`) — for
+   grey-literature sources (editorial statements, venue policies,
+   institutional documents, legal sources such as USCO / UrhG, W3C
+   recommendations, RDA recommendations).
+5. **`WebFetch`** — used after a candidate URL has been identified, to
+   read the actual page and extract the snippet.
+
+A search result is not a citation until its identifier resolves and
+its claim has been linked to a `fair2r:Claim` in
+`doc/provenance.ttl` per the verification ladder. Promotion through
+the rungs follows `agents/source-analyzer.md`.
+
 ## Search rounds
 
 ### Round 1 — TBD
 
 - **Date:** YYYY-MM-DD
-- **Databases:** Google Scholar, Semantic Scholar, arXiv (cs.DL, cs.DB),
-  ACM Digital Library.
+- **Tools used:** Consensus / Scholar (default), plus any of the
+  above as required.
 - **Queries:**
   - `("FAIR principles" OR "FAIR data") AND ("large language model" OR LLM)`
   - `"PROV-O" AND ("scholarly" OR "manuscript" OR "paper writing")`

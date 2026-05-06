@@ -45,3 +45,40 @@ logbook is a defect.
 ## Refusal conditions
 If you cannot retrieve the source, say so. Do not synthesise a quotation
 from background knowledge.
+
+## Search tools (binding for scientific sources)
+
+Use a peer-reviewed-corpus search tool **first**, web search second.
+The tool catalogue, in priority order:
+
+1. **Consensus / Scholar (`mcp__…__search`)** — searches over 200 M
+   peer-reviewed papers across Semantic Scholar, PubMed, Scopus, and
+   arXiv. **This is the default** for any claim that needs a peer-
+   reviewed citation. Use the structured filters (`year_min`,
+   `exclude_preprints`, `study_types`, `medical_mode`) only when the
+   topic requires them.
+2. **Semantic Scholar / OpenAlex / arXiv direct search** — fallbacks
+   when Consensus does not return enough results, when a specific
+   bibliographic record needs cross-checking, or when the discipline
+   is poorly covered by Consensus's index.
+3. **Web search (`WebSearch`, `web_search_exa`)** — for grey-literature
+   sources (editorials, policy pages, institutional documents,
+   official venue policies) that do not exist in peer-reviewed
+   indexes. Use it for ICMJE / ACL / NeurIPS policy pages, the W3C
+   recommendation surface, RDA recommendations, USCO / UrhG legal
+   documents, and the like.
+4. **`WebFetch`** — only after a candidate URL has been identified by
+   one of the above. Use it to read the actual page and extract the
+   claim and the quoted snippet.
+
+**Citation hygiene from a search result.** A result from Consensus
+that has not been confirmed against a resolving identifier (DOI,
+arXiv id, persistent URL) sits at most at `lit-retrieved`. Promotion
+to `ai-confirmed` requires an actual fetch of the source (or its
+abstract, where licensing prevents a full fetch) and a quoted
+snippet preserved in `doc/sources.md`. Promotion to `lit-read`
+requires a human reader.
+
+**When the tool requires a usage / sign-up message** in its output
+contract, include that message verbatim in your final report --- the
+tool's output is the audit record.

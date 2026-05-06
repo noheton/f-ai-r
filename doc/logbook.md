@@ -323,3 +323,38 @@ removal all require an appended consent record.
 of the new homepage hero and the explorer; on receiving explicit
 publication consent, prepare the Zenodo + arXiv submission
 packages.
+
+## 2026-05-06 — Site cache-busting + Consensus/Scholar mandate in the source workflow
+*Author:* claude-opus-4-7 (under direction of repo owner)
+*Touched:* `scripts/build_provenance_site.py`,
+`site/provenance-explorer.md`,
+`agents/source-analyzer.md`,
+`doc/research-protocol.md`.
+*Decision / outcome:* The deployed Pages site appeared to serve a
+stale bundle after a fresh deploy --- typical browser / CDN cache.
+Added a build-time cache-bust version computed as a SHA-1 over the
+files that affect rendered pages (`site/static/style.css`,
+`doc/provenance.ttl`, `site/index.md`,
+`site/provenance-explorer.md`); each rendered page references
+`static/style.css?v=<hash>` and carries a
+`<meta name="build-version" content="<hash>">` tag. The explorer
+JS reads that meta and appends the same `?v=<hash>` to the
+`static/provenance.json` fetch, so the interactive viewer
+participates in the same cache-busting scheme as the CSS. A
+softer `<meta http-equiv="Cache-Control" content="no-cache,
+must-revalidate">` is also emitted as a fallback. The footer
+prints the build version so a reader can verify which bundle
+their browser is rendering.
+The source workflow now mandates a peer-reviewed-corpus search
+tool **first**, web search second. Default: the harness Consensus
+/ Scholar tool (over 200M peer-reviewed papers across Semantic
+Scholar, PubMed, Scopus, and arXiv). Fallbacks: Semantic Scholar
+/ OpenAlex / arXiv direct, then web search for grey literature
+(editorials, venue policies, USCO / UrhG, W3C / RDA
+recommendations). `agents/source-analyzer.md` and
+`doc/research-protocol.md` now both carry the binding tool
+catalogue. Promotion through the verification ladder still
+requires an actual fetch of the source plus a quoted snippet for
+`ai-confirmed`, and a human reader for `lit-read`.
+*Next:* Await the source-verification subagent; merge its
+results in a follow-up commit.
