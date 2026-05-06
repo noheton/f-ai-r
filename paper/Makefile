@@ -8,12 +8,18 @@ LATEXMKOPTS ?= -pdf -interaction=nonstopmode -halt-on-error -file-line-error
 MAIN        := main
 PAGE_BUDGET ?= 10
 
-.PHONY: all pdf watch clean distclean arxiv check pages
+.PHONY: all pdf provenance watch clean distclean arxiv check pages
 
 all: pdf
 
-pdf: check
+# Always regenerate provenance fragments before compiling.
+pdf: check provenance
 	$(LATEXMK) $(LATEXMKOPTS) $(MAIN).tex
+
+# Re-run the provenance analysis script. Generates four LaTeX fragments
+# under paper/sections/_generated/ that provenance-analysis.tex inputs.
+provenance:
+	@cd .. && python3 scripts/provenance_analysis.py
 
 watch: check
 	$(LATEXMK) $(LATEXMKOPTS) -pvc $(MAIN).tex

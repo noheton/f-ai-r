@@ -702,5 +702,106 @@ act:rev-readme-pages-url  a prov:Activity ;
 ent:readme  prov:wasGeneratedBy act:rev-readme-pages-url .
 
 #-------------------------------------------------------------------------
+# Revision: CI fix, provenance-analysis section, pipeline figure,
+# interactive explorer, draft-PDF release, sources index, consent gate
+#-------------------------------------------------------------------------
+
+ent:section-provenance-analysis  a fair2r:Section ;
+    rdfs:label "Provenance Analysis"@en ;
+    prov:hadPrimarySource ent:manuscript .
+
+ent:figure-pipeline  a fair2r:Figure ;
+    rdfs:label "Ten-stage pipeline figure"@en ;
+    dcterms:source <paper/figures/pipeline.tex> .
+
+ent:script-provenance-analysis  a prov:Entity ;
+    rdfs:label "scripts/provenance_analysis.py"@en ;
+    dcterms:source <scripts/provenance_analysis.py> .
+
+ent:script-explorer-json  a prov:Entity ;
+    rdfs:label "Provenance JSON exporter (in scripts/build_provenance_site.py)"@en ;
+    dcterms:source <scripts/build_provenance_site.py> .
+
+ent:page-prov-explorer  a prov:Entity ;
+    rdfs:label "Interactive provenance explorer page"@en ;
+    dcterms:source <site/provenance-explorer.md> .
+
+ent:doc-publication-consent  a prov:Entity ;
+    rdfs:label "doc/publication-consent.md (consent gate)"@en ;
+    dcterms:source <doc/publication-consent.md> .
+
+ent:doc-sources  a prov:Entity ;
+    rdfs:label "doc/sources.md (sources index)"@en ;
+    dcterms:source <doc/sources.md> .
+
+agent:source-analyzer-subagent  a fair2r:AIAgent ;
+    foaf:name "Source-analyzer subagent (general-purpose)" ;
+    rdfs:comment "Spawned in isolation to research and evaluate the bibliography against doc/sources.md."@en ;
+    prov:actedOnBehalfOf agent:human-author .
+
+act:rev-ci-fix-and-features  a prov:Activity ;
+    rdfs:label "Fix paper-build CI; add provenance-analysis section, pipeline figure, interactive explorer, splashy homepage, draft-PDF release, consent gate"@en ;
+    prov:startedAtTime "2026-05-06T00:00:00Z"^^xsd:dateTime ;
+    prov:endedAtTime   "2026-05-06T00:00:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith agent:claude-opus-4-7 ;
+    prov:wasAssociatedWith agent:human-author ;
+    prov:generated ent:section-provenance-analysis ,
+                   ent:figure-pipeline ,
+                   ent:script-provenance-analysis ,
+                   ent:page-prov-explorer ,
+                   ent:doc-publication-consent .
+
+act:research-sources  a prov:Activity ;
+    rdfs:label "Research and evaluate sources, populate doc/sources.md"@en ;
+    prov:startedAtTime "2026-05-06T00:00:00Z"^^xsd:dateTime ;
+    prov:endedAtTime   "2026-05-06T00:00:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith agent:source-analyzer-subagent ;
+    prov:wasAssociatedWith agent:human-author ;
+    prov:generated ent:doc-sources .
+
+ent:section-provenance-analysis  prov:wasGeneratedBy act:rev-ci-fix-and-features ;
+                                 prov:wasAttributedTo agent:scientific-writer ,
+                                                      agent:human-author .
+ent:figure-pipeline              prov:wasGeneratedBy act:rev-ci-fix-and-features ;
+                                 prov:wasAttributedTo agent:illustration ,
+                                                      agent:human-author .
+ent:doc-publication-consent      prov:wasGeneratedBy act:rev-ci-fix-and-features ;
+                                 prov:wasAttributedTo agent:human-author .
+
+claim:provenance-analysis-claim  a fair2r:Claim ;
+    rdfs:label "The provenance graph is a queryable structure whose health, taken section by section, is the audit pass on Reusable; four diagnostic queries (rung distribution, section-to-claim coverage, source invocation strength, activity timeline) catch the failure modes that have a graph signature."@en ;
+    prov:wasAttributedTo agent:human-author ;
+    prov:wasGeneratedBy  act:rev-ci-fix-and-features ;
+    fair2r:verificationState verif:human-confirmed ;
+    dcterms:created "2026-05-06"^^xsd:date .
+
+claim:base-rates-distinct  a fair2r:Claim ;
+    rdfs:label "Walters & Wilder report 55%/18% citation fabrication for GPT-3.5/GPT-4 in general-purpose generation; Magesh et al. report 17–34% hallucination for retrieval-augmented legal-research tools; the two studies grade different objects and should be cited distinctly."@en ;
+    prov:wasAttributedTo agent:source-analyzer-subagent , agent:human-author ;
+    prov:wasGeneratedBy  act:research-sources ;
+    prov:wasDerivedFrom  src:walters2023fabrication , src:magesh2024legal ;
+    fair2r:verificationState verif:ai-confirmed ;
+    dcterms:created "2026-05-06"^^xsd:date .
+
+claim:consent-gate-binding  a fair2r:Claim ;
+    rdfs:label "doc/publication-consent.md is the gate read by every script and workflow that publishes the manuscript outside the local working tree; until a signed entry records explicit human-author consent for a specific surface, those workflows must refuse to publish."@en ;
+    prov:wasAttributedTo agent:human-author ;
+    prov:wasGeneratedBy  act:rev-ci-fix-and-features ;
+    prov:wasDerivedFrom  src:krebs2026obscurity ;
+    fair2r:verificationState verif:source-vendored ;
+    dcterms:created "2026-05-06"^^xsd:date .
+
+# Bibliography correction: vannoorden2023chatgpt DOI and authors
+ent:src-vannoorden-corrected  a prov:Entity ;
+    rdfs:label "src:vannoorden2023chatgpt with corrected DOI/authors"@en ;
+    prov:wasRevisionOf src:vannoorden2023chatgpt ;
+    prov:wasGeneratedBy act:research-sources .
+
+# Bibliography correction: ravi2024fair4ml authors and Zenodo DOI
+ent:src-ravi-corrected  a prov:Entity ;
+    rdfs:label "ravi2024fair4ml bib entry with Castro/Garijo authors and Zenodo DOI 10.5281/zenodo.14002310"@en ;
+    prov:wasGeneratedBy act:research-sources .
+
+#-------------------------------------------------------------------------
 # End of seed graph. Append, do not rewrite.
 #-------------------------------------------------------------------------
