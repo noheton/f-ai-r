@@ -520,3 +520,34 @@ visual confirmation of the new sections; fold the remaining
 `pending` observations into the paper if the researcher endorses;
 add a companion `doc/ai-contributions.md` so the partition the
 Author's Note describes is symmetric.
+
+## 2026-05-06 — Accelerator-or-blender observation logged
+*Author:* claude-opus-4-7 (under direction of repo owner)
+*Touched:* `doc/user-observations-log.md`, `doc/provenance.ttl`,
+`doc/logbook.md`.
+*Decision / outcome:* Researcher posed the cognition question:
+"I can build a vision in my head, mumble ideas as they come and
+go, and LLMs make sense of that and put it into a mostly /
+sometimes / usually useful structured context. I wonder what that
+means for 'cognition' in biological systems --- is GenAI some kind
+of accelerator of human potential, or is it just a big cultural
+blender?" The model offered a perspective in chat: probably both,
+conditional on where in the cognitive stack the model is allowed
+to operate. LLMs interpolate fluently \emph{within} the manifold
+of prior text and accelerate when they stay on the prose-craft
+side of the partition; LLMs do not extrapolate \emph{off} the
+manifold and become cultural blenders when they cross into the
+abstracting layer. The Author's Note's partition (the human does
+the deciding, the model does the drafting) is therefore not just a
+description but a coupling rule. The honest test for any
+collaboration: ask whether the abstraction would have been
+thinkable without the model. The observation is logged in
+`doc/user-observations-log.md` as a strong candidate for paper
+graduation (sharpens *What surprised me about the cooperation*) and
+mirrored as `hc:obs-accelerator-or-blender` in the graph at
+`promotedToPaper="pending"`. The prompt-accretion entry's italic
+conclusion was inadvertently overwritten in the first edit and has
+been restored in the same commit.
+*Next:* On researcher endorsement, extend the Author's Note's
+*What surprised me about the cooperation* paragraph with the
+coupling-rule sentence.

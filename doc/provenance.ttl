@@ -1199,6 +1199,14 @@ hc:obs-prompt-accretion       a fair2r:MetaContribution ;
     fair2r:promotedToPaper "pending" ;
     dcterms:created "2026-05-06"^^xsd:date .
 
+hc:obs-accelerator-or-blender  a fair2r:MetaContribution ;
+    rdfs:label "Accelerator or cultural blender? --- the cognition question"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "observation" ;
+    fair2r:contributionLeverage "high" ;
+    fair2r:promotedToPaper "pending" ;
+    dcterms:created "2026-05-06"^^xsd:date .
+
 claim:contribution-tracking-rule  a fair2r:Claim ;
     rdfs:label "Every material contribution to the manuscript or its scaffolding is logged in doc/user-contributions.md (mirrored as fair2r:HumanContribution / AIContribution / MetaContribution in the graph), so that the question 'what did the human / AI actually do here?' has a structured, queryable answer."@en ;
     prov:wasAttributedTo agent:human-author ;

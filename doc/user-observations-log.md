@@ -188,10 +188,51 @@ accumulate. Each session adds a binding clause (chapter granularity,
 DLR voice rules, page budget, Consensus mandate, paywall escalation,
 contribution tracking) and the prompt grows by accretion. This is the
 same pattern as the verification ladder itself --- the
-`ai-confirmed` rung was added when the cost of single-tier verification
-was felt. \textbf{Implication}: the prompts are themselves a research
-artefact whose evolution is worth tracing. A future analysis pass
-could query the git log for `agents/*.md` and produce a histogram of
-"clauses added per session", giving an empirical curve for
-"experience with the tool". Candidate for the
+\textsc{ai-confirmed} rung was added when the cost of single-tier
+verification was felt. \textbf{Implication}: the prompts are
+themselves a research artefact whose evolution is worth tracing. A
+future analysis pass could query the git log for `agents/*.md` and
+produce a histogram of "clauses added per session", giving an
+empirical curve for "experience with the tool". Candidate for the
 \texttt{provenance\_analysis.py} extractor in a follow-up commit.}
+
+## 2026-05-06 — Accelerator or cultural blender? — the cognition question
+*Source:* session 2026-05-06 (user message after the position-paper
+completion was merged)
+*Stage:* hypothesis
+*Promoted-to-paper:* pending — strong candidate for an extension to
+`paper/sections/authors-note.tex` (sharpens *What surprised me about
+the cooperation*).
+
+The user observed: "I can build a vision in my head, mumble ideas as
+they come and go, and LLMs make sense of that and put it into a
+mostly / sometimes / usually useful structured context. I wonder what
+that means for 'cognition' in biological systems --- is GenAI some
+kind of accelerator of human potential, or is it just a big cultural
+blender?"
+
+\emph{The model offered a perspective in chat. The honest answer is:
+probably both, conditional on where in the cognitive stack the model
+is allowed to operate. LLMs interpolate fluently within the manifold
+of prior text; for ideas that lie on or near that manifold ---
+F(AI)\textsuperscript{2}R itself is one --- the model is a
+structuring accelerator. LLMs do not extrapolate well to ideas off
+the manifold; the failure mode there is exactly the cultural-blender
+one (smooth the unfamiliar into the nearest familiar shape). The
+diagnostic is a coupling rule: keep the model on the prose-craft
+side of the partition and the answer is closer to ``accelerator'';
+let it across to the abstraction side and the answer is closer to
+``blender''. The Author's Note's partition --- the human does the
+deciding, the model does the drafting --- is therefore not just a
+description of how this paper was written; it is the rule that
+keeps the cooperation on the accelerator side of the question.
+The honest test for any given collaboration: ask whether the
+abstraction would have been thinkable without the model. If yes,
+the model was an accelerator on that abstraction; if no, the
+question genuinely opens.}
+
+\emph{Recommendation: extend the Author's Note's *What surprised me
+about the cooperation* paragraph with one sentence stating the
+coupling rule explicitly. The current paragraph already names the
+partition; this observation supplies the reason the partition
+matters.}
