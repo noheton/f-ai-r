@@ -1,0 +1,98 @@
+\section{Provenance Analysis}
+\label{sec:provenance-analysis}
+
+The graph at \texttt{doc/provenance.ttl} is not a passive record. It
+is a queryable structure whose health, taken section by section,
+\emph{is} the audit pass on \textbf{Reusable} (\S\ref{sec:axes}). This
+section describes the queries the audit runs in practice, with worked
+examples on the present manuscript.
+
+The three numbers below are produced by
+\texttt{scripts/provenance\_analysis.py}, which the build pipeline
+re-runs on every commit. They reflect the state of
+\texttt{doc/provenance.ttl} at the time this PDF was compiled and are
+embedded into the prose by the build, not transcribed by hand.
+
+\paragraph{Verification rung distribution.}
+Every claim in the graph carries a
+\texttt{fair2r:verificationState}; we report the fraction at each
+rung at submission time per the sixth integrated practice
+(\S\ref{sec:eight}, item~6). The query is one SPARQL pattern:
+
+\begin{quote}\small
+\texttt{SELECT ?state (COUNT(?c) AS ?n)\\
+WHERE \{ ?c a fair2r:Claim ; fair2r:verificationState ?state \}\\
+GROUP BY ?state}
+\end{quote}
+
+\noindent The result for the present manuscript:
+
+\input{sections/_generated/rung-distribution.tex}
+
+\noindent A submission whose load-bearing claims sit below
+\textsc{lit-read} fails the FAIR audit unless the manuscript hedges
+explicitly --- the rung distribution tells the reviewer where
+hedging is mandatory and where it would be over-cautious.
+
+\paragraph{Section-to-claim coverage.}
+Every section in \texttt{paper/main.tex} should appear in the graph
+as a \texttt{fair2r:Section} entity, with at least one
+\texttt{prov:Activity} that produced it and (almost always) at least
+one \texttt{fair2r:Claim} attributed to that activity. A section
+that exists in prose but not in the graph is a defect surfaced by
+the FAIR Aligner.
+
+\input{sections/_generated/section-coverage.tex}
+
+\noindent A coverage row that reads \emph{prose: yes / graph: no} is
+a hard fail; \emph{graph: yes / claims: 0} is a soft warning meaning
+the section has been registered but the claim curation has not
+caught up.
+
+\paragraph{Source invocation strength.}
+Every \texttt{fair2r:Source} entity that the manuscript cites should
+appear as the object of at least one
+\texttt{prov:wasDerivedFrom} edge from a \texttt{fair2r:Claim}. A
+source cited but never linked from a claim is most often a
+\textbf{ghost citation} --- a reference that lives in the
+bibliography because the prose mentions it, but that no claim
+actually relies on. In a healthy F(AI)\textsuperscript{2}R
+manuscript, the count is zero.
+
+\input{sections/_generated/source-strength.tex}
+
+\paragraph{Activity timeline.}
+The \texttt{prov:Activity} nodes form a dated record of every
+substantive change. The most recent five activities, in
+ISO-8601 order, are:
+
+\input{sections/_generated/recent-activities.tex}
+
+\noindent The same data, with one row per session, is the
+human-readable mirror in \texttt{doc/logbook.md}; drift between the
+two is itself a defect (see \S\ref{sec:handback} on the mirror
+discipline).
+
+\paragraph{What the analysis is and is not.}
+The four queries above are diagnostic, not exhaustive. They surface
+the failure modes of \S\ref{sec:failure-modes} that have a graph
+signature: ghost citations, drift between prose and graph, sections
+that have not yet been curated. They do not surface
+\textbf{semantic} drift --- a claim that has been correctly recorded
+in the graph but whose phrasing in the prose has shifted away from
+its evidence. That is the readability scrutinizer's job
+(\S\ref{sec:pipeline}), not the graph's.
+
+A live, more interactive view of the same graph is published at
+\href{https://noheton.github.io/f-ai-r/provenance.html}{the
+\textbf{Provenance} tab of the public site}, with a click-to-inspect
+node browser and the same SPARQL queries available client-side.
+
+\paragraph{Keep this section honest.}
+This section is generated against the current graph. If a future
+revision adds a verification rung, a new section, or a new failure
+mode, the corresponding entry here updates automatically on the next
+build; the prose around the figures stays put. The intent is that a
+reader who clones the repository, recompiles the PDF, and re-reads
+this section, will see the analysis reflect the manuscript that was
+actually produced --- not a snapshot frozen at draft time.

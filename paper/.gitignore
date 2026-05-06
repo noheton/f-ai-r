@@ -12,3 +12,6 @@
 build/
 main.pdf
 main-condensed.pdf
+
+# Auto-generated provenance-analysis fragments (rebuilt on every build).
+sections/_generated/

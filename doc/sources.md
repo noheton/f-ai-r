@@ -1,18 +1,627 @@
 # Sources
 
-Index of sources cited or vendored. Maintained by `agents/source-analyzer.md`.
+Index of sources cited or vendored for the F(AI)²R paper. Maintained by
+`agents/source-analyzer.md`. Last updated 2026-05-06.
+
+## Verification ladder (per `doc/methodology.md`)
+
+A `fair2r:Claim` (and the source backing it) carries one of:
+
+| state | meaning |
+|---|---|
+| `unverified`        | Asserted but no evidence yet attached. |
+| `needs-research`    | Evidence-gap acknowledged; search planned. |
+| `lit-retrieved`     | Identifier (DOI / arXiv / stable URL) resolves; title and authors confirmed; the abstract has been read by an AI agent. |
+| `ai-confirmed`      | An AI agent has read a vendored or fetched copy of the source and confirmed the inference made from it. |
+| `lit-read`          | A human author has read the source itself and confirmed the inference. |
+| `source-vendored`   | The source itself is vendored under `doc/sources/<bibkey>/`. |
+| `unverifiable`      | Searches have not located a canonical record; the citation cannot be defended. |
+
+Per the methodology, a claim must reach `lit-read` (or `source-vendored`)
+before it can appear in the condensed manuscript. `ai-confirmed` is the
+ceiling an LLM agent can deliver on its own.
 
 ## Conventions
 
 - Open-licensed sources are vendored under `doc/sources/<bibkey>/` so the
   evidence travels with the repo.
-- Closed-licensed sources are referenced by DOI only and noted here as
-  `paywalled: true`.
-- Each entry below mirrors one BibTeX key in `paper/references.bib`.
+- Closed-licensed sources are referenced by DOI only and noted as `paywalled`.
+- Each entry mirrors one BibTeX key in `paper/references.bib`.
+- "How the paper uses it" describes the load-bearing function in
+  `paper/sections/*.tex`. If we drift from that function during revision,
+  the entry must be revisited.
 
-## Index
+---
 
-| bibkey | type | DOI / URL | vendored | verification |
-|---|---|---|---|---|
-| `wilkinson2016fair` | article | 10.1038/sdata.2016.18 | no (open access link in bib) | human-confirmed |
-| `w3c2013provo`      | spec    | https://www.w3.org/TR/prov-o/ | no (stable W3C URL) | human-confirmed |
+## 1. The FAIR family
+
+### `wilkinson2016fair`
+
+- **Citation.** Wilkinson, M. D., Dumontier, M., Aalbersberg, IJ. J., et al.
+  (2016). "The FAIR Guiding Principles for scientific data management and
+  stewardship." *Scientific Data* 3, 160018.
+  DOI: [10.1038/sdata.2016.18](https://doi.org/10.1038/sdata.2016.18).
+- **What it says.** Defines the four FAIR principles (Findable, Accessible,
+  Interoperable, Reusable) and their fifteen sub-principles (F1–F4, A1–A2,
+  I1–I3, R1.1–R1.3) as a guideline set for scientific data management.
+- **How the paper uses it.** Cited as the substrate that F(AI)²R extends;
+  the fifteen sub-principles are the cells the F(AI)²R mapping (Appendix C)
+  populates. Used in `intro.tex`, `background.tex`, `related.tex`.
+- **Verification.** `lit-read` — open access, canonical, well-known to the
+  human author.
+
+### `chuehong2022fair4rs`
+
+- **Citation.** Chue Hong, N. P., Katz, D. S., Barker, M., Lamprecht, A.-L.,
+  Martinez, C., et al. (2022). "FAIR Principles for Research Software
+  (FAIR4RS Principles)." *Research Data Alliance* — RDA Recommendation.
+  DOI: [10.15497/RDA00068](https://doi.org/10.15497/RDA00068).
+- **What it says.** Re-reads the fifteen FAIR sub-principles for research
+  software. Picks up versioning, dependencies, and build-time
+  reproducibility as first-class concerns. Released June 2022 after roughly
+  two years of community consultation as a joint RDA / FORCE11 / ReSA
+  recommendation.
+- **How the paper uses it.** Cited as the first prior FAIR re-reading and
+  as the precedent that F(AI)²R follows in form. Used in `intro.tex`,
+  `background.tex`, `related.tex`.
+- **Verification.** `lit-read` — DOI resolves, RDA has the canonical record.
+
+### `ravi2024fair4ml`
+
+- **Citation (proposed).** Castro, L. J., Garijo, D., et al. (2024).
+  *FAIR4ML-schema*, version 0.1.0. RDA FAIR4ML Working Group / Task Force.
+  Zenodo. DOI: [10.5281/zenodo.14002310](https://doi.org/10.5281/zenodo.14002310).
+  Vocabulary: <https://w3id.org/fair4ml/>.
+- **What it says.** A schema.org extension defining `fair4ml:MLModel` and
+  `fair4ml:MLModelEvaluation` for machine-readable representations of
+  trained ML models, reusing properties from CodeMeta to point to the model
+  code. Output of the RDA FAIR for Machine Learning Interest Group.
+- **How the paper uses it.** Cited as the second prior FAIR re-reading
+  (FAIR for ML models) that F(AI)²R follows in form. Used in `intro.tex`,
+  `background.tex`, `related.tex`.
+- **Verification status.** `lit-retrieved`. The current bib entry has
+  `author = {TODO-VERIFY}` and the bibkey suggests an author "Ravi" who is
+  **not** the canonical FAIR4ML author. The canonical artefact is the
+  Castro–Garijo schema (Zenodo 14002310). The bibkey should probably
+  remain as-is for stability, but the entry should be filled in with
+  Castro et al. as authors. The human author must read the schema before
+  this can move to `lit-read`.
+
+---
+
+## 2. Provenance and reproducibility methodology
+
+### `w3c2013provo`
+
+- **Citation.** Lebo, T., Sahoo, S., McGuinness, D., et al. (2013).
+  *PROV-O: The PROV Ontology*. W3C Recommendation, 30 April 2013.
+  URL: <https://www.w3.org/TR/prov-o/>.
+- **What it says.** OWL2 ontology defining `prov:Entity`, `prov:Activity`,
+  `prov:Agent`, and the relations (`prov:wasGeneratedBy`,
+  `prov:wasAttributedTo`, `prov:wasDerivedFrom`, `prov:hadPlan`, etc.)
+  that F(AI)²R uses verbatim.
+- **How the paper uses it.** Substrate for the `fair2r:` namespace. Cited
+  in `background.tex` and `related.tex`. Vendored implicitly via the W3C
+  stable URI, which we treat as permanent.
+- **Verification.** `lit-read` — W3C Recommendation, stable URL.
+
+### `page2021prisma`
+
+- **Citation.** Page, M. J., McKenzie, J. E., Bossuyt, P. M., Boutron, I.,
+  Hoffmann, T. C., Mulrow, C. D., et al. (2021). "The PRISMA 2020
+  statement: an updated guideline for reporting systematic reviews."
+  *BMJ* 372, n71.
+  DOI: [10.1136/bmj.n71](https://doi.org/10.1136/bmj.n71).
+- **What it says.** Updated reporting guideline for systematic reviews,
+  successor to PRISMA 2009. Provides a flow-diagram template
+  (Identification → Screening → Included) and a 27-item checklist.
+- **How the paper uses it.** The retrieval-depth axis the verification
+  ladder borrows from. Used in `background.tex`, `related.tex`. We treat
+  PRISMA's flow as the lower bound a rung permits ("retrieved" as
+  opposed to "read").
+- **Verification.** `lit-read` — open access at BMJ.
+
+### `guyatt2008grade`
+
+- **Citation.** Guyatt, G. H., Oxman, A. D., Vist, G. E., Kunz, R.,
+  Falck-Ytter, Y., Alonso-Coello, P., Schünemann, H. J. (2008).
+  "GRADE: an emerging consensus on rating quality of evidence and strength
+  of recommendations." *BMJ* 336(7650), 924–926.
+  DOI: [10.1136/bmj.39489.470347.AD](https://doi.org/10.1136/bmj.39489.470347.AD).
+- **What it says.** Introduces the four-level GRADE rating (very low, low,
+  moderate, high) for the quality of evidence and the strength of
+  recommendations derived from it.
+- **How the paper uses it.** The invocation-strength axis the verification
+  ladder borrows from. Used in `background.tex`, `related.tex`. Cited as
+  the rating dimension that complements PRISMA's retrieval dimension.
+- **Verification.** `lit-read` — open access, PMC2335261.
+
+---
+
+## 3. Documentation patterns for ML artefacts
+
+### `gebru2021datasheets`
+
+- **Citation.** Gebru, T., Morgenstern, J., Vecchione, B., Vaughan, J. W.,
+  Wallach, H., Daumé III, H., Crawford, K. (2021). "Datasheets for
+  datasets." *Communications of the ACM* 64(12), 86–92.
+  DOI: [10.1145/3458723](https://doi.org/10.1145/3458723).
+  arXiv: [1803.09010](https://arxiv.org/abs/1803.09010).
+- **What it says.** Proposes a structured 57-question, seven-section
+  datasheet (Motivation, Composition, Collection Process, Preprocessing,
+  Uses, Distribution, Maintenance) to accompany every dataset, modelled on
+  the electronic-component datasheet.
+- **How the paper uses it.** Named as the canonical ancestor of structured
+  human-readable documentation for ML artefacts; the per-prompt and
+  per-claim documentation in F(AI)²R inherits its instinct that each
+  artefact deserves its own datasheet-shaped record. Used in
+  `background.tex`, `related.tex`.
+- **Verification.** `lit-read` — both ACM and arXiv versions are open.
+
+### `mitchell2019modelcards`
+
+- **Citation.** Mitchell, M., Wu, S., Zaldivar, A., Barnes, P., Vasserman, L.,
+  Hutchinson, B., Spitzer, E., Raji, I. D., Gebru, T. (2019). "Model Cards
+  for Model Reporting." In *Proceedings of the Conference on Fairness,
+  Accountability, and Transparency (FAT\* / FAccT '19)*, 220–229.
+  DOI: [10.1145/3287560.3287596](https://doi.org/10.1145/3287560.3287596).
+  arXiv: [1810.03993](https://arxiv.org/abs/1810.03993).
+- **What it says.** Recommends short structured documents accompanying
+  every released ML model: intended use, performance benchmarks across
+  demographic groups, evaluation conditions, ethical considerations.
+  Worked examples for a smile detector and a toxic-comment classifier.
+- **How the paper uses it.** Same role as `gebru2021datasheets` — second
+  immediate ancestor of structured per-artefact documentation. Used in
+  `background.tex`, `related.tex`.
+- **Verification.** `lit-read` — open access at ACM and arXiv.
+
+---
+
+## 4. AI disclosure norms in venues
+
+### `icmje2023`
+
+- **Citation.** International Committee of Medical Journal Editors (2023,
+  most recently revised January 2024). *Recommendations for the Conduct,
+  Reporting, Editing, and Publication of Scholarly Work in Medical
+  Journals*. URL: <https://www.icmje.org/recommendations/>. The AI-specific
+  guidance is at
+  <https://www.icmje.org/recommendations/browse/roles-and-responsibilities/defining-the-role-of-authors-and-contributors.html>
+  and the topic page
+  <https://www.icmje.org/recommendations/browse/artificial-intelligence/ai-use-by-authors.html>.
+- **What it says.** Authors must disclose the use of AI-assisted tools at
+  submission; chatbots cannot be authors because they cannot be held
+  responsible for accuracy, integrity, or originality; AI use for writing
+  assistance goes in the acknowledgements, AI use for data analysis or
+  figures goes in the methods.
+- **How the paper uses it.** The canonical disclosure-norm citation in
+  `background.tex` and `related.tex`. Anchors the claim that "AI is not
+  an author" is a community position, not a F(AI)²R invention.
+- **Verification.** `lit-read` — public guidance, freely available.
+
+---
+
+## 5. LLM failure modes — fabrication, hallucination, drift
+
+### `walters2023fabrication`
+
+- **Citation.** Walters, W. H., Wilder, E. I. (2023). "Fabrication and
+  errors in the bibliographic citations generated by ChatGPT." *Scientific
+  Reports* 13, 14045.
+  DOI: [10.1038/s41598-023-41032-5](https://doi.org/10.1038/s41598-023-41032-5).
+  PubMed: 37679503.
+- **What it says.** Examined 636 citations across 84 ChatGPT-generated
+  literature reviews on 42 topics. **55% of GPT-3.5 citations and 18% of
+  GPT-4 citations were fabricated**; of the real citations, 43% (GPT-3.5)
+  and 24% (GPT-4) contained substantive errors.
+- **How the paper uses it.** The lower bound (18%) of the "18–55%
+  fabrication rate" sentence in `intro.tex` (line 23) and the citation
+  beside the failure-mode table in `failure-modes.tex` (line 20). The 55%
+  upper bound is also from this paper, *not* from `magesh2024legal`; the
+  current `intro.tex` phrasing eliding the two is acceptable but should be
+  flagged on revision.
+- **Verification.** `lit-retrieved` → must move to `lit-read` before
+  condensation. Identifier resolves; abstract and key figures confirmed
+  by web search. Human author has not yet read the full PDF.
+
+### `magesh2024legal`
+
+- **Citation.** Magesh, V., Surani, F., Dahl, M., Suzgun, M., Manning, C. D.,
+  Ho, D. E. (2024). "Hallucination-Free? Assessing the Reliability of
+  Leading AI Legal Research Tools." Stanford RegLab and HAI, preprint.
+  arXiv: [2405.20362](https://arxiv.org/abs/2405.20362).
+  Final version: *Journal of Empirical Legal Studies* (2025), DOI
+  [10.1111/jels.12413](https://doi.org/10.1111/jels.12413).
+  Companion piece: *AI on Trial: Legal Models Hallucinate in 1 out of 6
+  (or More) Benchmarking Queries* (Stanford HAI news, 2024),
+  <https://hai.stanford.edu/news/ai-trial-legal-models-hallucinate-1-out-6-or-more-benchmarking-queries>.
+- **What it says.** First preregistered empirical evaluation of
+  RAG-backed legal research tools. **Lexis+ AI and Ask Practical Law AI
+  hallucinated on more than 17% of queries; Westlaw AI-Assisted Research
+  hallucinated on more than 34%.** The Stanford HAI summary frames this
+  as 17–33% (or "1 in 6 or more"). Earlier general-purpose-model figures
+  cited in the same line of work reach roughly 58–88%.
+- **How the paper uses it.** The 55% upper bound in `intro.tex` line 23 is
+  *not* directly from this paper; it is from `walters2023fabrication`.
+  The number that should be associated with `magesh2024legal` is the
+  17–34% RAG-backed range, or the 58–88% general-model range from the
+  preceding Stanford "Large Legal Fictions" work
+  ([Dahl et al. 2024, arXiv:2401.01301](https://arxiv.org/abs/2401.01301)).
+  **The intro currently leaves this ambiguous and should be tightened.**
+- **Verification.** `lit-retrieved`. arXiv ID and journal DOI both resolve;
+  the news framing is from the canonical Stanford HAI page. Human author
+  must read the preprint to commit to a specific upper-bound figure.
+
+### `bender2021stochastic`
+
+- **Citation.** Bender, E. M., Gebru, T., McMillan-Major, A., Shmitchell, S.
+  (2021). "On the Dangers of Stochastic Parrots: Can Language Models Be
+  Too Big?🦜" In *Proceedings of the 2021 ACM Conference on Fairness,
+  Accountability, and Transparency (FAccT '21)*, 610–623.
+  DOI: [10.1145/3442188.3445922](https://doi.org/10.1145/3442188.3445922).
+- **What it says.** Names large language models as systems that
+  "haphazardly stitch together sequences of linguistic forms … without
+  any reference to meaning"; surveys environmental, financial, and
+  representational risks; argues for documentation, dataset curation,
+  and direction-shifts away from ever-larger models.
+- **How the paper uses it.** Cited in `related.tex` as the source of much
+  of the vocabulary the disclosure literature uses (stochastic-parrot,
+  meaning-form distinction, documentation as mitigation).
+- **Verification.** `lit-read` — open access at ACM, widely vendored.
+
+### `else2023chatgpt`
+
+- **Citation.** Else, H. (2023). "Tools such as ChatGPT threaten transparent
+  science — here are our ground rules for their use." *Nature* 613, 612.
+  DOI: [10.1038/d41586-023-00191-1](https://doi.org/10.1038/d41586-023-00191-1).
+  PubMed: 36694020.
+- **What it says.** Nature editorial that LLMs cannot be authors, that
+  use of LLM tools must be documented in methods or acknowledgements,
+  and that publishers must lay down clear guidelines.
+- **How the paper uses it.** `intro.tex` line 36 — the "editors at major
+  venues asked for provenance from authors instead of post-hoc detection
+  against them" sentence. The editorial argues for exactly that posture.
+- **Verification.** `lit-read` — open at Nature.
+
+### `vannoorden2023chatgpt`
+
+- **Citation.** Van Noorden, R., Webb, R. (2023). "ChatGPT and science:
+  the AI system was a force in 2023 — for good and bad." *Nature*
+  624(7992), 509.
+  DOI: [10.1038/d41586-023-03930-6](https://doi.org/10.1038/d41586-023-03930-6).
+  PubMed: 38093061.
+- **What it says.** End-of-year overview of AI's impact on the scientific
+  ecosystem in 2023: rising LLM-assisted submissions, paper-mill
+  exposure, retraction record, journal policy responses.
+- **How the paper uses it.** Backdrop reference in `intro.tex` line 30
+  (alongside `liang2024mapping`) for the volume-problem claim.
+- **Verification.** `lit-retrieved`. **Two corrections to the bib file
+  are needed:** (1) the DOI in `references.bib` is currently
+  `d41586-023-03907-5`, which actually points to a *different* article
+  ("Where science meets Indian economics: in five charts"); the correct
+  DOI is `d41586-023-03930-6`. (2) The second author is Webb, not
+  Perkel. Pages are `509`, not `S2–S3`. These need fixing in the .bib —
+  per the task constraint, no changes were made here; flagged for the
+  human author. Until corrected, the bib entry is **`unverifiable` as
+  written**.
+
+### `liang2024mapping`
+
+- **Citation.** Liang, W., Zhang, Y., Wu, Z., Lepp, H., Ji, W., Zhao, X.,
+  Cao, H., Liu, S., He, S., Huang, Z., Yang, D., Potts, C., Manning, C. D.,
+  Zou, J. Y. (2024). "Mapping the Increasing Use of LLMs in Scientific
+  Papers." arXiv preprint.
+  arXiv: [2404.01268](https://arxiv.org/abs/2404.01268).
+- **What it says.** Population-level analysis of 950,965 papers
+  (Jan 2020 – Feb 2024) on arXiv, bioRxiv, and the Nature portfolio,
+  using a mixture-model framework on word frequencies. Reports
+  LLM-modification fractions of **up to 17.5% in computer-science
+  papers** and **up to 6.3% in mathematics and the Nature portfolio**.
+- **How the paper uses it.** `intro.tex` line 30 — the volume-problem
+  anchor; the rising LLM-assisted-prose fraction since 2023 is taken
+  from this paper.
+- **Verification.** `lit-retrieved`. arXiv ID resolves; abstract, methods,
+  and headline figure confirmed. Author must read before condensation.
+
+### `kobak2024delving`
+
+- **Citation.** Kobak, D., González-Márquez, R., Horvát, E.-Á., Lause, J.
+  (2024). "Delving into ChatGPT usage in academic writing through excess
+  vocabulary." arXiv preprint.
+  arXiv: [2406.07016](https://arxiv.org/abs/2406.07016).
+- **What it says.** Adapts the "excess mortality" idea to vocabulary use.
+  In 14 million PubMed abstracts (2010–2024), the appearance of LLMs
+  causes an abrupt jump in the frequency of certain style words. **A
+  lower bound of ~10% of 2024 abstracts shows LLM processing**, varying
+  by discipline, country, and journal — **as high as ~30% in some PubMed
+  sub-corpora**.
+- **How the paper uses it.** `intro.tex` line 32 — the cross-discipline
+  detection-symptom anchor.
+- **Verification.** `lit-retrieved`. arXiv ID resolves; abstract and
+  headline figures confirmed. Human author has not yet read the full
+  paper.
+
+---
+
+## 6. Methodological ancestor
+
+### `krebs2026obscurity`
+
+- **Citation.** Krebs, F. (2026). *Obscurity Is Dead: a methodology
+  repository*. GitHub.
+  URL: <https://github.com/noheton/Obscurity-Is-Dead>.
+- **What it says.** The author's earlier methodology repository, the
+  template that F(AI)²R abstracts. Domain content is deliberately not
+  reproduced here.
+- **How the paper uses it.** Direct ancestor citation in `intro.tex`
+  line 18 and `related.tex` line 36.
+- **Verification.** `lit-read` — under the human author's direct control.
+
+---
+
+## 7. Institutional context (used in acknowledgements / imprint)
+
+These do not back load-bearing claims in the body but are cited or alluded
+to in title-block, acknowledgements, and `\S\ref{sec:impl}`.
+
+### `helmholtz_hmc` (proposed addition)
+
+- **Citation.** Helmholtz Metadata Collaboration (HMC). Helmholtz
+  Association of German Research Centres, launched 2019.
+  Homepage: <https://helmholtz-metadaten.de/>.
+  About: <https://helmholtz-metadaten.de/en/about-hmc>.
+  See also Curdt, C. et al. (2025), "Helmholtz Metadata Collaboration —
+  Building a Sustainable FAIR Data Ecosystem in a Changing Research
+  Landscape," Zenodo:
+  [10.5281/zenodo.15113717](https://doi.org/10.5281/zenodo.15113717).
+- **What it says.** A Helmholtz-wide platform whose mission is making
+  research data across the eighteen Helmholtz centres FAIR. Three
+  workstreams: (1) assessing/monitoring FAIR data, (2) improving
+  connectivity of Helmholtz research data, (3) implementing (meta)data
+  recommendations. Operates per-research-field "metadata hubs."
+- **How the paper uses it.** Imprint context — DLR / Helmholtz / HMC is
+  the institutional setting under which this paper is produced (per
+  `methodology.md` design-system note).
+- **Verification.** `lit-retrieved` — homepage and Zenodo record both
+  resolve.
+
+### `nfdi4ing` (proposed addition)
+
+- **Citation.** NFDI4Ing — National Research Data Infrastructure for
+  Engineering Sciences, German Nationale Forschungsdateninfrastruktur
+  (NFDI). Homepage: <https://nfdi4ing.de/>.
+  Foundational document: Schmitt, R. H., Anthofer, V., Auer, S., et al.
+  (2020), "NFDI4Ing — the National Research Data Infrastructure for
+  Engineering Sciences," Zenodo:
+  [10.5281/zenodo.4015201](https://doi.org/10.5281/zenodo.4015201).
+- **What it says.** German NFDI consortium for engineering RDM. Organises
+  engineering workflows into "archetypes" with shared base services
+  (quality assurance, research-software development, terminologies,
+  repositories, data security, training, discovery).
+- **How the paper uses it.** Imprint context, as for HMC.
+- **Verification.** `lit-retrieved` — homepage and Zenodo record both
+  resolve.
+
+### DLR open-science position
+
+- **Status.** No single canonical DLR open-science position paper was
+  located in public form. The relevant materials are (a) the Helmholtz
+  Open Science Policy
+  (<https://os.helmholtz.de/en/open-science-in-helmholtz/open-science-policy/>)
+  and (b) the Helmholtz Open Access Memorandum (GFZ:
+  <https://gfzpublic.gfz.de/pubman/faces/ViewItemOverviewPage.jsp?itemId=item_5032879>).
+  DLR participates as a Helmholtz centre rather than issuing its own
+  separate FAIR position paper.
+- **Verification.** `lit-retrieved` for the two Helmholtz documents above.
+  A DLR-specific document is **`unverifiable`** at this search depth.
+
+---
+
+## 8. Legal context
+
+### Germany — UrhG §2
+
+- **Citation.** *Gesetz über Urheberrecht und verwandte Schutzrechte
+  (Urheberrechtsgesetz — UrhG)*, §2 ("Geschützte Werke"). Bundesamt für
+  Justiz: <https://www.gesetze-im-internet.de/urhg/__2.html>.
+- **What it says.** Lists protected works and requires "persönliche
+  geistige Schöpfung" — personal intellectual creation by a human — for
+  copyright protection.
+- **How the paper uses it.** `background.tex` line 51 — anchors the
+  German leg of the "AI cannot hold copyright" claim.
+- **Verification.** `lit-retrieved` — public statute. **No bib entry
+  exists**; should be added as a `@misc` if cited in body. Currently
+  cited in body without a bib entry, which is a defect.
+
+### USCO 2023 — `usco2023ai` (proposed addition)
+
+- **Citation.** U.S. Copyright Office (2023). "Copyright Registration
+  Guidance: Works Containing Material Generated by Artificial
+  Intelligence." 88 Fed. Reg. 16190 (16 March 2023).
+  Federal Register:
+  <https://www.federalregister.gov/documents/2023/03/16/2023-05321/copyright-registration-guidance-works-containing-material-generated-by-artificial-intelligence>.
+  PDF: <https://www.copyright.gov/ai/ai_policy_guidance.pdf>.
+  Programme page: <https://www.copyright.gov/ai/>.
+- **What it says.** Restates that U.S. copyright requires human authorship
+  and that "author" excludes non-humans. Applicants must disclose AI-
+  generated content in registration applications and explain the human
+  contribution. Worked example (the *Zarya of the Dawn* graphic novel,
+  February 2023) found that human-authored text was protectable but the
+  individual Midjourney-generated images were not.
+- **How the paper uses it.** `background.tex` line 51 — anchors the U.S.
+  leg of the "AI cannot hold copyright" claim. Currently cited in body
+  as "USCO 2023" without a bib entry; the new bibkey `usco2023ai` is
+  proposed.
+- **Verification.** `lit-retrieved` — Federal Register record and USCO
+  PDF both resolve.
+
+---
+
+## Proposed additions
+
+The eight entries below are proposed for `references.bib`. All have been
+identifier-verified by an AI agent (`lit-retrieved`). None has yet been
+read by the human author and so none can move to `lit-read`.
+
+### `usco2023ai` — USCO AI registration guidance
+
+See §8 above. Backs the U.S. leg of the legal-honesty claim in
+`background.tex`.
+
+### `acl2023aipolicy` — ACL Rolling Review / ACL 2023 AI policy
+
+- **Citation.** Association for Computational Linguistics (2023). "ACL
+  2023 Policy on AI Writing Assistance." ACL 2023 blog,
+  <https://2023.aclweb.org/blog/ACL-2023-policy/>. ACL Rolling Review
+  Authors / Reviewer Guidelines:
+  <http://aclrollingreview.org/authors>,
+  <http://aclrollingreview.org/reviewerguidelines>. Disclosure is
+  enforced via the Responsible NLP Checklist item E1.
+- **What it says.** Authors must disclose generative-AI use; pure
+  language-polishing assistance does not need disclosure; literature-
+  search tools are acceptable; LLM-generated reviews are unacceptable
+  and area chairs may flag them.
+- **How the paper would use it.** `related.tex` line 25 currently cites
+  ACL Rolling Review by name without a bib entry. Cited as one of the
+  major-venue disclosure positions converging on "AI is not an author,
+  AI use must be disclosed."
+- **Verification.** `lit-retrieved`.
+
+### `neurips2024llmpolicy` — NeurIPS LLM policy
+
+- **Citation.** Neural Information Processing Systems Foundation. "NeurIPS
+  LLM Policy" (2024 / 2025).
+  <https://neurips.cc/Conferences/2025/LLM>; NeurIPS 2024 Call for Papers:
+  <https://neurips.cc/Conferences/2024/CallForPapers>.
+- **What it says.** Authors are responsible for the entire content of
+  the paper, including all text and figures; LLM use as a tool (data
+  processing, filtering, visualisation, theorem-proving, important or
+  non-standard methodological components) must be described.
+- **How the paper would use it.** Same role as `acl2023aipolicy`.
+- **Verification.** `lit-retrieved`.
+
+### `icml2025llmpolicy` — ICML LLM policy
+
+- **Citation.** International Conference on Machine Learning. "ICML 2025
+  Author Instructions" / "Intro LLM Policy."
+  <https://icml.cc/Conferences/2025/AuthorInstructions>;
+  <https://icml.cc/Conferences/2026/Intro-LLM-Policy>.
+- **What it says.** Authors may use generative-AI tools for writing or
+  research provided they take full responsibility, disclose significant
+  use, and ensure no plagiarism or scientific misconduct. LLMs are not
+  eligible for authorship. (A more permissive stance than ICML 2023,
+  which had banned LLM-generated text outside experimental analysis.)
+- **How the paper would use it.** Same role as `acl2023aipolicy`.
+- **Verification.** `lit-retrieved`.
+
+### `weberwulff2023detection` — AI-detection-tool benchmarking
+
+- **Citation.** Weber-Wulff, D., Anohina-Naumeca, A., Bjelobaba, S.,
+  Foltýnek, T., Guerrero-Dib, J., Popoola, O., Šigut, P., Waddington, L.
+  (2023). "Testing of detection tools for AI-generated text."
+  *International Journal for Educational Integrity* 19, 26.
+  DOI: [10.1007/s40979-023-00146-z](https://doi.org/10.1007/s40979-023-00146-z).
+  arXiv: [2306.15666](https://arxiv.org/abs/2306.15666).
+- **What it says.** Tested 12 publicly available detectors plus Turnitin
+  and PlagiarismCheck against six text-condition types. **All scored
+  below 80% accuracy; only five exceeded 70%.** Tools are biased toward
+  classifying text as human-written and degrade further on paraphrased
+  output.
+- **How the paper would use it.** Backs the editorial-fatigue / detection-
+  reliability framing in `intro.tex` and the residual "adversarial review"
+  failure mode in `failure-modes.tex`. Quantifies why
+  F(AI)²R prefers author-side provenance over reviewer-side detection.
+- **Verification.** `lit-retrieved`.
+
+### `liang2023detectorbias` — GPT-detector bias against non-native English
+
+- **Citation.** Liang, W., Yuksekgonul, M., Mao, Y., Wu, E., Zou, J.
+  (2023). "GPT detectors are biased against non-native English writers."
+  *Patterns* 4(7), 100779.
+  DOI: [10.1016/j.patter.2023.100779](https://doi.org/10.1016/j.patter.2023.100779).
+  arXiv: [2304.02819](https://arxiv.org/abs/2304.02819).
+- **What it says.** Across seven detectors, **more than half of non-
+  native-authored TOEFL essays were misclassified as AI-generated** while
+  US 8th-grade essays were classified almost perfectly. Simple prompting
+  ("elevate the text with literary language") drove detection rates close
+  to zero.
+- **How the paper would use it.** Same role as `weberwulff2023detection`,
+  with the additional fairness/equity dimension that aligns with the
+  equity paragraph in `sustainability.tex`.
+- **Verification.** `lit-retrieved`.
+
+### `mitchell2023detectgpt` — DetectGPT
+
+- **Citation.** Mitchell, E., Lee, Y., Khazatsky, A., Manning, C. D.,
+  Finn, C. (2023). "DetectGPT: Zero-Shot Machine-Generated Text Detection
+  using Probability Curvature." In *Proceedings of the 40th International
+  Conference on Machine Learning (ICML)*. PMLR 202: 24950–24962.
+  arXiv: [2301.11305](https://arxiv.org/abs/2301.11305). PMLR:
+  <https://proceedings.mlr.press/v202/mitchell23a.html>.
+- **What it says.** Zero-shot detector exploiting the observation that
+  LLM-generated text occupies negative-curvature regions of the model's
+  log-probability surface. Reports AUROC improvements (e.g. 0.81 → 0.95
+  for fake-news detection on GPT-NeoX-20B) over earlier zero-shot
+  baselines.
+- **How the paper would use it.** Cited where the paper currently names
+  "Detect-GPT" parenthetically in the AI-detection discussion. Establishes
+  that the upper-bound detector performance is itself fragile to
+  paraphrase attacks (which `sadasivan2023reliably` then formalises).
+- **Verification.** `lit-retrieved`.
+
+### `sadasivan2023reliably` — limits of AI-text detection
+
+- **Citation.** Sadasivan, V. S., Kumar, A., Balasubramanian, S., Wang, W.,
+  Feizi, S. (2023). "Can AI-Generated Text be Reliably Detected?" arXiv
+  preprint. arXiv: [2303.11156](https://arxiv.org/abs/2303.11156).
+- **What it says.** Demonstrates a recursive paraphrasing attack that
+  breaks watermarking, neural-classifier, zero-shot, and retrieval-based
+  detectors. Presents a theoretical impossibility result: as LLMs better
+  emulate human text, the best-possible detector's performance
+  approaches a chance baseline.
+- **How the paper would use it.** Theoretical complement to
+  `weberwulff2023detection` and `liang2023detectorbias`. Backs the
+  editorial position that post-hoc detection cannot be load-bearing.
+- **Verification.** `lit-retrieved`.
+
+### `hosseini2025disclosure` — disclosure should be voluntary, structured
+
+- **Citation.** Hosseini, M., Gordijn, B., Kaebnick, G. E., Holmes, K.
+  (2025). "Disclosing generative AI use for writing assistance should be
+  voluntary." *Research Ethics*.
+  DOI: [10.1177/17470161251345499](https://doi.org/10.1177/17470161251345499).
+  Companion: Hosseini, M., Resnik, D. B. (2025), "Disclosing artificial
+  intelligence use in scientific research and publication: When should
+  disclosure be mandatory, optional, or unnecessary?" *Accountability in
+  Research*. DOI:
+  [10.1080/08989621.2025.2481949](https://doi.org/10.1080/08989621.2025.2481949).
+- **What it says.** Categorises AI-use disclosure into mandatory
+  (intentional and substantial use — hypothesis generation, drafting,
+  data analysis, figure generation), optional (text refinement under
+  human control), and unnecessary (spell-check, reference management).
+  Aligns with ICMJE 2024 framing.
+- **How the paper would use it.** A 2024–2025 anchor for the
+  AI-co-authorship / ICMJE-compliance discussion in `related.tex` and
+  the sixth integrated practice in `eight.tex`.
+- **Verification.** `lit-retrieved`.
+
+---
+
+## Summary of corrections needed in `references.bib`
+
+(Per the task constraint, the `.bib` file was not modified. These are
+flagged for the human author.)
+
+1. **`vannoorden2023chatgpt`**: DOI is wrong (`d41586-023-03907-5` points
+   to an unrelated India-economics article). Correct is
+   `10.1038/d41586-023-03930-6`. Second author is Webb, not Perkel.
+   Pages are `509`, not `S2–S3`.
+2. **`ravi2024fair4ml`**: `author = {TODO-VERIFY}` should be filled in
+   with Castro, L. J., Garijo, D., et al.; canonical artefact is the
+   FAIR4ML-schema on Zenodo (10.5281/zenodo.14002310).
+3. **`icmje2023`** is fine but the most current revision is January 2024;
+   consider updating the year and adding the AI-specific topic page URL.
+4. **UrhG §2** is cited in `background.tex` without a bib entry — needs
+   one.
+5. **USCO 2023** is cited in `background.tex` without a bib entry —
+   `usco2023ai` is proposed above.

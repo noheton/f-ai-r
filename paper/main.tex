@@ -6,6 +6,11 @@
 
 \documentclass[11pt,a4paper]{article}
 
+% Mark this build as a draft (unpublished); set to "false" before
+% submission. When true, paper/style/fair2r.sty applies a "DRAFT --
+% not yet peer-reviewed" watermark to every page.
+\def\faiarDraft{true}
+
 \usepackage{style/fair2r}        % DLR-aligned typography, colours, layout
 
 \usepackage{graphicx}
@@ -21,7 +26,7 @@
   \small ORCID: \href{https://orcid.org/0000-0001-6033-801X}{0000-0001-6033-801X}\\
   \small \href{mailto:florian.krebs@dlr.de}{florian.krebs@dlr.de}\\[4pt]
   \small DLR Zentrum für Leichtbauproduktionstechnologie (ZLP), Augsburg\\
-  \small Helmholtz-Gemeinschaft \textperiodcentered{} NFDI4Ing \textperiodcentered{} HMC%
+  \small Helmholtz-Gemeinschaft \,--\, NFDI4Ing \,--\, HMC%
 }
 \date{\today}
 
@@ -35,6 +40,7 @@
 \input{sections/pattern}
 \input{sections/eight-practices}
 \input{sections/implementation}
+\input{sections/provenance-analysis}
 \input{sections/self-reference}
 \input{sections/evolution}
 \input{sections/failure-modes}

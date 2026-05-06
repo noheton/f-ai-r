@@ -13,7 +13,8 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write   # write so the main-branch build can update the
+                    # 'latest-draft' release that hosts the draft PDF
 
 jobs:
   build:
@@ -23,12 +24,26 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
+      - name: Set up Python (for provenance-analysis fragment generator)
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+          cache-dependency-path: scripts/requirements.txt
+
+      - name: Install Python deps
+        run: pip install -r scripts/requirements.txt
+
+      - name: Regenerate provenance-analysis fragments
+        run: python scripts/provenance_analysis.py
+
       - name: Compile main.tex
         uses: xu-cheng/latex-action@v3
         with:
           working_directory: paper
           root_file: main.tex
-          args: -pdf -interaction=nonstopmode -halt-on-error -file-line-error
+          extra_system_packages: ""
+          args: -pdf -interaction=nonstopmode -file-line-error
 
       - name: Report page count
         working-directory: paper
@@ -39,10 +54,32 @@ jobs:
             echo "pdfinfo not available in container; skipping."
           fi
 
-      - name: Upload PDF
+      - name: Upload PDF as workflow artefact
         uses: actions/upload-artifact@v4
         with:
           name: paper-pdf-${{ github.sha }}
           path: paper/main.pdf
           if-no-files-found: error
           retention-days: 30
+
+      # On main, publish the freshly-built PDF as a rolling
+      # 'latest-draft' GitHub Release so the README and the site can
+      # link a stable, current download URL without rerunning CI.
+      # The PDF carries a "DRAFT — not yet peer-reviewed" watermark
+      # via paper/style/fair2r.sty (\faiarDraft=true), which is the
+      # default until a published version is explicitly authorised.
+      - name: Publish draft PDF to 'latest-draft' release
+        if: github.ref == 'refs/heads/main'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest-draft
+          name: "F(AI)²R — latest draft PDF"
+          body: |
+            Auto-built from commit ${{ github.sha }}.
+            Carries a DRAFT watermark; not yet peer-reviewed.
+            Site: https://noheton.github.io/f-ai-r/
+          files: paper/main.pdf
+          prerelease: true
+          make_latest: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

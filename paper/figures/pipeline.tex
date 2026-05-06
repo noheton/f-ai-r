@@ -1,0 +1,74 @@
+% Ten-stage F(AI)^2R agent pipeline. Self-contained TikZ figure.
+% Loaded by paper/sections/pattern.tex via \input.
+\begin{figure*}[!t]
+\centering
+\begin{tikzpicture}[
+  node distance=4mm and 4mm,
+  every node/.style={font=\sffamily\footnotesize, align=center,
+                     inner sep=4pt, minimum height=8mm},
+  authoring/.style={draw, rectangle, fill=dlrBlau5, draw=dlrBlau1,
+                    line width=0.5pt, text=black, minimum width=22mm},
+  audit/.style={draw, rectangle, fill=dlrGruen5, draw=dlrGruen1,
+                line width=0.5pt, text=black, minimum width=22mm},
+  curate/.style={draw, rectangle, fill=dlrGelb5, draw=dlrGelb1,
+                 line width=0.5pt, text=black, minimum width=22mm},
+  orchestrator/.style={draw, rectangle, fill=dlrGrau5,
+                       draw=dlrGrau1, line width=0.5pt, text=dlrGrau1,
+                       minimum width=22mm},
+  arrow/.style={-{Latex[length=1.5mm]}, draw=dlrGrau1, line width=0.4pt},
+  legend/.style={font=\sffamily\scriptsize, text=dlrGrau1},
+]
+% Row 1: orchestrator + authoring stages (left to right)
+\node[orchestrator] (orc)  {0. Orchestrator};
+\node[authoring, right=of orc] (res)  {1. Research};
+\node[authoring, right=of res] (sa)   {1.5. Source\\Analyzer};
+\node[authoring, right=of sa]  (sw)   {2. Scientific\\Writer};
+\node[authoring, right=of sw]  (ill)  {3. Illustration};
+
+% Row 2: audit stages (right to left below)
+\node[audit, below=10mm of ill] (lay)  {4. Layout\\Scrutinizer};
+\node[audit, left=of lay]  (read) {5. Readability\\\& Novelty};
+\node[audit, left=of read] (ali)  {6. Aligner\\(FAIR)};
+\node[curate, left=of ali] (pc)   {7. Provenance\\Curator};
+\node[orchestrator, left=of pc] (site) {8. Site Agent};
+
+% Authoring flow (row 1, left → right)
+\draw[arrow] (orc) -- (res);
+\draw[arrow] (res) -- (sa);
+\draw[arrow] (sa)  -- (sw);
+\draw[arrow] (sw)  -- (ill);
+
+% Authoring → Audit transition
+\draw[arrow] (ill.south) |- ([yshift=2mm]lay.north);
+
+% Audit flow (row 2, right → left)
+\draw[arrow] (lay)  -- (read);
+\draw[arrow] (read) -- (ali);
+\draw[arrow] (ali)  -- (pc);
+\draw[arrow] (pc)   -- (site);
+
+% Handback edges (audit → orchestrator), dashed
+\draw[arrow, dashed, draw=dlrGrau3]
+  (lay.south) to[bend right=20] node[legend, below, midway]
+    {hand-back} (orc.south);
+
+% Legend
+\node[legend, anchor=north west, draw=dlrGrau4, fill=white,
+      inner sep=4pt]
+  at ([xshift=0mm, yshift=-2mm]lay.south west)
+  {%
+    \tikz\draw[fill=dlrBlau5, draw=dlrBlau1] (0,0) rectangle (3mm,3mm);\,Authoring \quad
+    \tikz\draw[fill=dlrGruen5, draw=dlrGruen1] (0,0) rectangle (3mm,3mm);\,Audit \quad
+    \tikz\draw[fill=dlrGelb5, draw=dlrGelb1] (0,0) rectangle (3mm,3mm);\,Curate \quad
+    \tikz\draw[fill=dlrGrau5, draw=dlrGrau1] (0,0) rectangle (3mm,3mm);\,Orchestration / Site
+  };
+\end{tikzpicture}
+\caption{The ten-stage F(AI)\textsuperscript{2}R pipeline. Authoring
+(blue) and audit (green) stages are strictly separated by the
+handback discipline (\S\ref{sec:handback}); only the Provenance
+Curator (yellow) writes \texttt{doc/provenance.ttl}; the Orchestrator
+and Site Agent (grey) are coordination roles that never edit prose.
+A scrutinizing stage that finds a defect files a \emph{handback} (dashed
+arrow) rather than patching in place.}
+\label{fig:pipeline}
+\end{figure*}

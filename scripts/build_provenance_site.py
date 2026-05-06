@@ -36,27 +36,29 @@ FOAF = Namespace("http://xmlns.com/foaf/0.1/")
 
 # (slug, title, source markdown path)
 PAGES: list[tuple[str, str, Path]] = [
-    ("index",             "Home",                  SITE_SRC / "index.md"),
-    ("methodology",       "Methodology",           ROOT / "doc" / "methodology.md"),
-    ("fair",              "FAIR",                  ROOT / "doc" / "fair.md"),
-    ("collab",            "Human-AI collaboration", ROOT / "doc" / "human-ai-collaboration-process.md"),
-    ("research-protocol", "Research protocol",     ROOT / "doc" / "research-protocol.md"),
-    ("submission",        "Submission",            ROOT / "doc" / "submission-plan.md"),
-    ("logbook",           "Logbook",               ROOT / "doc" / "logbook.md"),
-    ("provenance-graph",  "Provenance topology",   ROOT / "doc" / "provenance-graph.md"),
+    ("index",                "Home",                   SITE_SRC / "index.md"),
+    ("methodology",          "Methodology",            ROOT / "doc" / "methodology.md"),
+    ("fair",                 "FAIR",                   ROOT / "doc" / "fair.md"),
+    ("collab",               "Human-AI collaboration", ROOT / "doc" / "human-ai-collaboration-process.md"),
+    ("research-protocol",    "Research protocol",      ROOT / "doc" / "research-protocol.md"),
+    ("submission",           "Submission",             ROOT / "doc" / "submission-plan.md"),
+    ("logbook",              "Logbook",                ROOT / "doc" / "logbook.md"),
+    ("provenance-graph",     "Provenance topology",    ROOT / "doc" / "provenance-graph.md"),
+    ("provenance-explorer",  "Provenance explorer",    SITE_SRC / "provenance-explorer.md"),
 ]
 
 # Order in which nav items appear, with their final slugs.
 NAV: list[tuple[str, str]] = [
-    ("index",             "Home"),
-    ("methodology",       "Methodology"),
-    ("fair",              "FAIR"),
-    ("collab",            "Collab"),
-    ("agents",            "Agents"),
-    ("logbook",           "Logbook"),
-    ("provenance",        "Provenance"),
-    ("provenance-graph",  "Topology"),
-    ("submission",        "Submission"),
+    ("index",                "Home"),
+    ("methodology",          "Methodology"),
+    ("fair",                 "FAIR"),
+    ("collab",               "Collab"),
+    ("agents",               "Agents"),
+    ("logbook",              "Logbook"),
+    ("provenance",           "Provenance"),
+    ("provenance-explorer",  "Explorer"),
+    ("provenance-graph",     "Topology"),
+    ("submission",           "Submission"),
 ]
 
 MD_EXT = ["fenced_code", "tables", "toc", "sane_lists"]
@@ -283,6 +285,87 @@ def render_agents() -> str:
     return readme + links
 
 
+CLASS_FOR_TYPE = {
+    str(FAIR2R.AIAgent):          "agent",
+    str(FAIR2R.HumanResearcher):  "agent",
+    str(PROV.Activity):           "activity",
+    str(FAIR2R.AuthoringPass):    "activity",
+    str(FAIR2R.AuditPass):        "activity",
+    str(FAIR2R.Build):            "activity",
+    str(FAIR2R.Manuscript):       "entity",
+    str(FAIR2R.Section):          "entity",
+    str(FAIR2R.Figure):           "entity",
+    str(FAIR2R.Source):           "source",
+    str(FAIR2R.Prompt):           "prompt",
+    str(FAIR2R.Claim):            "claim",
+    str(PROV.Entity):             "entity",
+}
+
+
+def export_provenance_json(g: Graph, out_path: Path) -> None:
+    """Project the PROV-O graph to a vis-network friendly JSON file
+    (nodes + directed edges) for the interactive explorer page.
+    """
+    import json
+
+    # Pass 1: collect nodes for every named subject/object that has a
+    # label, a type we recognise, or participates in a PROV/dcterms edge.
+    nodes: dict[str, dict[str, object]] = {}
+
+    def add_node(uri):
+        if not isinstance(uri, URIRef):
+            return
+        s = str(uri)
+        if s in nodes:
+            return
+        cls = "other"
+        for t in g.objects(uri, RDF.type):
+            cls = CLASS_FOR_TYPE.get(str(t), cls)
+            if cls != "other":
+                break
+        nodes[s] = {
+            "id": s,
+            "iri": s,
+            "label": label_of(g, uri),
+            "cls": cls,
+        }
+
+    interesting_predicates = {
+        PROV.wasGeneratedBy,
+        PROV.wasAttributedTo,
+        PROV.wasDerivedFrom,
+        PROV.used,
+        PROV.wasAssociatedWith,
+        PROV.actedOnBehalfOf,
+        PROV.hadPlan,
+        PROV.wasInformedBy,
+        PROV.wasRevisionOf,
+        PROV.invalidated,
+        PROV.hadPrimarySource,
+        FAIR2R.verificationState,
+        FAIR2R.contradicts,
+    }
+
+    edges: list[dict[str, str]] = []
+    for s, p, o in g.triples((None, None, None)):
+        if p in interesting_predicates and isinstance(s, URIRef) and isinstance(o, URIRef):
+            add_node(s)
+            add_node(o)
+            edges.append({
+                "from": str(s),
+                "to": str(o),
+                "label": p.n3(g.namespace_manager).replace("prov:", "")
+                                                  .replace("fair2r:", ""),
+            })
+    # Also surface all top-level typed subjects, even if disconnected.
+    for cls_iri in CLASS_FOR_TYPE.keys():
+        for s in g.subjects(RDF.type, URIRef(cls_iri)):
+            add_node(s)
+
+    out = {"nodes": list(nodes.values()), "edges": edges}
+    out_path.write_text(json.dumps(out, indent=2), encoding="utf-8")
+
+
 def main(argv: Iterable[str]) -> int:
     if OUT.exists():
         shutil.rmtree(OUT)
@@ -308,6 +391,9 @@ def main(argv: Iterable[str]) -> int:
     g = Graph()
     g.parse(TTL, format="turtle")
     write_page("provenance", "Provenance", render_provenance(g))
+
+    # Interactive explorer JSON: emitted alongside the static assets.
+    export_provenance_json(g, OUT / "static" / "provenance.json")
 
     pages = sorted(OUT.glob("*.html"))
     print(f"Built {len(pages)} pages to {OUT.relative_to(ROOT)}/")

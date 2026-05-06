@@ -19,10 +19,15 @@ verified?}~\cite{krebs2026obscurity}. Second, the work is more
 exposed to the documented failure modes of LLM-assisted writing:
 fabricated citations, drift between claim and evidence,
 sloppification, and the gradual flattening of an argument as hedges
-accrete. Reported base rates for fabricated citations range from
-roughly 18\% to 55\%~\cite{walters2023fabrication,magesh2024legal} ---
-the kind of number that turns a methodological inconvenience into a
-disqualifying one.
+accrete. Reported base rates are not anecdotal: Walters and
+Wilder~\cite{walters2023fabrication} report 55\% fabrication for
+GPT-3.5 and 18\% for GPT-4 across general-purpose generation;
+Magesh et al.~\cite{magesh2024legal} report 17--34\% hallucination
+for retrieval-augmented legal-research tools. The numbers are not
+directly comparable --- one grades full citations, the other grades
+RAG-anchored answers --- but they are the same order of magnitude,
+and it is the kind of number that turns a methodological
+inconvenience into a disqualifying one.
 
 The volume problem compounds the per-paper one. The fraction of
 journal and arXiv submissions that contain LLM-generated or
