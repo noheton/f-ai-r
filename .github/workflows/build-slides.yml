@@ -1,0 +1,91 @@
+name: Build slides
+
+on:
+  push:
+    branches: ["**"]
+    paths:
+      - "slides/**"
+      - ".github/workflows/build-slides.yml"
+  pull_request:
+    paths:
+      - "slides/**"
+      - ".github/workflows/build-slides.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write   # write so the main-branch build can update the
+                    # 'latest-draft-slides' release that hosts the rendered
+                    # decks for direct download (mirrors the paper PDF flow).
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js (Marp CLI is npm-distributed)
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install Marp CLI
+        run: npm install -g @marp-team/marp-cli
+
+      - name: Install Chromium (Marp needs a headless browser for PDF / PPTX)
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y --no-install-recommends \
+            chromium-browser fonts-noto fonts-liberation || \
+          sudo apt-get install -y --no-install-recommends \
+            chromium fonts-noto fonts-liberation
+
+      - name: Render decks to PDF + PPTX + HTML
+        working-directory: slides
+        env:
+          CHROME_PATH: /usr/bin/chromium-browser
+        run: |
+          mkdir -p dist
+          for deck in pitch-5min conference-30min; do
+            marp --theme static/dlr/dlr.css --pdf  -o dist/${deck}.pdf  ${deck}.md
+            marp --theme static/dlr/dlr.css --pptx -o dist/${deck}.pptx ${deck}.md || true
+            marp --theme static/dlr/dlr.css --html -o dist/${deck}.html ${deck}.md
+          done
+          ls -la dist/
+
+      - name: Upload decks as workflow artefact
+        uses: actions/upload-artifact@v4
+        with:
+          name: slides-${{ github.sha }}
+          path: |
+            slides/dist/*.pdf
+            slides/dist/*.pptx
+            slides/dist/*.html
+          if-no-files-found: error
+          retention-days: 30
+
+      # On main, publish the rendered decks as a rolling
+      # 'latest-draft-slides' GitHub Release so the README and the
+      # site can link a stable download URL without rerunning CI per
+      # reader. Mirrors the paper-PDF distribution pattern.
+      - name: Publish rendered decks to 'latest-draft-slides' release
+        if: github.ref == 'refs/heads/main'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest-draft-slides
+          name: "F(AI)²R — latest draft slide decks"
+          body: |
+            Auto-built from commit ${{ github.sha }}.
+            Pitch deck (5 min) and conference deck (25+5 min), DLR Corporate
+            Design (Marp). DRAFT until publication consent is recorded.
+            Site: https://noheton.github.io/f-ai-r/
+          files: |
+            slides/dist/pitch-5min.pdf
+            slides/dist/pitch-5min.pptx
+            slides/dist/conference-30min.pdf
+            slides/dist/conference-30min.pptx
+          prerelease: true
+          make_latest: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

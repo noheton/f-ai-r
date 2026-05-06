@@ -6,27 +6,38 @@ three as load-bearing.
 
 ## Primary artifacts (invariant)
 
-The following three artifacts are **primary** and must be **consistent and
-up to date at all times**. No commit may be made if any one of them lags
-the others.
+The following four artifacts are **primary** and must be **consistent
+and up to date at all times**. No commit may be made if any one of
+them lags the others.
 
-1. **The manuscript** — `paper/main.tex` (and `paper/main-condensed.tex`,
-   plus any included `paper/sections/*.tex`).
+1. **The manuscript** — `paper/main.tex` plus any included
+   `paper/sections/*.tex`.
 2. **The PROV-O graph** — `doc/provenance.ttl`.
 3. **The logbook** — `doc/logbook.md`.
+4. **The slide decks** — `slides/pitch-5min.md` and
+   `slides/conference-30min.md` (DLR-themed Marp Markdown). Rendered
+   outputs (`slides/dist/*.{pdf,pptx,html}`) are derived; the `.md`
+   sources are the primary artefact.
 
 Concretely, any change that touches one must, in the same commit (or a
 clearly linked follow-up commit before the working session ends), produce
-the corresponding updates in the other two. Examples:
+the corresponding updates in the others. Examples:
 
 - Add a claim to `main.tex` ⇒ add a `fair2r:Claim` triple to
-  `provenance.ttl` ⇒ note the addition in `logbook.md`.
+  `provenance.ttl` ⇒ note the addition in `logbook.md` ⇒ if the
+  claim is load-bearing, surface it on the appropriate slide deck.
 - Retire a section ⇒ add a `prov:Invalidation` activity in
-  `provenance.ttl` ⇒ note the retirement and reason in `logbook.md`.
+  `provenance.ttl` ⇒ note the retirement and reason in `logbook.md`
+  ⇒ remove or revise the corresponding slide.
 - Swap an agent prompt ⇒ update the `fair2r:Prompt` entity referenced by
   `provenance.ttl` ⇒ note the prompt change in `logbook.md`.
+- Restructure a deck ⇒ keep its claims aligned with the manuscript;
+  log the change as a `fair2r:Contribution` of type
+  `content-prompt`.
 
-Every agent in `agents/` is bound by this invariant.
+Every agent in `agents/` is bound by this invariant. The
+`agents/presentation.md` agent owns the slide decks; the slides do
+not get to argue ahead of the paper.
 
 ## Contribution tracking (binding)
 

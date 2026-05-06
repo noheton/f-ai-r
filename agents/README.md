@@ -17,6 +17,7 @@ commit. Do not improvise new prompts in chat without landing them here first.
 | `readability-reviewer.md`| Reviews prose for clarity, flow, and novelty signal.       | auditor |
 | `illustration.md`        | Plans and specifies figures (TikZ / SVG / matplotlib).     | author |
 | `condenser.md`           | Page-budget enforcer. Fires when the compiled PDF exceeds the configured budget (default 10 pages of body). | auditor |
+| `presentation.md`        | Slide-deck custodian. Owns `slides/pitch-5min.md` and `slides/conference-30min.md`; ensures slide claims are downstream of the paper text. | author |
 | `research-protocol.md`   | Defines literature-search and verification protocols.      | both |
 
 ## Primary artifacts — consistency invariant (binds every agent)

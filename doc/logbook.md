@@ -807,3 +807,64 @@ future revision.
 sentence into authors-note.tex; consider whether the supervisory-
 glance pattern warrants graduation to a numbered practice or
 remains as a field-note in evolution.tex.
+
+## 2026-05-06 — Two slide decks (DLR Marp theme) + presentation agent + slides promoted to fourth primary artefact
+*Author:* claude-opus-4-7 (under direction of repo owner)
+*Touched:* `slides/pitch-5min.md`, `slides/conference-30min.md`,
+`slides/Makefile`, `slides/.gitignore`,
+`slides/static/dlr/dlr.css`, `slides/static/dlr/mermaid.css`,
+`slides/static/dlr/assets/{slide_back.png, title_back.png,
+dlr-logo.svg, dlr-logo-white.svg}`,
+new `agents/presentation.md`, new
+`.github/workflows/build-slides.yml`, `CLAUDE.md`,
+`doc/methodology.md`, `doc/provenance.ttl`,
+`doc/user-contributions.md`, `README.md`, `site/index.md`.
+*Decision / outcome:* Researcher requested two slide decks ---
+"every paper needs a slide deck. I want you to design 2 slide
+decks. A 5 minute pitch deck and a 25+5 conference deck for the
+paper. can you generate it using the DLR DESIGN system. both should
+be treated as primary artifacts. included in ci. create a fitting
+presentation agent". Implementation:
+The DLR design-system bundle's canonical slide kit is
+`ui_kits/marp/` (Marp + DLR theme, Markdown → PPTX/PDF). Vendored
+the theme (`dlr.css`, `mermaid.css`) and the layout assets
+(background plates, logos) under `slides/static/dlr/`. Two source
+decks committed: `pitch-5min.md` (six slides, ~50 s each, claim per
+slide, no figure overload) and `conference-30min.md` (~28 slides,
+section-divider slides between the position-paper's natural breaks,
+backup slides included). Both use only the DLR-theme layout
+classes (`title`, `section-divider`, `toc`, `thanks`); no inline
+HTML. Both close on the position-paper aphorism
+(*pipeline-team-methodology / specialisation-at-the-seam /
+naming-the-practice*).
+A `slides/Makefile` runs the Marp CLI via `npx`, producing
+`dist/<deck>.{pdf,pptx,html}`. The `.github/workflows/build-slides.yml`
+mirrors the paper-build pattern: it installs Node + Chromium +
+Marp, renders both decks to all three formats, uploads the workflow
+artefact, and on `main` publishes a rolling `latest-draft-slides`
+release with the PDF + PPTX downloads. The README and the site
+index now carry direct download links to all four files.
+A new `agents/presentation.md` is the slide-deck custodian. It
+binds the same primary-artefact-consistency rule the other agents
+follow, plus a slide-specific addendum: a claim on a slide must
+already appear in the paper text; a slide that contradicts the
+paper is a defect. The agent also restates the DLR voice rules and
+the variant-locking rule (one chapter accent per section).
+The biggest invariant-level change: **slides are promoted to the
+fourth primary artefact**. `CLAUDE.md` and `doc/methodology.md`
+now name four primary artefacts (manuscript, PROV-O graph,
+logbook, slides). A new
+`fair2r:Slidedeck` class extends the schema; both decks have
+`fair2r:Slidedeck` IRIs in the graph. A new
+`claim:slides-as-primary-artefact` formalises the rule.
+Local smoke test: `provenance.ttl` parses to **1331 triples** (up
+from 1276, +55 for the new schema and entries). The slide builds
+cannot be smoke-tested locally without a Node + Chromium install;
+the CI workflow is the canonical render path.
+*Next:* Trigger build-slides on `main` after merge to verify the
+DLR theme renders cleanly; on the first set of rendered decks,
+spot-check the section-divider slides' background plates and the
+title slide's accent rule; replace any `pending` source rungs that
+the conference deck's content depends on (e.g. `magesh2024legal`,
+`walters2023fabrication`) with `lit-read` once the human author has
+read them in full.
