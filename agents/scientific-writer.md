@@ -38,12 +38,41 @@ one-line logbook entry. Do not hand back prose alone.
   the bibkey it leans on (if any), and the verification state you believe
   applies (`ai-confirmed`, `needs-research`, `unverified`).
 
-## House style
+## House style (DLR Corporate Design alignment)
 - One idea per sentence. One claim per sentence where possible.
 - Define an acronym at first use.
-- Prefer the active voice. "We extend FAIR" not "FAIR is extended".
+- Active voice. "We extend FAIR" not "FAIR is extended". The
+  scholarly "we" is fine.
 - Never start a sentence with a citation.
 - Em-dashes are fine; do not overuse them.
+
+### DLR voice rules (CD-Handbuch §10 *Wording*)
+- **No second person.** Never address the reader as "you" or "your".
+  Subjects are usually the institution, the work, or the practice.
+- **No emoji.** Anywhere. No exclamation marks except in direct
+  quotations.
+- **No marketing verbs.** No "revolutionize", "supercharge", "unlock",
+  "leverage as a force-multiplier". The voice is precise, factual,
+  and institutionally calm.
+- **No invented statistics.** Cite institute, study, year. If the
+  number is not yet `lit-read`, mark the sentence with `\todo{verify}`.
+- **British English** for the manuscript (per CD-Handbuch §10) ---
+  "behaviour" not "behavior", "centre" not "center", "organise" not
+  "organize". The single allowed exception is the proper name "German
+  Aerospace Center".
+- **Numbers**: thousands `.`, decimal `,`, space-separated `%` when
+  rendering German; in English prose use the standard
+  comma-thousands and period-decimal. Be consistent within a section.
+
+## Page budget (binding)
+- The manuscript is short-form: default target **10 pages of body**,
+  plus references and appendices (which do not count).
+- If your draft exceeds the budget, hand to the `condenser` agent
+  before committing rather than trimming in place. The condenser
+  proposes; you implement.
+- Soft per-section budget: roughly one page per section in the body,
+  scaling for the eight-practices and pattern sections which are
+  load-bearing and may run longer.
 
 ## File granularity (binding)
 - Each `.tex` file under `paper/sections/` represents **one chapter**

@@ -2,192 +2,99 @@
 \label{sec:evolution}
 
 \S\ref{sec:self} attests that this paper was produced by the
-F(AI)\textsuperscript{2}R pipeline. This section is the second half of
-that attestation: a candid record of how the process itself changed
-while the paper was being written. The goal is transparency. The
-prescription in \S\ref{sec:pattern} is the destination; the path was
-not straight, and the path is worth preserving for two reasons.
-First, it shows which practices survived first contact with a real
-manuscript. Second, it shows where the human researcher had to
-intervene to keep the AI from drifting.
+F(AI)\textsuperscript{2}R pipeline. This section is the second half
+of that attestation: a candid record of how the process itself
+changed while the paper was being written. The goal is transparency
+about how the paper came to be and how researcher and AI interacted.
+The record is reconstructed from \texttt{doc/logbook.md} and
+\texttt{doc/provenance.ttl}.
 
-The record below is reconstructed from \texttt{doc/logbook.md} and
-\texttt{doc/provenance.ttl}. Every event names the trigger (a
-researcher decision, a defect surfaced by review, or a model
-behaviour observed in conversation), the artefact altered, and ---
-where applicable --- the failure mode of \S\ref{sec:failure-modes}
-that the change now mitigates.
-
-\subsection{Initial bootstrap}
-\label{sec:evo-bootstrap}
-
-\textbf{Trigger.} Researcher request: initialise a repository for the
-paper, with prompts under \texttt{agents/}, a logbook under
-\texttt{doc/}, and a single PROV-O graph that follows the creation of
-the paper. Distil best practices from a prior repository
-(\texttt{noheton/Obscurity-Is-Dead}) and exclude the prior repository's
-domain content.
-
-\textbf{Response.} The AI surveyed the source repository
-(via a separate research subagent, to keep the surveying read-only and
-out of the main writing context), produced a distillation, and
-proposed an initial directory layout. The researcher accepted it.
-
-\textbf{Artefact.} 37 files in the first commit: \texttt{paper/}
-skeleton, ten prompt files, six \texttt{doc/} documents, the seed
-provenance graph, machine-readable metadata at the root, dual
-licensing.
-
-\textbf{Observation.} The first AI proposal of F(AI)\textsuperscript{2}R
-read the ``squared'' as \emph{AI participates twice in the loop}.
+\paragraph{Bootstrap.}
+Researcher request: initialise a paper-plus-pipeline repository with
+prompts under \texttt{agents/}, a logbook under \texttt{doc/}, and a
+single PROV-O graph that follows the creation of the paper, distilled
+from a prior repository (\texttt{noheton/Obscurity-Is-Dead}) with all
+domain content abstracted away. The first AI draft read
+F(AI)\textsuperscript{2}R as ``AI participates twice in the loop''.
 Reading the prior repository carefully revealed the researcher's
-original framing: \emph{(AI)} as a factor multiplied through every FAIR
-axis, squared because of the two passes per axis. The two readings are
-compatible but the second is the load-bearing one. The paper draft
-adopts it. The lesson: when the AI's first-pass interpretation differs
-from the researcher's prior writing, the prior writing wins.
+original framing: \emph{(AI)} as a factor multiplied through every
+FAIR axis, squared because of the two passes per axis. The paper
+draft adopts the latter. Lesson: when the AI's first-pass
+interpretation differs from the researcher's prior writing, the prior
+writing wins.
 
-\subsection{Primary-artefact consistency invariant}
-\label{sec:evo-invariant}
+\paragraph{Primary-artefact consistency invariant.}
+After the bootstrap, the researcher asserted that the manuscript,
+the PROV-O graph, and the logbook are primary artefacts and must
+remain consistent and up to date at all times. The AI added a
+binding ``Primary-artefact consistency'' block to every prompt;
+named the Orchestrator the ultimate custodian and the Provenance
+Curator the keystone; specified that the FAIR Aligner surfaces a
+desync as an audit \emph{fail}. The rule was recorded as a
+\texttt{fair2r:Claim}, attributed to the researcher, and as a
+\texttt{prov:Activity} revising every affected prompt entity.
 
-\textbf{Trigger.} The researcher asserted, after the bootstrap commit,
-that the manuscript, the PROV-O graph, and the logbook are primary
-artefacts and \emph{must be consistent and up to date at all times}.
-The trigger was not a defect; it was a rule the researcher knew was
-needed, observed was missing, and made explicit.
+\paragraph{Static site, Pages workflow, paper-build CI.}
+Researcher request: a public site in the spirit of the prior
+repository, plus continuous integration. The AI added a static-site
+generator (parsing \texttt{doc/provenance.ttl} via \texttt{rdflib}),
+the corresponding GitHub Pages workflow with a Turtle-validation
+gate, and a paper-build workflow.
 
-\textbf{Response.} The AI added a uniform ``Primary-artefact
-consistency (binding)'' block to every prompt under \texttt{agents/};
-named the Orchestrator the ultimate custodian of the invariant and the
-Provenance Curator its keystone; specified that the FAIR Aligner will
-surface a desync as an audit \emph{fail}. The rule was also recorded
-as a \texttt{fair2r:Claim} in the graph, attributed to the researcher,
-at \textsc{lit-read} from session conversation; and as a
-\texttt{prov:Activity} (\texttt{act:rev-consistency-rule}) revising
-each affected prompt entity.
+\paragraph{Chapter granularity for the writer.}
+Researcher request: \emph{each \texttt{.tex} file should represent
+one chapter}. The Scientific Writer prompt gained a binding
+``File granularity'' block: one \texttt{\textbackslash section\{\}}
+per file, soft target 100--400 lines, filename slug matches the
+\texttt{\textbackslash label\{sec:\dots\}}. \texttt{paper/main.tex}
+became a thin assembler.
 
-\textbf{Artefact.} A second commit, narrowly scoped: 15 files
-modified, 201 insertions.
+\paragraph{Recursive attestation, by request.}
+Researcher request: \emph{add a section that this paper is generated
+using exactly this process}. \S\ref{sec:self} was added.
 
-\textbf{Failure mode addressed.} Claim--evidence drift
-(\S\ref{sec:fm-drift}) and silent retraction. The invariant binds
-prose changes to graph changes to logbook changes; a writer that
-modifies one without the others now violates a load-bearing rule
-rather than a stylistic preference.
+\paragraph{This section, by request.}
+Researcher request: \emph{document the evolution of the process
+during cooperative writing}. This section. The \texttt{fair2r:Claim}
+entries for it sit at \textsc{ai-confirmed} until reviewed.
 
-\subsection{Site, Pages workflow, paper-build CI}
-\label{sec:evo-ci}
+\paragraph{Short-form pivot.}
+Researcher request: write only the short form (10 pages of body plus
+references and appendices) rather than maintaining a long/condensed
+split. The \texttt{main-condensed.tex} target was retired; the
+Condenser agent was repurposed as a \emph{page-budget enforcer} that
+fires when the compiled PDF exceeds the configured budget; the
+Scientific Writer prompt gained a page-budget rule.
 
-\textbf{Trigger.} Researcher request: a public site in the spirit of
-the prior repository, plus continuous integration for the paper
-build.
+\paragraph{Institutional design system.}
+Researcher request: integrate the DLR design system (Frutiger /
+Arial, blue/green/yellow chapter accents, square corners, hairline
+borders, photography-led, no marketing register). The site CSS was
+rewritten on top of the DLR \texttt{colors\_and\_type.css} tokens; a
+small \LaTeX{} style file (\texttt{paper/style/fair2r.sty}) carries
+the equivalent typography and rule colours into the PDF; the
+imprint was updated with the author's institutional identity (DLR
+ZLP Augsburg, Helmholtz, NFDI4Ing, HMC).
 
-\textbf{Response.} The AI added a static-site generator
-(\texttt{scripts/build\_provenance\_site.py}, parsing
-\texttt{doc/provenance.ttl} via \texttt{rdflib}), the corresponding
-GitHub Pages workflow with a Turtle-validation gate, and a paper-build
-workflow that compiles both manuscripts on every push and uploads the
-PDFs as artefacts. The site replicates the topology of the prior
-repository's site; the workflow is the conventional pair of
-\texttt{actions/configure-pages} and \texttt{actions/deploy-pages}.
+\subsection*{Patterns observed}
 
-\textbf{Observation.} The researcher noted that the prior repository
-used a consent gate before deployment. We ported the structure of the
-gate (Pages deploys only on \texttt{main}; the working branch sees
-artefacts only) and deferred the explicit consent record to a later
-commit, recorded in the logbook as a known gap. Asset honesty over
-asset completeness (\S\ref{sec:practice-mirror}) was applied to the
-gap itself.
-
-\textbf{Failure mode addressed.} Mirror drift between source and
-render (\S\ref{sec:practice-mirror}). The CI is the audit pass for
-the build: any commit that breaks the build, or that produces a
-provenance graph that fails Turtle validation, fails the workflow
-visibly.
-
-\subsection{Chapter-granularity rule for the Scientific Writer}
-\label{sec:evo-chapter}
-
-\textbf{Trigger.} While the AI was drafting the paper sections in a
-single conversation, the researcher requested an explicit rule that
-\emph{each \texttt{.tex} file should represent one chapter, to keep
-the files at a manageable size}.
-
-\textbf{Response.} The Scientific Writer prompt
-(\texttt{agents/scientific-writer.md}) gained a binding ``File
-granularity'' block: one \texttt{\textbackslash section\{\}} per file
-under \texttt{paper/sections/}, soft target 100--400 lines per file,
-filename slug matches the \texttt{\textbackslash label\{sec:\dots\}}.
-\texttt{paper/main.tex} is now a thin assembler --- preamble plus
-\texttt{\textbackslash input\{sections/...\}} in reading order ---
-and prose lives in the section files.
-
-\textbf{Failure mode addressed.} List-of-lists prose
-(\S\ref{sec:fm-listoflists}) and the implicit pressure on the writer
-to flatten an argument when a single file grows past comprehensibility.
-A 400-line file is small enough to keep in a single review pass; a
-2000-line file is not.
-
-\subsection{Explicit recursive-attestation section}
-\label{sec:evo-recursive}
-
-\textbf{Trigger.} Researcher request: \emph{add a section that this
-paper is generated using exactly this process}.
-
-\textbf{Response.} \S\ref{sec:self} was added: a list of what ran,
-what is committed, how a third party can replay the build, and the
-honest limits of artefactual attestation. The section is short on
-purpose. The fifth integrated practice
-(\S\ref{sec:practice-recursive}) requires the recursive case study;
-\S\ref{sec:self} is the receipt.
-
-\textbf{Failure mode addressed.} The methodological-tract failure
-mode --- a paper that prescribes a discipline it did not itself
-follow.
-
-\subsection{This section, by request}
-\label{sec:evo-this-section}
-
-\textbf{Trigger.} Researcher request, after the previous addition:
-\emph{document the evolution of the process during cooperative
-writing}, with the goal of transparency about how the paper came to
-be and how researcher and AI interacted.
-
-\textbf{Response.} This section. The AI drafted it from
-\texttt{doc/logbook.md} and the conversation history; the researcher
-will read and either accept or hand back. The
-\texttt{fair2r:Claim} entries for this section sit at
-\textsc{ai-confirmed} until the researcher reviews and elevates them.
-
-\subsection{Patterns observed in the cooperation}
-\label{sec:evo-patterns}
-
-Three patterns recur across the events above and are worth naming
-explicitly.
+Three patterns recur and are worth naming.
 
 \paragraph{Researcher-as-corrector.}
-The researcher's interventions are short, specific, and rule-shaped:
-\emph{the three artefacts must stay consistent}; \emph{tex files
-should be chapter-sized}; \emph{add a section that says X}. None of
-them is a rewrite of AI-produced prose. The cooperation lives in the
-gap between a model that produces a plausible default and a researcher
-who can recognise when the default is wrong. The pipeline of
-\S\ref{sec:pipeline} is intended to make that gap shorter, not to
-remove the researcher.
+The researcher's interventions are short, specific, and rule-shaped.
+None is a rewrite of AI-produced prose. The cooperation lives in the
+gap between a model that produces a plausible default and a
+researcher who can recognise when the default is wrong.
 
 \paragraph{Pipeline as target, not yet as practice.}
 The ten-stage pipeline is the architecture the prompts encode. The
 present draft was produced by a single AI agent in conversation with
 the researcher, with role separation documented in the prompts but
-not yet actively switched per turn. The honest reading: this paper
-encodes the pattern; the next paper, written from the same prompts
-under a stricter Orchestrator that enforces single-stage handoffs,
-will exercise it. We name this gap rather than paper over it.
+not yet actively switched per turn. We name this gap rather than
+paper over it.
 
 \paragraph{Logbook as conscience.}
-Every event in this section corresponds to an entry in
+Every event above corresponds to an entry in
 \texttt{doc/logbook.md}. The append-only discipline made the
-reconstruction cheap: there was no need to interview the AI about
-what it ``remembered'' having done, because the logbook had already
-recorded it. \emph{The logbook is the conscience of the cooperation};
-the provenance graph is its record.
+reconstruction cheap. \emph{The logbook is the conscience of the
+cooperation; the provenance graph is its record.}

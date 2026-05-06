@@ -1,0 +1,233 @@
+/* ============================================================
+   DLR Design System — Colors & Type
+   Source: DLR Corporate Design (DLR-PPT-Master_1.31_EN.potx)
+   ============================================================ */
+
+/* ---------- Frutiger (DLR Hausschrift) ----------
+   Loaded from /fonts. Frutiger is the corporate face named in the
+   PPT-Master and the Python theme. Arial remains the safe fallback
+   when Frutiger isn't shipped to the channel (web/print without
+   embedding rights). */
+/* Frutiger 45 Light — DLR-Hausschrift (CD-Handbuch §10.1) */
+@font-face {
+  font-family: "Frutiger";
+  src: url("fonts/Frutiger_light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+/* Frutiger 55 Roman — Body / Standard */
+@font-face {
+  font-family: "Frutiger";
+  src: url("fonts/Frutiger_roman.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+/* Frutiger Regular (legacy file shipped earlier) */
+@font-face {
+  font-family: "Frutiger";
+  src: url("fonts/Frutiger.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+/* Frutiger Bold — Headlines, Wortmarken */
+@font-face {
+  font-family: "Frutiger";
+  src: url("fonts/Frutiger_bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* ---------- Color: Blue scale (primary) ---------- */
+  --dlr-blau-1: #00658b;  /* primary accent, "DLR Blue" */
+  --dlr-blau-2: #3b98cb;
+  --dlr-blau-3: #6cb9dc;
+  --dlr-blau-4: #a7d3ec;
+  --dlr-blau-5: #d1e8fa;
+
+  /* ---------- Color: Yellow scale ---------- */
+  --dlr-gelb-1: #d2ae3d;
+  --dlr-gelb-2: #f2cd51;
+  --dlr-gelb-3: #f8de53;
+  --dlr-gelb-4: #fcea7a;
+  --dlr-gelb-5: #fff8be;
+
+  /* ---------- Color: Green scale ---------- */
+  --dlr-gruen-1: #82a043;
+  --dlr-gruen-2: #a6bf51;
+  --dlr-gruen-3: #cad55c;
+  --dlr-gruen-4: #d9df78;
+  --dlr-gruen-5: #e6eaaf;
+
+  /* ---------- Color: Gray scale ---------- */
+  --dlr-grau-1: #666666;
+  --dlr-grau-2: #868585;
+  --dlr-grau-3: #b1b1b1;
+  --dlr-grau-4: #cfcfcf;
+  --dlr-grau-5: #ebebeb;
+
+  /* ---------- Extra accents from theme clrScheme ---------- */
+  --dlr-teal: #0094a8;
+  --dlr-sky-blue: #5f98cb;
+  --dlr-link: #00b0f0;
+
+  /* ---------- Semantic foundations ---------- */
+  --bg: #ffffff;
+  --bg-soft: #f6f7f8;
+  --bg-muted: var(--dlr-grau-5);
+
+  --fg: #000000;             /* body */
+  --fg-2: var(--dlr-grau-1); /* secondary, slide titles, footers */
+  --fg-3: #464646;           /* h3 dark charcoal */
+  --fg-mute: var(--dlr-grau-2);
+  --fg-on-accent: #ffffff;
+
+  --border: var(--dlr-grau-4);
+  --border-soft: var(--dlr-grau-5);
+
+  /* Active variant — A (Blue) by default. Switch by setting [data-variant="b"|"c"] on root */
+  --accent: var(--dlr-blau-1);
+  --accent-2: var(--dlr-blau-2);
+  --accent-3: var(--dlr-blau-3);
+  --accent-4: var(--dlr-blau-4);
+  --accent-5: var(--dlr-blau-5);
+
+  /* Logo black */
+  --dlr-logo-black: #1d1d1b;
+
+  /* ---------- Spacing ---------- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+
+  /* ---------- Radii ---------- */
+  --radius-0: 0;          /* DLR is mostly square */
+  --radius-1: 2px;
+  --radius-2: 4px;
+  --radius-pill: 999px;
+
+  /* ---------- Shadow ---------- */
+  --shadow-1: 0 1px 2px rgba(0,0,0,.06);
+  --shadow-2: 0 2px 8px rgba(0,0,0,.08);
+  --shadow-3: 0 8px 24px rgba(0,0,0,.10);
+
+  /* ---------- Type ----------
+     Per CD-Handbuch §10.1 "Unsere Korrespondenz / Schriften":
+       • Print, Briefe, Broschüren  →  Frutiger 45 Light (Hausschrift)
+       • Elektronisch (E-Mail, Web, PowerPoint)  →  Arial
+     The web fallback below realises both rules in one stack. */
+  --font-sans: "Frutiger", Arial, "Helvetica Neue", Helvetica, "Liberation Sans", system-ui, sans-serif;
+  --font-print: "Frutiger", "Liberation Sans", sans-serif;        /* Hausschrift channel */
+  --font-electronic: Arial, "Helvetica Neue", sans-serif;          /* substitute channel */
+  --font-mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+
+  /* PPT specs are pt; converted to px assuming 1pt ≈ 1.333px (96dpi).
+     Web sizes are derived from these but reasonable for screens. */
+  --type-cover-title: 64px;   /* 48pt */
+  --type-h1: 38px;            /* 28pt slide title */
+  --type-h2: 27px;            /* 20pt sub-heading */
+  --type-h3: 24px;            /* 18pt sub-sub-heading */
+  --type-body-lg: 32px;       /* 24pt body / bullet L1 */
+  --type-body: 18px;          /* web body baseline */
+  --type-bullet-2: 27px;      /* 20pt bullet L2 */
+  --type-bullet-3: 24px;      /* 18pt bullet L3 */
+  --type-small: 14px;
+  --type-footer: 13px;        /* 10pt */
+}
+
+/* Variant B — Green chapter accent */
+[data-variant="b"] {
+  --accent: var(--dlr-gruen-1);
+  --accent-2: var(--dlr-gruen-2);
+  --accent-3: var(--dlr-gruen-3);
+  --accent-4: var(--dlr-gruen-4);
+  --accent-5: var(--dlr-gruen-5);
+}
+
+/* Variant C — Yellow chapter accent */
+[data-variant="c"] {
+  --accent: var(--dlr-gelb-1);
+  --accent-2: var(--dlr-gelb-2);
+  --accent-3: var(--dlr-gelb-3);
+  --accent-4: var(--dlr-gelb-4);
+  --accent-5: var(--dlr-gelb-5);
+}
+
+/* ============================================================
+   Base type
+   ============================================================ */
+html, body {
+  font-family: var(--font-sans);
+  color: var(--fg);
+  background: var(--bg);
+  font-size: var(--type-body);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, .h1 {
+  font-size: var(--type-h1);
+  font-weight: 700;
+  color: var(--fg-2);   /* slide title gray, per spec */
+  line-height: 1.15;
+  letter-spacing: -0.005em;
+  margin: 0 0 var(--space-5);
+}
+
+h2, .h2 {
+  font-size: var(--type-h2);
+  font-weight: 700;
+  color: var(--accent);  /* sub-heading uses accent */
+  line-height: 1.2;
+  margin: 0 0 var(--space-4);
+}
+
+h3, .h3 {
+  font-size: var(--type-h3);
+  font-weight: 700;
+  color: var(--fg-3);
+  line-height: 1.25;
+  margin: 0 0 var(--space-3);
+}
+
+p, .body {
+  font-size: var(--type-body);
+  color: var(--fg);
+  line-height: 1.55;
+  margin: 0 0 var(--space-4);
+  text-wrap: pretty;
+}
+
+.cover-title { font-size: var(--type-cover-title); font-weight: 700; color: #000; line-height: 1.05; }
+.body-lg     { font-size: var(--type-body-lg); line-height: 1.4; }
+.small       { font-size: var(--type-small); color: var(--fg-2); }
+.footer-text { font-size: var(--type-footer); color: var(--fg-2); }
+
+blockquote, .quote {
+  font-size: var(--type-h2);
+  font-style: italic;
+  color: var(--fg-2);
+  border-left: 4px solid var(--accent);
+  padding: var(--space-3) var(--space-5);
+  margin: var(--space-5) 0;
+}
+
+a, .link { color: var(--dlr-link); text-decoration: underline; text-underline-offset: 2px; }
+a:hover  { color: var(--accent); }
+
+code, pre, .mono { font-family: var(--font-mono); }
+
+/* Utility */
+.muted    { color: var(--fg-2); }
+.dim      { color: var(--fg-mute); }
+.on-accent{ color: var(--fg-on-accent); }

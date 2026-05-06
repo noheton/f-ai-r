@@ -1,66 +1,38 @@
 \section{Related Work}
 \label{sec:related}
 
-\paragraph{FAIR and its descendants.}
-The FAIR Guiding Principles are the
-substrate~\cite{wilkinson2016fair}. FAIR4RS~\cite{chuehong2022fair4rs}
-re-reads them for research software; FAIR4ML~\cite{ravi2024fair4ml}
-re-reads them for machine-learning models.
-F(AI)\textsuperscript{2}R is the third such re-reading and the first
-that targets the artefact classes generated downstream of the writing
-process itself. The relationship is additive, not revisionist: a paper
-whose data is FAIR, whose code is FAIR4RS, and whose models are
-FAIR4ML is, on the writing layer,
-\emph{FAIR-uncovered until it is also F(AI)\textsuperscript{2}R}.
+FAIR~\cite{wilkinson2016fair} is the substrate;
+FAIR4RS~\cite{chuehong2022fair4rs} and
+FAIR4ML~\cite{ravi2024fair4ml} are the prior re-readings.
+F(AI)\textsuperscript{2}R is the third such extension and the first
+that targets artefacts generated downstream of the writing process
+itself. Datasheets for datasets~\cite{gebru2021datasheets} and model
+cards~\cite{mitchell2019modelcards} are the canonical attempts to
+attach human-readable, structured documentation to ML artefacts and
+are the immediate ancestors of the per-prompt and per-claim
+documentation we propose; they document an artefact at a single
+level, while F(AI)\textsuperscript{2}R documents the artefact and
+the process that produced it, chained.
 
-\paragraph{Datasheets and model cards.}
-Datasheets for datasets~\cite{gebru2021datasheets} and model cards for
-model reporting~\cite{mitchell2019modelcards} are the canonical
-attempts to attach human-readable, structured documentation to ML
-artefacts. Both are ancestors of the per-prompt and per-claim
-documentation we propose. They differ in scope --- datasheets and
-model cards document an artefact at a single level; F(AI)\textsuperscript{2}R
-documents an artefact \emph{and} the process that produced it,
-chained.
-
-\paragraph{Provenance and reproducibility.}
 PROV-O~\cite{w3c2013provo} is the formal substrate. The recent
-ML-reproducibility literature has produced a number of tools
-(\textsc{papers-with-code} reproducibility checklists; the NeurIPS
-reproducibility checklist; \textsc{Code Ocean}-style executable
-papers). F(AI)\textsuperscript{2}R differs in that the writing layer
-is itself the artefact under reproducibility audit, not merely the
-code or the dataset.
+ML-reproducibility literature has produced reproducibility checklists
+and executable-paper systems; F(AI)\textsuperscript{2}R differs in
+that the writing layer is itself the artefact under reproducibility
+audit. PRISMA 2020~\cite{page2021prisma} and
+GRADE~\cite{guyatt2008grade} supply the retrieval-depth and
+invocation-strength axes the verification ladder crosswalks.
 
-\paragraph{Systematic reviews and certainty of evidence.}
-PRISMA 2020~\cite{page2021prisma} and GRADE~\cite{guyatt2008grade}
-supply the retrieval-depth and invocation-strength axes the
-verification ladder crosswalks. Neither was designed for LLM-assisted
-writing; both have decades of editorial practice behind them. The
-ladder is, in this sense, an attempt to import established practice
-from systematic-review methodology into a setting that has lacked it.
-
-\paragraph{AI-disclosure norms and authorship.}
 The \textsc{ICMJE}~\cite{icmje2023}, ACL Rolling Review, NeurIPS, and
-the major scientific publishers have converged on a position that
-disclosure is mandatory and AI authorship is unacceptable. The
-literature on what \emph{adequate} disclosure looks like is thinner.
-Bender and colleagues' critiques~\cite{bender2021stochastic} provide
-much of the vocabulary the disclosure community has since used; the
-sixth practice (\S\ref{sec:practice-disclosure}) is our attempt to
-operationalise it in a single submission.
-
-\paragraph{The base-rate literature on fabrication.}
-Reported base rates for fabricated citations in LLM
-output~\cite{walters2023fabrication,magesh2024legal} are the load-bearing
-empirical input to the verification ladder. Without a number, the
-ladder is overhead; with a number, the ladder is the cheapest known
-mitigation that scales.
-
-\paragraph{Recursive-meta-process examples.}
-A handful of recent papers describe their own LLM-assisted production
-process. We are not aware of a prior recursive case study that
-combines transcript preservation, a verification-status FSM, a PROV-O
-graph, and the full eight-practice integration we describe here. The
-source repository \texttt{noheton/Obscurity-Is-Dead} is the immediate
-methodological ancestor of this paper; this paper is its abstraction.
+the major scientific publishers have converged on disclosure being
+mandatory and AI authorship being unacceptable. The literature on
+what \emph{adequate} disclosure looks like is thinner; Bender and
+colleagues~\cite{bender2021stochastic} provide much of its
+vocabulary. The sixth integrated practice
+(\S\ref{sec:eight}, item~6) is our attempt to operationalise
+adequate disclosure in a single submission. The base-rate
+literature on
+fabrication~\cite{walters2023fabrication,magesh2024legal} is the
+load-bearing empirical input to the verification ladder. The source
+repository \texttt{noheton/Obscurity-Is-Dead}~\cite{krebs2026obscurity}
+is the immediate methodological ancestor of this paper; this paper
+is its abstraction.

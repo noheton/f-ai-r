@@ -1,29 +1,28 @@
-% F(AI)^2R: FAIR Research with AI in the Loop, Twice
-% Long-form manuscript. main.tex is a thin assembler: preamble, then
+% F(AI)^2R — FAIR Research with AI in the Loop, Twice.
+% Short-form manuscript (target ~10 pages of body, plus references and
+% appendices). main.tex is a thin assembler: preamble, then
 % \input{sections/...} in reading order. Prose lives in section files.
+% Style: paper/style/fair2r.sty — DLR Corporate Design alignment.
 
 \documentclass[11pt,a4paper]{article}
 
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage{lmodern}
-\usepackage{microtype}
-\usepackage[margin=2.5cm]{geometry}
-\usepackage[hidelinks]{hyperref}
+\usepackage{style/fair2r}        % DLR-aligned typography, colours, layout
+
 \usepackage{graphicx}
-\usepackage{xcolor}
-\usepackage{booktabs}
-\usepackage{enumitem}
 \usepackage[backend=biber,style=numeric,sorting=none]{biblatex}
 \usepackage{todonotes}
 
 \addbibresource{references.bib}
 
-\title{F(AI)\textsuperscript{2}R: \\
+\title{\faiar:\\
        \large FAIR Research with AI in the Loop, Twice}
-\author{TBD\thanks{Author affiliation TBD. ORCID TBD. The manuscript is
-released under CC-BY-4.0; the accompanying code, prompts, and
-provenance graph are released under MIT.}}
+\author{%
+  Florian Krebs\\[2pt]
+  \small ORCID: \href{https://orcid.org/0000-0001-6033-801X}{0000-0001-6033-801X}\\
+  \small \href{mailto:florian.krebs@dlr.de}{florian.krebs@dlr.de}\\[4pt]
+  \small DLR Zentrum für Leichtbauproduktionstechnologie (ZLP), Augsburg\\
+  \small Helmholtz-Gemeinschaft \textperiodcentered{} NFDI4Ing \textperiodcentered{} HMC%
+}
 \date{\today}
 
 \begin{document}
@@ -40,16 +39,17 @@ provenance graph are released under MIT.}}
 \input{sections/evolution}
 \input{sections/failure-modes}
 \input{sections/discussion}
+\input{sections/sustainability}
 \input{sections/related}
 \input{sections/conclusion}
 
 \input{sections/acknowledgements}
 
+\printbibliography
+
 \appendix
 \input{sections/appendix-a-ladder}
 \input{sections/appendix-b-prompts}
 \input{sections/appendix-c-fair-cells}
-
-\printbibliography
 
 \end{document}

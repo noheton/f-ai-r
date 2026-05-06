@@ -1,13 +1,14 @@
 {
   "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
   "@type": "SoftwareSourceCode",
-  "name": "F(AI²)R",
-  "description": "FAIR research with AI in the loop, twice — a paper and a reproducible LLM-assisted writing pipeline with PROV-O provenance.",
+  "name": "F(AI)²R",
+  "description": "FAIR research with AI in the loop, twice. Short-form paper plus reproducible LLM-assisted writing pipeline (agent prompts, PROV-O provenance, static site) under the DLR Corporate Design.",
   "license": "https://spdx.org/licenses/MIT",
   "codeRepository": "https://github.com/noheton/f-ai-r",
+  "url": "https://noheton.github.io/f-ai-r/",
   "programmingLanguage": ["TeX", "Python", "Shell"],
   "developmentStatus": "active",
-  "version": "0.1.0-dev",
+  "version": "0.2.0-dev",
   "datePublished": "2026-05-06",
   "keywords": [
     "FAIR",
@@ -15,13 +16,28 @@
     "LLM",
     "reproducibility",
     "scholarly communication",
-    "provenance"
+    "provenance",
+    "research data management",
+    "HMC",
+    "NFDI4Ing"
   ],
   "author": [
     {
       "@type": "Person",
-      "givenName": "TBD",
-      "familyName": "TBD"
+      "givenName": "Florian",
+      "familyName": "Krebs",
+      "@id": "https://orcid.org/0000-0001-6033-801X",
+      "email": "florian.krebs@dlr.de",
+      "affiliation": {
+        "@type": "Organization",
+        "name": "DLR Zentrum für Leichtbauproduktionstechnologie (ZLP), Augsburg",
+        "url": "https://www.dlr.de/zlp",
+        "parentOrganization": {
+          "@type": "Organization",
+          "name": "Helmholtz-Gemeinschaft Deutscher Forschungszentren",
+          "url": "https://www.helmholtz.de/"
+        }
+      }
     }
   ]
 }

@@ -87,3 +87,44 @@ appear in `main-condensed.tex`.
    `human-confirmed` or `source-vendored`.
 3. `fair-aligner` audit reports no `fail`s for the section.
 4. Logbook entry committed.
+
+## Form factor and page budget
+
+F(AI)²R is published as a single short-form paper. The default budget
+is **10 pages of body**, plus references and appendices, which do
+**not** count against the budget. There is no separate condensed
+manuscript; the condenser agent (`agents/condenser.md`) is repurposed
+as a *page-budget enforcer* that fires when `make -C paper pages`
+reports a body page count above the budget.
+
+A budget change requires (a) human-author approval recorded in
+`doc/logbook.md` and (b) a corresponding update to
+`paper/Makefile` (`PAGE_BUDGET`).
+
+## Design system
+
+The site, the paper PDF, and (forthcoming) the slide deck follow the
+**DLR Corporate Design** (CD-Handbuch §10.1 *Schriften*, §4
+*Printmedien*, §10 *Wording*):
+
+- **Type:** Frutiger 45 Light for Drucksachen; **Arial** is mandated
+  for electronic channels (Web, PowerPoint, E-Mail). Tokens are
+  vendored in `site/static/dlr/colors_and_type.css`; the LaTeX style
+  in `paper/style/fair2r.sty` carries the same intent into the PDF.
+- **Colour:** Default **DLR Blue `#00658B`**; chapter variants Green
+  (`#82A043`) and Yellow (`#D2AE3D`) are available via
+  `<html data-variant="b|c">` on the site or
+  `\usepackage[variant=b]{style/fair2r}` in the paper.
+- **Layout:** white backgrounds, generous whitespace, **square
+  corners** (0–2px max), **hairline `#cfcfcf` borders**, no
+  gradients in chrome, no shadows on print.
+- **Voice:** precise, factual, institutional. No second person, no
+  emoji, no marketing verbs. British English is the canonical English
+  rendering (per CD-Handbuch §10).
+
+The institutional imprint (Florian Krebs, ORCID 0000-0001-6033-801X,
+DLR ZLP Augsburg, Helmholtz / NFDI4Ing / HMC) appears identically on
+the title block of `paper/main.tex`, the `Acknowledgements` section,
+the public site footer, `CITATION.cff`, `codemeta.json`, and
+`.zenodo.json`. Drift between any pair is a defect surfaced by the
+FAIR aligner.
