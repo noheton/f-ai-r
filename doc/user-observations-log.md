@@ -196,6 +196,68 @@ produce a histogram of "clauses added per session", giving an
 empirical curve for "experience with the tool". Candidate for the
 \texttt{provenance\_analysis.py} extractor in a follow-up commit.}
 
+## 2026-05-06 — Coding with LLMs: structure becomes more important; visions, feature sets, dependencies as the human's load
+*Source:* session 2026-05-06 (user message after the slide-decks PR
+\#16 merged)
+*Stage:* hypothesis
+*Promoted-to-paper:* pending --- candidate to flag in the Conclusion's
+*The longer arc* paragraph as a generalisation of the
+F(AI)\textsuperscript{2}R partition beyond scholarly writing, OR as
+a footnote to the coupling-rule paragraph in
+`paper/sections/authors-note.tex`. We mark it pending so the paper
+takes one stand at a time.
+
+The user observed: "In coding with LLMs somehow structure becomes
+more important, like guiding and shaping a river of code --- it's
+more about visions, feature sets, dependencies."
+
+\emph{The model offered a perspective in chat. The observation is the
+coding-counterpart of the writing observations earlier in this log
+(cooperation-as-conversation, accelerator-or-blender, latency-as-
+feature). Both surfaces reveal the same partition: human at the
+architectural layer, model at the executable layer. For writing,
+the architecture is the argument and the verification ladder; for
+coding, it is the dependency graph, the type system, and the test
+surface. The "river" metaphor is exact: with prose, the river is
+the prose-stream and the human shapes the argumentative direction;
+with code, the river is the code-stream and the human shapes the
+architectural direction.}
+
+\emph{Why structure becomes more important counterintuitively:
+when the model generates fluently, the bottleneck shifts from
+\textbf{production} to \textbf{integration}. A line of code (or a
+sentence) in isolation is cheap; a line that fits the surrounding
+system is not. Without an explicit structural commitment from the
+human (visions, feature sets, dependencies in coding;
+position, eight practices, verification ladder in writing), the
+model produces fragments that locally make sense and globally do
+not. The river floods. With explicit structure, the river
+irrigates.}
+
+\emph{Generalisation of the coupling rule. The accelerator-vs-blender
+coupling rule from the Author's Note transposes to coding:
+\textbf{accelerator regime} = human supplies architecture
+(interfaces, dependency graph, test surface, naming conventions),
+model fills implementations; \textbf{blender regime} = human
+supplies vague intent, model picks a locally-plausible architecture
+that does not compose, codebase entropy rises. The diagnostic
+transposes too: \emph{would the architecture have been thinkable
+without the model?}}
+
+\emph{For F(AI)\textsuperscript{2}R: the schema (PROV-O +
+verification ladder + per-claim graph + handback discipline + the
+chapter-per-file rule + the `agents/` taxonomy) is the structural
+skeleton --- the analogue, in cooperative writing, of an interface
+contract for cooperative coding. The eight integrated practices are
+essentially the architectural spec.}
+
+\emph{Recommendation: flag the generalisation as future work in the
+Conclusion's \emph{The longer arc} paragraph (one sentence:
+"the partition and the coupling rule appear to apply to
+long-form cooperative coding under the same diagnostic, though we
+do not defend that claim here"), and leave the full observation in
+this log. The cleaner paper takes one stand at a time.}
+
 ## 2026-05-06 — Latency as cognitive feature, not bug
 *Source:* session 2026-05-06 (user message after the
 "The longer arc" paragraph was merged into the Conclusion)
