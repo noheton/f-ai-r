@@ -1606,6 +1606,15 @@ hc:slide-decks               a fair2r:HumanContribution ;
                     ent:workflow-build-slides ,
                     claim:slides-as-primary-artefact .
 
+hc:obs-coding-structure        a fair2r:MetaContribution ;
+    rdfs:label "Coding with LLMs: structure becomes more important; visions, feature sets, dependencies are the human's load (the coding-counterpart of the writing partition)"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "observation" ;
+    fair2r:contributionLeverage "high" ;
+    fair2r:promotedToPaper "pending" ;
+    rdfs:comment "Researcher observed during the slide-decks session: 'In coding with LLMs somehow structure becomes more important, like guiding and shaping a river of code --- it's more about visions, feature sets, dependencies.' The model identified this as the coding-counterpart of the writing partition: human at the architectural layer (visions, dependency graph, test surface), model at the executable layer; the accelerator-vs-blender coupling rule transposes (architecture would-have-been-thinkable diagnostic). The bottleneck shifts from production to integration when generation is fluent. F(AI)^2R's eight practices are essentially the architectural spec for cooperative writing, the analogue of an interface contract in cooperative coding. Recommendation: flag the generalisation as future work in the Conclusion's 'The longer arc' paragraph (one sentence, no defence); keep the full observation in user-observations-log.md."@en ;
+    dcterms:created "2026-05-06"^^xsd:date .
+
 hc:obs-latency-as-feature      a fair2r:MetaContribution ;
     rdfs:label "Latency between prompt and response is a cognitive feature, not a bug; it allows formulation work and short context switches (e.g. checking on a coding agent in another window)"@en ;
     fair2r:contributedBy agent:human-author ;

@@ -868,3 +868,34 @@ title slide's accent rule; replace any `pending` source rungs that
 the conference deck's content depends on (e.g. `magesh2024legal`,
 `walters2023fabrication`) with `lit-read` once the human author has
 read them in full.
+
+## 2026-05-06 — Coding-with-LLMs structure observation logged
+*Author:* claude-opus-4-7 (under direction of repo owner)
+*Touched:* `doc/user-observations-log.md`, `doc/provenance.ttl`,
+`doc/logbook.md`.
+*Decision / outcome:* Researcher posed a meta-observation about
+coding cooperation: "In coding with LLMs somehow structure becomes
+more important, like guiding and shaping a river of code --- it's
+more about visions, feature sets, dependencies." The model offered
+a perspective in chat: the observation is the coding-counterpart of
+the writing observations earlier in this log. The same partition
+appears (human at the architectural layer, model at the executable
+layer); the same coupling rule transposes (accelerator vs cultural
+blender, with the diagnostic "would the architecture have been
+thinkable without the model?"); the bottleneck shifts from
+production to integration when generation is fluent. The eight
+F(AI)\textsuperscript{2}R practices are essentially the
+architectural spec for cooperative writing, the analogue of an
+interface contract in cooperative coding.
+The observation is logged as `hc:obs-coding-structure`
+(`fair2r:MetaContribution`, leverage high, `promotedToPaper`
+`pending`). Recommendation recorded in italics in the log: flag
+the generalisation as future work in the Conclusion's *The longer
+arc* paragraph (one sentence, no defence); keep the full
+observation in `user-observations-log.md`. The paper takes one
+stand at a time. Graph: 1340 triples (up from 1331).
+*Next:* On researcher endorsement, fold the one-sentence
+generalisation into the Conclusion's *The longer arc* paragraph;
+otherwise leave the observation as logged context for future
+revisions of F(AI)\textsuperscript{2}R or for a successor
+framework that targets cooperative coding directly.
