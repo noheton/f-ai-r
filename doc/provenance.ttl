@@ -1540,6 +1540,15 @@ hc:obs-prompt-accretion       a fair2r:MetaContribution ;
     fair2r:promotedToPaper "pending" ;
     dcterms:created "2026-05-06"^^xsd:date .
 
+hc:obs-latency-as-feature      a fair2r:MetaContribution ;
+    rdfs:label "Latency between prompt and response is a cognitive feature, not a bug; it allows formulation work and short context switches (e.g. checking on a coding agent in another window)"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "observation" ;
+    fair2r:contributionLeverage "high" ;
+    fair2r:promotedToPaper "pending" ;
+    rdfs:comment "Two-part observation: (a) near-instantaneous LLM responses would degrade user-as-co-author into user-as-consumer because formulation pauses (the abstracting work) would compress out of existence; (b) the wait window is productive parallel-tracking time, amortising context-switch cost across slow loops the human author is already running (coding agent, CI, colleague Slack). Candidate sentence for the coupling-rule paragraph in authors-note.tex; possible candidate ninth integrated practice (the supervisory-glance pattern). Marked pending for researcher endorsement."@en ;
+    dcterms:created "2026-05-06"^^xsd:date .
+
 hc:obs-accelerator-or-blender  a fair2r:MetaContribution ;
     rdfs:label "Accelerator or cultural blender? --- the cognition question"@en ;
     fair2r:contributedBy agent:human-author ;
