@@ -1,0 +1,90 @@
+\section{Discussion}
+\label{sec:discussion}
+
+\subsection{What F(AI)\texorpdfstring{\textsuperscript{2}}{2}R is not}
+
+It is not a vendor stack. The pattern is indifferent to which model is
+behind a given agent, which harness invokes it, or which serialisation
+format the provenance graph takes. Substituting Turtle for JSON-LD,
+GitHub Actions for any other CI, or any one model for any other,
+leaves the eight practices intact.
+
+It is not a guarantee. A team that adopts the eight practices and
+the pipeline can still ship a bad paper. The pattern reduces specific
+failure modes to specific remediations and surfaces residual ones; it
+does not promise that what survives is true.
+
+It is not the first attempt at any of the eight. Datasheets for
+datasets~\cite{gebru2021datasheets}, model
+cards~\cite{mitchell2019modelcards}, FAIR4RS~\cite{chuehong2022fair4rs},
+and the broader research-software-engineering community have spent the
+last decade publishing the precursors. The integration is what we
+claim is new; we claim it modestly.
+
+\subsection{Limitations of a single worked example}
+
+The pattern has been exercised on two papers (the source repository
+and this one), both authored by the same hobbyist researcher. The
+sample is too small to support claims about the pattern's behaviour at
+scale, in adversarial review settings, or in collaborations whose
+contributors do not share the same toolchain. We expect the
+verification-overhead figures to be sensitive to the heaviness of the
+audit pass and the maturity of the harness; we do not have data to
+quantify the dependence.
+
+A community case study --- two or more independent groups, each
+applying the pattern to a different paper --- is the prerequisite for
+a candidate community recommendation. Until that exists, the
+contribution is a worked example with explicit invariants, offered for
+adoption rather than for adoption-by-default.
+
+\subsection{Submission conditions}
+
+We will submit F(AI)\textsuperscript{2}R to the
+Research Data Alliance and to FORCE11 as a candidate community
+recommendation when (and only when) two preconditions are met:
+\begin{enumerate}
+    \item Human-author consent for community-recommendation submission
+        is recorded as a signed entry in
+        \texttt{doc/publication-consent.md}.
+    \item At least one external case study has adopted the eight
+        practices and the pipeline on a paper that is unrelated to
+        either the source repository or this one, and the resulting
+        artefacts have been made public under a permissive licence.
+\end{enumerate}
+The conditions are not bureaucratic. They are the minimum we need to
+distinguish a single-author idiosyncrasy from a transferable pattern.
+
+\subsection{The dual-use surface}
+
+We are explicit about the dual-use surface (\S\ref{sec:fm-dualuse}).
+A pipeline of prompts, a finite-state ladder, and a structured
+provenance schema are an instruction set that can be adopted by
+bad-faith authors as readily as by good-faith ones. F(AI)\textsuperscript{2}R
+\emph{makes the dual-use surface visible} in a form that can be
+reasoned about; it does not eliminate it. The mitigation, in our
+view, is community: a bad-faith adoption is detectable by inspection
+of the artefacts the pattern requires, in a way that a bad-faith
+opaque process is not.
+
+\subsection{On AI co-authorship, again}
+
+We have rehearsed this in \S\ref{sec:practice-legal}. The position
+holds. AI cannot hold copyright, cannot consent, cannot be held
+accountable. The pattern accommodates AI as a first-class
+\texttt{prov:Agent} in the graph and as an acknowledged contributor in
+the prose; it never accommodates AI as an author, whatever the
+incentive. The line is not symbolic. \emph{Legal honesty about
+authorship is the practice that keeps every other practice usable.}
+
+\subsection{Naming the practice}
+
+Naming what we are already doing is the first step toward surrendering
+it to peer scrutiny. The eight practices were not invented for this
+paper; they are the practices the source repository's author had
+gradually adopted by attrition, after each individually-unoriginal
+practice paid for itself against a specific failure mode. The act of
+naming, here, does two things at once: it makes the practices
+contestable in the open literature, and it lets a third party adopt
+them without re-deriving each from the failure modes that motivated
+it. Both effects are the contribution.

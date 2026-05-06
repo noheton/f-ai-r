@@ -1,0 +1,119 @@
+\section{Failure Modes Named and Addressed}
+\label{sec:failure-modes}
+
+The pattern is meant to resist a finite set of failure modes that the
+literature on LLM-assisted writing has documented. We name them, say
+which practice mitigates each, and are honest about which the pattern
+does not address.
+
+\subsection{Fabricated citations}
+\label{sec:fm-fabrication}
+
+Reported base rates of fabricated citations in LLM output range from
+roughly 18\% in general-purpose biomedical settings to 55\% in
+specialised legal queries~\cite{walters2023fabrication,magesh2024legal}.
+Fabrication includes: an entirely invented title, an invented DOI for a
+real title, a real DOI attached to a wrong title, and a real citation
+attached to a claim the source does not in fact make.
+
+The verification ladder (\S\ref{sec:ladder}) and the per-claim
+provenance map (\S\ref{sec:practice-provenance}) are the two practices
+that bear the load. A citation cannot reach \textsc{lit-retrieved}
+without a URL or DOI that resolves; cannot reach \textsc{ai-confirmed}
+without a quoted snippet from the resolved source preserved in
+\texttt{doc/sources.md}; cannot reach \textsc{lit-read} without a human
+who has read it. Each rung is a state in the FSM, not a checkbox: an
+elevation must be accompanied by an artefact in the repository.
+
+\subsection{Claim--evidence drift}
+\label{sec:fm-drift}
+
+A single agent that writes prose, retrieves sources, and rates the
+fit will, under any non-trivial workload, drift: the claim sharpens,
+the evidence narrows, and the gap between the two becomes a hedge that
+nobody notices. The handback discipline (\S\ref{sec:handback}) is the
+mitigation: the writer cannot rate its own claims, the Source Analyzer
+cannot rewrite the prose, and the Aligner can only file
+hand-backs.
+
+\subsection{Sloppification}
+\label{sec:fm-sloppification}
+
+Sloppification is the gradual loss of precision under iterative
+LLM editing: technical terms get replaced by near-synonyms, named
+constants get rounded, and quoted passages drift from their source. The
+mitigation is the mirror discipline applied to quotations specifically
+(\S\ref{sec:practice-mirror}): every quoted passage either appears
+verbatim in a vendored source under \texttt{doc/sources/} or is held
+as a literal in the provenance graph; a paraphrase that has crept into
+quotation marks fails the audit pass.
+
+\subsection{Model collapse}
+\label{sec:fm-collapse}
+
+Model collapse is the documented degradation of model output quality
+when training corpora are increasingly populated by prior model output.
+The mitigation in F(AI)\textsuperscript{2}R is indirect: by preserving
+transcripts (\S\ref{sec:practice-transcripts}) and disclosing them
+under \S\ref{sec:practice-disclosure}, downstream training corpora can
+be filtered. The pattern does not prevent collapse; it does provide the
+labelling that lets others avoid contaminating downstream pipelines.
+
+\subsection{List-of-lists prose}
+\label{sec:fm-listoflists}
+
+A symptom of LLM-driven editing: prose that decomposes into nested
+bullet lists, each list a paraphrase of the surrounding sentence,
+because list output is a local optimum for many models. The
+Readability \& Novelty Scrutinizer's defect registry has a category for
+it; the Scientific Writer is responsible for the repair. The pattern
+does not eliminate the symptom; it makes it visible.
+
+\subsection{Hedging chains}
+\label{sec:fm-hedging}
+
+Hedging chains are sentences whose hedging clauses are so dense that
+the contribution disappears: ``it may be argued, though some have
+suggested otherwise, that under certain assumptions and pending
+further work\dots''. The Readability scrutinizer flags hedge density
+above a per-section threshold (default: one hedge per six to eight
+sentences); the writer rewrites with the rule that each hedge must be
+paired with a commitment in the same sentence. This rule is itself
+unoriginal --- editors have enforced it for decades --- but it is
+machine-checkable enough to delegate to an audit pass.
+
+\subsection{Placeholder dishonesty}
+\label{sec:fm-placeholder}
+
+A polished surface that conceals which load-bearing parts remain
+unverified is a worse failure than an obviously incomplete draft. The
+mitigation is \emph{asset honesty over asset completeness}: a
+placeholder is allowed and encouraged, but it must visibly identify
+itself as AI-authored and pending. In \LaTeX{} the \texttt{todonotes}
+package is used for inline placeholders; in figures, a labelled
+``placeholder'' canvas is committed and replaced. A render that hides
+its own gaps is a defect.
+
+\subsection{Dual use}
+\label{sec:fm-dualuse}
+
+The same artefacts that make this work auditable also make it
+adoptable by adversarial integrators. A pipeline of prompts, a
+verification ladder, and a PROV-O schema are as much a recipe for
+\emph{automating bad-faith scholarship at scale} as they are for
+honest LLM-assisted writing. The pattern does not eliminate this
+surface. It makes the surface visible in a form that can be reasoned
+about, which is the most we are willing to claim.
+
+\subsection{What the pattern does not address}
+\label{sec:fm-residual}
+
+Three failure modes are out of scope. \emph{Pre-publication leakage} ---
+a model's training data containing the manuscript before it is meant
+to --- is a vendor problem F(AI)\textsuperscript{2}R cannot reach.
+\emph{Audience fatigue} --- readers who have stopped engaging with
+disclosures because the boilerplate is identical at every venue --- is
+a community problem the pattern can only signal toward.
+\emph{Adversarial review} --- a reviewer who reads the prose and
+ignores the graph, or vice versa --- is a sociological problem that no
+artefact discipline can solve. We name these as residual.

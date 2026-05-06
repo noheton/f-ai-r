@@ -1,0 +1,41 @@
+\section{F(AI)\texorpdfstring{\textsuperscript{2}}{2}R Cell Mapping}
+\label{app:fair-cells}
+
+The original FAIR Guiding Principles enumerate fifteen sub-principles.
+F(AI)\textsuperscript{2}R adds, for each, an authoring-pass cell and
+an audit-pass cell that name the artefact involved. The full list is
+in \texttt{doc/fair.md}; Table~\ref{tab:cells} is a condensed view.
+
+\begin{table}[!ht]
+\centering
+\small
+\begin{tabular}{lp{4.6cm}p{4.6cm}}
+\toprule
+\textbf{Sub-principle} & \textbf{Authoring pass (AI\textsubscript{1})} & \textbf{Audit pass (AI\textsubscript{2})} \\
+\midrule
+F1 (identifier)       & Mint Zenodo DOI; assign \texttt{fair2r:Claim} IRIs. & Verify identifier resolves; verify IRIs are unique. \\
+F2 (rich metadata)    & Populate CFF / CodeMeta / Zenodo metadata. & Verify metadata surfaces agree. \\
+F3 (metadata link)    & Reference the data identifier from metadata. & Verify the link is bidirectional. \\
+F4 (registered)       & Deposit at Zenodo; minimum DataCite metadata. & Verify deposit visible from the registry. \\
+A1 (retrievable)      & Public Git repo; static site. & Verify clone-and-build succeeds on a clean machine. \\
+A1.1 (open protocol)  & HTTPS / Git. & --- \\
+A1.2 (auth where needed) & Document redaction policy and consent gate. & Verify redacted markers cover the documented taxonomy. \\
+A2 (metadata persists) & Metadata in Git history; immutable Zenodo deposit. & Verify post-retraction metadata still reachable. \\
+I1 (formal language)  & Turtle for provenance; \LaTeX{} for prose; CFF / JSON for metadata. & Validate Turtle; lint CFF. \\
+I2 (FAIR vocab)       & PROV-O + DCTERMS + FOAF + \texttt{fair2r:}. & Verify namespaces stable. \\
+I3 (qualified refs)   & \texttt{prov:wasDerivedFrom}, \texttt{fair2r:contradicts}, etc. & Verify graph has no dangling refs. \\
+R1 (multiple attrs)   & Record \texttt{fair2r:VerificationState}, \texttt{prov:wasAttributedTo}, etc. & Verify rung distribution at submission time. \\
+R1.1 (clear licence)  & MIT for code/RDF; CC-BY-4.0 for prose. & Verify SPDX expressions. \\
+R1.2 (provenance)     & The provenance graph itself. & Replay the graph; report drift. \\
+R1.3 (community std)  & Follow FAIR4RS / FAIR4ML where applicable. & Cross-check against the relevant standard at audit time. \\
+\bottomrule
+\end{tabular}
+\caption{F(AI)\textsuperscript{2}R cell mapping. Authoritative source:
+\texttt{doc/fair.md} in the public repository.}
+\label{tab:cells}
+\end{table}
+
+The table is a contract. Adopting F(AI)\textsuperscript{2}R amounts to
+producing an audit pass artefact for every cell in the right column at
+submission time, and to declaring the residual gaps explicitly when an
+artefact does not yet exist.

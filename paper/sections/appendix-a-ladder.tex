@@ -1,0 +1,56 @@
+\section{Verification Ladder Specification}
+\label{app:ladder}
+
+The ladder is the finite-state machine of \S\ref{sec:ladder}.
+This appendix supplies the per-rung specification used by the
+Source Analyzer (\S\ref{sec:pipeline}) and the Aligner.
+
+\begin{table}[!ht]
+\centering
+\small
+\begin{tabular}{lp{2.4cm}p{4.0cm}p{4.5cm}}
+\toprule
+\textbf{Rung} & \textbf{Required artefact} & \textbf{Promotion condition} & \textbf{PRISMA / GRADE floor} \\
+\midrule
+\textsc{unverified-external}
+  & --
+  & Claim recognised as needing a source.
+  & --- \\
+\textsc{needs-research}
+  & Search query in \texttt{research-protocol.md}
+  & A candidate URL or DOI has been identified.
+  & --- \\
+\textsc{lit-retrieved}
+  & URL/DOI that resolves
+  & A Source Analyzer reads the source and confirms claim support, with quoted snippet.
+  & PRISMA: Identification \\
+\textsc{ai-confirmed}
+  & Quoted snippet in \texttt{sources.md} plus \texttt{fair2r:Source} entity
+  & A human reads the source and confirms the inference from source to claim.
+  & PRISMA: Screening; GRADE floor: \textsc{low} \\
+\textsc{lit-read}
+  & Vendored source in \texttt{doc/sources/} (when licensable) or human signature in logbook
+  & ---
+  & PRISMA: Included; GRADE floor: \textsc{moderate} \\
+\bottomrule
+\end{tabular}
+\caption{Verification ladder, with promotion condition and crosswalk
+floor. The crosswalk is the floor each rung permits, not a guarantee of
+the GRADE ceiling.}
+\label{tab:ladder}
+\end{table}
+
+\paragraph{Retraction.}
+A claim is retracted by adding a \texttt{prov:Invalidation} activity
+that names the original \texttt{fair2r:Claim} as
+\texttt{prov:invalidated}; the original triple is not deleted. A
+retracted claim cannot be invoked by the manuscript and is rendered
+visibly retracted on the public site.
+
+\paragraph{Per-rung budget.}
+At submission time, the manuscript reports the fraction of claims at
+each rung. A typical first submission carries a single-digit
+percentage at \textsc{lit-retrieved}, a moderate fraction at
+\textsc{ai-confirmed}, and the load-bearing remainder at
+\textsc{lit-read}. The ratio is itself a disclosure under the sixth
+practice (\S\ref{sec:practice-disclosure}).
