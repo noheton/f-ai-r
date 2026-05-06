@@ -28,6 +28,42 @@ the corresponding updates in the other two. Examples:
 
 Every agent in `agents/` is bound by this invariant.
 
+## Contribution tracking (binding)
+
+Every material contribution to the manuscript or its scaffolding is
+logged in [`doc/user-contributions.md`](doc/user-contributions.md)
+and (for observations about the cooperation itself) in
+[`doc/user-observations-log.md`](doc/user-observations-log.md). Both
+are mirrored as `fair2r:HumanContribution`, `fair2r:AIContribution`,
+or `fair2r:MetaContribution` entities in `doc/provenance.ttl` per
+the `Contribution` extension to the schema.
+
+A "material contribution" is any one of:
+
+- A structural decision (e.g. chapter-per-file rule, position-paper
+  reframing).
+- A corrective intervention (e.g. catching a wrong DOI, a stale
+  cache, a CI failure).
+- A content prompt (e.g. "add a section on X").
+- A rule-shape addition to an agent prompt or the methodology.
+- A meta-observation about the cooperation that may or may not
+  graduate to paper content.
+- A responsibility-uptake event (the human author signing the
+  artefact, defending it in person, or carrying it into a venue).
+
+Format and types are documented at the top of
+`doc/user-contributions.md`. Every entry there has a corresponding
+`hc:<slug>` IRI in `doc/provenance.ttl`.
+
+This rule applies to AI agents the same way: a session that produces
+a material change appends both an entry in
+`doc/user-contributions.md` (or, for AI authorship, the AI mirror
+file when it exists) and the corresponding triples. The partition the
+Author's Note describes
+([`paper/sections/authors-note.tex`](paper/sections/authors-note.tex),
+*What surprised me about the cooperation*) is auditable only if both
+sides log their contributions.
+
 ## Ground rules
 
 1. **Never edit `paper/` without also updating `doc/logbook.md`.** Append a

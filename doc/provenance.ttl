@@ -920,5 +920,291 @@ claim:institutional-access-channel  a fair2r:Claim ;
     dcterms:created "2026-05-06"^^xsd:date .
 
 #-------------------------------------------------------------------------
+# Schema extension: Contribution
+#-------------------------------------------------------------------------
+# A discrete shaping intervention by an agent (human or AI) on the
+# manuscript or its scaffolding. Contribution is finer-grained than
+# prov:Activity (one Activity may contain many Contributions) and
+# coarser than prov:wasGeneratedBy / prov:wasAttributedTo (one
+# Contribution typically generates several entities and is attributed
+# to one agent). Made explicit so the question "what did the human
+# actually do here?" --- and the symmetric question for the AI --- has
+# a structured, queryable answer.
+
+fair2r:Contribution        a owl:Class ; rdfs:subClassOf prov:Activity ;
+    rdfs:label "Contribution"@en ;
+    rdfs:comment "A discrete shaping intervention by an agent on the manuscript or its scaffolding."@en .
+fair2r:HumanContribution   a owl:Class ; rdfs:subClassOf fair2r:Contribution ;
+    rdfs:label "Human contribution"@en .
+fair2r:AIContribution      a owl:Class ; rdfs:subClassOf fair2r:Contribution ;
+    rdfs:label "AI contribution"@en .
+fair2r:MetaContribution    a owl:Class ; rdfs:subClassOf fair2r:Contribution ;
+    rdfs:label "Meta contribution (an observation about the cooperation itself)"@en .
+
+# Properties on a Contribution
+fair2r:contributionType  a owl:DatatypeProperty ;
+    rdfs:domain fair2r:Contribution ; rdfs:range xsd:string ;
+    rdfs:comment "structural-decision | corrective-intervention | content-prompt | rule-shape | observation | responsibility-uptake | experience-meta"@en .
+fair2r:contributionLeverage  a owl:DatatypeProperty ;
+    rdfs:domain fair2r:Contribution ; rdfs:range xsd:string ;
+    rdfs:comment "high | medium | low --- how much subsequent work the contribution redirected."@en .
+fair2r:promotedToPaper  a owl:DatatypeProperty ;
+    rdfs:domain fair2r:MetaContribution ; rdfs:range xsd:string ;
+    rdfs:comment "yes | pending | no --- whether the observation graduated to paper text."@en .
+
+#-------------------------------------------------------------------------
+# Back-filled HumanContribution instances (mirror of doc/user-contributions.md)
+# Keep this block append-only; one entry per documented contribution.
+#-------------------------------------------------------------------------
+
+@prefix hc:  <https://noheton.org/f-ai-r/contribution/> .
+
+hc:bootstrap                  a fair2r:HumanContribution ;
+    rdfs:label "Bootstrap request: initialise repo for F(AI)^2R"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "content-prompt" ;
+    fair2r:contributionLeverage "high" ;
+    dcterms:created "2026-05-06"^^xsd:date ;
+    prov:influenced ent:manuscript .
+
+hc:consistency-invariant      a fair2r:HumanContribution ;
+    rdfs:label "Primary-artefact consistency invariant"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "rule-shape" ;
+    fair2r:contributionLeverage "high" ;
+    dcterms:created "2026-05-06"^^xsd:date ;
+    prov:influenced claim:primary-artifact-invariant .
+
+hc:ci-site                    a fair2r:HumanContribution ;
+    rdfs:label "Site + paper-build CI"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "content-prompt" ;
+    fair2r:contributionLeverage "high" ;
+    dcterms:created "2026-05-06"^^xsd:date ;
+    prov:influenced ent:script-build-provenance-site ,
+                    ent:workflow-pages ,
+                    ent:workflow-build-paper .
+
+hc:chapter-rule               a fair2r:HumanContribution ;
+    rdfs:label "Chapter-per-file rule for .tex sources"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "rule-shape" ;
+    fair2r:contributionLeverage "medium" ;
+    dcterms:created "2026-05-06"^^xsd:date ;
+    prov:influenced ent:prompt-scientific-writer .
+
+hc:self-reference-section     a fair2r:HumanContribution ;
+    rdfs:label "Self-reference section requested"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "content-prompt" ;
+    fair2r:contributionLeverage "medium" ;
+    dcterms:created "2026-05-06"^^xsd:date ;
+    prov:influenced ent:section-self .
+
+hc:evolution-section          a fair2r:HumanContribution ;
+    rdfs:label "Process-evolution narrative requested"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "content-prompt" ;
+    fair2r:contributionLeverage "high" ;
+    dcterms:created "2026-05-06"^^xsd:date ;
+    prov:influenced ent:section-evolution .
+
+hc:short-form-pivot           a fair2r:HumanContribution ;
+    rdfs:label "Short-form pivot to ~10 pages"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "structural-decision" ;
+    fair2r:contributionLeverage "high" ;
+    dcterms:created "2026-05-06"^^xsd:date ;
+    prov:influenced claim:short-form-budget .
+
+hc:dlr-design                 a fair2r:HumanContribution ;
+    rdfs:label "DLR Corporate Design integration"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "structural-decision" ;
+    fair2r:contributionLeverage "high" ;
+    dcterms:created "2026-05-06"^^xsd:date ;
+    prov:influenced claim:dlr-design-alignment ,
+                    ent:dlr-tokens-css ,
+                    ent:paper-style-fair2r .
+
+hc:provenance-analysis-section  a fair2r:HumanContribution ;
+    rdfs:label "Provenance-analysis section requested"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "content-prompt" ;
+    fair2r:contributionLeverage "high" ;
+    dcterms:created "2026-05-06"^^xsd:date ;
+    prov:influenced ent:section-provenance-analysis ,
+                    ent:script-provenance-analysis .
+
+hc:illustrations              a fair2r:HumanContribution ;
+    rdfs:label "Illustrations + interactive graph viewer requested"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "content-prompt" ;
+    fair2r:contributionLeverage "medium" ;
+    dcterms:created "2026-05-06"^^xsd:date ;
+    prov:influenced ent:figure-pipeline , ent:page-prov-explorer .
+
+hc:splashy-homepage           a fair2r:HumanContribution ;
+    rdfs:label "Splashy homepage; PDF link prominent"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "content-prompt" ;
+    fair2r:contributionLeverage "medium" ;
+    dcterms:created "2026-05-06"^^xsd:date ;
+    prov:influenced ent:readme .
+
+hc:ci-fix                     a fair2r:HumanContribution ;
+    rdfs:label "Fix paper-build CI"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "corrective-intervention" ;
+    fair2r:contributionLeverage "high" ;
+    dcterms:created "2026-05-06"^^xsd:date ;
+    prov:influenced ent:paper-style-fair2r , ent:workflow-build-paper .
+
+hc:draft-pdf-release          a fair2r:HumanContribution ;
+    rdfs:label "Vendored DRAFT-watermarked PDF via release"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "rule-shape" ;
+    fair2r:contributionLeverage "medium" ;
+    dcterms:created "2026-05-06"^^xsd:date ;
+    prov:influenced ent:workflow-build-paper .
+
+hc:source-workflow            a fair2r:HumanContribution ;
+    rdfs:label "Source-research mandate; Consensus / Scholar default"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "rule-shape" ;
+    fair2r:contributionLeverage "high" ;
+    dcterms:created "2026-05-06"^^xsd:date ;
+    prov:influenced ent:doc-sources , ent:prompt-source-analyzer .
+
+hc:scientific-repos           a fair2r:HumanContribution ;
+    rdfs:label "Add arXiv/IEEE/Springer/etc.; paywall escalation"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "rule-shape" ;
+    fair2r:contributionLeverage "medium" ;
+    dcterms:created "2026-05-06"^^xsd:date ;
+    prov:influenced ent:prompt-source-analyzer .
+
+hc:cache-bust                 a fair2r:HumanContribution ;
+    rdfs:label "Cache-bust the deployed Pages site"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "corrective-intervention" ;
+    fair2r:contributionLeverage "low" ;
+    dcterms:created "2026-05-06"^^xsd:date ;
+    prov:influenced claim:cache-bust-versioning .
+
+hc:mermaid-fix                a fair2r:HumanContribution ;
+    rdfs:label "GitHub Mermaid renderer fix"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "corrective-intervention" ;
+    fair2r:contributionLeverage "low" ;
+    dcterms:created "2026-05-06"^^xsd:date ;
+    prov:influenced ent:provenance-graph-md .
+
+hc:authors-note               a fair2r:HumanContribution ;
+    rdfs:label "Author's Note carried over from Obscurity-Is-Dead"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "structural-decision" ;
+    fair2r:contributionLeverage "high" ;
+    dcterms:created "2026-05-06"^^xsd:date ;
+    prov:influenced ent:manuscript .
+
+hc:position-reframe           a fair2r:HumanContribution ;
+    rdfs:label "Position-paper reframing"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "structural-decision" ;
+    fair2r:contributionLeverage "high" ;
+    dcterms:created "2026-05-06"^^xsd:date ;
+    prov:influenced ent:manuscript .
+
+hc:contribution-question      a fair2r:HumanContribution ;
+    rdfs:label "What's my contribution? --- the question that became this rule"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "responsibility-uptake" ;
+    fair2r:contributionLeverage "high" ;
+    dcterms:created "2026-05-06"^^xsd:date ;
+    prov:influenced ent:manuscript .
+
+hc:contribution-rule          a fair2r:HumanContribution ;
+    rdfs:label "Contribution-tracking rule (the schema this section defines)"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "rule-shape" ;
+    fair2r:contributionLeverage "high" ;
+    dcterms:created "2026-05-06"^^xsd:date .
+
+#-------------------------------------------------------------------------
+# Back-filled MetaContribution instances (mirror of doc/user-observations-log.md)
+#-------------------------------------------------------------------------
+
+hc:obs-cooperation-partition  a fair2r:MetaContribution ;
+    rdfs:label "Cooperation as conversation; decision-density as pace"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "observation" ;
+    fair2r:contributionLeverage "high" ;
+    fair2r:promotedToPaper "yes" ;
+    dcterms:created "2026-05-06"^^xsd:date .
+
+hc:obs-token-budget           a fair2r:MetaContribution ;
+    rdfs:label "Token budgets as schedule constraint"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "observation" ;
+    fair2r:contributionLeverage "medium" ;
+    fair2r:promotedToPaper "pending" ;
+    dcterms:created "2026-05-06"^^xsd:date .
+
+hc:obs-experience-meta        a fair2r:MetaContribution ;
+    rdfs:label "Obscurity-Is-Dead as first try; F(AI)^2R as second"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "experience-meta" ;
+    fair2r:contributionLeverage "medium" ;
+    fair2r:promotedToPaper "yes" ;
+    dcterms:created "2026-05-06"^^xsd:date .
+
+hc:obs-researcher-role        a fair2r:MetaContribution ;
+    rdfs:label "Researcher role becoming more technical / experimental"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "observation" ;
+    fair2r:contributionLeverage "high" ;
+    fair2r:promotedToPaper "pending" ;
+    dcterms:created "2026-05-06"^^xsd:date .
+
+hc:obs-prompts-feel-easier    a fair2r:MetaContribution ;
+    rdfs:label "Prompts feel easier to write than the paper"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "observation" ;
+    fair2r:contributionLeverage "medium" ;
+    fair2r:promotedToPaper "pending" ;
+    dcterms:created "2026-05-06"^^xsd:date .
+
+hc:obs-responsibility-sharing  a fair2r:MetaContribution ;
+    rdfs:label "Responsibility-uptake plus interpersonal sharing"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "observation" ;
+    fair2r:contributionLeverage "medium" ;
+    fair2r:promotedToPaper "pending" ;
+    dcterms:created "2026-05-06"^^xsd:date .
+
+hc:obs-gambling-metaphor      a fair2r:MetaContribution ;
+    rdfs:label "Gambling metaphor; bank-always-wins"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "observation" ;
+    fair2r:contributionLeverage "low" ;
+    fair2r:promotedToPaper "no" ;
+    dcterms:created "2026-05-06"^^xsd:date .
+
+hc:obs-prompt-accretion       a fair2r:MetaContribution ;
+    rdfs:label "Afterthought crafting of prompts over hours"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "observation" ;
+    fair2r:contributionLeverage "medium" ;
+    fair2r:promotedToPaper "pending" ;
+    dcterms:created "2026-05-06"^^xsd:date .
+
+claim:contribution-tracking-rule  a fair2r:Claim ;
+    rdfs:label "Every material contribution to the manuscript or its scaffolding is logged in doc/user-contributions.md (mirrored as fair2r:HumanContribution / AIContribution / MetaContribution in the graph), so that the question 'what did the human / AI actually do here?' has a structured, queryable answer."@en ;
+    prov:wasAttributedTo agent:human-author ;
+    fair2r:verificationState verif:human-confirmed ;
+    dcterms:created "2026-05-06"^^xsd:date .
+
+#-------------------------------------------------------------------------
 # End of seed graph. Append, do not rewrite.
 #-------------------------------------------------------------------------

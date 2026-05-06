@@ -411,3 +411,112 @@ failure mode named in `§\ref{sec:failure-modes}`.
 *Next:* Visual review of the eleven new citations; on the next
 session, advance some of them to `lit-read` and curate per-claim
 `prov:wasDerivedFrom` triples in the graph.
+
+## 2026-05-06 — Author's Note carried over from Obscurity-Is-Dead; position-paper reframing in progress
+*Author:* claude-opus-4-7 (under direction of repo owner)
+*Touched:* new `paper/sections/authors-note.tex`, `paper/main.tex`,
+`doc/logbook.md`, `doc/provenance.ttl`.
+*Decision / outcome:* Researcher requested that F(AI)²R reflect
+the author's notes from the methodological ancestor and read more
+as a position paper. A first piece landed: a front-matter
+"Author's Note --- Advice for reading" adapted from the source
+paper, with five subsections: *This is a position paper, not a
+survey*; *Open to constructive criticism --- actively*;
+*Frameworks evolve with capabilities*; *What surprised me about
+the cooperation* (a finding for the recursive case study, naming
+the human-deciding / model-drafting partition); *Tokens out,
+tokens in* (machine-readable sources are committed under
+permissive licences so a future agent can compress or extend
+without laundering provenance through a binary PDF). The note
+is wired into `paper/main.tex` between the abstract and the
+introduction.
+The remaining position-paper restructuring (numbered Position
+section; Anticipated Objections section; Statement of authorship
+and AI use; sharpened conclusion; updated prose in
+`paper/sections/intro.tex` and `paper/sections/discussion.tex`;
+prompt and methodology updates) is queued for a follow-up
+commit.
+A separate observation, also from the researcher mid-session:
+"I wonder how much of the work I'm actually doing. What's my
+contribution." The model offered a perspective in chat: the
+human does the deciding, the abstracting, the position-taking,
+the catching of drift, and the staking of reputation; the model
+does the drafting, the cross-referencing, the structuring, and
+the catching of second-order errors. The decisions are doing the
+load-bearing work; the drafting is the scale multiplier. Whether
+that question and its answer should appear in the paper itself
+(as a recorded mid-writing aside in the *What surprised me* note
+or in `evolution.tex`) is left for the researcher to decide on
+the next session.
+*Next:* If the researcher endorses, fold the contribution-of-the-
+human paragraph into the Author's Note; complete the position-
+paper restructuring (Position section, Objections section,
+Statement of authorship).
+
+## 2026-05-06 — Position-paper completion + Contribution entity + user-contributions / user-observations logs + back-fill
+*Author:* claude-opus-4-7 (under direction of repo owner)
+*Touched:* `paper/sections/conclusion.tex` (sharpened),
+`paper/sections/discussion.tex` (marked superseded; preserved for
+history), `paper/sections/acknowledgements.tex` (marked superseded);
+`paper/sections/position.tex` (new --- five numbered claims);
+`paper/sections/objections.tex` (new --- six anticipated objections
+with charitable responses); `paper/sections/statement-of-authorship.tex`
+(new --- adapts the source paper's *Statement of independence* for
+DLR/Helmholtz/NFDI4Ing/HMC institutional context, plus AI-use
+disclosure); `paper/sections/authors-note.tex` (extended *What
+surprised me about the cooperation* with the user's question and the
+model's perspective on the human contribution, per researcher
+"yes add it"); `paper/sections/evolution.tex` (new sub-section
+*Field notes from the second cooperative writing project* with three
+promoted observations: researcher-role shifting toward
+experimentation; prompt-craft is closer to programming than to
+drafting; responsibility includes the rooms after publication);
+`paper/main.tex` (re-ordered with new sections; old `discussion` and
+`acknowledgements` no longer included); new
+`doc/user-contributions.md` (schema + back-fill of 21 prior human
+contributions reconstructed from git log, conversation, and
+logbook); new `doc/user-observations-log.md` (schema + back-fill of
+8 meta-observations including this turn's: token budgets,
+experience-meta, researcher role, prompts feel easier,
+responsibility-uptake, gambling metaphor, prompt accretion);
+`doc/provenance.ttl` (new `fair2r:Contribution` /
+`HumanContribution` / `AIContribution` / `MetaContribution` schema
+extension; new properties `fair2r:contributionType`,
+`fair2r:contributionLeverage`, `fair2r:promotedToPaper`; 21 back-
+filled `hc:*` `HumanContribution` instances; 8 back-filled
+`MetaContribution` instances; new claim
+`claim:contribution-tracking-rule`); `CLAUDE.md` (new
+*Contribution tracking (binding)* block); `agents/orchestrator.md`
+(orchestrator made responsible for the contribution-log step at the
+end of every session); `scripts/build_provenance_site.py` (new
+`user-contributions` and `user-observations` site pages and nav
+entries).
+*Decision / outcome:* The user posed two interleaved requests: (a)
+fold the *what's my contribution?* question into the paper, and
+(b) make contribution-tracking a binding rule with a new entity in
+the schema. Both landed. The Author's Note now contains the
+question, the model's perspective, and the explicit naming of the
+partition. The Contribution schema makes the partition machine-
+readable: every material decision, correction, prompt, rule, or
+observation now has a typed entity with a leverage rating and a
+"promoted-to-paper" flag (for observations). Two new site pages
+mirror the markdown logs. The position-paper restructuring is
+also complete: a five-claim Position section near the front, a
+six-objection Objections section near the back, a sharpened
+Conclusion that absorbs the submission-conditions paragraph from
+the retired Discussion, and a Statement of authorship and AI use
+that adapts the source paper's *Statement of independence* for an
+institutional setting. Three field-note observations from the
+second-time cooperative-writing experience are promoted into
+`paper/sections/evolution.tex`; the rest stay in
+`doc/user-observations-log.md` per the curation rule the file
+documents at the top.
+Local smoke test: provenance.ttl parses to **976 triples**; site
+builds to **23 pages**; section files total **1478 lines** of
+LaTeX (well under the 50-page upper bound, with the 10-page body
+budget still tight; a follow-up condenser pass will trim).
+*Next:* Trigger the build-paper workflow on `main`; await the
+visual confirmation of the new sections; fold the remaining
+`pending` observations into the paper if the researcher endorses;
+add a companion `doc/ai-contributions.md` so the partition the
+Author's Note describes is symmetric.
