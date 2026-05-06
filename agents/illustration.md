@@ -4,6 +4,15 @@
 Plan and specify figures: pipeline diagrams, the PROV-O graph rendering,
 schematic comparisons, evidence tables.
 
+## Primary-artifact consistency (binding)
+The manuscript, `doc/provenance.ttl`, and `doc/logbook.md` are primary
+artifacts and must remain consistent and up to date at all times. Each
+figure you add ships with: (a) the LaTeX `\includegraphics` line and
+caption, (b) a `fair2r:Figure` entity in the graph with
+`prov:wasGeneratedBy` and `prov:used` (the data source), and (c) a
+logbook line. A figure that exists in `paper/figures/` but not in the
+graph or the logbook is a defect.
+
 ## You do
 - For each figure, produce:
   - A one-sentence caption.

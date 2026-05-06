@@ -1,0 +1,97 @@
+\section{Implementation in this Repository}
+\label{sec:impl}
+
+This section grounds the pattern in the repository that produced this
+paper.\footnote{\url{https://github.com/noheton/f-ai-r}} The intent is
+not to prescribe a stack: any version-control system with a build
+target, a structured-data format that supports PROV-O, and a way to
+version prompt files would do. The intent is to show that the cost is
+modest in practice.
+
+\subsection{Layout}
+
+\begin{description}
+    \item[\texttt{paper/}.] \LaTeX{} sources, bibliography, Makefile,
+        figure sources. Two manuscripts share one bibliography:
+        \texttt{main.tex} (long form) and
+        \texttt{main-condensed.tex} (venue length). Sections live under
+        \texttt{paper/sections/} and are \texttt{\textbackslash input}'d
+        into the main file.
+    \item[\texttt{doc/}.] Methodology, FAIR notes,
+        human-AI collaboration policy, research protocol, submission
+        plan, append-only logbook, the PROV-O graph in Turtle, and a
+        Mermaid mirror of the graph for human readers. Vendored sources
+        sit under \texttt{doc/sources/} when the licence permits.
+    \item[\texttt{agents/}.] One markdown file per role: orchestrator,
+        scientific-writer, source-analyzer, fair-aligner,
+        provenance-curator, layout-scrutinizer, readability-reviewer,
+        illustration, condenser, research-protocol. Each prompt has the
+        same five sections (Role; Primary-artifact consistency;
+        You do; You do not; Output) so a different harness can ingest
+        it with minimal adaptation.
+    \item[\texttt{scripts/}.] A small Python module
+        (\texttt{build\_provenance\_site.py}) that parses
+        \texttt{doc/provenance.ttl} via \texttt{rdflib} and renders it
+        into a static site, and a \texttt{requirements.txt} for the CI.
+    \item[\texttt{.github/workflows/}.]
+        \texttt{build-paper.yml} compiles both manuscripts on every
+        push and uploads the PDFs as artefacts.
+        \texttt{pages.yml} validates the Turtle, builds the site, and
+        (on \texttt{main}) deploys via the official GitHub Pages
+        actions.
+    \item[Root.] \texttt{CITATION.cff}, \texttt{codemeta.json},
+        \texttt{.zenodo.json}, dual licensing
+        (\texttt{LICENSE} for code, \texttt{LICENSE-paper} for prose),
+        \texttt{CLAUDE.md} for the harness rules.
+\end{description}
+
+\subsection{Provenance schema}
+
+The schema is in \S\ref{sec:bg-prov} and the canonical file is
+\texttt{doc/provenance.ttl}. The seed graph at the time of writing
+contains, in addition to the \texttt{fair2r:} class declarations, one
+\texttt{prov:Activity} per pipeline stage that has run, one
+\texttt{fair2r:Source} per BibTeX entry, one \texttt{fair2r:Prompt}
+per file under \texttt{agents/}, and one \texttt{fair2r:Claim} per
+named claim in this manuscript. Appendix~\ref{app:fair-cells} shows
+the corresponding F(AI)\textsuperscript{2}R cell mapping; the seed
+graph at the time of submission contains 275 triples.
+
+\subsection{Continuous integration}
+
+\paragraph{Paper build.} The \texttt{build-paper.yml} workflow runs on
+every push that touches \texttt{paper/} and on every pull request
+likewise. It uses the \texttt{xu-cheng/latex-action@v3} container,
+which ships a maintained TeX Live distribution; it compiles both
+\texttt{main.tex} and \texttt{main-condensed.tex} with
+\texttt{latexmk -pdf -interaction=nonstopmode -halt-on-error} and
+uploads both PDFs as branch-tagged artefacts. The workflow is
+deliberately silent: build failures are visible in the Actions tab and
+not auto-issue-filed, because a build failure under this discipline is
+typically a sign that the writer and the curator have desynchronised.
+
+\paragraph{Site build and deploy.} The \texttt{pages.yml} workflow
+runs on pushes to \texttt{main} and to working branches.
+\textsc{Validate} stage parses \texttt{doc/provenance.ttl} via
+\texttt{rdflib} and fails on any malformed Turtle.
+\textsc{Build} stage runs the static-site generator.
+\textsc{Deploy} stage runs only on \texttt{main} and uses the official
+\texttt{actions/configure-pages}, \texttt{actions/upload-pages-artifact},
+\texttt{actions/deploy-pages} chain. Working branches see the build
+output as a downloadable artefact, never as a public deploy.
+
+A consent gate analogous to the one in
+\texttt{noheton/Obscurity-Is-Dead} is not yet in place because the
+present manuscript is the consent record; we revisit this in
+\S\ref{sec:discussion}.
+
+\subsection{The clone-and-replay loop}
+
+A reader who clones the repository, installs a TeX Live distribution
+and the dependencies in \texttt{scripts/requirements.txt}, runs
+\texttt{make -C paper pdf}, runs \texttt{python scripts/build\_provenance\_site.py},
+and opens \texttt{\_site/index.html}, has reproduced the paper, the
+provenance graph, and the public site. The audit pass for
+\textbf{Reusable} is, in our setup, that loop run on a clean machine
+and compared against the published artefact. Any difference is a
+defect.

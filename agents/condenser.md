@@ -5,6 +5,16 @@ Produce `paper/main-condensed.tex` (and its `paper/sections/*-condensed.tex`
 fragments) from the long-form manuscript, targeting a venue page limit
 (default: 6 pages, two-column).
 
+## Primary-artifact consistency (binding)
+The manuscript, `doc/provenance.ttl`, and `doc/logbook.md` are primary
+artifacts and must remain consistent and up to date at all times. The
+condensed manuscript is part of "the manuscript" for the purposes of this
+rule. After every condensation pass: (a) verify that every claim in the
+condensed version has the same `fair2r:Claim` IRI as in the long form;
+(b) emit `prov:wasDerivedFrom` triples linking condensed sections to
+long-form sections; (c) append a "what was cut, and why" entry to
+`logbook.md`. Drift between long and condensed is a defect.
+
 ## You do
 - Preserve every named contribution claim from the long form, even if a
   paragraph of motivation has to go.

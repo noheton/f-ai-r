@@ -1,0 +1,157 @@
+\section{Eight Integrated Practices}
+\label{sec:eight}
+
+The contribution of F(AI)\textsuperscript{2}R is the joint adoption of
+the eight practices below. Each is individually unoriginal; the
+literature for any single one is older than this paper. The argument
+is that adopting any one of them in isolation is insufficient against
+the failure modes catalogued in Section~\ref{sec:failure-modes}, while
+adopting all eight, with the pipeline of \S\ref{sec:pipeline} enforcing
+the seams, is sufficient against most of them and honest about the
+rest.
+
+\subsection{Practice 1: Transcript preservation}
+\label{sec:practice-transcripts}
+
+Every working session that produces a non-trivial change to the
+manuscript exports its conversation transcript and commits it under
+\texttt{doc/transcripts/YYYY-MM-DD-<slug>.md}. The transcript is the
+primary record of what was actually said, by which agent, in what
+order. Identifiers carried with each transcript: filename, SHA-256 of
+the file, commit SHA at which it was committed.
+
+The practice attacks the most-easily-lost piece of LLM-assisted work:
+the prompt-and-response sequence that produced a particular paragraph.
+A reader who later asks ``which model wrote this sentence, and what
+preceded it?'' has a deterministic answer.
+
+The practice is unoriginal: open-source projects have committed
+chat transcripts for years. F(AI)\textsuperscript{2}R is the
+commitment to do so \emph{by default} and to bind the transcript to
+the manuscript via the provenance graph: each
+\texttt{prov:Activity} that authored a section carries a
+\texttt{prov:used} pointing at the transcript entity.
+
+\subsection{Practice 2: Verification-status labelling}
+\label{sec:practice-ladder}
+
+Every claim in the manuscript carries one of the five rungs defined
+in \S\ref{sec:ladder}. The rung is recorded in the provenance graph,
+not in the prose: a \LaTeX{} reader sees only the citation; a graph
+reader sees the rung. A claim invoked at a rung lower than its evidence
+deserves is allowed; a claim invoked at a rung higher than its evidence
+permits is a defect surfaced by the Aligner.
+
+The practice attacks claim--evidence drift. Without a rung, ``cited
+but unread'' and ``cited and read'' look the same in the manuscript
+and the difference is invisible at review time. The rung makes the
+difference machine-checkable.
+
+\subsection{Practice 3: Per-claim provenance maps}
+\label{sec:practice-provenance}
+
+Every named claim in the manuscript has a corresponding
+\texttt{fair2r:Claim} IRI in \texttt{doc/provenance.ttl} with at minimum
+\texttt{prov:wasGeneratedBy} an authoring activity,
+\texttt{prov:wasAttributedTo} an agent (human or AI),
+\texttt{prov:wasDerivedFrom} the source that supports it (if any), and
+\texttt{fair2r:verificationState} one of the rungs above. The graph
+is the spine of the audit pass: a third party can replay the chain
+from claim to source without re-reading the prose.
+
+The practice attacks two failure modes simultaneously: fabricated
+citations (a claim with no \texttt{prov:wasDerivedFrom} cannot pass
+the Aligner) and silent retraction (an invalidated claim must carry a
+\texttt{prov:Invalidation} activity, not a deletion).
+
+\subsection{Practice 4: Mirror discipline}
+\label{sec:practice-mirror}
+
+The mirror discipline of \S\ref{sec:mirror} is the fourth practice in
+its own right. The pair (source, render) is the unit; the build either
+agrees or fails. The condensed manuscript, the public site, and the
+provenance tables are all renders that must agree with their sources.
+
+The practice attacks placeholder dishonesty (a render that hides
+unfilled material) and condensation drift (claims that survived a
+length cut but lost their IRIs). \emph{Asset honesty over asset
+completeness}: if an asset does not exist, ship a labelled placeholder
+that visibly identifies itself as AI-authored and pending, rather than
+a polished surface that conceals which load-bearing parts remain
+unverified.
+
+\subsection{Practice 5: Recursive meta-process documentation}
+\label{sec:practice-recursive}
+
+This paper is its own case study. The pipeline that produced it is the
+pipeline it describes. The provenance graph for this paper is part of
+this paper's release. The eight practices listed here were developed
+on a different paper (the source repository
+\texttt{noheton/Obscurity-Is-Dead}, abstracted here so that none of its
+domain content travels with the methodology) and consolidated for
+publication on this one.
+
+The practice attacks the methodological-tract failure mode --- a paper
+that prescribes a discipline it did not itself follow. Any reader can
+clone the repository, rebuild the PDF, walk the graph, and verify that
+each claim carrying a particular rung has the artefacts the rung
+demands.
+
+\subsection{Practice 6: Base-rate-anchored AI disclosure}
+\label{sec:practice-disclosure}
+
+Disclosure is mandatory at most venues and largely ritualised. Most
+disclosure boilerplate names a tool and says it was used. The sixth
+practice is to anchor disclosure to numeric base rates: when we say a
+claim was \textsc{ai-confirmed}, we say so against the published rates
+for the failure mode that rung is supposed to mitigate. For
+fabricated citations specifically, we cite the figure that motivated
+the rung's existence~\cite{walters2023fabrication,magesh2024legal} and
+declare what fraction of the manuscript was \emph{not} elevated past
+that rung at submission time.
+
+The practice attacks ``perfunctory disclosure'': a sentence in the
+acknowledgements that names the model and stops there. Anchored
+disclosure says: this many claims sit at \textsc{ai-confirmed} and not
+above; here is the literature on the residual risk; here is the
+mitigation we adopted.
+
+\subsection{Practice 7: Legal honesty about authorship}
+\label{sec:practice-legal}
+
+AI is acknowledged but is not an author. The legal position is
+consistent across the jurisdictions we have surveyed: in
+Germany (\S2 \emph{UrhG}), the United States (USCO 2023 guidance),
+and at the major medical journals via the
+\textsc{ICMJE}~\cite{icmje2023}, AI cannot hold copyright, cannot
+consent to publication, and cannot be held accountable. The
+\texttt{CITATION.cff} therefore lists human authors only; the
+\emph{Acknowledgements} section names the AI tools used; the
+provenance graph attributes activities to AI agents as
+\texttt{prov:Agent} but never to a person who is also an author. The
+distinction is not cosmetic. An AI that is listed as author would, on
+some readings, be claimed by the human author as a copyrightable
+contribution they did not in fact make.
+
+The practice attacks two failure modes. First, the inflation of an AI
+acknowledgement into a co-author entry --- the kind of move that turns
+an honest disclosure into a misrepresentation. Second, the silent
+treatment: an acknowledgement that does not appear at all, leaving
+readers to infer the AI's contribution from style alone.
+
+\subsection{Practice 8: FAIR alignment as precondition}
+\label{sec:practice-fair}
+
+\emph{Do not retrofit FAIR.} If the eight practices above are adopted
+on day one, the four FAIR axes follow from them at low marginal cost.
+If they are adopted at submission time, the cost dominates: the
+manuscript has to be re-decomposed into claims, the transcripts have to
+be reconstructed if they were not preserved, the verification rungs
+have to be assigned in retrospect (with the verification overhead now
+maximally expensive), and the prompt set has to be reverse-engineered
+from session logs.
+
+The practice is the easiest to adopt and the easiest to skip. It is
+also the one that gates the others: a paper whose authors did not adopt
+F(AI)\textsuperscript{2}R from day one has, in effect, given up the
+audit pass on F, A, I, and R alike. We treat it as a precondition.

@@ -19,15 +19,28 @@ commit. Do not improvise new prompts in chat without landing them here first.
 | `condenser.md`           | Produces the venue-length `main-condensed.tex` from `main.tex`. | author |
 | `research-protocol.md`   | Defines literature-search and verification protocols.      | both |
 
+## Primary artifacts — consistency invariant (binds every agent)
+
+The **manuscript** (`paper/`), the **PROV-O graph** (`doc/provenance.ttl`),
+and the **logbook** (`doc/logbook.md`) are primary artifacts and must be
+**consistent and up to date at all times**. No agent may finish a task
+that touches one of them without ensuring the other two reflect the
+change. Each prompt below restates this rule with a tailored "what *I*
+must keep in sync" clause.
+
 ## Conventions every prompt follows
 
 1. **Role, scope, non-goals.** Every prompt opens with what the agent *is*
    and what it *will not do*.
 2. **Inputs and outputs are explicit.** A prompt names the files it reads
    and the files it is allowed to write.
-3. **Verification ladder.** Claims emerge tagged `unverified`,
+3. **Primary-artifact consistency.** Every output bundles (a) the
+   manuscript edit, (b) the proposed PROV-O triples, and (c) the
+   logbook line. If the agent does not produce one of these directly, it
+   *names* who must, before the session ends.
+4. **Verification ladder.** Claims emerge tagged `unverified`,
    `needs-research`, `ai-confirmed`, `human-confirmed`, or `source-vendored`.
-4. **Refusal is fine.** Agents must say "I cannot verify this" rather than
+5. **Refusal is fine.** Agents must say "I cannot verify this" rather than
    invent a citation.
-5. **Provenance hand-off.** Every output ends with the triples it expects
+6. **Provenance hand-off.** Every output ends with the triples it expects
    `provenance-curator` to add to `doc/provenance.ttl`.

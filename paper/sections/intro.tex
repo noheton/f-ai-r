@@ -1,0 +1,89 @@
+\section{Introduction}
+\label{sec:intro}
+
+The FAIR Guiding Principles for scientific data management were published
+in 2016 and have, over the intervening decade, become the default
+language in which the research-data community talks about
+quality~\cite{wilkinson2016fair}. They were drafted for data. The
+community subsequently extended them to research
+software~\cite{chuehong2022fair4rs} and to machine-learning
+models~\cite{ravi2024fair4ml}. Both extensions are pragmatic
+re-readings of the original four axes for a different artefact class.
+Neither yet covers the artefact classes that have appeared since
+generative AI began participating in scholarly production: exportable
+conversation transcripts, versioned prompt files, tool-and-model version
+manifests, verification-status ladders, structured redaction policies,
+and per-claim provenance maps.
+
+This is not a hypothetical gap. Anyone now writing a paper with an LLM
+in the room is producing those artefacts, whether or not they preserve
+them. The question is whether they travel with the manuscript or vanish
+the moment the chat window closes. If they vanish, two things follow.
+First, the audit trail is gone --- a reader cannot ask
+\emph{who wrote this sentence, what evidence supports this claim, and
+how was the claim verified?}~\cite{krebs2026obscurity} Second, the work
+is more vulnerable to the well-documented failure modes of
+LLM-assisted writing: fabricated citations, drift between claim and
+evidence, sloppification, and the gradual flattening of an argument as
+hedges accrete. Reported base rates for fabricated citations in LLM
+output range from roughly 18\% to 55\% depending on
+domain~\cite{walters2023fabrication,magesh2024legal}, which is the kind
+of number that turns a methodological inconvenience into a
+disqualifying one.
+
+We propose \emph{F(AI)\textsuperscript{2}R}, read \emph{F-A-I-A-I-R}.
+The name is not a new principle. It is a typographic commitment: the
+canonical FAIR axes with an additional \emph{(AI)} factor multiplied
+through them, squared because each axis demands two passes over every
+artefact --- an authoring pass and an audit pass. The original draft of
+this work used the name \emph{FAIR4AI}; we discarded it after observing
+that \emph{4AI heißt alles} (\emph{4AI means everything}): a suffix
+denotes nothing about how the principles change. Folding \emph{(AI)}
+into the acronym, multiplied through, asserts that the extension is
+internal to FAIR rather than external to it.
+
+The contribution of this paper is not the name. The contribution is the
+integration of eight individually unoriginal practices into a single
+discipline. The eight are: (1) transcript preservation, (2)
+verification-status labelling, (3) per-claim provenance maps, (4)
+mirror discipline between markdown source and \LaTeX{} render, (5)
+recursive meta-process documentation (the paper is its own case
+study), (6) base-rate-anchored AI disclosure, (7) legal honesty about
+authorship, and (8) FAIR alignment treated as a precondition rather
+than a retrofit. None of the eight is novel on its own. None taken
+alone resists more than a subset of the failure modes the literature
+has documented. Their joint adoption, enforced by a ten-stage agent
+pipeline with strict separation between prose-owning and audit-owning
+agents, is what we claim is new.
+
+The pipeline is the team; the team is the methodology. Specialisation
+reduces hallucination at the seam: an agent that owns prose is not
+trusted to assess its own claims, and an agent that audits claims is
+not trusted to rewrite the prose. The cost is one extra commit boundary
+per cycle. The payoff is that ``what did the scrutinizer actually
+flag?'' has a single canonical answer in the git history.
+
+\paragraph{Roadmap.}
+Section~\ref{sec:background} reviews FAIR, its existing extensions,
+PROV-O, PRISMA 2020, GRADE, and the AI-disclosure norms relevant to the
+discussion. Section~\ref{sec:pattern} states the F(AI)\textsuperscript{2}R
+pattern in full: the renamed axes, the ten-stage pipeline, the
+verification ladder as a finite-state machine, the handback discipline,
+and the mirror discipline. Section~\ref{sec:eight} treats the eight
+integrated practices in turn, each with the failure mode it addresses
+and the artefact it produces. Section~\ref{sec:impl} grounds the
+pattern in the repository that produced this paper.
+Section~\ref{sec:failure-modes} names the failure modes the pattern is
+meant to resist and is honest about which of them it does not.
+Section~\ref{sec:discussion} discusses the dual-use surface, the
+limitations of a single worked example, and the conditions under which
+we will submit F(AI)\textsuperscript{2}R to RDA / FORCE11 as a
+candidate community recommendation.
+
+\paragraph{What this paper is not.}
+It is not a survey of LLM-assisted writing tools. It is not a
+prescription for any one model, harness, or vendor. It is not an
+ethical defence of AI-assisted scientific work in general; that
+defence has to be made artefact by artefact, and naming what we are
+already doing is the first step toward surrendering it to peer
+scrutiny.

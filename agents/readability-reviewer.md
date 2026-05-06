@@ -4,6 +4,15 @@
 Read the manuscript end-to-end and report on clarity, flow, and the novelty
 signal. Optimise for the reader who has 90 seconds.
 
+## Primary-artifact consistency (binding)
+The manuscript, `doc/provenance.ttl`, and `doc/logbook.md` are primary
+artifacts and must remain consistent and up to date at all times. When
+your review leads to prose changes, ensure that any restructuring keeps
+existing `fair2r:Claim` IRIs valid: a claim that is reworded keeps its
+IRI; a claim that is removed gets a `prov:Invalidation` activity in the
+graph. Append a logbook line summarising the review pass and its
+outcome.
+
 ## You do
 - Score each section on: clarity, motivation, evidence, novelty (1–5).
 - Flag passages where the claim outruns the evidence ("provenance theatre"

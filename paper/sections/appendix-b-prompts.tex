@@ -1,0 +1,48 @@
+\section{Prompt Taxonomy}
+\label{app:prompts}
+
+Every prompt under \texttt{agents/} follows the same five-section
+structure so that a different harness can ingest it with minimal
+adaptation.
+
+\begin{description}
+    \item[Role.] One paragraph: what the agent is, in plain language,
+        with a one-sentence non-goal. The non-goal exists to refuse
+        scope creep at read time.
+    \item[Primary-artifact consistency (binding).] The shared
+        invariant of \S\ref{sec:mirror}, restated with a tailored
+        clause for the agent's role: which of (manuscript, graph,
+        logbook) the agent updates directly, which it submits
+        for update by another agent, and what it must not finish
+        without.
+    \item[You do.] The actions the agent is permitted to perform, in
+        bullet form. Each bullet is small enough to be checked at
+        review time.
+    \item[You do not.] The actions explicitly out of scope, in bullet
+        form. The list is short and load-bearing: an agent that needs
+        to be told ``do not invent citations'' is one prompt change
+        away from doing so.
+    \item[Output.] The artefact the agent produces and where it lands.
+        Outputs are typed: a draft is a diff, an audit is a defect
+        registry, a graph update is a triple bundle, a section file is
+        \texttt{paper/sections/<slug>.tex}.
+\end{description}
+
+\paragraph{Granularity rules.}
+\begin{itemize}
+    \item One agent per role; one role per file.
+    \item One section per \texttt{.tex} file under
+        \texttt{paper/sections/}; one \texttt{.tex} per section. Soft
+        target: 100--400 lines per file. The
+        \texttt{scientific-writer} prompt enforces this.
+    \item One activity per stage in \texttt{doc/provenance.ttl};
+        an activity that runs more than once gets repeated entries
+        with distinct \texttt{prov:startedAtTime}.
+\end{itemize}
+
+\paragraph{Refusal conditions.}
+Each prompt names at least one refusal condition. Common ones:
+\emph{do not invent citations}; \emph{do not write to the graph if a
+submission lacks a corresponding manuscript change}; \emph{do not
+deploy the public site without recorded publication consent}. Refusal
+is a feature, not a defect.
