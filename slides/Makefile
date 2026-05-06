@@ -1,38 +1,39 @@
 # Makefile for the F(AI)^2R slide decks.
-# Renders both decks to PDF (and PPTX where the toolchain supports it)
-# using the Marp CLI with the vendored DLR theme. Marp is required at
-# build time but not as a runtime dependency: the deck Markdown is the
-# source of truth, the rendered .pdf and .pptx are derived artefacts.
+# The DLR Marp theme references ./assets/*.png plates that headless
+# Chromium cannot resolve through Marp's CSS @url(...) cleanly; the
+# canonical marp-dlr framework solves that by inlining the assets as
+# base64 data: URIs. We do the same via scripts/build_slides.py so the
+# slide build matches the upstream behaviour without a Node toolchain.
 #
 # Usage:
-#     make             # build both decks to dist/
-#     make pitch       # build pitch-5min.pdf only
-#     make conference  # build conference-30min.pdf only
+#     make             # build both decks (PDF + PPTX + HTML)
+#     make pitch       # build pitch-5min only
+#     make conference  # build conference-30min only
 #     make watch       # serve the pitch deck live during authoring
 #     make clean       # remove dist/
 
-MARP    ?= npx --yes -p @marp-team/marp-cli marp
-THEME   := static/dlr/dlr.css
+PYTHON  ?= python3
 DIST    := dist
-PITCH   := pitch-5min
-CONF    := conference-30min
 
 .PHONY: all pitch conference watch clean
 
 all: pitch conference
 
 pitch: | $(DIST)
-	$(MARP) --theme $(THEME) --pdf -o $(DIST)/$(PITCH).pdf $(PITCH).md
-	$(MARP) --theme $(THEME) --pptx -o $(DIST)/$(PITCH).pptx $(PITCH).md || true
-	$(MARP) --theme $(THEME) --html -o $(DIST)/$(PITCH).html $(PITCH).md
+	cd .. && $(PYTHON) scripts/build_slides.py pitch
 
 conference: | $(DIST)
-	$(MARP) --theme $(THEME) --pdf -o $(DIST)/$(CONF).pdf $(CONF).md
-	$(MARP) --theme $(THEME) --pptx -o $(DIST)/$(CONF).pptx $(CONF).md || true
-	$(MARP) --theme $(THEME) --html -o $(DIST)/$(CONF).html $(CONF).md
+	cd .. && $(PYTHON) scripts/build_slides.py conference
 
 watch: | $(DIST)
-	$(MARP) --theme $(THEME) -s . --watch
+	# Watch mode does not benefit from the asset-inlining preprocessor
+	# (Marp's --watch needs to re-read the theme from disk), so this
+	# falls back to direct Marp with the raw theme file. Use this for
+	# fast authoring iteration only; for the canonical render run
+	# `make pitch` or `make conference`.
+	npx --yes -p @marp-team/marp-cli marp \
+	    --theme static/dlr/dlr.css --allow-local-files \
+	    -s . --watch
 
 $(DIST):
 	mkdir -p $(DIST)

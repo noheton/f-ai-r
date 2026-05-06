@@ -1607,13 +1607,39 @@ hc:slide-decks               a fair2r:HumanContribution ;
                     claim:slides-as-primary-artefact .
 
 hc:obs-coding-structure        a fair2r:MetaContribution ;
-    rdfs:label "Coding with LLMs: structure becomes more important; visions, feature sets, dependencies are the human's load (the coding-counterpart of the writing partition)"@en ;
+    rdfs:label "Coding with LLMs: structure becomes more important; visions, feature sets, dependencies are the human's load (the coding-counterpart of the writing partition); domain vocabulary fluency is a collaboration multiplier"@en ;
     fair2r:contributedBy agent:human-author ;
     fair2r:contributionType "observation" ;
     fair2r:contributionLeverage "high" ;
     fair2r:promotedToPaper "pending" ;
-    rdfs:comment "Researcher observed during the slide-decks session: 'In coding with LLMs somehow structure becomes more important, like guiding and shaping a river of code --- it's more about visions, feature sets, dependencies.' The model identified this as the coding-counterpart of the writing partition: human at the architectural layer (visions, dependency graph, test surface), model at the executable layer; the accelerator-vs-blender coupling rule transposes (architecture would-have-been-thinkable diagnostic). The bottleneck shifts from production to integration when generation is fluent. F(AI)^2R's eight practices are essentially the architectural spec for cooperative writing, the analogue of an interface contract in cooperative coding. Recommendation: flag the generalisation as future work in the Conclusion's 'The longer arc' paragraph (one sentence, no defence); keep the full observation in user-observations-log.md."@en ;
+    rdfs:comment "Researcher observed during the slide-decks session: 'In coding with LLMs somehow structure becomes more important, like guiding and shaping a river of code --- it's more about visions, feature sets, dependencies.' Extended in the next message: 'addition to the river thought, as a dev / cs engineer i have the vocabulary to effectively work with the llm by referring to things more specifically producing a more general cohesiveness'. The model identified this as the coding-counterpart of the writing partition (same partition, same coupling rule, same diagnostic). The vocabulary-fluency extension adds a second layer to the equity discussion in §sustainability: it is not just access to frontier models that is asymmetric, it is access to the formal vocabulary that makes the cooperation effective. Researchers from disciplines with rich shared formal vocabularies (CS, mathematics, physics, well-formalised parts of biology) start with an advantage that does not transfer to disciplines whose vocabularies are still being built. The eight integrated practices of F(AI)^2R are themselves a vocabulary for cooperative writing; the act of naming them gives a future researcher a set of API terms to reach for. The paper's contribution, on this reading, is partly the practices and partly the vocabulary that lets a researcher operate them precisely."@en ;
     dcterms:created "2026-05-06"^^xsd:date .
+
+ent:script-build-slides        a prov:Entity ;
+    rdfs:label "scripts/build_slides.py (DLR-theme asset-inlining preprocessor + Marp wrapper)"@en ;
+    dcterms:source <scripts/build_slides.py> .
+
+act:rev-fix-slide-rendering    a prov:Activity ;
+    rdfs:label "Fix slide rendering: port marp-dlr's run-marp.mjs asset-inlining preprocessor to Python so the DLR background plates and logos actually load in headless Chromium"@en ;
+    prov:startedAtTime "2026-05-06T00:00:00Z"^^xsd:dateTime ;
+    prov:endedAtTime   "2026-05-06T00:00:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith agent:claude-opus-4-7 ;
+    prov:wasAssociatedWith agent:human-author ;
+    prov:generated ent:script-build-slides .
+
+ent:script-build-slides        prov:wasGeneratedBy act:rev-fix-slide-rendering .
+
+hc:fix-slide-rendering         a fair2r:HumanContribution ;
+    rdfs:label "Researcher report: slides don't adhere to the DLR design system; pages reverted to old look"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "corrective-intervention" ;
+    fair2r:contributionLeverage "high" ;
+    rdfs:comment "Researcher reported two issues after PR #16: (a) the rendered slides did not actually look DLR-themed; (b) the deployed Pages site appeared to revert to an older version. Diagnosis: (a) The naïve 'marp --theme path/to/dlr.css' invocation we used does not pre-process the theme CSS the way the canonical marp-dlr framework does. The framework's run-marp.mjs inlines every url('./assets/...') reference as a base64 data URI before passing the CSS to Marp; without that step, the title and section-divider background plates and the DLR logos never load in headless Chromium and the deck rendering looks unstyled. We ported the preprocessor to Python (scripts/build_slides.py) and the slide Makefile and CI now use it. (b) Likely a CDN cache: the slide-only PR did not match the path filter on pages.yml, so the site did not re-deploy. Touched site/index.md in this commit so the merge triggers a fresh Pages deploy, which busts the cache. The cache-busting scheme on asset URLs (style.css?v=hash) is unchanged."@en ;
+    dcterms:created "2026-05-06"^^xsd:date ;
+    prov:influenced ent:script-build-slides ,
+                    ent:slidedeck-pitch ,
+                    ent:slidedeck-conference ,
+                    ent:workflow-build-slides .
 
 hc:obs-latency-as-feature      a fair2r:MetaContribution ;
     rdfs:label "Latency between prompt and response is a cognitive feature, not a bug; it allows formulation work and short context switches (e.g. checking on a coding agent in another window)"@en ;

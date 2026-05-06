@@ -899,3 +899,56 @@ generalisation into the Conclusion's *The longer arc* paragraph;
 otherwise leave the observation as logged context for future
 revisions of F(AI)\textsuperscript{2}R or for a successor
 framework that targets cooperative coding directly.
+
+## 2026-05-06 — Fix slide rendering (DLR theme) + vocabulary-fluency observation + Pages cache refresh
+*Author:* claude-opus-4-7 (under direction of repo owner)
+*Touched:* new `scripts/build_slides.py`,
+`slides/Makefile`, `.github/workflows/build-slides.yml`,
+`site/index.md`, `doc/user-observations-log.md`,
+`doc/provenance.ttl`, `doc/user-contributions.md`,
+`doc/logbook.md`.
+*Decision / outcome:* Researcher reported two issues after PR \#16:
+(a) the rendered slides did not actually look DLR-themed;
+(b) the deployed Pages site appeared to revert to an older version.
+Diagnosis: \\
+(a) The naïve `marp --theme path/to/dlr.css` invocation does not
+pre-process the theme CSS the way the canonical marp-dlr framework
+does. The framework's `run-marp.mjs` inlines every
+`url('./assets/...')` reference as a base64 data URI before passing
+the CSS to Marp; without that step, headless Chromium cannot resolve
+the relative asset paths in the cross-mounted theme file, so the
+DLR title-slide and section-divider background plates plus the DLR
+logos never load and the deck looks unstyled. \\
+(b) Likely a CDN cache: the slide-only PR did not match the path
+filter on `pages.yml`, so the site did not re-deploy after merge.
+Fix landed: \\
+(a) `scripts/build_slides.py` is the Python port of
+`run-marp.mjs`'s preprocessor (regex-replace `url('assets/...')` with
+`url('data:image/...;base64,...')`, write to a tempfile, pass to
+Marp). The slide Makefile and the build-slides CI now invoke it
+instead of calling Marp directly. \\
+(b) Touched `site/index.md` in the same commit so the merge
+triggers a fresh Pages deploy and busts the CDN cache. The
+cache-busting scheme on asset URLs is unchanged.
+
+The user's *coding-with-LLMs* observation from the previous turn was
+also extended in this turn: "addition to the river thought, as a
+dev / cs engineer i have the vocabulary to effectively work with the
+llm by referring to things more specifically producing a more general
+cohesiveness". Added as a continuation of `hc:obs-coding-structure`
+in `doc/user-observations-log.md` and the `rdfs:comment` of the IRI
+in the graph. The vocabulary-fluency claim adds a second axis to the
+equity discussion in §sustainability: it is not just access to
+frontier models that is asymmetric, it is access to the formal
+vocabulary that makes the cooperation effective. The eight
+integrated practices of F(AI)\textsuperscript{2}R are themselves a
+vocabulary for cooperative writing.
+
+Local smoke test: TTL parses to **1357 triples** (up from 1340).
+Slide rendering can only be verified end-to-end in the CI; the
+preprocessor logic is small and the test in CI will confirm.
+*Next:* On the next push to `main`, watch the build-slides workflow
+on the rendered PDF + PPTX of `pitch-5min` and `conference-30min` to
+confirm the DLR theme actually applies; on the same push, the
+`pages.yml` rebuild should refresh the site and remove the "old
+page" cache. If either still misbehaves, escalate.

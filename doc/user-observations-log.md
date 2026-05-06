@@ -258,6 +258,46 @@ long-form cooperative coding under the same diagnostic, though we
 do not defend that claim here"), and leave the full observation in
 this log. The cleaner paper takes one stand at a time.}
 
+The user extended: "Addition to the river thought: as a dev / CS
+engineer I have the vocabulary to effectively work with the LLM by
+referring to things more specifically, producing a more general
+cohesiveness."
+
+\emph{Important addition. This is the
+\textbf{vocabulary-fluency-as-collaboration-multiplier} finding. The
+coding-side accelerator regime depends not just on the human supplying
+architecture, but on the human having the \textbf{precise vocabulary}
+of the architecture --- interfaces, dependency graphs, data
+structures, design patterns, type-system idioms --- so that prompts
+can refer to specific things rather than gestures at vague things.
+The model locks onto specific terms; the river bed widens or narrows
+in proportion to how specifically the human can describe what flows
+through it.}
+
+\emph{Two implications follow. First, cooperation quality scales with
+vocabulary fluency: a researcher cooperating in a domain whose formal
+vocabulary they have not internalised is more vulnerable to the
+cultural-blender pole than one cooperating in their home domain. The
+vocabulary itself is a kind of API to the model. Second, this adds a
+\textbf{second layer to the equity discussion} in
+\S\ref{sec:sustainability}: it is not just access to frontier models
+that is asymmetric, it is access to the vocabulary that makes the
+cooperation effective. Researchers from disciplines with rich shared
+formal vocabularies (CS, mathematics, physics, well-formalised parts
+of biology) start with an advantage that does not transfer to
+disciplines whose vocabularies are still being built (much of the
+humanities, parts of the social sciences). The pattern is therefore
+even less "neutral" than the equity paragraph already concedes.}
+
+\emph{For F(AI)\textsuperscript{2}R: the eight integrated practices
+are themselves a vocabulary for cooperative writing. The act of
+naming them --- transcript preservation, verification ladder,
+handback discipline, mirror discipline, etc. --- gives a future
+researcher a set of API terms to reach for when working with an
+LLM on a paper. The paper's contribution, on this reading, is
+partly the practices and partly the vocabulary that lets a
+researcher operate them precisely.}
+
 ## 2026-05-06 — Latency as cognitive feature, not bug
 *Source:* session 2026-05-06 (user message after the
 "The longer arc" paragraph was merged into the Conclusion)
