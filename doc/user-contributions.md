@@ -279,6 +279,51 @@ primary-artefact consistency invariant.
 `agents/orchestrator.md`.
 *Provenance IRI:* `fair2r:hc-contribution-rule`
 
+### 2026-05-06 --- "ontologies might actually help" --- domain ontologies as schema extension
+*Type:* `content-prompt`
+*Leverage:* high
+*Triggered:* New §3.5 "Extensibility through domain ontologies" in
+`paper/sections/pattern.tex`; three new bib entries (`janowicz2019sosa`
+for SOSA/SSN, `rijgersberg2013om` for OM-2,
+`qudt` for QUDT); new `claim:domain-ontologies-extension` in the
+graph at `human-confirmed`. The German fragment "konkrete
+standardisierte Methode" carried into the prose as a load-bearing
+technical term in the source-author voice.
+*Artefacts touched:* `paper/sections/pattern.tex`,
+`paper/references.bib`, `doc/provenance.ttl`,
+`doc/user-contributions.md`.
+*Provenance IRI:* `fair2r:hc-domain-ontologies`
+
+### 2026-05-06 --- "link reviewer-side AI policies + reproducibility-crisis literature"
+*Type:* `content-prompt`
+*Leverage:* medium
+*Triggered:* Five new bib entries: `ioannidis2005`,
+`pineau2021reproducibility`, `neurips_llm_policy`, `iclr_llm_policy`,
+`aclrr_llm_policy`. Citations inserted in `paper/sections/intro.tex`
+(reproducibility baseline) and `paper/sections/background.tex`
+(reviewer-AI policies). Two new fair2r:Claim entries.
+*Artefacts touched:* `paper/sections/intro.tex`,
+`paper/sections/background.tex`, `paper/references.bib`,
+`doc/provenance.ttl`.
+*Provenance IRI:* `fair2r:hc-gap-fill-reproducibility-and-policies`
+
+### 2026-05-06 --- "do we have a list of reading tasks for the researcher?"
+*Type:* `content-prompt`
+*Leverage:* high
+*Triggered:* New `scripts/build_reading_queue.py` that produces
+`doc/reading-queue.md` from the graph plus the bib. Entries sorted
+by load-bearing weight (number of `fair2r:Claim` entries that
+depend on the source via `prov:wasDerivedFrom`). Wired into
+`paper/Makefile` (`make provenance` regenerates both
+analysis fragments and the queue) and into
+`.github/workflows/build-paper.yml`. Surfaced on the public site
+nav as "Reading queue".
+*Artefacts touched:* `scripts/build_reading_queue.py`,
+`doc/reading-queue.md`, `paper/Makefile`,
+`.github/workflows/build-paper.yml`,
+`scripts/build_provenance_site.py`.
+*Provenance IRI:* `fair2r:hc-reading-queue`
+
 ### 2026-05-06 --- "Its still a bit hard to read" --- more illustrations
 *Type:* `content-prompt`
 *Leverage:* medium

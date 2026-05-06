@@ -17,9 +17,12 @@ pdf: check provenance
 	$(LATEXMK) $(LATEXMKOPTS) $(MAIN).tex
 
 # Re-run the provenance analysis script. Generates four LaTeX fragments
-# under paper/sections/_generated/ that provenance-analysis.tex inputs.
+# under paper/sections/_generated/ that provenance-analysis.tex inputs;
+# also regenerates doc/reading-queue.md so the human author's reading
+# queue stays in sync with the graph.
 provenance:
 	@cd .. && python3 scripts/provenance_analysis.py
+	@cd .. && python3 scripts/build_reading_queue.py
 
 watch: check
 	$(LATEXMK) $(LATEXMKOPTS) -pvc $(MAIN).tex

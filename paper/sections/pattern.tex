@@ -146,3 +146,62 @@ The pattern, in one sentence: \emph{the manuscript, the provenance
 graph, and the logbook are primary artefacts and must remain
 consistent and up to date at all times}. A commit that updates one
 and leaves the others lagging is a defect, even if the build passes.
+
+\subsection{Extensibility through domain ontologies}
+\label{sec:domain-ontologies}
+
+PROV-O is the spine; it does not have to be the only ontology in
+the graph. The schema we have introduced is compositional: any
+\texttt{fair2r:Claim} can carry additional triples that ground its
+\emph{values} in a domain ontology, alongside the
+\texttt{prov:wasDerivedFrom} edge that grounds its
+\emph{evidence}. The two axes are orthogonal --- provenance asks
+\emph{where did this claim come from?}, domain ontologies ask
+\emph{what does the value of this claim mean?} --- and a manuscript
+that answers both is more reproducible than one that answers only
+the first.
+
+Two examples concrete enough to plug in today:
+
+\begin{description}[leftmargin=1.2em,itemsep=2pt,topsep=4pt]
+    \item[\textbf{Sensor data: SOSA / SSN.}] The W3C Semantic Sensor
+        Network ontology and its lightweight core
+        SOSA~\cite{janowicz2019sosa}\todo[inline]{verify} expose
+        \texttt{sosa:Observation}, \texttt{sosa:Sensor},
+        \texttt{sosa:FeatureOfInterest}, and the relations between
+        them. A \texttt{fair2r:Claim} that asserts a measurement can
+        carry a \texttt{prov:wasDerivedFrom} pointing at the
+        underlying \texttt{sosa:Observation}, and the audit pass
+        gains the ability to ask \emph{is this measurement well-
+        formed?} as a SHACL query rather than a paragraph of
+        prose.
+    \item[\textbf{Units of measure: OM-2 / QUDT.}] The OM-2 ontology
+        of units of measure~\cite{rijgersberg2013om}\todo[inline]{verify}
+        and the QUDT vocabulary~\cite{qudt}\todo[inline]{verify}
+        expose \texttt{om:Quantity}, \texttt{om:Unit},
+        \texttt{qudt:hasUnit}, and the dimensional relations between
+        units. A claim that asserts a numeric value can carry the
+        unit as an explicit triple rather than as a typographic
+        decoration. Unit consistency is then a graph query, not a
+        manuscript-reading exercise.
+\end{description}
+
+\noindent The class of failure modes this addresses is the one
+prose alone cannot reach: a value that is internally coherent in
+its prose and its citation but \emph{wrong in its units}, or
+\emph{wrong in the dimensional sense it implies}. A reviewer
+catching such a defect today reads the figure caption and the
+methods section and triangulates; an audit pass with a domain
+ontology reads the graph and the SHACL shapes and reports.
+
+The recommendation is open. F(AI)\textsuperscript{2}R does not
+prescribe specific domain ontologies because the right choice is
+discipline-specific. It prescribes that, where a discipline already
+has a \emph{konkrete standardisierte Methode} expressed as an
+ontology, the F(AI)\textsuperscript{2}R repository should adopt it
+and link from \texttt{fair2r:Claim} entities to its terms. NFDI4Ing
+and the Helmholtz Metadata Collaboration are the nearest two
+communities to this paper that maintain such ontologies for
+engineering and metadata respectively, and the integration cost is
+low. The ceiling is the discipline's; the floor is what
+F(AI)\textsuperscript{2}R asks for.

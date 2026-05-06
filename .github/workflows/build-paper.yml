@@ -37,6 +37,9 @@ jobs:
       - name: Regenerate provenance-analysis fragments
         run: python scripts/provenance_analysis.py
 
+      - name: Regenerate reading-queue
+        run: python scripts/build_reading_queue.py
+
       - name: Compile main.tex
         uses: xu-cheng/latex-action@v3
         with:

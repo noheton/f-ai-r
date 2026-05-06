@@ -1270,6 +1270,137 @@ hc:readability-figures         a fair2r:HumanContribution ;
     prov:influenced ent:figure-ladder-fsm , ent:figure-axes , ent:figure-coupling-rule .
 
 #-------------------------------------------------------------------------
+# New claim: domain ontologies as schema extension (researcher-proposed)
+#-------------------------------------------------------------------------
+
+src:janowicz2019sosa           a fair2r:Source ;
+    dcterms:title "SOSA: A lightweight ontology for sensors, observations, samples, and actuators"@en ;
+    dcterms:identifier "doi:10.1016/j.websem.2018.06.003" ;
+    fair2r:verificationState verif:lit-retrieved .
+
+src:rijgersberg2013om          a fair2r:Source ;
+    dcterms:title "Ontology of units of Measure and related concepts"@en ;
+    dcterms:identifier "doi:10.3233/SW-2012-0069" ;
+    fair2r:verificationState verif:lit-retrieved .
+
+src:qudt                       a fair2r:Source ;
+    dcterms:title "QUDT: Quantities, Units, Dimensions and Types ontology"@en ;
+    dcterms:identifier <https://www.qudt.org/> ;
+    fair2r:verificationState verif:lit-retrieved .
+
+ent:section-pattern-domain-ontologies  a fair2r:Section ;
+    rdfs:label "Extensibility through domain ontologies"@en ;
+    prov:hadPrimarySource ent:manuscript .
+
+claim:domain-ontologies-extension  a fair2r:Claim ;
+    rdfs:label "Domain ontologies (SOSA / SSN for sensor data, OM-2 / QUDT for units of measure) plug into the F(AI)^2R schema as side-arms of PROV-O, grounding the values of claims (not just their evidence) in machine-checkable terms; this addresses unit-and-dimension defects that prose alone cannot reach, and is a low-cost win for engineering and metadata communities (NFDI4Ing, HMC) that already maintain such ontologies."@en ;
+    prov:wasAttributedTo agent:human-author ;
+    prov:wasDerivedFrom  src:janowicz2019sosa , src:rijgersberg2013om , src:qudt ;
+    fair2r:verificationState verif:human-confirmed ;
+    dcterms:created "2026-05-06"^^xsd:date .
+
+act:rev-domain-ontologies      a prov:Activity ;
+    rdfs:label "Add §3.5 'Extensibility through domain ontologies' to pattern.tex"@en ;
+    prov:startedAtTime "2026-05-06T00:00:00Z"^^xsd:dateTime ;
+    prov:endedAtTime   "2026-05-06T00:00:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith agent:claude-opus-4-7 ;
+    prov:wasAssociatedWith agent:human-author ;
+    prov:used src:janowicz2019sosa , src:rijgersberg2013om , src:qudt .
+
+ent:section-pattern-domain-ontologies  prov:wasGeneratedBy act:rev-domain-ontologies ;
+                                       prov:wasAttributedTo agent:scientific-writer , agent:human-author .
+
+hc:domain-ontologies           a fair2r:HumanContribution ;
+    rdfs:label "Researcher claim: domain ontologies (SOSA, OM-2, QUDT) extend the schema"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "content-prompt" ;
+    fair2r:contributionLeverage "high" ;
+    rdfs:comment "Researcher proposed during session: 'ontologies might actually help to make this process more efficient and reproducible (first example prov, but for example sensor data and OM-2 (units of measure) ontology --- konkrete standardisierte methoden ... potential)'. Claim graduated to paper text in §3.5 of pattern.tex; bibliography gains janowicz2019sosa, rijgersberg2013om, qudt; the German phrase 'konkrete standardisierte Methode' carried into the prose as a load-bearing technical term in the source-author voice."@en ;
+    dcterms:created "2026-05-06"^^xsd:date ;
+    prov:influenced ent:section-pattern-domain-ontologies ,
+                    claim:domain-ontologies-extension .
+
+#-------------------------------------------------------------------------
+# Reproducibility-crisis literature + reviewer-side AI policies
+#-------------------------------------------------------------------------
+
+src:ioannidis2005              a fair2r:Source ;
+    dcterms:title "Why Most Published Research Findings Are False"@en ;
+    dcterms:identifier "doi:10.1371/journal.pmed.0020124" ;
+    fair2r:verificationState verif:lit-retrieved .
+
+src:pineau2021reproducibility  a fair2r:Source ;
+    dcterms:title "Improving Reproducibility in Machine Learning Research (NeurIPS 2019)"@en ;
+    dcterms:identifier <https://jmlr.org/papers/v22/20-303.html> ;
+    fair2r:verificationState verif:lit-retrieved .
+
+src:neurips_llm_policy         a fair2r:Source ;
+    dcterms:title "NeurIPS policy on the use of Large Language Models"@en ;
+    dcterms:identifier <https://neurips.cc/> ;
+    fair2r:verificationState verif:lit-retrieved .
+
+src:iclr_llm_policy            a fair2r:Source ;
+    dcterms:title "ICLR author and reviewer guidelines on the use of AI tools"@en ;
+    dcterms:identifier <https://iclr.cc/> ;
+    fair2r:verificationState verif:lit-retrieved .
+
+src:aclrr_llm_policy           a fair2r:Source ;
+    dcterms:title "ACL Rolling Review policy on the use of LLMs in submissions and reviews"@en ;
+    dcterms:identifier <https://aclrollingreview.org/cfp> ;
+    fair2r:verificationState verif:lit-retrieved .
+
+claim:reproducibility-baseline-poor  a fair2r:Claim ;
+    rdfs:label "The LLM-assisted writing failure modes sit on top of a reproducibility baseline that is already poor in many fields, so an authoring-side discipline is necessary even before LLMs are considered."@en ;
+    prov:wasAttributedTo agent:human-author ;
+    prov:wasDerivedFrom  src:ioannidis2005 , src:pineau2021reproducibility ;
+    fair2r:verificationState verif:ai-confirmed ;
+    dcterms:created "2026-05-06"^^xsd:date .
+
+claim:reviewer-side-ai-policies  a fair2r:Claim ;
+    rdfs:label "Major ML venues (NeurIPS, ICLR, ACL Rolling Review) have published explicit author-and-reviewer AI policies, going beyond the editorial-level disclosure norms of the medical journals."@en ;
+    prov:wasAttributedTo agent:human-author ;
+    prov:wasDerivedFrom  src:neurips_llm_policy , src:iclr_llm_policy , src:aclrr_llm_policy ;
+    fair2r:verificationState verif:ai-confirmed ;
+    dcterms:created "2026-05-06"^^xsd:date .
+
+hc:gap-fill-reproducibility-and-policies  a fair2r:HumanContribution ;
+    rdfs:label "Researcher request: link reviewer-side AI policies + reproducibility-crisis literature"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "content-prompt" ;
+    fair2r:contributionLeverage "medium" ;
+    rdfs:comment "Researcher endorsed two of the three small gaps the model had flagged: reviewer-side AI policies (NeurIPS / ICLR / ACL ARR) and reproducibility-crisis literature (Ioannidis 2005; Pineau et al. 2021). Five new bib entries; citations inserted in intro.tex (reproducibility) and background.tex (reviewer-AI policies). The third flagged gap (position-paper genre precedents) was not endorsed and is not added in this commit."@en ;
+    dcterms:created "2026-05-06"^^xsd:date ;
+    prov:influenced claim:reproducibility-baseline-poor , claim:reviewer-side-ai-policies .
+
+ent:script-build-reading-queue  a prov:Entity ;
+    rdfs:label "scripts/build_reading_queue.py"@en ;
+    dcterms:source <scripts/build_reading_queue.py> .
+
+ent:doc-reading-queue           a prov:Entity ;
+    rdfs:label "doc/reading-queue.md (auto-generated reading queue)"@en ;
+    dcterms:source <doc/reading-queue.md> .
+
+act:rev-reading-queue           a prov:Activity ;
+    rdfs:label "Add the reading-queue generator and the auto-regenerated queue file"@en ;
+    prov:startedAtTime "2026-05-06T00:00:00Z"^^xsd:dateTime ;
+    prov:endedAtTime   "2026-05-06T00:00:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith agent:claude-opus-4-7 ;
+    prov:wasAssociatedWith agent:human-author ;
+    prov:generated ent:script-build-reading-queue , ent:doc-reading-queue .
+
+ent:script-build-reading-queue  prov:wasGeneratedBy act:rev-reading-queue .
+ent:doc-reading-queue           prov:wasGeneratedBy act:rev-reading-queue .
+
+hc:reading-queue                a fair2r:HumanContribution ;
+    rdfs:label "Researcher request: a list of reading tasks for the researcher"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "content-prompt" ;
+    fair2r:contributionLeverage "high" ;
+    rdfs:comment "scripts/build_reading_queue.py reads doc/provenance.ttl plus paper/references.bib and emits doc/reading-queue.md, sorted by load-bearing weight (number of fair2r:Claim entries that depend on the source via prov:wasDerivedFrom). Wired into paper/Makefile (make provenance) and the build-paper CI; surfaced on the public site nav as 'Reading queue'. The queue regenerates on every build, so the human author always sees the current state of the verification ladder."@en ;
+    dcterms:created "2026-05-06"^^xsd:date ;
+    prov:influenced ent:script-build-reading-queue , ent:doc-reading-queue .
+
+#-------------------------------------------------------------------------
 # Back-filled MetaContribution instances (mirror of doc/user-observations-log.md)
 #-------------------------------------------------------------------------
 
