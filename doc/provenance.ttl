@@ -662,5 +662,27 @@ claim:dlr-design-alignment  a fair2r:Claim ;
     dcterms:created "2026-05-06"^^xsd:date .
 
 #-------------------------------------------------------------------------
+# Revision: GitHub Mermaid compatibility for provenance-graph.md
+#-------------------------------------------------------------------------
+
+ent:provenance-graph-md  a prov:Entity ;
+    rdfs:label "doc/provenance-graph.md (Mermaid mirror)"@en ;
+    dcterms:source <doc/provenance-graph.md> .
+
+act:rev-mermaid-fix  a prov:Activity ;
+    rdfs:label "Repair GitHub-Mermaid renderer incompatibilities and fix HTML-escaping in the site builder"@en ;
+    prov:startedAtTime "2026-05-06T00:00:00Z"^^xsd:dateTime ;
+    prov:endedAtTime   "2026-05-06T00:00:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith agent:claude-opus-4-7 ;
+    prov:wasAssociatedWith agent:human-author ;
+    prov:generated ent:provenance-graph-md ,
+                   ent:script-build-provenance-site .
+
+ent:provenance-graph-md           prov:wasRevisionOf       ent:provenance-graph-md ;
+                                  prov:wasGeneratedBy      act:rev-mermaid-fix .
+ent:script-build-provenance-site  prov:wasRevisionOf       ent:script-build-provenance-site ;
+                                  prov:wasGeneratedBy      act:rev-mermaid-fix .
+
+#-------------------------------------------------------------------------
 # End of seed graph. Append, do not rewrite.
 #-------------------------------------------------------------------------
