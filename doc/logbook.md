@@ -49,3 +49,22 @@ provenance-curator is named keystone; `fair-aligner` will surface
 desync as a `fail`.
 *Next:* When `agents/scientific-writer.md` produces its first
 section draft, exercise the rule end-to-end as the test case.
+
+## 2026-05-06 — Site builder, Pages workflow, paper-build CI
+*Author:* claude-opus-4-7 (under direction of repo owner)
+*Touched:* `site/static/style.css`, `site/index.md`,
+`scripts/build_provenance_site.py`, `scripts/requirements.txt`,
+`.github/workflows/pages.yml`, `.github/workflows/build-paper.yml`,
+`.gitignore`.
+*Decision / outcome:* Added a static-site generator that renders
+`doc/*.md`, `agents/*.md`, and `doc/provenance.ttl` (parsed via
+`rdflib`) into `_site/`, mirroring the layout of
+`noheton/Obscurity-Is-Dead`'s public site. Mermaid blocks render
+client-side via CDN. Added two GitHub Actions workflows: `pages.yml`
+builds and (on `main`) deploys via the official Pages actions;
+`build-paper.yml` compiles `paper/main.tex` and
+`paper/main-condensed.tex` with `xu-cheng/latex-action@v3` and
+uploads PDFs as artifacts. Local smoke test: 20 pages built clean
+from the current sources. `_site/` added to `.gitignore`.
+*Next:* Draft the paper using the methodology distilled from
+`Obscurity-Is-Dead`; trigger both workflows by pushing.

@@ -1,0 +1,51 @@
+name: Build paper
+
+on:
+  push:
+    branches: ["**"]
+    paths:
+      - "paper/**"
+      - ".github/workflows/build-paper.yml"
+  pull_request:
+    paths:
+      - "paper/**"
+      - ".github/workflows/build-paper.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Compile main.tex (long form)
+        uses: xu-cheng/latex-action@v3
+        with:
+          working_directory: paper
+          root_file: main.tex
+          latexmk_use_xelatex: false
+          latexmk_shell_escape: false
+          extra_system_packages: ""
+          args: -pdf -interaction=nonstopmode -halt-on-error -file-line-error
+
+      - name: Compile main-condensed.tex (venue form)
+        uses: xu-cheng/latex-action@v3
+        with:
+          working_directory: paper
+          root_file: main-condensed.tex
+          args: -pdf -interaction=nonstopmode -halt-on-error -file-line-error
+
+      - name: Upload PDFs
+        uses: actions/upload-artifact@v4
+        with:
+          name: paper-pdfs-${{ github.sha }}
+          path: |
+            paper/main.pdf
+            paper/main-condensed.pdf
+          if-no-files-found: error
+          retention-days: 30

@@ -1,0 +1,238 @@
+#!/usr/bin/env python3
+"""Build the F(AI^2)R static site to ``_site/``.
+
+Renders Markdown pages from ``doc/``, ``agents/``, and ``site/`` and a
+human-readable view of ``doc/provenance.ttl`` grouped by class.
+
+Usage:
+    python scripts/build_provenance_site.py
+
+Dependencies (see scripts/requirements.txt):
+    - markdown
+    - rdflib
+"""
+from __future__ import annotations
+
+import datetime as _dt
+import html
+import shutil
+import sys
+from pathlib import Path
+from typing import Iterable
+
+import markdown  # type: ignore[import-not-found]
+from rdflib import Graph, Namespace, RDF, RDFS  # type: ignore[import-not-found]
+from rdflib.term import URIRef  # type: ignore[import-not-found]
+
+ROOT = Path(__file__).resolve().parents[1]
+OUT = ROOT / "_site"
+TTL = ROOT / "doc" / "provenance.ttl"
+SITE_SRC = ROOT / "site"
+
+PROV = Namespace("http://www.w3.org/ns/prov#")
+DCT = Namespace("http://purl.org/dc/terms/")
+FAIR2R = Namespace("https://noheton.org/f-ai-r/ns#")
+FOAF = Namespace("http://xmlns.com/foaf/0.1/")
+
+# (slug, title, source markdown path)
+PAGES: list[tuple[str, str, Path]] = [
+    ("index",             "Home",                  SITE_SRC / "index.md"),
+    ("methodology",       "Methodology",           ROOT / "doc" / "methodology.md"),
+    ("fair",              "FAIR",                  ROOT / "doc" / "fair.md"),
+    ("collab",            "Human-AI collaboration", ROOT / "doc" / "human-ai-collaboration-process.md"),
+    ("research-protocol", "Research protocol",     ROOT / "doc" / "research-protocol.md"),
+    ("submission",        "Submission",            ROOT / "doc" / "submission-plan.md"),
+    ("logbook",           "Logbook",               ROOT / "doc" / "logbook.md"),
+    ("provenance-graph",  "Provenance topology",   ROOT / "doc" / "provenance-graph.md"),
+]
+
+# Order in which nav items appear, with their final slugs.
+NAV: list[tuple[str, str]] = [
+    ("index",             "Home"),
+    ("methodology",       "Methodology"),
+    ("fair",              "FAIR"),
+    ("collab",            "Collab"),
+    ("agents",            "Agents"),
+    ("logbook",           "Logbook"),
+    ("provenance",        "Provenance"),
+    ("provenance-graph",  "Topology"),
+    ("submission",        "Submission"),
+]
+
+MD_EXT = ["fenced_code", "tables", "toc", "sane_lists"]
+
+TEMPLATE = """<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{title} - F(AI^2)R</title>
+<link rel="stylesheet" href="static/style.css">
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({{ startOnLoad: true, theme: 'neutral' }});
+</script>
+</head>
+<body>
+<header>
+  <h1><a href="index.html">F(AI&sup2;)R</a></h1>
+  <p class="tagline">FAIR research with AI in the loop, twice.</p>
+  <nav>{nav}</nav>
+</header>
+<main>{body}</main>
+<footer>
+  <p>Built {built} from <a href="https://github.com/noheton/f-ai-r">noheton/f-ai-r</a>. Code: MIT. Prose: CC-BY-4.0.</p>
+</footer>
+</body>
+</html>
+"""
+
+
+def render_md(path: Path) -> str:
+    text = path.read_text(encoding="utf-8")
+    rendered = markdown.markdown(text, extensions=MD_EXT)
+    # Promote ```mermaid fenced code blocks to <div class="mermaid"> so the
+    # client-side library can render them.
+    rendered = rendered.replace(
+        '<pre><code class="language-mermaid">',
+        '<div class="mermaid">',
+    ).replace(
+        "</code></pre>",
+        "</div>",
+        rendered.count('<pre><code class="language-mermaid">'),
+    )
+    return rendered
+
+
+def nav_html(active: str) -> str:
+    parts: list[str] = []
+    for slug, title in NAV:
+        cls = ' class="active"' if slug == active else ""
+        parts.append(f'<a href="{slug}.html"{cls}>{title}</a>')
+    return " &middot; ".join(parts)
+
+
+def write_page(slug: str, title: str, body_html: str) -> None:
+    OUT.mkdir(parents=True, exist_ok=True)
+    out = OUT / f"{slug}.html"
+    out.write_text(
+        TEMPLATE.format(
+            title=html.escape(title),
+            body=body_html,
+            nav=nav_html(slug),
+            built=_dt.date.today().isoformat(),
+        ),
+        encoding="utf-8",
+    )
+
+
+def label_of(graph: Graph, subject: URIRef) -> str:
+    for o in graph.objects(subject, RDFS.label):
+        return str(o)
+    s = str(subject)
+    return s.rsplit("/", 1)[-1].split("#")[-1]
+
+
+def render_provenance(graph: Graph) -> str:
+    groups: list[tuple[str, list[URIRef]]] = [
+        ("Agents",                  [FAIR2R.AIAgent, FAIR2R.HumanResearcher]),
+        ("Activities",              [PROV.Activity, FAIR2R.AuthoringPass,
+                                     FAIR2R.AuditPass, FAIR2R.Build]),
+        ("Manuscripts and parts",   [FAIR2R.Manuscript, FAIR2R.Section, FAIR2R.Figure]),
+        ("Sources",                 [FAIR2R.Source]),
+        ("Prompts (plans)",         [FAIR2R.Prompt]),
+        ("Claims",                  [FAIR2R.Claim]),
+    ]
+
+    out: list[str] = []
+    out.append("<h2>Provenance graph</h2>")
+    out.append(
+        "<p class='callout'>Authoritative source: "
+        "<a href='https://github.com/noheton/f-ai-r/blob/main/doc/provenance.ttl'>"
+        "<code>doc/provenance.ttl</code></a>. This page is a rendered view; "
+        "see <a href='provenance-graph.html'>Topology</a> for the diagram.</p>"
+    )
+
+    seen: set[URIRef] = set()
+    for group_title, types in groups:
+        rows: list[tuple[str, str, str]] = []
+        for t in types:
+            for s in graph.subjects(RDF.type, t):
+                if not isinstance(s, URIRef):
+                    continue
+                if s in seen:
+                    continue
+                seen.add(s)
+                attrs: list[str] = []
+                for o in graph.objects(s, FAIR2R.verificationState):
+                    attrs.append(f"verification: <code>{html.escape(label_of(graph, o))}</code>")
+                for o in graph.objects(s, DCT.created):
+                    attrs.append(f"created: {html.escape(str(o))}")
+                for o in graph.objects(s, PROV.wasGeneratedBy):
+                    attrs.append(f"generated by: <code>{html.escape(label_of(graph, o))}</code>")
+                for o in graph.objects(s, PROV.wasAttributedTo):
+                    attrs.append(f"attributed to: <code>{html.escape(label_of(graph, o))}</code>")
+                for o in graph.objects(s, PROV.wasAssociatedWith):
+                    attrs.append(f"associated with: <code>{html.escape(label_of(graph, o))}</code>")
+                for o in graph.objects(s, FOAF.name):
+                    attrs.append(f"name: {html.escape(str(o))}")
+                rows.append((label_of(graph, s), str(s), "; ".join(attrs)))
+        if not rows:
+            continue
+        out.append(f"<h3>{html.escape(group_title)}</h3>")
+        out.append("<table><thead><tr><th>Label</th><th>IRI</th><th>Attributes</th></tr></thead><tbody>")
+        for lbl, iri, attrs in sorted(rows, key=lambda r: r[0].lower()):
+            out.append(
+                f"<tr><td>{html.escape(lbl)}</td>"
+                f"<td><code>{html.escape(iri)}</code></td>"
+                f"<td>{attrs}</td></tr>"
+            )
+        out.append("</tbody></table>")
+
+    return "\n".join(out)
+
+
+def render_agents() -> str:
+    agents_dir = ROOT / "agents"
+    readme = render_md(agents_dir / "README.md")
+    files = sorted(p for p in agents_dir.glob("*.md") if p.name != "README.md")
+    links = "<h3>Per-role prompts</h3><ul>"
+    for p in files:
+        links += f'<li><a href="agent-{p.stem}.html"><code>{p.stem}</code></a></li>'
+    links += "</ul>"
+    return readme + links
+
+
+def main(argv: Iterable[str]) -> int:
+    if OUT.exists():
+        shutil.rmtree(OUT)
+    OUT.mkdir(parents=True, exist_ok=True)
+
+    # Static assets
+    static_src = SITE_SRC / "static"
+    if static_src.is_dir():
+        shutil.copytree(static_src, OUT / "static", dirs_exist_ok=True)
+
+    # Markdown pages
+    for slug, title, src in PAGES:
+        write_page(slug, title, render_md(src))
+
+    # Agents
+    write_page("agents", "Agents", render_agents())
+    for p in sorted((ROOT / "agents").glob("*.md")):
+        if p.name == "README.md":
+            continue
+        write_page(f"agent-{p.stem}", f"Agent: {p.stem}", render_md(p))
+
+    # Provenance
+    g = Graph()
+    g.parse(TTL, format="turtle")
+    write_page("provenance", "Provenance", render_provenance(g))
+
+    pages = sorted(OUT.glob("*.html"))
+    print(f"Built {len(pages)} pages to {OUT.relative_to(ROOT)}/")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main(sys.argv[1:]))

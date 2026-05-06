@@ -319,5 +319,39 @@ claim:primary-artifact-invariant  a fair2r:Claim ;
     dcterms:created "2026-05-06"^^xsd:date .
 
 #-------------------------------------------------------------------------
+# Revision: site builder + Pages workflow + paper-build CI
+#-------------------------------------------------------------------------
+
+ent:script-build-provenance-site  a prov:Entity ;
+    rdfs:label "scripts/build_provenance_site.py"@en ;
+    dcterms:source <scripts/build_provenance_site.py> .
+
+ent:workflow-pages   a prov:Entity ;
+    rdfs:label ".github/workflows/pages.yml"@en ;
+    dcterms:source <.github/workflows/pages.yml> .
+
+ent:workflow-build-paper  a prov:Entity ;
+    rdfs:label ".github/workflows/build-paper.yml"@en ;
+    dcterms:source <.github/workflows/build-paper.yml> .
+
+act:rev-site-and-ci  a prov:Activity ;
+    rdfs:label "Add static-site builder, Pages workflow, paper-build CI"@en ;
+    prov:startedAtTime "2026-05-06T00:00:00Z"^^xsd:dateTime ;
+    prov:endedAtTime   "2026-05-06T00:00:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith agent:claude-opus-4-7 ;
+    prov:wasAssociatedWith agent:human-author ;
+    prov:generated ent:script-build-provenance-site ,
+                   ent:workflow-pages ,
+                   ent:workflow-build-paper .
+
+ent:script-build-provenance-site  prov:wasGeneratedBy act:rev-site-and-ci ;
+                                  prov:used ent:manuscript ,
+                                            <doc/provenance.ttl> .
+ent:workflow-pages                prov:wasGeneratedBy act:rev-site-and-ci .
+ent:workflow-build-paper          prov:wasGeneratedBy act:rev-site-and-ci ;
+                                  prov:used ent:manuscript ,
+                                            ent:manuscript-condensed .
+
+#-------------------------------------------------------------------------
 # End of seed graph. Append, do not rewrite.
 #-------------------------------------------------------------------------
