@@ -146,19 +146,30 @@ TEMPLATE = """<!doctype html>
 """
 
 
+_MERMAID_FENCE = __import__("re").compile(
+    r"^```mermaid\s*\n(.*?)^```\s*$", __import__("re").MULTILINE | __import__("re").DOTALL
+)
+
+
 def render_md(path: Path) -> str:
     text = path.read_text(encoding="utf-8")
+    # Pull Mermaid fenced blocks out before markdown runs so that the
+    # markdown library does not HTML-escape their contents (which would
+    # break client-side rendering: Mermaid needs raw " and <br/>).
+    blocks: list[str] = []
+
+    def _stash(match):
+        blocks.append(match.group(1))
+        return f"\n\nMERMAIDPLACEHOLDER{len(blocks) - 1}END\n\n"
+
+    text = _MERMAID_FENCE.sub(_stash, text)
     rendered = markdown.markdown(text, extensions=MD_EXT)
-    # Promote ```mermaid fenced code blocks to <div class="mermaid"> so the
-    # client-side library can render them.
-    rendered = rendered.replace(
-        '<pre><code class="language-mermaid">',
-        '<div class="mermaid">',
-    ).replace(
-        "</code></pre>",
-        "</div>",
-        rendered.count('<pre><code class="language-mermaid">'),
-    )
+    # Re-inject the original (un-escaped) Mermaid source.
+    for i, src in enumerate(blocks):
+        rendered = rendered.replace(
+            f"<p>MERMAIDPLACEHOLDER{i}END</p>",
+            f'<div class="mermaid">\n{src}</div>',
+        )
     return rendered
 
 

@@ -168,3 +168,33 @@ deck is built.
 within the 10-page body budget; merge PR #1; mint Zenodo DOI; replace
 `TODO-VERIFY` references with `lit-read` once the human author has
 read them.
+
+## 2026-05-06 — Mermaid graph fixed for the GitHub renderer
+*Author:* claude-opus-4-7 (under direction of repo owner)
+*Touched:* `doc/provenance-graph.md`,
+`scripts/build_provenance_site.py`.
+*Decision / outcome:* Repaired three GitHub-Mermaid-renderer
+incompatibilities in `doc/provenance-graph.md`: (a) the
+`subgraph Plans (prompts)` title with bare parentheses was rejected
+by the parser and is now `subgraph plans["Plans (prompts)"]`; (b)
+node labels containing colons (e.g. `[fair2r:HumanResearcher]`) need
+to be wrapped in double quotes (e.g.
+`["fair2r:HumanResearcher"]`); (c) edge labels containing colons
+(e.g. `-- prov:wasGeneratedBy -->`) were rewritten to the pipe form
+(e.g. `-->|"prov:wasGeneratedBy"|`). These are the same constraints
+documented at
+<https://docs.github.com/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams#creating-mermaid-diagrams>.
+
+The site builder
+(`scripts/build_provenance_site.py`) had a related defect that
+appeared only after the diagram was quoted: the `markdown` library
+was HTML-escaping the contents of fenced ` ```mermaid ` blocks
+(turning `"` into `&quot;` and `<br/>` into `&lt;br/&gt;`), which
+would have broken client-side Mermaid rendering on the public site.
+The fix extracts Mermaid blocks before `markdown` runs, replaces
+them with sentinel tokens, and re-injects the original (un-escaped)
+source after rendering inside `<div class="mermaid">` wrappers. This
+is verified locally: `_site/provenance-graph.html` now contains raw
+`"` and `<br/>` inside the Mermaid block, which Mermaid's CDN
+loader can parse.
+*Next:* Visual confirmation on the deployed Pages site after merge.
