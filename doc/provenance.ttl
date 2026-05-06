@@ -684,5 +684,23 @@ ent:script-build-provenance-site  prov:wasRevisionOf       ent:script-build-prov
                                   prov:wasGeneratedBy      act:rev-mermaid-fix .
 
 #-------------------------------------------------------------------------
+# Revision: promote the GitHub Pages URL in the README
+#-------------------------------------------------------------------------
+
+ent:readme  a prov:Entity ;
+    rdfs:label "README.md"@en ;
+    dcterms:source <README.md> .
+
+act:rev-readme-pages-url  a prov:Activity ;
+    rdfs:label "Promote the GitHub Pages URL to a top-of-README callout"@en ;
+    prov:startedAtTime "2026-05-06T00:00:00Z"^^xsd:dateTime ;
+    prov:endedAtTime   "2026-05-06T00:00:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith agent:claude-opus-4-7 ;
+    prov:wasAssociatedWith agent:human-author ;
+    prov:generated ent:readme .
+
+ent:readme  prov:wasGeneratedBy act:rev-readme-pages-url .
+
+#-------------------------------------------------------------------------
 # End of seed graph. Append, do not rewrite.
 #-------------------------------------------------------------------------
