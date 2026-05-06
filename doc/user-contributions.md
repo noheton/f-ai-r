@@ -279,6 +279,29 @@ primary-artefact consistency invariant.
 `agents/orchestrator.md`.
 *Provenance IRI:* `fair2r:hc-contribution-rule`
 
+### 2026-05-06 --- Forward-looking pair: bioinformatics precedent + research-infrastructure vision
+*Type:* `content-prompt`
+*Leverage:* high
+*Triggered:* New §3.6 *Looking forward: provenance graphs as research
+infrastructure* in `paper/sections/pattern.tex`. The researcher
+posed two paired claims: (a) "future research success might depend a
+lot more on provenance models for hypothesis development, graph
+interconnectivity (Helmholtz graph supercharged) and clever
+experimental validation", and (b) "bioinformatics was driven there
+earlier by the at-the-time obscene amounts of data leading to
+semantic tagging becoming the norm to identify genes". Both
+graduated to paper text. The bioinformatics-precedent argument is
+anchored on Ashburner et al. 2000 (Gene Ontology, Nature Genetics);
+the Helmholtz cross-centre graph reuses `curdt2025hmc`. The
+marketing-verb "supercharged" was rephrased to "fully-instrumented"
+to fit the DLR voice rules. Two new fair2r:Claim entries
+(`bioinformatics-precedent`, `future-research-infrastructure`),
+both at `human-confirmed`.
+*Artefacts touched:* `paper/sections/pattern.tex`,
+`paper/references.bib`, `doc/provenance.ttl`,
+`doc/user-contributions.md`.
+*Provenance IRI:* `fair2r:hc-research-infrastructure`
+
 ### 2026-05-06 --- "ontologies might actually help" --- domain ontologies as schema extension
 *Type:* `content-prompt`
 *Leverage:* high

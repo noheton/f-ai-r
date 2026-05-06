@@ -700,3 +700,53 @@ the extent possible without full-text reading.
 of the new §3.5 and the additional citations; advance the 24
 `lit-retrieved` entries the human author has time to read; fix the
 2 graph-cleanliness defects (sources without rungs).
+
+## 2026-05-06 — §3.6 forward-looking subsection: bioinformatics precedent + research-infrastructure vision
+*Author:* claude-opus-4-7 (under direction of repo owner)
+*Touched:* `paper/sections/pattern.tex` (new §3.6 *Looking forward:
+provenance graphs as research infrastructure*),
+`paper/references.bib` (new entry `ashburner2000go`),
+`doc/provenance.ttl`, `doc/user-contributions.md`,
+`doc/logbook.md`.
+*Decision / outcome:* Researcher proposed two paired forward-looking
+claims:
+\begin{quote}
+\emph{Claim 1.} Future research success might depend a lot more on
+provenance models for hypothesis development, graph interconnectivity
+(Helmholtz graph supercharged) and clever experimental validation.\\
+\emph{Claim 2.} Bioinformatics was driven there earlier by the
+at-the-time "obscene amounts of data" leading to semantic tagging
+becoming the norm to identify genes.
+\end{quote}
+Both graduated to paper text as a single new subsection §3.6 of
+`pattern.tex`, immediately following §3.5 *Extensibility through
+domain ontologies*. The bioinformatics precedent is anchored on
+Ashburner et al. 2000 (the canonical Gene Ontology paper, *Nature
+Genetics* 25:25--29, DOI 10.1038/75556) --- a high-citation,
+high-recognition reference that establishes the
+semantic-tagging-as-norm-under-data-pressure case in one move. The
+Helmholtz cross-centre graph reuses the existing `curdt2025hmc`
+citation rather than adding a fresh entry. The
+marketing-register verb "supercharged" was rephrased to
+"fully-instrumented" to fit the DLR voice rules in
+`agents/scientific-writer.md`.
+Two new `fair2r:Claim` entries
+(`claim:bioinformatics-precedent`,
+`claim:future-research-infrastructure`), both at
+`human-confirmed` because both rest on researcher-supplied
+abstraction rather than on AI-confirmed reading of the underlying
+sources. New `act:rev-research-infrastructure` activity; new
+`hc:research-infrastructure` HumanContribution with the verbatim
+researcher quote in the `rdfs:comment`. New
+`ent:section-pattern-research-infrastructure` `fair2r:Section`
+entity wired with `prov:wasGeneratedBy`.
+The §3 (Pattern) section is now a full position-paper spine: §3.1
+axes, §3.2 pipeline, §3.3 verification ladder, §3.4 handback +
+mirror disciplines, §3.5 extensibility through domain ontologies,
+§3.6 looking forward.
+*Next:* Trigger the build-paper workflow; verify §3.6 reads cleanly
+in the compiled PDF; promote the bioinformatics-precedent and
+future-research-infrastructure claims into the Conclusion's
+call-to-action if the researcher endorses; advance
+`ashburner2000go` and `curdt2025hmc` to `lit-read` once the human
+author has read them in full.

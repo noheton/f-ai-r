@@ -1401,6 +1401,55 @@ hc:reading-queue                a fair2r:HumanContribution ;
     prov:influenced ent:script-build-reading-queue , ent:doc-reading-queue .
 
 #-------------------------------------------------------------------------
+# §3.6 Looking forward: provenance graphs as research infrastructure
+#-------------------------------------------------------------------------
+
+src:ashburner2000go            a fair2r:Source ;
+    dcterms:title "Gene Ontology: tool for the unification of biology"@en ;
+    dcterms:identifier "doi:10.1038/75556" ;
+    fair2r:verificationState verif:lit-retrieved .
+
+ent:section-pattern-research-infrastructure  a fair2r:Section ;
+    rdfs:label "Looking forward: provenance graphs as research infrastructure"@en ;
+    prov:hadPrimarySource ent:manuscript .
+
+claim:bioinformatics-precedent  a fair2r:Claim ;
+    rdfs:label "Bioinformatics standardised semantic tagging (Gene Ontology and successors) under data-volume pressure; the ontology was not a research output but a precondition for research that scaled, and that investment is what made the next decade of bioinformatics possible."@en ;
+    prov:wasAttributedTo agent:human-author ;
+    prov:wasDerivedFrom  src:ashburner2000go ;
+    fair2r:verificationState verif:human-confirmed ;
+    dcterms:created "2026-05-06"^^xsd:date .
+
+claim:future-research-infrastructure  a fair2r:Claim ;
+    rdfs:label "Future research success may depend less on the solitary craft of a single manuscript and more on (i) provenance models that turn published claims into machine-readable hypotheses; (ii) graph interconnectivity across institutional knowledge graphs (the Helmholtz cross-centre graph as the proximate example); (iii) clever experimental validation that uses the graph to identify the next testable deviation from the published consensus."@en ;
+    prov:wasAttributedTo agent:human-author ;
+    prov:wasDerivedFrom  src:ashburner2000go , src:curdt2025hmc ;
+    fair2r:verificationState verif:human-confirmed ;
+    dcterms:created "2026-05-06"^^xsd:date .
+
+act:rev-research-infrastructure  a prov:Activity ;
+    rdfs:label "Add §3.6 'Looking forward: provenance graphs as research infrastructure' to pattern.tex"@en ;
+    prov:startedAtTime "2026-05-06T00:00:00Z"^^xsd:dateTime ;
+    prov:endedAtTime   "2026-05-06T00:00:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith agent:claude-opus-4-7 ;
+    prov:wasAssociatedWith agent:human-author ;
+    prov:used src:ashburner2000go , src:curdt2025hmc .
+
+ent:section-pattern-research-infrastructure  prov:wasGeneratedBy act:rev-research-infrastructure ;
+                                             prov:wasAttributedTo agent:scientific-writer , agent:human-author .
+
+hc:research-infrastructure      a fair2r:HumanContribution ;
+    rdfs:label "Researcher claims: bioinformatics precedent + future-research-infrastructure vision"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "content-prompt" ;
+    fair2r:contributionLeverage "high" ;
+    rdfs:comment "Researcher proposed two paired forward-looking claims during session: (a) 'future research success might depend a lot more on provenance models for hypothesis development, graph interconnectivity (Helmholtz graph supercharged) and clever experimental validation', and (b) 'bioinformatics was driven there earlier by the at-the-time obscene amounts of data leading to semantic tagging becoming the norm to identify genes'. Both graduated to paper text as a new subsection §3.6 of pattern.tex. The bioinformatics-precedent argument is anchored on Ashburner et al. 2000 (Gene Ontology); the Helmholtz cross-centre graph reuses curdt2025hmc. The marketing-verb 'supercharged' was rephrased to 'fully-instrumented' to fit the DLR voice."@en ;
+    dcterms:created "2026-05-06"^^xsd:date ;
+    prov:influenced ent:section-pattern-research-infrastructure ,
+                    claim:bioinformatics-precedent ,
+                    claim:future-research-infrastructure .
+
+#-------------------------------------------------------------------------
 # Back-filled MetaContribution instances (mirror of doc/user-observations-log.md)
 #-------------------------------------------------------------------------
 
