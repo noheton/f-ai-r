@@ -279,6 +279,28 @@ primary-artefact consistency invariant.
 `agents/orchestrator.md`.
 *Provenance IRI:* `fair2r:hc-contribution-rule`
 
+### 2026-05-06 --- "yes, also perform another pass on the context data"
+*Type:* `content-prompt`
+*Leverage:* high
+*Triggered:* The accelerator-or-blender observation graduated to
+paper text in `paper/sections/authors-note.tex` as the *coupling rule*
+extending *What surprised me about the cooperation*; corresponding
+`fair2r:MetaContribution` `hc:obs-accelerator-or-blender` flipped from
+`promotedToPaper="pending"` to `"yes"`. A third-pass source-research
+subagent was dispatched in parallel to (a) verify the existing bib
+entries that remain at `lit-retrieved`, (b) build new sources for the
+manifold-vs-extrapolation framing, distributed-cognition philosophical
+grounding, prompt-engineering literature, and HMC / NFDI4Ing position
+papers, and (c) run a context-data pass: orphan
+`fair2r:HumanContribution` checks, dangling-cite check across
+`paper/sections/*.tex`, section-graph mismatch checks, and
+unactioned-`Next:` todos in `doc/logbook.md`.
+*Artefacts touched:* `paper/sections/authors-note.tex`,
+`doc/provenance.ttl`, `doc/user-contributions.md`,
+`paper/references.bib` (via the dispatched subagent),
+`doc/sources.md` (via the dispatched subagent).
+*Provenance IRI:* `fair2r:hc-third-pass-research`
+
 ---
 
 ## Aggregate count (back-filled at 2026-05-06)

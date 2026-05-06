@@ -1131,6 +1131,14 @@ hc:contribution-rule          a fair2r:HumanContribution ;
     fair2r:contributionLeverage "high" ;
     dcterms:created "2026-05-06"^^xsd:date .
 
+hc:third-pass-research        a fair2r:HumanContribution ;
+    rdfs:label "Third-pass source research + Author's Note coupling-rule graduation"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "content-prompt" ;
+    fair2r:contributionLeverage "high" ;
+    dcterms:created "2026-05-06"^^xsd:date ;
+    prov:influenced ent:manuscript .
+
 #-------------------------------------------------------------------------
 # Back-filled MetaContribution instances (mirror of doc/user-observations-log.md)
 #-------------------------------------------------------------------------
@@ -1204,7 +1212,8 @@ hc:obs-accelerator-or-blender  a fair2r:MetaContribution ;
     fair2r:contributedBy agent:human-author ;
     fair2r:contributionType "observation" ;
     fair2r:contributionLeverage "high" ;
-    fair2r:promotedToPaper "pending" ;
+    fair2r:promotedToPaper "yes" ;
+    rdfs:comment "Graduated to paper text 2026-05-06 as the second-order finding in paper/sections/authors-note.tex, *What surprised me about the cooperation*. The coupling-rule formulation (accelerator on the prose-craft side; cultural blender if it crosses into the abstracting layer) supplies the reason the human-deciding / model-drafting partition matters."@en ;
     dcterms:created "2026-05-06"^^xsd:date .
 
 claim:contribution-tracking-rule  a fair2r:Claim ;

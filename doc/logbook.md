@@ -551,3 +551,34 @@ been restored in the same commit.
 *Next:* On researcher endorsement, extend the Author's Note's
 *What surprised me about the cooperation* paragraph with the
 coupling-rule sentence.
+
+## 2026-05-06 — Author's Note coupling-rule graduation; third-pass source-research dispatched
+*Author:* claude-opus-4-7 (under direction of repo owner)
+*Touched:* `paper/sections/authors-note.tex` (coupling-rule paragraph
+appended to *What surprised me about the cooperation*),
+`doc/provenance.ttl` (`hc:obs-accelerator-or-blender` flipped from
+`promotedToPaper="pending"` to `"yes"` with explanatory `rdfs:comment`;
+new `hc:third-pass-research` HumanContribution),
+`doc/user-contributions.md` (new entry).
+*Decision / outcome:* The researcher endorsed graduation of the
+accelerator-or-blender observation. The Author's Note's *What
+surprised me about the cooperation* paragraph now contains both the
+question and its answer, plus a second-order finding stated as a
+\emph{coupling rule}: the cooperation works as an accelerator when
+the model stays on the prose-craft side of the partition; it
+collapses toward a cultural blender when allowed across into the
+abstracting layer. The honest diagnostic is recorded inline:
+\emph{ask whether the abstraction would have been thinkable without
+the model}.
+A third-pass source-research subagent was dispatched in parallel to
+build further sources (manifold / extrapolation; distributed
+cognition / extended mind; prompt-engineering literature; HMC /
+NFDI4Ing position papers; verification of inference-cost references
+that remain at `lit-retrieved`) and to run a context-data pass
+(orphan `fair2r:HumanContribution` checks; dangling-cite check
+across `paper/sections/*.tex`; section-graph mismatch checks;
+unactioned-`Next:` todos). Its results will land in a follow-up
+commit.
+*Next:* Fold the subagent's bibliography additions and the context-
+data findings; commit + PR + merge; trigger the build-paper workflow
+on `main` to refresh the `latest-draft` PDF.
