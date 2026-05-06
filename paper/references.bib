@@ -166,3 +166,123 @@
   url          = {https://github.com/noheton/Obscurity-Is-Dead},
   note         = {Methodological ancestor of the present paper. Domain content of the source repository is deliberately abstracted away here.}
 }
+
+% --- Second-pass additions: sustainability, model collapse, legal context,
+% editorial position, equity. All identifier-verified by source-analyzer
+% (lit-retrieved); none yet read by the human author.
+
+@inproceedings{luccioni2024power,
+  title     = {Power Hungry Processing: Watts Driving the Cost of {AI} Deployment?},
+  author    = {Luccioni, Alexandra Sasha and Jernite, Yacine and Strubell, Emma},
+  booktitle = {Proceedings of the 2024 ACM Conference on Fairness, Accountability, and Transparency (FAccT)},
+  year      = {2024},
+  doi       = {10.1145/3630106.3658542},
+  eprint    = {2311.16863},
+  archivePrefix = {arXiv},
+  note      = {Inference-side energy cost of multi-purpose generative models. Cited as base-rate anchor for sustainability discussion (TODO-VERIFY at lit-read).}
+}
+
+@article{patterson2021carbon,
+  title   = {Carbon Emissions and Large Neural Network Training},
+  author  = {Patterson, David and Gonzalez, Joseph and Le, Quoc and Liang, Chen and Munguia, Lluis-Miquel and Rothchild, Daniel and So, David and Texier, Maud and Dean, Jeff},
+  year    = {2021},
+  journal = {arXiv preprint},
+  eprint  = {2104.10350},
+  archivePrefix = {arXiv},
+  note    = {Training-time carbon footprint of large language models. Cited as base-rate anchor for sustainability (TODO-VERIFY at lit-read).}
+}
+
+@article{li2023thirsty,
+  title   = {Making {AI} Less ``Thirsty'': Uncovering and Addressing the Secret Water Footprint of {AI} Models},
+  author  = {Li, Pengfei and Yang, Jianyi and Islam, Mohammad A. and Ren, Shaolei},
+  year    = {2023},
+  journal = {arXiv preprint},
+  eprint  = {2304.03271},
+  archivePrefix = {arXiv},
+  doi     = {10.1145/3724499},
+  note    = {Water footprint of frontier-model training and inference. Cited alongside luccioni2024power for the sustainability paragraph (TODO-VERIFY at lit-read).}
+}
+
+@inproceedings{strubell2019energy,
+  title     = {Energy and Policy Considerations for Deep Learning in {NLP}},
+  author    = {Strubell, Emma and Ganesh, Ananya and McCallum, Andrew},
+  booktitle = {Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics (ACL)},
+  pages     = {3645--3650},
+  year      = {2019},
+  doi       = {10.18653/v1/P19-1355},
+  eprint    = {1906.02243},
+  archivePrefix = {arXiv},
+  note      = {Foundational study on training-side energy cost in NLP. Background citation for sustainability paragraph (TODO-VERIFY at lit-read).}
+}
+
+@inproceedings{birhane2022values,
+  title     = {The Values Encoded in Machine Learning Research},
+  author    = {Birhane, Abeba and Kalluri, Pratyusha and Card, Dallas and Agnew, William and Dotan, Ravit and Bao, Michelle},
+  booktitle = {Proceedings of the 2022 ACM Conference on Fairness, Accountability, and Transparency (FAccT)},
+  year      = {2022},
+  doi       = {10.1145/3531146.3533083},
+  eprint    = {2106.15590},
+  archivePrefix = {arXiv},
+  note      = {Audit of values in 100 highly cited ML papers; ties to industry funding. Cited in sustainability for the equity-of-access claim (TODO-VERIFY at lit-read).}
+}
+
+@article{shumailov2024collapse,
+  title   = {{AI} models collapse when trained on recursively generated data},
+  author  = {Shumailov, Ilia and Shumaylov, Zakhar and Zhao, Yiren and Papernot, Nicolas and Anderson, Ross and Gal, Yarin},
+  journal = {Nature},
+  volume  = {631},
+  pages   = {755--759},
+  year    = {2024},
+  doi     = {10.1038/s41586-024-07566-y},
+  note    = {Demonstrates irreversible degradation when generative models are trained on their own output. Cited in failure-modes for the model-collapse row (TODO-VERIFY at lit-read).}
+}
+
+@article{alemohammad2023mad,
+  title   = {Self-Consuming Generative Models Go {MAD}},
+  author  = {Alemohammad, Sina and Casco-Rodriguez, Josue and Luzi, Lorenzo and Humayun, Ahmed Imtiaz and Babaei, Hossein and LeJeune, Daniel and Siahkoohi, Ali and Baraniuk, Richard G.},
+  year    = {2023},
+  journal = {arXiv preprint},
+  eprint  = {2307.01850},
+  archivePrefix = {arXiv},
+  note    = {Coins ``Model Autophagy Disorder'' (MAD); precursor to shumailov2024collapse. Cited in failure-modes (TODO-VERIFY at lit-read).}
+}
+
+@article{chen2023drift,
+  title   = {How Is {ChatGPT}'s Behavior Changing over Time?},
+  author  = {Chen, Lingjiao and Zaharia, Matei and Zou, James},
+  year    = {2023},
+  journal = {arXiv preprint},
+  eprint  = {2307.09009},
+  archivePrefix = {arXiv},
+  note    = {Empirical demonstration that the same hosted LLM endpoint produces measurably different outputs across versions. Cited for the frontier-model-dependence paragraph in sustainability (TODO-VERIFY at lit-read).}
+}
+
+@article{thorp2023chatgpt,
+  title   = {{ChatGPT} is fun, but not an author},
+  author  = {Thorp, H. Holden},
+  journal = {Science},
+  volume  = {379},
+  number  = {6630},
+  pages   = {313},
+  year    = {2023},
+  doi     = {10.1126/science.adg7879},
+  note    = {Editor-in-Chief of Science declares AI cannot be an author and AI-generated content without disclosure is plagiarism. Cited in intro alongside else2023chatgpt as a major-venue editorial position (TODO-VERIFY at lit-read).}
+}
+
+@misc{usco2023ai,
+  title        = {Copyright Registration Guidance: Works Containing Material Generated by Artificial Intelligence},
+  author       = {{U.S. Copyright Office}},
+  year         = {2023},
+  howpublished = {88 Fed. Reg. 16190 (16 March 2023)},
+  url          = {https://www.federalregister.gov/documents/2023/03/16/2023-05321/copyright-registration-guidance-works-containing-material-generated-by-artificial-intelligence},
+  note         = {Restates that U.S. copyright requires human authorship; AI-generated material must be disclosed at registration. Cited in background.tex for the U.S. leg of the legal-honesty claim.}
+}
+
+@misc{urhg2,
+  title        = {Gesetz \"uber Urheberrecht und verwandte Schutzrechte (Urheberrechtsgesetz, UrhG), \S\,2 Gesch\"utzte Werke},
+  author       = {{Bundesministerium der Justiz}},
+  year         = {1965},
+  howpublished = {Bundesgesetzblatt (last amended 2021)},
+  url          = {https://www.gesetze-im-internet.de/urhg/__2.html},
+  note         = {Statutory definition of protected works in German copyright; requires ``pers\"onliche geistige Sch\"opfung'' (personal intellectual creation by a human). Cited in background.tex for the German leg of the legal-honesty claim.}
+}

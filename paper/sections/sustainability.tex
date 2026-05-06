@@ -11,7 +11,9 @@ agent, by a human, sometimes by a second agent during readability
 review, and again by the FAIR aligner. A heavily-revised paper can
 drive dozens of model invocations per claim. The energy and water
 footprint of frontier-model inference is non-trivial and is paid by
-someone, somewhere, regardless of who pays for the API call. The
+someone, somewhere, regardless of who pays for the API
+call~\cite{strubell2019energy,patterson2021carbon,luccioni2024power,li2023thirsty}\todo[inline]{verify}.
+The
 seventh integrated practice (\S\ref{sec:eight}, item~7) is silent on
 this; we add a request here that disclosure under that practice
 \emph{include the order-of-magnitude inference budget consumed by the
@@ -23,7 +25,7 @@ The pattern's effective behaviour depends on the capability of the
 underlying model. As frontier models change --- through vendor
 turnover, version deprecation, capability shifts, training-data
 updates, or refusal-policy changes --- the pattern's outputs will
-shift with them. The transcripts of Practice~1 and the
+shift with them~\cite{chen2023drift}\todo[inline]{verify}. The transcripts of Practice~1 and the
 tool-and-model version manifest are partial mitigation: a future
 researcher can at least know which model produced which sentence,
 even if they can no longer invoke it. The receipts are preserved;
@@ -39,7 +41,8 @@ pattern at the same effective rung; the verification ladder requires
 that an AI agent at \textsc{ai-confirmed} actually understands the
 source it has read, and the floor for ``understands'' is set by the
 state of the art. F(AI)\textsuperscript{2}R \emph{describes} the
-work; it does not \emph{equalise} access to it. The pattern is
+work; it does not \emph{equalise} access to
+it~\cite{bender2021stochastic,birhane2022values}\todo[inline]{verify}. The pattern is
 therefore not a neutral standard. We name this honestly and offer
 two partial mitigations: (i) smaller-model fallbacks for routine
 audit passes (layout, hedging-density, list-of-lists detection) that

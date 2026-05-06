@@ -57,17 +57,41 @@ The tool catalogue, in priority order:
    reviewed citation. Use the structured filters (`year_min`,
    `exclude_preprints`, `study_types`, `medical_mode`) only when the
    topic requires them.
-2. **Semantic Scholar / OpenAlex / arXiv direct search** — fallbacks
+2. **Direct scientific repositories** — first-party records, in
+   approximate order of openness:
+   - **arXiv** (<https://arxiv.org/>) — preprints, fully open. Verify
+     the arXiv id, the version (`vN`), and the abstract page text.
+   - **OpenAlex** (<https://api.openalex.org/>) — open metadata across
+     all disciplines; useful for cross-checking authors and DOIs.
+   - **Crossref** (<https://api.crossref.org/works>) — DOI metadata
+     resolution; canonical for journal records.
+   - **PubMed / EuropePMC** — biomedical, open metadata; full text
+     where the article is OA.
+   - **IEEE Xplore** (<https://ieeexplore.ieee.org/>) — engineering
+     and computing, mostly paywalled; abstracts and bibliographic
+     records are open.
+   - **Springer Link** (<https://link.springer.com/>) — broad
+     coverage, mostly paywalled; abstracts and tables of contents
+     are open.
+   - **ACM Digital Library** (<https://dl.acm.org/>) — computing
+     proceedings; abstracts open, full text often paywalled.
+   - **ScienceDirect / Elsevier** — paywalled; record-level metadata
+     is reachable via Crossref.
+   - **W3C / RDA / NIST / ISO** record pages for standards-track
+     references.
+3. **Semantic Scholar / OpenAlex / arXiv direct search** — fallbacks
    when Consensus does not return enough results, when a specific
    bibliographic record needs cross-checking, or when the discipline
    is poorly covered by Consensus's index.
-3. **Web search (`WebSearch`, `web_search_exa`)** — for grey-literature
+4. **Google Scholar** — for orientation and citation-graph traversal,
+   not as the primary record (its identifiers are not always stable).
+5. **Web search (`WebSearch`, `web_search_exa`)** — for grey-literature
    sources (editorials, policy pages, institutional documents,
    official venue policies) that do not exist in peer-reviewed
    indexes. Use it for ICMJE / ACL / NeurIPS policy pages, the W3C
    recommendation surface, RDA recommendations, USCO / UrhG legal
    documents, and the like.
-4. **`WebFetch`** — only after a candidate URL has been identified by
+6. **`WebFetch`** — only after a candidate URL has been identified by
    one of the above. Use it to read the actual page and extract the
    claim and the quoted snippet.
 
@@ -82,3 +106,29 @@ requires a human reader.
 **When the tool requires a usage / sign-up message** in its output
 contract, include that message verbatim in your final report --- the
 tool's output is the audit record.
+
+## Paywall escalation (binding)
+
+When a candidate source is necessary for a load-bearing claim but
+the full text is **paywalled and the abstract alone is insufficient**
+(e.g. the claim depends on a figure, a numeric result, a
+methodological detail, or wording that does not appear in the
+abstract), do **not** silently downgrade the rung or skip the source.
+Instead:
+
+1. Mark the entry in `doc/sources.md` as
+   `lit-retrieved (paywalled; institutional access requested)`.
+2. **Append a structured request** to
+   [`doc/sources-needing-institutional-access.md`](../doc/sources-needing-institutional-access.md)
+   per the schema documented at the top of that file. This list is
+   the explicit channel through which the human author (with DLR
+   institutional access via SciHub-equivalent legal channels:
+   ZB MED, TIB, Helmholtz e-journals) can supply the missing PDF.
+3. Surface the entry in the audit report you return to the
+   orchestrator. The Aligner treats unresolved paywall requests
+   older than the configured SLA as a soft `warn`.
+
+A paper that has been requested but not yet supplied **cannot leave
+`lit-retrieved`**, regardless of how confident the abstract makes
+the agent. The verification ladder does not care about confidence;
+it cares about whether the source itself has been read.

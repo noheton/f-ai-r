@@ -1,7 +1,36 @@
 # Sources
 
 Index of sources cited or vendored for the F(AI)²R paper. Maintained by
-`agents/source-analyzer.md`. Last updated 2026-05-06.
+`agents/source-analyzer.md`. Last updated 2026-05-06 (second pass).
+
+## Second-pass log (2026-05-06)
+
+The second pass focused on completion rather than re-verification:
+identifier-confirmation of the six lit-retrieved entries, and discovery
+of canonical references for the previously-uncited claims in
+`sustainability.tex`, `intro.tex`, `failure-modes.tex`, and
+`background.tex`. New entries (all `lit-retrieved`) added to
+`references.bib`:
+
+- `luccioni2024power` — inference-side energy cost (FAccT 2024).
+- `patterson2021carbon` — training-time carbon footprint (arXiv 2104.10350).
+- `li2023thirsty` — water footprint of AI (arXiv 2304.03271).
+- `strubell2019energy` — early NLP-energy analysis (ACL 2019).
+- `birhane2022values` — equity / industry capture in ML research (FAccT 2022).
+- `shumailov2024collapse` — model collapse on recursive data (Nature 631:755).
+- `alemohammad2023mad` — Model Autophagy Disorder (arXiv 2307.01850).
+- `chen2023drift` — empirical LLM behaviour drift over time (arXiv 2307.09009).
+- `thorp2023chatgpt` — *Science* editorial that ChatGPT is not an author.
+- `usco2023ai` — USCO 2023 Federal Register guidance.
+- `urhg2` — German UrhG §2 statutory entry.
+
+The six previously `lit-retrieved` entries (`walters2023fabrication`,
+`magesh2024legal`, `liang2024mapping`, `kobak2024delving`,
+`ravi2024fair4ml`, `vannoorden2023chatgpt`) had identifier, title,
+authors, and headline figures re-confirmed via search; abstracts already
+read by an AI agent in the first pass. None has yet been read in full
+by the human author, so all remain at `lit-retrieved` rather than
+advancing to `lit-read`.
 
 ## Verification ladder (per `doc/methodology.md`)
 
@@ -604,6 +633,188 @@ See §8 above. Backs the U.S. leg of the legal-honesty claim in
   AI-co-authorship / ICMJE-compliance discussion in `related.tex` and
   the sixth integrated practice in `eight.tex`.
 - **Verification.** `lit-retrieved`.
+
+---
+
+## 9. Sustainability and resource cost
+
+### `strubell2019energy`
+
+- **Citation.** Strubell, E., Ganesh, A., McCallum, A. (2019). "Energy and
+  Policy Considerations for Deep Learning in NLP." *Proceedings of the
+  57th Annual Meeting of the Association for Computational Linguistics
+  (ACL)*, 3645–3650.
+  DOI: [10.18653/v1/P19-1355](https://doi.org/10.18653/v1/P19-1355).
+  arXiv: [1906.02243](https://arxiv.org/abs/1906.02243).
+- **What it says.** Quantifies the financial and environmental cost of
+  training large NLP models. The often-quoted figure: training a single
+  large neural-architecture-search run produces CO₂ comparable to the
+  lifetime emissions of five average automobiles.
+- **How the paper uses it.** Background citation in `sustainability.tex`
+  (resource-cost paragraph) for the training-side energy footprint.
+- **Verification.** `lit-retrieved` — ACL Anthology and arXiv resolve.
+
+### `patterson2021carbon`
+
+- **Citation.** Patterson, D., Gonzalez, J., Le, Q., Liang, C., Munguia,
+  L.-M., Rothchild, D., So, D., Texier, M., Dean, J. (2021). "Carbon
+  Emissions and Large Neural Network Training." arXiv preprint.
+  arXiv: [2104.10350](https://arxiv.org/abs/2104.10350).
+- **What it says.** Refines training-time carbon estimates for T5, Meena,
+  GShard, Switch Transformer, and GPT-3; argues that DNN choice,
+  datacenter location, and processor choice each move the carbon
+  footprint by an order of magnitude.
+- **How the paper uses it.** Same role as `strubell2019energy`; cited
+  alongside it in `sustainability.tex`.
+- **Verification.** `lit-retrieved` — arXiv resolves.
+
+### `luccioni2024power`
+
+- **Citation.** Luccioni, A. S., Jernite, Y., Strubell, E. (2024). "Power
+  Hungry Processing: Watts Driving the Cost of AI Deployment?" In
+  *Proceedings of the 2024 ACM Conference on Fairness, Accountability,
+  and Transparency (FAccT)*.
+  DOI: [10.1145/3630106.3658542](https://doi.org/10.1145/3630106.3658542).
+  arXiv: [2311.16863](https://arxiv.org/abs/2311.16863).
+- **What it says.** Inference-side energy and carbon comparison across
+  task-specific and general-purpose generative models. Multi-purpose
+  generative architectures cost orders of magnitude more per inference
+  than task-specific systems even when controlling for parameter count.
+- **How the paper uses it.** The inference-cost anchor in
+  `sustainability.tex`; the F(AI)²R pattern's per-claim re-invocation
+  pattern explicitly amplifies the inference cost this paper measures.
+- **Verification.** `lit-retrieved` — both ACM DL and arXiv resolve.
+
+### `li2023thirsty`
+
+- **Citation.** Li, P., Yang, J., Islam, M. A., Ren, S. (2023). "Making
+  AI Less 'Thirsty': Uncovering and Addressing the Secret Water
+  Footprint of AI Models." arXiv preprint.
+  arXiv: [2304.03271](https://arxiv.org/abs/2304.03271).
+  Final: *Communications of the ACM* (2025), DOI:
+  [10.1145/3724499](https://doi.org/10.1145/3724499).
+- **What it says.** First systematic estimate of fresh-water
+  consumption: training GPT-3 in U.S. Microsoft data centres directly
+  evaporates roughly 700,000 litres; global AI demand is projected to
+  withdraw 4.2–6.6 billion m³ in 2027.
+- **How the paper uses it.** Cited alongside `luccioni2024power` for the
+  water-footprint half of the resource-cost paragraph in
+  `sustainability.tex`.
+- **Verification.** `lit-retrieved` — arXiv and CACM resolve.
+
+### `birhane2022values`
+
+- **Citation.** Birhane, A., Kalluri, P., Card, D., Agnew, W., Dotan, R.,
+  Bao, M. (2022). "The Values Encoded in Machine Learning Research." In
+  *Proceedings of the 2022 ACM Conference on Fairness, Accountability,
+  and Transparency (FAccT)*.
+  DOI: [10.1145/3531146.3533083](https://doi.org/10.1145/3531146.3533083).
+  arXiv: [2106.15590](https://arxiv.org/abs/2106.15590).
+- **What it says.** Audits 100 highly cited ICML/NeurIPS papers; finds a
+  threefold increase in ties to Big Tech and 79% overall industry
+  affiliation; documents that ML research uplifts performance, novelty,
+  and generality while neglecting equity, justice, and harm-mitigation.
+- **How the paper uses it.** Backs the equity paragraph in
+  `sustainability.tex` — the claim that frontier-model dependence
+  produces a non-neutral standard.
+- **Verification.** `lit-retrieved` — both ACM DL and arXiv resolve.
+
+### `chen2023drift`
+
+- **Citation.** Chen, L., Zaharia, M., Zou, J. (2023). "How Is ChatGPT's
+  Behavior Changing over Time?" arXiv preprint.
+  arXiv: [2307.09009](https://arxiv.org/abs/2307.09009). Later in
+  *Harvard Data Science Review*.
+- **What it says.** Empirically documents that the same hosted LLM
+  endpoint (GPT-3.5, GPT-4) produces measurably different outputs
+  across March and June 2023 versions; GPT-4 prime-vs-composite
+  accuracy fell from 84% to 51%.
+- **How the paper uses it.** Cited in the frontier-model-dependence
+  paragraph in `sustainability.tex` as evidence that the pattern's
+  effective behaviour shifts under the author's feet.
+- **Verification.** `lit-retrieved` — arXiv resolves.
+
+---
+
+## 10. Model collapse and self-consuming generative loops
+
+### `shumailov2024collapse`
+
+- **Citation.** Shumailov, I., Shumaylov, Z., Zhao, Y., Papernot, N.,
+  Anderson, R., Gal, Y. (2024). "AI models collapse when trained on
+  recursively generated data." *Nature* 631, 755–759.
+  DOI: [10.1038/s41586-024-07566-y](https://doi.org/10.1038/s41586-024-07566-y).
+- **What it says.** Demonstrates that training generative models on
+  their own outputs irreversibly degrades the resulting model — the
+  tails of the original content distribution disappear. Effect holds
+  for LLMs, variational autoencoders, and Gaussian mixture models.
+- **How the paper uses it.** The model-collapse row in
+  `failure-modes.tex` — quantifies the failure mode the F(AI)²R
+  pattern's transcript-preservation discipline only indirectly
+  mitigates.
+- **Verification.** `lit-retrieved` — Nature DOI resolves.
+
+### `alemohammad2023mad`
+
+- **Citation.** Alemohammad, S., Casco-Rodriguez, J., Luzi, L., Humayun,
+  A. I., Babaei, H., LeJeune, D., Siahkoohi, A., Baraniuk, R. G. (2023).
+  "Self-Consuming Generative Models Go MAD." arXiv preprint.
+  arXiv: [2307.01850](https://arxiv.org/abs/2307.01850). Later: ICLR
+  2024.
+- **What it says.** Coins "Model Autophagy Disorder" (MAD) for the
+  self-consuming-loop failure mode that `shumailov2024collapse` later
+  formalised in *Nature*. Without enough fresh real data per
+  generation, model quality or diversity progressively decays.
+- **How the paper uses it.** Cited alongside `shumailov2024collapse` in
+  the model-collapse row of `failure-modes.tex`.
+- **Verification.** `lit-retrieved` — arXiv resolves.
+
+---
+
+## 11. Editorial position (added second pass)
+
+### `thorp2023chatgpt`
+
+- **Citation.** Thorp, H. H. (2023). "ChatGPT is fun, but not an
+  author." *Science* 379(6630), 313.
+  DOI: [10.1126/science.adg7879](https://doi.org/10.1126/science.adg7879).
+- **What it says.** Editor-in-Chief of *Science* declares that
+  AI-generated content without disclosure is plagiarism, that AI cannot
+  be an author, and that the scientific record is a human endeavour
+  with machines as tools.
+- **How the paper uses it.** Cited in `intro.tex` alongside
+  `else2023chatgpt` as the second major-venue editorial declaration —
+  the *Science* counterpart to the *Nature* editorial — backing the
+  "editors at major venues asked for provenance from authors" sentence.
+- **Verification.** `lit-retrieved` — Science DOI resolves.
+
+---
+
+## 12. Legal context (formal entries)
+
+### `usco2023ai`
+
+Promoted from "proposed addition" to a real `references.bib` entry in
+the second pass. See §8 above.
+
+- **Verification.** `lit-retrieved` — Federal Register and USCO PDF
+  both resolve.
+
+### `urhg2`
+
+- **Citation.** Bundesministerium der Justiz. *Gesetz über Urheberrecht
+  und verwandte Schutzrechte (Urheberrechtsgesetz, UrhG)*, §2
+  ("Geschützte Werke"). 1965, last amended 2021.
+  URL: <https://www.gesetze-im-internet.de/urhg/__2.html>. English
+  translation: <https://www.gesetze-im-internet.de/englisch_urhg/englisch_urhg.html>.
+- **What it says.** Lists protected works (Sprachwerke, Musikwerke,
+  Lichtbildwerke, Filmwerke, etc.) and requires "persönliche geistige
+  Schöpfung" — personal intellectual creation by a human — for
+  copyright protection.
+- **How the paper uses it.** Cited in `background.tex` for the German
+  leg of the "AI cannot hold copyright" claim.
+- **Verification.** `lit-retrieved` — public statute, multiple stable
+  URLs.
 
 ---
 
