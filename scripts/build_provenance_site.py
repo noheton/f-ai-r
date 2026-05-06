@@ -43,6 +43,8 @@ PAGES: list[tuple[str, str, Path]] = [
     ("research-protocol",    "Research protocol",      ROOT / "doc" / "research-protocol.md"),
     ("submission",           "Submission",             ROOT / "doc" / "submission-plan.md"),
     ("logbook",              "Logbook",                ROOT / "doc" / "logbook.md"),
+    ("user-contributions",   "User contributions",     ROOT / "doc" / "user-contributions.md"),
+    ("user-observations",    "Observations log",       ROOT / "doc" / "user-observations-log.md"),
     ("provenance-graph",     "Provenance topology",    ROOT / "doc" / "provenance-graph.md"),
     ("provenance-explorer",  "Provenance explorer",    SITE_SRC / "provenance-explorer.md"),
 ]
@@ -55,6 +57,8 @@ NAV: list[tuple[str, str]] = [
     ("collab",               "Collab"),
     ("agents",               "Agents"),
     ("logbook",              "Logbook"),
+    ("user-contributions",   "Contributions"),
+    ("user-observations",    "Observations"),
     ("provenance",           "Provenance"),
     ("provenance-explorer",  "Explorer"),
     ("provenance-graph",     "Topology"),

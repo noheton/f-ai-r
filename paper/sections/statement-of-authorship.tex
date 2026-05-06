@@ -1,0 +1,73 @@
+\section{Statement of authorship and AI use}
+\label{sec:authorship-statement}
+
+This statement adapts the \emph{Statement of independence} from the
+methodological ancestor~\cite{krebs2026obscurity} for a paper that
+is, by contrast, institutionally embedded.
+
+\paragraph{Author.}
+Florian Krebs (ORCID
+\href{https://orcid.org/0000-0001-6033-801X}{0000-0001-6033-801X})
+is the sole human author. The work is conducted at the German
+Aerospace Center (DLR / \emph{Deutsches Zentrum für Luft- und
+Raumfahrt}), Zentrum für Leichtbauproduktionstechnologie (ZLP),
+Augsburg. The author is responsible for every claim in the
+manuscript and for the integrity of the artefacts the manuscript
+ships with.
+
+\paragraph{Institutional context.}
+DLR is a member of the Helmholtz-Gemeinschaft Deutscher
+Forschungszentren. Two Helmholtz initiatives are relevant to this
+work and are acknowledged here in addition to the author's
+affiliation: the Helmholtz Metadata Collaboration (HMC), whose
+mandate is FAIR metadata across the Helmholtz association, and
+NFDI4Ing, the DFG-funded research-data infrastructure for
+engineering sciences. F(AI)\textsuperscript{2}R intersects both
+mandates and is offered to both communities for refinement.
+
+\paragraph{AI use.}
+The manuscript was drafted in cooperation with a Large Language
+Model (Anthropic Claude, model identifier
+\texttt{claude-opus-4-7}) operating under the per-role prompts
+committed to \texttt{agents/} and the harness rules in
+\texttt{CLAUDE.md}. The model is acknowledged here per the seventh
+integrated practice (\S\ref{sec:eight}, item~7); it is \emph{not}
+an author. The legal position is consistent across the
+jurisdictions surveyed: in Germany
+(\S2 \emph{UrhG}~\cite{urhg2}), in the United States
+(USCO 2023~\cite{usco2023ai}), and at the major medical journals
+via the \textsc{ICMJE}~\cite{icmje2023} and at \emph{Science} via
+the editor-in-chief~\cite{thorp2023chatgpt}, AI cannot hold
+copyright, cannot consent to publication, and cannot be held
+accountable. The provenance graph in \texttt{doc/provenance.ttl}
+records, for each section, the activity that produced it, the
+agents (human and AI) that participated, and the verification rung
+of every named claim. The \texttt{CITATION.cff} lists humans only.
+
+\paragraph{Data and code availability.}
+The repository\footnote{\url{https://github.com/noheton/f-ai-r}}
+contains the \LaTeX{} sources, the bibliography, the agent prompts,
+the build pipeline, the static-site generator, the PROV-O graph,
+the logbook, and the redaction and consent policies. Code, prompts,
+and RDF are released under MIT; manuscript prose is released under
+CC-BY-4.0. The DLR design-system assets vendored under
+\texttt{site/static/dlr/} are subject to upstream licensing terms.
+
+\paragraph{Conflict of interest.}
+None declared. The author has no financial relationship with any
+LLM vendor.
+
+\paragraph{Funding.}
+This work was carried out in the course of the author's regular
+research activity at DLR. No targeted external funding supported
+the writing of this paper.
+
+\paragraph{Acknowledgements.}
+We thank the maintainers of the underlying open-source toolchain
+--- TeX Live, \texttt{latexmk}, \texttt{biber}, \texttt{rdflib},
+the Python ecosystem, GitHub Actions --- without which the pattern
+would be more expensive than it is. The pattern here distilled was
+developed on the source repository
+\texttt{noheton/Obscurity-Is-Dead}~\cite{krebs2026obscurity} by the
+same author; the present paper is the abstraction that strips the
+source's domain content and publishes the methodological layer.

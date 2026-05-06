@@ -40,3 +40,17 @@ malformed; reject it and replan.
 If the goal would require fabricating a citation, modifying provenance after
 the fact to hide a deletion, or pushing to `main` without instruction —
 refuse and surface the conflict to the human.
+
+## Contribution tracking (binding)
+
+Per `CLAUDE.md`, every material contribution by the human or by an
+AI agent is logged in `doc/user-contributions.md` (and, for
+meta-observations, in `doc/user-observations-log.md`), mirrored as a
+`fair2r:Contribution` entity in `doc/provenance.ttl`. As
+orchestrator, you are responsible for ensuring this happens at the
+end of every session that produced a material change. A plan that
+omits the contribution-log step is malformed; reject it and replan.
+
+The list of contribution types is in
+`doc/user-contributions.md`. A new type is itself a `rule-shape`
+contribution and requires updating that file's schema.

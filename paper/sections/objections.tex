@@ -1,0 +1,90 @@
+\section{Anticipated Objections}
+\label{sec:objections}
+
+A position paper that does not name the objections it expects has
+not committed to a position. The six objections below are the
+objections the author has heard, anticipates, or has had to argue
+against in writing F(AI)\textsuperscript{2}R itself. Each is
+restated as charitably as we know how, and each receives an answer
+that the position can defend. Where the answer is conditional, we
+mark the condition; where the objection lands, we concede in
+\S\ref{sec:fm-residual}.
+
+\paragraph{``This is just FAIR with extra steps.''}
+The objection is that the four canonical FAIR axes already cover
+what F(AI)\textsuperscript{2}R proposes, and the new artefact
+classes (transcripts, prompts, ladders) are absorbed into existing
+sub-principles without rewording them. The answer is empirical:
+two prior re-readings (FAIR4RS~\cite{chuehong2022fair4rs},
+FAIR4ML~\cite{ravi2024fair4ml}) judged that adding sub-principles
+for new artefact classes was preferable to absorbing them; we
+follow that precedent. The audit pass on \textbf{Reusable} is the
+load-bearing case: replaying the writing pipeline is materially
+different from replaying a build, and the FAIR4RS framing for
+software builds does not yet capture the cost of replaying an
+LLM-mediated authoring loop.
+
+\paragraph{``Adopting eight practices on day one is too expensive.''}
+The objection is one of overhead. Our answer is that eight is the
+\emph{minimum}: the failure-modes table (Table~\ref{tab:failure-modes})
+shows that dropping any one practice exposes a specific failure
+mode that the others do not cover. The verification ladder, in
+particular, looks expensive on first pass and saves the
+human-reader budget on the second --- the $\textsc{ai-confirmed}$
+rung was introduced exactly to attack the verification-overhead
+bottleneck (\S\ref{sec:ladder}).
+
+\paragraph{``Provenance graphs add bureaucracy without preventing
+fraud.''}
+The objection is that an author willing to fabricate a citation is
+willing to fabricate a triple. The answer is that the graph does
+not aim to prevent fraud; it aims to make fraud
+\emph{detectable by inspection}. A bad-faith adoption of the pattern
+leaves a graph whose edges contradict the prose, whose claims
+reference sources that do not exist, or whose
+\texttt{prov:wasGeneratedBy} activities have no transcript record.
+Each of those is a checkable defect. The contrast is with
+unstructured AI-assisted writing, where the same fraud leaves no
+artefact a third party can point at.
+
+\paragraph{``You cannot check the model's reasoning, only its
+output.''}
+The objection is that LLMs are stochastic and that any artefact-level
+discipline is a Potemkin pass over an opaque generator. The answer
+is two-part. \emph{Yes}, we cannot inspect the model's reasoning;
+we never claim otherwise. \emph{No}, the discipline is not made
+useless by that limit: it makes the \emph{output's relationship to
+the input} checkable, even when the model's internals are not.
+That is what the verification ladder, the source-analyser hand-off,
+and the human-reader rung are for. The sustainability section
+(\S\ref{sec:sustainability}) is honest about the limit.
+
+\paragraph{``This privileges well-resourced groups.''}
+The objection is real and we name it without flinching
+(\S\ref{sec:sustainability}, equity paragraph). Research groups
+without access to frontier models cannot apply F(AI)\textsuperscript{2}R
+at the same effective rung. F(AI)\textsuperscript{2}R describes the
+work but does not equalise access to it. Two partial mitigations
+follow from the verification ladder itself: smaller-model fallbacks
+at audit-only stages (layout, hedging-density, list-of-lists
+detection) that do not need frontier-grade reasoning, and the
+structural property that an honestly-declared lower-rung
+distribution at submission time is preferable to a forged
+higher-rung distribution from a richer group. The pattern's
+disclosure rules are written so that the difference is legible to
+the reviewer.
+
+\paragraph{``A position paper should not also be a worked example.''}
+The objection is generic: position papers prescribe; case-study
+papers exemplify; mixing the two is bad form. The answer is
+intentional. The fifth integrated practice
+(\S\ref{sec:eight}, item~5) requires that a paper which prescribes
+a discipline have been written under that discipline. The
+recursive case study is not an aesthetic choice; it is the way the
+position can be checked. The Author's Note up front is the
+invitation to read it that way.
+
+\bigskip
+\noindent The objections we cannot answer --- pre-publication
+leakage, audience fatigue, adversarial review --- sit in
+\S\ref{sec:fm-residual} as residual.
