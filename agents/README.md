@@ -16,7 +16,7 @@ commit. Do not improvise new prompts in chat without landing them here first.
 | `layout-scrutinizer.md`  | Reviews LaTeX layout, figure placement, typography.        | auditor |
 | `readability-reviewer.md`| Reviews prose for clarity, flow, and novelty signal.       | auditor |
 | `illustration.md`        | Plans and specifies figures (TikZ / SVG / matplotlib).     | author |
-| `condenser.md`           | Produces the venue-length `main-condensed.tex` from `main.tex`. | author |
+| `condenser.md`           | Page-budget enforcer. Fires when the compiled PDF exceeds the configured budget (default 10 pages of body). | auditor |
 | `research-protocol.md`   | Defines literature-search and verification protocols.      | both |
 
 ## Primary artifacts — consistency invariant (binds every agent)

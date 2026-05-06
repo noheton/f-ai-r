@@ -1,6 +1,6 @@
 {
-  "title": "F(AI²)R: FAIR research with AI in the loop, twice",
-  "description": "Working paper and reproducible LLM-assisted writing pipeline. Manuscript, agent prompts, methodology, logbook, and a PROV-O provenance graph are versioned together.",
+  "title": "F(AI)²R: FAIR Research with AI in the Loop, Twice",
+  "description": "Short-form working paper plus reproducible LLM-assisted writing pipeline (agent prompts, PROV-O provenance, build CI, static site). Manuscript, prompts, and the provenance graph are versioned together; the public site is at https://noheton.github.io/f-ai-r/.",
   "license": "MIT",
   "upload_type": "publication",
   "publication_type": "preprint",
@@ -11,18 +11,31 @@
     "LLM",
     "reproducibility",
     "scholarly communication",
-    "provenance"
+    "provenance",
+    "research data management",
+    "HMC",
+    "NFDI4Ing"
   ],
   "creators": [
     {
-      "name": "TBD, TBD",
-      "affiliation": "TBD"
+      "name": "Krebs, Florian",
+      "orcid": "0000-0001-6033-801X",
+      "affiliation": "DLR Zentrum für Leichtbauproduktionstechnologie (ZLP), Augsburg, Germany"
     }
+  ],
+  "communities": [
+    {"identifier": "helmholtz"},
+    {"identifier": "nfdi4ing"}
   ],
   "related_identifiers": [
     {
       "identifier": "https://github.com/noheton/f-ai-r",
       "relation": "isSupplementTo",
+      "scheme": "url"
+    },
+    {
+      "identifier": "https://noheton.github.io/f-ai-r/",
+      "relation": "isDocumentedBy",
       "scheme": "url"
     }
   ]

@@ -1,0 +1,127 @@
+% =====================================================================
+% fair2r.sty — F(AI^2)R paper style, aligned with the DLR Corporate
+% Design (CD-Handbuch §10.1, §4 Printmedien).
+%
+% - Body face: Helvetica/Arial-equivalent (helvet) per CD-Handbuch §10.1
+%   "Elektronischer Dokumentenaustausch ... Arial".
+% - Accent: DLR Blue #00658B (Variant A, default).
+% - Section headings: mid-grey #666 (H1) and DLR Blue (H2).
+% - Square corners (DLR layout rule, 0–2px max).
+% - Hairline rules in tables; no shadows.
+%
+% Switch chapter accent by passing [variant=b] (green) or [variant=c]
+% (yellow) when loading the package; default is variant=a (blue).
+% =====================================================================
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{style/fair2r}[2026/05/06 F(AI^2)R DLR-aligned style]
+
+\RequirePackage{xkeyval}
+\define@choicekey*{fair2r}{variant}[\fair@variant]{a,b,c}[a]{}
+\DeclareOptionX*{\PackageWarning{fair2r}{Unknown option `\CurrentOption'}}
+\ExecuteOptionsX{variant=a}
+\ProcessOptionsX
+
+\RequirePackage[T1]{fontenc}
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[scaled=1.0]{helvet}
+\RequirePackage{sansmath}
+\renewcommand{\familydefault}{\sfdefault}
+
+\RequirePackage{microtype}
+\RequirePackage{xcolor}
+\RequirePackage{booktabs}
+\RequirePackage{enumitem}
+\RequirePackage{titlesec}
+\RequirePackage{titling}
+\RequirePackage[margin=2.5cm,headheight=14pt]{geometry}
+\RequirePackage{fancyhdr}
+\RequirePackage{caption}
+\RequirePackage[hidelinks]{hyperref}
+
+% --- DLR colour ramps (subset; expand as needed) -----------------------
+\definecolor{dlrBlau1}{HTML}{00658B}
+\definecolor{dlrBlau2}{HTML}{3B98CB}
+\definecolor{dlrBlau5}{HTML}{D1E8FA}
+\definecolor{dlrGruen1}{HTML}{82A043}
+\definecolor{dlrGruen5}{HTML}{E6EAAF}
+\definecolor{dlrGelb1}{HTML}{D2AE3D}
+\definecolor{dlrGelb5}{HTML}{FFF8BE}
+\definecolor{dlrGrau1}{HTML}{666666}
+\definecolor{dlrGrau3}{HTML}{B1B1B1}
+\definecolor{dlrGrau4}{HTML}{CFCFCF}
+\definecolor{dlrGrau5}{HTML}{EBEBEB}
+\definecolor{dlrLink}{HTML}{00B0F0}
+\definecolor{dlrLogo}{HTML}{1D1D1B}
+
+% --- Active accent per chosen variant ----------------------------------
+\ifcase\fair@variant\relax
+  \colorlet{dlrAccent}{dlrBlau1}\colorlet{dlrAccentSoft}{dlrBlau5}\or
+  \colorlet{dlrAccent}{dlrGruen1}\colorlet{dlrAccentSoft}{dlrGruen5}\or
+  \colorlet{dlrAccent}{dlrGelb1}\colorlet{dlrAccentSoft}{dlrGelb5}
+\fi
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=dlrAccent,
+  citecolor=dlrAccent,
+  urlcolor=dlrLink,
+}
+
+% --- Sectioning: H1 mid-grey, H2/H3 in accent --------------------------
+\titleformat{\section}
+  {\sffamily\bfseries\Large\color{dlrGrau1}}
+  {\thesection}{0.6em}{}
+\titleformat{\subsection}
+  {\sffamily\bfseries\large\color{dlrAccent}}
+  {\thesubsection}{0.55em}{}
+\titleformat{\subsubsection}
+  {\sffamily\bfseries\normalsize\color{dlrGrau1}}
+  {\thesubsubsection}{0.5em}{}
+\titlespacing*{\section}{0pt}{1.4\baselineskip}{0.6\baselineskip}
+\titlespacing*{\subsection}{0pt}{1.0\baselineskip}{0.4\baselineskip}
+
+% --- Title block: minimal, left-aligned, with DLR Blue rule ------------
+\renewcommand{\maketitlehookc}{\vspace{0.5em}{\color{dlrAccent}\rule{\linewidth}{1.2pt}}}
+\pretitle{\noindent\sffamily\bfseries\Huge\color{dlrGrau1}}
+\posttitle{\par\vspace{0.4em}}
+\preauthor{\noindent\sffamily\normalsize\color{black}}
+\postauthor{\par}
+\predate{\noindent\sffamily\small\color{dlrGrau1}}
+\postdate{\par\vspace{0.6em}}
+
+% --- Page style: hairline rules, page number in grey -------------------
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[R]{\sffamily\footnotesize\color{dlrGrau1}\thetitle}
+\fancyfoot[R]{\sffamily\footnotesize\color{dlrGrau1}\thepage}
+
+% --- Captions: small, mid-grey -----------------------------------------
+\captionsetup{font={small,sf,color=dlrGrau1},labelfont=bf,labelsep=period}
+
+% --- Tables: hairline rules ---------------------------------------------
+\setlength{\heavyrulewidth}{0.6pt}
+\setlength{\lightrulewidth}{0.3pt}
+\setlength{\cmidrulewidth}{0.3pt}
+\arrayrulecolor{dlrGrau4}
+
+% --- Lists: tight, square markers, accent for first level --------------
+\setlist[itemize,1]{leftmargin=1.2em,itemsep=2pt,topsep=4pt,
+                    label=\textcolor{dlrAccent}{\rule[0.45ex]{0.5em}{0.5em}}}
+\setlist[itemize,2]{leftmargin=1.0em,itemsep=2pt,topsep=2pt,label=--}
+\setlist[enumerate,1]{leftmargin=1.5em,itemsep=2pt,topsep=4pt,label=\textcolor{dlrAccent}{\arabic*.}}
+\setlist[description]{leftmargin=1.2em,itemsep=2pt,topsep=4pt,
+                      font=\sffamily\bfseries\color{dlrGrau1}}
+
+% --- Block quote: accent left rule, italic, mid-grey -------------------
+\renewenvironment{quote}
+  {\par\smallskip\begin{list}{}{\leftmargin=1.2em\rightmargin=1em}\item
+   \color{dlrGrau1}\itshape\hspace{-1.2em}\textcolor{dlrAccent}{\rule[-0.2em]{1.5pt}{1.0em}}\hspace{0.6em}}
+  {\end{list}\smallskip}
+
+% --- Convenience macros -----------------------------------------------
+\newcommand{\faiar}{F(AI)\textsuperscript{2}R}
+\newcommand{\faiarmath}{F(\mathrm{AI})^{2}R}
+
+\endinput

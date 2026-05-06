@@ -1,17 +1,23 @@
 cff-version: 1.2.0
-title: "F(AI²)R: FAIR research with AI in the loop, twice"
+title: "F(AI)²R: FAIR Research with AI in the Loop, Twice"
 message: "If you use this work, please cite it as below."
 type: software
 authors:
-  - family-names: "TBD"
-    given-names: "TBD"
-    affiliation: "TBD"
+  - family-names: "Krebs"
+    given-names: "Florian"
+    orcid: "https://orcid.org/0000-0001-6033-801X"
+    affiliation: "DLR Zentrum für Leichtbauproduktionstechnologie (ZLP), Augsburg, Germany"
+    email: "florian.krebs@dlr.de"
 abstract: >-
-  F(AI²)R extends the FAIR principles (Findable, Accessible, Interoperable,
-  Reusable) for scholarly artefacts produced with the active participation of
-  Large Language Models. AI participates twice — as assistant in authoring and
-  as auditor of provenance — and both passes are captured in a PROV-O graph
-  that travels with the manuscript.
+  F(AI)²R extends the FAIR principles (Findable, Accessible,
+  Interoperable, Reusable) for scholarly artefacts produced with the
+  active participation of Large Language Models. The (AI) factor is
+  multiplied through every FAIR axis, squared because each axis demands
+  two passes over every artefact: an authoring pass and an audit pass.
+  The contribution is the integration of eight individually unoriginal
+  practices into a single discipline, enforced by a ten-stage agent
+  pipeline. Released as a worked example with prompts, build pipeline,
+  PROV-O graph, and public site.
 keywords:
   - FAIR
   - PROV-O
@@ -19,8 +25,12 @@ keywords:
   - LLM
   - scholarly communication
   - provenance
+  - research data management
+  - HMC
+  - NFDI4Ing
 license: MIT
 license-url: "https://opensource.org/licenses/MIT"
 repository-code: "https://github.com/noheton/f-ai-r"
-version: "0.1.0-dev"
+url: "https://noheton.github.io/f-ai-r/"
+version: "0.2.0-dev"
 date-released: "2026-05-06"

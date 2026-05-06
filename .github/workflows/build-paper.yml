@@ -23,29 +23,26 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Compile main.tex (long form)
+      - name: Compile main.tex
         uses: xu-cheng/latex-action@v3
         with:
           working_directory: paper
           root_file: main.tex
-          latexmk_use_xelatex: false
-          latexmk_shell_escape: false
-          extra_system_packages: ""
           args: -pdf -interaction=nonstopmode -halt-on-error -file-line-error
 
-      - name: Compile main-condensed.tex (venue form)
-        uses: xu-cheng/latex-action@v3
-        with:
-          working_directory: paper
-          root_file: main-condensed.tex
-          args: -pdf -interaction=nonstopmode -halt-on-error -file-line-error
+      - name: Report page count
+        working-directory: paper
+        run: |
+          if command -v pdfinfo >/dev/null 2>&1; then
+            pdfinfo main.pdf | awk '/^Pages:/ {print "PDF pages: " $2}'
+          else
+            echo "pdfinfo not available in container; skipping."
+          fi
 
-      - name: Upload PDFs
+      - name: Upload PDF
         uses: actions/upload-artifact@v4
         with:
-          name: paper-pdfs-${{ github.sha }}
-          path: |
-            paper/main.pdf
-            paper/main-condensed.pdf
+          name: paper-pdf-${{ github.sha }}
+          path: paper/main.pdf
           if-no-files-found: error
           retention-days: 30

@@ -1,128 +1,91 @@
 \section{The F(AI)\texorpdfstring{\textsuperscript{2}}{2}R Pattern}
 \label{sec:pattern}
 
-This section states the pattern in full. \S\ref{sec:axes} defines the
-axes. \S\ref{sec:pipeline} describes the ten-stage agent pipeline.
-\S\ref{sec:ladder} defines the verification ladder as a finite-state
-machine and crosswalks it to PRISMA 2020 and GRADE.
-\S\ref{sec:handback} specifies the handback discipline, and
-\S\ref{sec:mirror} the mirror discipline. The eight integrated
-practices that animate the pattern are deferred to Section~\ref{sec:eight}.
-
 \subsection{Axes: F(AI)\texorpdfstring{\textsuperscript{2}}{2}R}
 \label{sec:axes}
 
 We retain the four canonical FAIR axes and read each in two passes.
-The authoring pass (AI\textsubscript{1}) is the agent or human who
-\emph{produces} the artefact for that axis. The audit pass
-(AI\textsubscript{2}) is the agent or human who \emph{verifies} the
-artefact against the axis after the fact, never in the same role and
-never in the same commit. The two passes are what justifies the
-``squared'' notation. The (AI) factor is multiplied through every
-axis: there is an authoring and an audit pass for Findability, for
-Accessibility, for Interoperability, and for Reusability.
+The authoring pass (AI\textsubscript{1}) produces the artefact for
+that axis. The audit pass (AI\textsubscript{2}) verifies the artefact
+against the axis after the fact, never in the same role and never in
+the same commit. The two passes are what justifies the squared
+notation. The (AI) factor is multiplied through every axis.
 
-\paragraph{Findable, with (AI).}
-The authoring pass mints persistent identifiers
-(DOI via Zenodo; ORCID for authors), populates machine-readable metadata
+\paragraph{F.}
+Authoring mints persistent identifiers (DOI via Zenodo, ORCID for
+authors), populates machine-readable metadata
 (\texttt{CITATION.cff}, \texttt{codemeta.json},
-\texttt{.zenodo.json}), and assigns IRIs to per-claim entities in the
-provenance graph. The audit pass verifies that the four metadata
-surfaces agree, that no IRI is dangling, and that every claim
-referenced in the manuscript has a graph entry.
+\texttt{.zenodo.json}), and assigns IRIs to per-claim entities. Audit
+verifies the metadata surfaces agree, no IRI is dangling, and every
+manuscript-cited claim has a graph entry.
 
-\paragraph{Accessible, with (AI).}
-The authoring pass clones-and-builds: a third party with the public
-repository and a documented toolchain can reproduce the PDF. The
-audit pass verifies the licence pair (MIT for code/prompts/RDF,
-CC-BY-4.0 for prose), checks for paywalled sources that should have
-been vendored, and confirms that the structured redaction policy
-(Appendix~\ref{app:redaction}) covers what it claims to cover.
+\paragraph{A.}
+Authoring clones-and-builds: a third party with the public repository
+and a documented toolchain reproduces the PDF. Audit verifies the
+licence pair (MIT for code/RDF, CC-BY-4.0 for prose), that paywalled
+sources have been vendored where licensable, and that the redaction
+policy covers what it claims.
 
-\paragraph{Interoperable, with (AI).}
-The authoring pass commits the provenance graph as PROV-O over Turtle
-in \texttt{doc/provenance.ttl}, with stable namespaces and the
-\texttt{fair2r:} subclasses listed in \S\ref{sec:bg-prov}. The audit
-pass validates the Turtle, runs SHACL shapes if defined, and verifies
-that every section of the manuscript has a \texttt{prov:Activity}
-record that produced it.
+\paragraph{I.}
+Authoring commits the provenance graph as PROV-O over Turtle in
+\texttt{doc/provenance.ttl}. Audit validates the Turtle, runs SHACL
+shapes if defined, and verifies every section has a
+\texttt{prov:Activity} record that produced it.
 
-\paragraph{Reusable, with (AI).}
-The authoring pass commits the per-role prompts under \texttt{agents/},
-the build target under \texttt{paper/Makefile}, and the day-to-day
-logbook under \texttt{doc/logbook.md}. The audit pass replays the
-pipeline on a clean clone, compares the output to the published
-artefact, and reports drift.
-
-The crucial property is that the \emph{same agent never performs both
-passes}. We return to this in \S\ref{sec:handback}.
+\paragraph{R.}
+Authoring commits the per-role prompts under \texttt{agents/}, the
+build target under \texttt{paper/Makefile}, and the logbook under
+\texttt{doc/logbook.md}. Audit replays the pipeline on a clean clone
+and reports drift.
 
 \subsection{The pipeline as the team}
 \label{sec:pipeline}
 
-The pipeline is the team; the team is the methodology. Ten stages,
-coordinated by an Orchestrator, with a strict handback discipline
-between prose-owning agents and audit-owning agents:
+Ten stages, coordinated by an Orchestrator, with strict handback
+between prose-owning and audit-owning agents:
 
-\begin{description}
-    \item[0. Orchestrator.] Inspects state, applies a dispatch table,
-        routes work to \emph{exactly one} downstream stage. Never
-        edits prose. Only agent permitted to launch other agents.
-    \item[1. Research.] Per-section literature audit. Produces sources,
-        transcripts, and provenance maps under
-        \texttt{doc/sources/} and \texttt{doc/transcripts/}.
-    \item[1.5. Source Analyzer.] Upgrades retrieved sources from
-        \textsc{lit-retrieved} to \textsc{ai-confirmed}; never crosses
-        into \textsc{lit-read}. Introduced specifically to attack the
-        verification-overhead bottleneck described in
-        \S\ref{sec:ladder}.
-    \item[2. Scientific Writer.] Owns prose, register, and \LaTeX{}.
-        Does \emph{not} change claims, modify evidence, or introduce
-        citations without a verified source.
-    \item[3. Illustration.] Owns figures. Consumes
-        \texttt{[ILLUSTRATION OPPORTUNITY]} markers from the writer.
-        Prefers \textsc{ai-confirmed} or \textsc{lit-read} data; halts
-        on load-bearing values that are still \textsc{lit-retrieved}.
-    \item[4. Layout Scrutinizer.] Reads the \emph{rendered PDF} and
-        files a Layout Defect Registry under
-        \texttt{doc/handbacks/layout-*.md}. Defects are not fixed in
-        place by this agent.
-    \item[5. Readability \& Novelty Scrutinizer.] Reads the markdown
-        front-to-back and flags repetition, list-of-lists prose,
-        hedging chains, and unsupported novelty against
-        \texttt{doc/sources.md}. Files a Readability Defect Registry.
-    \item[6. Aligner (FAIR).] Audits traceability across paper, sources,
-        \texttt{README.md}, and the handback registries. Routes
-        per-defect hand-backs; never edits content.
-    \item[7. Modeler (Provenance Curator).] Renders the traceability
-        spine into a W3C PROV-O graph
-        (\texttt{doc/provenance.ttl}). Refuses to invent triples.
-    \item[8. Site Agent.] Owns the public-facing site under
-        \texttt{site/} and \texttt{\_site/}. Refuses to render without
-        explicit publication consent. The site never introduces a new
-        claim.
+\begin{description}[leftmargin=1.2em,itemsep=2pt]
+    \item[0. Orchestrator.] Inspects state, dispatches one downstream
+        stage at a time. Never edits prose.
+    \item[1. Research.] Per-section literature audit. Produces sources
+        and transcripts under \texttt{doc/sources/} and
+        \texttt{doc/transcripts/}.
+    \item[1.5. Source Analyzer.] Promotes
+        \textsc{lit-retrieved}\,$\to$\,\textsc{ai-confirmed}; never crosses into
+        \textsc{lit-read}.
+    \item[2. Scientific Writer.] Owns prose, register, \LaTeX. Does
+        not change claims or introduce citations without a verified
+        source.
+    \item[3. Illustration.] Owns figures; halts on load-bearing values
+        still at \textsc{lit-retrieved}.
+    \item[4. Layout Scrutinizer.] Reads the rendered PDF, files a
+        Layout Defect Registry under \texttt{doc/handbacks/}.
+    \item[5. Readability \& Novelty Scrutinizer.] Reads the markdown,
+        flags repetition, list-of-lists prose, hedging chains, and
+        unsupported novelty. Files a registry.
+    \item[6. Aligner (FAIR).] Audits traceability across paper,
+        sources, README, and registries. Routes hand-backs; never
+        edits content.
+    \item[7. Provenance Curator.] Sole writer of
+        \texttt{doc/provenance.ttl}; refuses to invent triples.
+    \item[8. Site Agent.] Owns the public site; refuses to render
+        without explicit publication consent. The site never
+        introduces a new claim.
 \end{description}
 
-A separate \emph{Condenser} stage produces the \(\le\)10-page core
-submission, mirroring the long form into
-\texttt{paper/main-condensed.tex} under independent application of the
-mirror discipline (\S\ref{sec:mirror}).
+The agent that owns prose cannot mark its own claims as verified. The
+agent that audits layout cannot edit prose. The agent that curates
+provenance cannot write \LaTeX. \emph{Specialisation reduces
+hallucination at the seam.}
 
-The strict separation is a structural property. The agent that owns
-prose cannot mark its own claims as verified. The agent that audits
-layout cannot edit prose. The agent that curates provenance cannot
-write \LaTeX. \emph{Specialisation reduces hallucination at the seam}:
-each agent's input is checkable by the previous stage, each agent's
-output is checkable by the next.
-
-\subsection{The verification ladder as a finite-state machine}
+\subsection{The verification ladder as an FSM}
 \label{sec:ladder}
 
-Every claim in the manuscript carries a verification state. The states
-are organised as a finite-state machine, monotone non-decreasing modulo
-explicit retraction:
+Every claim carries a verification state. The states are organised
+as a finite-state machine, monotone non-decreasing modulo explicit
+retraction:
 
-\begin{quote}
+\begin{quote}\small
 \textsc{unverified-external}
 \(\to\) \textsc{needs-research}
 \(\to\) \textsc{lit-retrieved}
@@ -130,92 +93,48 @@ explicit retraction:
 \(\to\) \textsc{lit-read}
 \end{quote}
 
-The semantics:
+\noindent \textsc{lit-retrieved}: a candidate URL or DOI that
+resolves. \textsc{ai-confirmed}: an AI agent has read the source and
+confirmed it supports the claim, with a quoted snippet preserved in
+\texttt{doc/sources.md}. \textsc{lit-read}: a human has read the
+source and confirmed both that it supports the claim and that the
+inference from source to claim is sound. A claim may invoke a source
+at its current rung or below; load-bearing or contested claims still
+require \textsc{lit-read}.
 
-\begin{description}
-    \item[\textsc{unverified-external}.] The claim originates outside
-        this repository (a model's prior knowledge, a casual reference)
-        and has not been checked.
-    \item[\textsc{needs-research}.] The claim has been recognised as
-        needing a source; the search is queued under
-        \texttt{doc/research-protocol.md}.
-    \item[\textsc{lit-retrieved}.] A candidate source has been
-        retrieved (URL or DOI), but no agent has read it.
-    \item[\textsc{ai-confirmed}.] An AI agent (the Source Analyzer)
-        has read the retrieved source and confirmed that it supports
-        the claim, with a quoted snippet preserved in
-        \texttt{doc/sources.md}.
-    \item[\textsc{lit-read}.] A human author has read the source and
-        confirmed both that it supports the claim and that the
-        inference from source to claim is sound. Equivalent for
-        graph-internal purposes to \textsc{source-vendored}.
-\end{description}
+The \textsc{ai-confirmed} rung exists because verification overhead
+is real and dominates writer cycles. Most retrieved entries are
+obvious from the abstract; a small minority anchor contested claims;
+the single-tier gate forced the human reader through both populations
+at the same cost. Splitting the work between the Source Analyzer
+(cheap) and the human (expensive) is the lever that makes the
+practice economically tenable.
 
-A claim may invoke a source at its current rung or below. Load-bearing
-or contested claims still require \textsc{lit-read}.
+\paragraph{Crosswalk.} Retrieval depth maps to PRISMA 2020:
+\textsc{lit-retrieved}\,=\,Identification, \textsc{ai-confirmed}\,=\,Screening,
+\textsc{lit-read}\,=\,Included. Invocation strength maps to GRADE: a
+claim invoked at \textsc{lit-read} carries a GRADE certainty floor of
+\textsc{moderate}; a claim at \textsc{ai-confirmed} can carry at most
+\textsc{low}. The mapping is a floor, not a ceiling.
 
-The \textsc{ai-confirmed} rung was introduced after observing that
-verification overhead is real and dominates writer cycles. Most
-retrieved entries are obvious-from-the-abstract; a small minority
-anchor contested claims; the single-tier gate forced the human reader
-through both populations at the same cost. Splitting the work between
-the Source Analyzer (cheap) and the human (expensive) is the lever
-that makes the practice economically tenable.
-
-\paragraph{Crosswalk to PRISMA 2020 and GRADE.}
-The ladder admits a useful, qualified mapping. The retrieval-depth axis
-maps onto PRISMA 2020: \textsc{lit-retrieved} corresponds to
-Identification, \textsc{ai-confirmed} to Screening,
-\textsc{lit-read} to Included. The invocation-strength axis maps onto
-GRADE: a claim invoked at \textsc{lit-read} carries a GRADE certainty
-of \textsc{moderate} or \textsc{high} for the inference from source to
-claim, while a claim invoked at \textsc{ai-confirmed} can carry at
-most \textsc{low}. GRADE certainty is a rating of the underlying
-evidence, not of the retrieval procedure; the mapping above is the
-floor the rung permits, not a guarantee of the ceiling.
-
-\subsection{Handback discipline}
+\subsection{Handback and mirror disciplines}
 \label{sec:handback}
 
 The four scrutinizing stages --- Source Analyzer, Layout Scrutinizer,
 Readability \& Novelty Scrutinizer, Aligner --- never edit source.
-They write \emph{Defect Registries} under \texttt{doc/handbacks/},
-each entry naming the file, the line, the defect, and the proposed
-remedy. The repair is performed by the appropriate prose-owning
-agent (Scientific Writer, Illustration, or the human author) in a
-subsequent commit.
+They write \emph{Defect Registries} under
+\texttt{doc/handbacks/}; the repair lands in a subsequent commit by
+a prose-owning agent. The cost is one extra commit boundary per
+cycle. The payoff is that ``what did the scrutinizer actually flag?''
+has a single canonical answer in the git history.
 
-The cost is one extra commit boundary per cycle. The payoff is that
-``what did the scrutinizer actually flag?'' has a single canonical
-answer in the git history, and that the scrutinizer's incentive to
-make their objection survive review is aligned with the writer's
-incentive to address it cleanly. A scrutinizer that may patch in place
-is, at the limit, a writer with a different hat; an audit that produces
-a registry is an audit that can be reasoned about.
+Every primary artefact has two mirrored representations: the source
+under version control, and the rendered output. The pair is enforced
+for the manuscript, the provenance graph, the prompts, and the
+logbook. Drift between source and render is detectable; the build
+either succeeds or fails.
 
-\subsection{Mirror discipline}
-\label{sec:mirror}
-
-Every primary artefact has two mirrored representations: the
-machine-readable source under version control, and the rendered output
-that humans read. The pair is enforced for the manuscript
-(markdown notes \(\leftrightarrow\) \LaTeX{} sources
-\(\leftrightarrow\) PDF), for the provenance graph
-(Turtle \(\leftrightarrow\) the rendered tables on the public site),
-for the prompts (markdown source under \texttt{agents/}
-\(\leftrightarrow\) HTML on the site), and for the logbook
-(markdown source \(\leftrightarrow\) HTML, plus the corresponding
-PROV-O activity records).
-
-The discipline buys two things. First, drift between source and render
-is detectable (the build either succeeds or fails; the rendered tables
-either match the Turtle or do not). Second, an audit pass can compare
-mirrors --- a claim that survived condensation, for example, must keep
-its \texttt{fair2r:Claim} IRI in both the long and condensed manuscripts
-(\S\ref{sec:practice-mirror}).
-
-The pattern, stated in one sentence: \emph{the manuscript, the
-provenance graph, and the logbook are primary artefacts and must remain
-consistent and up to date at all times}. A commit that updates one of
-them and leaves the others lagging is a defect, even if the build
-passes.
+The pattern, in one sentence: \emph{the manuscript, the provenance
+graph, and the logbook are primary artefacts and must remain
+consistent and up to date at all times}. A commit that updates one
+and leaves the others lagging is a defect, even if the build passes.

@@ -547,5 +547,120 @@ claim:specialisation-reduces-hallucination  a fair2r:Claim ;
     dcterms:created "2026-05-06"^^xsd:date .
 
 #-------------------------------------------------------------------------
+# Revision: short-form pivot, DLR design integration, new sections
+#-------------------------------------------------------------------------
+
+# New sources cited in the AI-rise paragraph of the introduction
+src:liang2024mapping  a fair2r:Source ;
+    dcterms:title "Mapping the increasing use of LLMs in scientific papers"@en ;
+    dcterms:identifier "arXiv:2404.01268" ;
+    fair2r:verificationState verif:lit-retrieved .
+
+src:kobak2024delving  a fair2r:Source ;
+    dcterms:title "Delving into ChatGPT usage in academic writing through excess vocabulary"@en ;
+    dcterms:identifier "arXiv:2406.07016" ;
+    fair2r:verificationState verif:lit-retrieved .
+
+src:else2023chatgpt  a fair2r:Source ;
+    dcterms:title "Tools such as ChatGPT threaten transparent science"@en ;
+    dcterms:identifier "doi:10.1038/d41586-023-00191-1" ;
+    fair2r:verificationState verif:ai-confirmed .
+
+src:vannoorden2023chatgpt  a fair2r:Source ;
+    dcterms:title "ChatGPT and science: the AI system was a force in 2023"@en ;
+    dcterms:identifier "doi:10.1038/d41586-023-03907-5" ;
+    fair2r:verificationState verif:lit-retrieved .
+
+# Section: Sustainability and Frontier-Model Dependence
+ent:section-sustainability  a fair2r:Section ;
+    rdfs:label "Sustainability and Frontier-Model Dependence"@en ;
+    prov:hadPrimarySource ent:manuscript .
+
+# Activity: short-form pivot + DLR integration + sustainability + imprint
+act:rev-short-form-pivot  a prov:Activity ;
+    rdfs:label "Pivot to short-form; integrate DLR Corporate Design; add sustainability and AI-rise content; institutional imprint"@en ;
+    prov:startedAtTime "2026-05-06T00:00:00Z"^^xsd:dateTime ;
+    prov:endedAtTime   "2026-05-06T00:00:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith agent:claude-opus-4-7 ;
+    prov:wasAssociatedWith agent:human-author ;
+    prov:used src:krebs2026obscurity ,
+              src:liang2024mapping ,
+              src:kobak2024delving ,
+              src:else2023chatgpt ,
+              src:vannoorden2023chatgpt .
+
+ent:section-sustainability  prov:wasGeneratedBy act:rev-short-form-pivot ;
+                            prov:wasAttributedTo agent:scientific-writer ,
+                                                 agent:human-author .
+
+# Repurposed condenser as page-budget enforcer
+ent:prompt-condenser  prov:wasGeneratedBy act:rev-short-form-pivot ;
+                      prov:wasRevisionOf ent:prompt-condenser .
+
+# Updated scientific-writer with page-budget + DLR voice
+ent:prompt-scientific-writer  prov:wasGeneratedBy act:rev-short-form-pivot .
+
+# DLR design assets vendored
+ent:dlr-tokens-css  a prov:Entity ;
+    rdfs:label "DLR colors_and_type.css (vendored)"@en ;
+    dcterms:source <site/static/dlr/colors_and_type.css> ;
+    prov:wasGeneratedBy act:rev-short-form-pivot .
+
+ent:paper-style-fair2r  a prov:Entity ;
+    rdfs:label "paper/style/fair2r.sty"@en ;
+    dcterms:source <paper/style/fair2r.sty> ;
+    prov:wasGeneratedBy act:rev-short-form-pivot .
+
+# Author: Florian Krebs (concrete identity replaces the TBD placeholder)
+agent:human-author  foaf:name "Florian Krebs" ;
+    foaf:mbox <mailto:florian.krebs@dlr.de> ;
+    rdfs:comment "DLR Zentrum für Leichtbauproduktionstechnologie (ZLP), Augsburg. Helmholtz / NFDI4Ing / HMC. ORCID 0000-0001-6033-801X."@en .
+
+# New claims
+claim:short-form-budget  a fair2r:Claim ;
+    rdfs:label "F(AI)^2R is published as a single short-form manuscript with a default body budget of 10 pages, plus references and appendices."@en ;
+    prov:wasAttributedTo agent:human-author ;
+    prov:wasGeneratedBy  act:rev-short-form-pivot ;
+    fair2r:verificationState verif:human-confirmed ;
+    dcterms:created "2026-05-06"^^xsd:date .
+
+claim:ai-rise-motivation  a fair2r:Claim ;
+    rdfs:label "The rising fraction of LLM-modified prose in scholarly venues makes a discipline of authoring-side provenance necessary now, rather than a forensic detection regime applied on the back end."@en ;
+    prov:wasAttributedTo agent:human-author ;
+    prov:wasGeneratedBy  act:rev-short-form-pivot ;
+    prov:wasDerivedFrom  src:liang2024mapping , src:kobak2024delving ,
+                         src:else2023chatgpt , src:vannoorden2023chatgpt ;
+    fair2r:verificationState verif:ai-confirmed ;
+    dcterms:created "2026-05-06"^^xsd:date .
+
+claim:sustainability-cost  a fair2r:Claim ;
+    rdfs:label "F(AI)^2R is not free: every authoring and audit pass burns inference compute, and disclosure should include the order-of-magnitude inference budget alongside the rung distribution."@en ;
+    prov:wasAttributedTo agent:human-author ;
+    prov:wasGeneratedBy  act:rev-short-form-pivot ;
+    fair2r:verificationState verif:human-confirmed ;
+    dcterms:created "2026-05-06"^^xsd:date .
+
+claim:frontier-model-dependence  a fair2r:Claim ;
+    rdfs:label "The pattern's effective behaviour depends on the capability of the underlying frontier model; the receipts (transcripts, prompts, version manifest) are preserved but the capability is not portable."@en ;
+    prov:wasAttributedTo agent:human-author ;
+    prov:wasGeneratedBy  act:rev-short-form-pivot ;
+    fair2r:verificationState verif:human-confirmed ;
+    dcterms:created "2026-05-06"^^xsd:date .
+
+claim:equity-not-neutral  a fair2r:Claim ;
+    rdfs:label "Research groups without access to frontier models cannot apply F(AI)^2R at the same effective rung; the pattern describes the work but does not equalise access to it."@en ;
+    prov:wasAttributedTo agent:human-author ;
+    prov:wasGeneratedBy  act:rev-short-form-pivot ;
+    fair2r:verificationState verif:human-confirmed ;
+    dcterms:created "2026-05-06"^^xsd:date .
+
+claim:dlr-design-alignment  a fair2r:Claim ;
+    rdfs:label "The site, the paper PDF, and the forthcoming slide deck follow the DLR Corporate Design (CD-Handbuch §10.1, §4, §10): Frutiger/Arial stack, DLR-Blue accent, square corners, hairline borders, photography-led imagery, institutional voice."@en ;
+    prov:wasAttributedTo agent:human-author ;
+    prov:wasGeneratedBy  act:rev-short-form-pivot ;
+    fair2r:verificationState verif:source-vendored ;
+    dcterms:created "2026-05-06"^^xsd:date .
+
+#-------------------------------------------------------------------------
 # End of seed graph. Append, do not rewrite.
 #-------------------------------------------------------------------------

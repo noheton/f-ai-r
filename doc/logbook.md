@@ -113,3 +113,58 @@ to `lit-read` over the next sessions; populate the
 `fair2r:Claim` triples for each section in the provenance graph
 (currently three seed claims plus the invariant claim; many more
 named in the prose now require curation).
+
+## 2026-05-06 — Short-form pivot, DLR design integration, sustainability + AI-rise sections, imprint
+*Author:* claude-opus-4-7 (under direction of repo owner)
+*Touched:* every section file under `paper/sections/` (compact
+rewrite); new `paper/sections/sustainability.tex`; new
+`paper/style/fair2r.sty`; rewritten `paper/main.tex`;
+`paper/Makefile` (drop condensed target, add `pages` target with
+`PAGE_BUDGET`); `.github/workflows/build-paper.yml` (drop condensed
+compile, add page-count report); deleted `paper/main-condensed.tex`;
+`paper/references.bib` (add `liang2024mapping`, `kobak2024delving`,
+`else2023chatgpt`, `vannoorden2023chatgpt`); `site/static/style.css`
+(rewritten on DLR tokens); `site/static/dlr/` (vendored DLR
+`colors_and_type.css`, four Frutiger TTFs, `dlr-logo.svg`,
+`dlr-logo-white.svg`); `scripts/build_provenance_site.py` (DLR layout
+template — utility bar, header with logo + org line, blue nav, hero,
+sidebar, content, dark-grey footer ribbon with imprint);
+`site/index.md`; `CITATION.cff`, `codemeta.json`, `.zenodo.json`,
+`README.md` (with the GitHub Pages URL `https://noheton.github.io/f-ai-r/`),
+`paper/sections/acknowledgements.tex` (with the Florian Krebs / DLR
+ZLP / Helmholtz / NFDI4Ing / HMC imprint); `agents/condenser.md`
+(repurposed as page-budget enforcer); `agents/scientific-writer.md`
+(page-budget rule + DLR voice rules + British English);
+`agents/README.md`; `doc/methodology.md` (form factor and design
+section); `doc/submission-plan.md` (single-form venues, including
+NFDI4Ing / HMC / RDA / FORCE11); `doc/todos-for-publication.md`
+(presentation deferred to P3 with explicit Pages-URL on slides
+requirement).
+*Decision / outcome:* Pivoted to the short-form-only manuscript per
+researcher request. The long/condensed split was retired; the
+condenser agent was repurposed as a page-budget enforcer that fires
+when `make -C paper pages` exceeds `PAGE_BUDGET` (default 10).
+Section files were rewritten compactly. New section
+`sustainability.tex` (resource cost, frontier-model dependence,
+equity, long-term archivability) added per researcher request. New
+intro paragraph added on the recent rise of AI-modified prose at
+journals and outlets (Liang 2024, Kobak 2024, Else 2023, Van Noorden
+2023), motivating why a discipline like F(AI)²R is necessary
+*now*. The DLR Corporate Design system (CD-Handbuch §10.1, §4, §10)
+was integrated end-to-end: tokens vendored under
+`site/static/dlr/`; site CSS rewritten on those tokens (utility bar,
+DLR-blue nav, hairline borders, square corners, photography-led
+imagery); LaTeX style file `paper/style/fair2r.sty` carries the
+equivalent typography (helvet→Arial fallback) and accent colours
+into the PDF. Imprint updated with the institutional identity:
+Florian Krebs, ORCID 0000-0001-6033-801X, DLR ZLP Augsburg, Helmholtz
+/ NFDI4Ing / HMC. The GitHub Pages URL
+`https://noheton.github.io/f-ai-r/` is now in the README, in
+`CITATION.cff`, in `codemeta.json`, in `.zenodo.json`, and on the
+public site footer; a deferred TODO records that the same URL must
+appear on the imprint slide and title-slide footer when the slide
+deck is built.
+*Next:* Run the build-paper workflow; verify the compiled PDF stays
+within the 10-page body budget; merge PR #1; mint Zenodo DOI; replace
+`TODO-VERIFY` references with `lit-read` once the human author has
+read them.

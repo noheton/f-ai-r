@@ -1,132 +1,55 @@
 \section{Background}
 \label{sec:background}
 
-We assume the reader is broadly familiar with FAIR. This section fixes
-notation, reviews the two prior FAIR extensions on which we lean, and
-introduces the three further frameworks --- PROV-O, PRISMA 2020, and
-GRADE --- whose combination, we will argue, supplies the missing
-machinery for evidence-anchored LLM-assisted scholarship.
+\paragraph{FAIR and its descendants.}
+The FAIR principles~\cite{wilkinson2016fair} organise into fifteen
+sub-principles (F1--F4, A1--A2, I1--I3, R1.1--R1.3) and were drafted
+as a guideline set rather than a specification. FAIR4RS re-reads them
+for research software, picking up versioning, dependencies, and
+build reproducibility~\cite{chuehong2022fair4rs}.
+FAIR4ML re-reads them for machine-learning models, where ``reusable''
+gathers training-data documentation and intended-use statements
+derived from datasheets~\cite{gebru2021datasheets} and model
+cards~\cite{mitchell2019modelcards,ravi2024fair4ml}. Both extensions
+are additive, not revisionist.
+F(AI)\textsuperscript{2}R is the third such extension. It differs in
+that the artefacts it covers are processual: a prompt is not the
+output of research, but a versioned input that determines how the
+output came about.
 
-\subsection{FAIR}
-\label{sec:bg-fair}
+\paragraph{PROV-O.}
+The W3C PROV family~\cite{w3c2013provo} supplies
+\texttt{prov:Entity}, \texttt{prov:Activity}, \texttt{prov:Agent}, and
+the relations we lean on (\texttt{prov:wasGeneratedBy},
+\texttt{prov:wasAttributedTo}, \texttt{prov:wasDerivedFrom},
+\texttt{prov:hadPlan}). We add a small project namespace
+(\texttt{fair2r:}) with subclasses for the new artefact classes:
+\texttt{fair2r:Claim}, \texttt{fair2r:Source}, \texttt{fair2r:Prompt}
+(a \texttt{prov:Plan}), \texttt{fair2r:AIAgent} and
+\texttt{fair2r:HumanResearcher}, \texttt{fair2r:AuthoringPass} and
+\texttt{fair2r:AuditPass}, and a \texttt{fair2r:VerificationState}
+class whose individuals are the rungs of the ladder defined in
+\S\ref{sec:pattern}. PROV-O is necessary but not sufficient: it
+records that an activity happened, not how confidently a claim was
+verified. That is the ladder's job.
 
-The FAIR Guiding Principles --- Findable, Accessible, Interoperable,
-Reusable --- were published by Wilkinson and
-colleagues~\cite{wilkinson2016fair}. The principles are organised into
-fifteen sub-principles (F1--F4, A1--A2 with A1.1, A1.2 and A2, I1--I3,
-R1 with R1.1--R1.3). FAIR is, by design, a guideline set rather than a
-specification: it describes the properties that make data fit for
-machine consumption without prescribing the technologies that supply
-those properties. The deliberate looseness is what has let the
-principles travel.
+\paragraph{Retrieval depth and certainty of evidence.}
+PRISMA 2020~\cite{page2021prisma} provides a retrieval-depth axis
+(Identification, Screening, Included). GRADE~\cite{guyatt2008grade}
+provides an invocation-strength axis (very low, low, moderate, high).
+Neither was designed for LLM-assisted writing. The verification
+ladder of \S\ref{sec:pattern} is best read as a crosswalk between
+them: PRISMA gives the floor a rung permits; GRADE rates the
+underlying evidence, not the retrieval procedure.
 
-The looseness has also made FAIR easy to retrofit poorly. A common
-failure pattern is to declare FAIR compliance after the fact, when
-identifiers have been minted by accident, machine-readable metadata is
-generated from a brittle scrape of the manuscript, and the
-``interoperable'' and ``reusable'' sub-principles are checked by
-intention rather than evidence. Section~\ref{sec:eight} returns to this
-as the eighth integrated practice: \emph{do not retrofit FAIR}.
-
-\subsection{FAIR4RS and FAIR4ML}
-\label{sec:bg-fair-extensions}
-
-FAIR4RS~\cite{chuehong2022fair4rs} re-reads each of the FAIR
-sub-principles for research software. The exercise is non-trivial:
-software has versions and dependencies that data does not have in the
-same way, and the ``reusable'' axis carries license, provenance, and
-build-reproducibility weight that the original FAIR formulation
-under-specifies. FAIR4ML~\cite{ravi2024fair4ml} performs the same
-exercise for machine-learning models, where ``reusable'' picks up
-training-data documentation, evaluation regimes, and intended-use
-statements derived from the model-cards and datasheets
-literature~\cite{mitchell2019modelcards,gebru2021datasheets}.
-
-Two observations:
-
-\begin{enumerate}
-    \item Each extension preserves the four FAIR letters and adds new
-        sub-principles or refines existing ones for the new artefact
-        class. The pattern is additive, not revisionist.
-    \item Neither extension explicitly accommodates artefact classes
-        that exist downstream of \emph{the writing process itself} ---
-        prompts, transcripts, verification ladders, redaction policies,
-        and per-claim provenance maps.
-\end{enumerate}
-
-F(AI)\textsuperscript{2}R is the third such extension. It follows
-FAIR4RS and FAIR4ML in being additive. It differs in that the
-artefacts it covers are processual rather than terminal: a prompt is
-not the output of the research, but a versioned input that determines
-how the output came about.
-
-\subsection{PROV-O}
-\label{sec:bg-prov}
-
-The W3C PROV family~\cite{w3c2013provo} supplies a vocabulary for
-expressing provenance: \texttt{prov:Entity} (something that exists),
-\texttt{prov:Activity} (something that happens, possibly to entities),
-\texttt{prov:Agent} (something or someone responsible). The relations
-that matter most for our purposes are \texttt{prov:wasGeneratedBy},
-\texttt{prov:wasAttributedTo}, \texttt{prov:wasDerivedFrom}, and
-\texttt{prov:hadPlan}. PROV-O is the OWL profile and is sufficient for
-the level of detail we need.
-
-We introduce a small project namespace
-(\texttt{fair2r:}) with subclasses for the artefacts particular to
-LLM-assisted scholarship --- \texttt{fair2r:Claim},
-\texttt{fair2r:Source}, \texttt{fair2r:Prompt} (a
-\texttt{prov:Plan}), \texttt{fair2r:AIAgent} and
-\texttt{fair2r:HumanResearcher} (subclasses of
-\texttt{prov:SoftwareAgent} and \texttt{prov:Person} respectively),
-\texttt{fair2r:AuthoringPass} and \texttt{fair2r:AuditPass}
-(subclasses of \texttt{prov:Activity}), and a
-\texttt{fair2r:VerificationState} class whose individuals are the
-rungs of the ladder defined in Section~\ref{sec:ladder}. The full
-schema is in \texttt{doc/provenance.ttl} of the accompanying
-repository; Appendix~\ref{app:fair-cells} shows it as a table.
-
-PROV-O is necessary but not sufficient. It records that an activity
-happened and that an agent participated; it does not, on its own, say
-how confidently a claim has been verified. That is what the
-verification ladder is for.
-
-\subsection{PRISMA 2020 and GRADE}
-\label{sec:bg-prisma-grade}
-
-PRISMA 2020~\cite{page2021prisma} is the dominant reporting standard
-for systematic reviews. Its flow diagram (Identification, Screening,
-Included) is, structurally, a verification ladder: each rung represents
-a deeper engagement with the literature, and an item's rung at
-publication time tells the reader how much retrieval effort underpins
-its inclusion.
-
-GRADE~\cite{guyatt2008grade} is the dominant framework for rating the
-\emph{certainty of evidence} behind a clinical recommendation. It is
-not a retrieval ladder but a strength-of-evidence ladder:
-\textsc{very low}, \textsc{low}, \textsc{moderate}, \textsc{high}.
-
-We will argue, in Section~\ref{sec:ladder}, that the verification
-ladder F(AI)\textsuperscript{2}R uses for individual claims is best
-read as a crosswalk between PRISMA 2020 (retrieval depth) and GRADE
-(invocation strength). The crosswalk is the floor a rung permits, not
-a guarantee of the ceiling.
-
-\subsection{AI-disclosure norms}
-\label{sec:bg-norms}
-
-The disclosure landscape is a moving target. The \textsc{ICMJE}
-Recommendations and most major venues now require authors to disclose
-the use of generative AI tools and to take responsibility for the
-output~\cite{icmje2023}. Some venues have explicit policies on
-AI co-authorship, all of which converge on one position: AI is not an
-author. The legal background, in jurisdictions including
-Germany (\S2 \emph{UrhG}), is consistent: AI cannot hold copyright,
-cannot consent to publication, and cannot be held accountable. We
-return to this in the seventh integrated practice
-(\S\ref{sec:practice-legal}).
-
-The norms cover \emph{whether to disclose}. They do not cover
-\emph{what to preserve}: which transcripts, which prompt versions,
-which model identifiers, which verification states. F(AI)\textsuperscript{2}R
-is the proposal that there is a usable answer.
+\paragraph{Disclosure norms.}
+The \textsc{ICMJE} Recommendations and most major venues now require
+authors to disclose the use of generative AI and to take
+responsibility for the output~\cite{icmje2023}. All converge on one
+position: AI is not an author. The legal background is consistent ---
+in Germany (\S2 \emph{UrhG}), in the United States (USCO 2023), and
+through the major medical journals --- AI cannot hold copyright,
+cannot consent to publication, and cannot be held accountable. The
+disclosure landscape covers \emph{whether} to disclose; it does not
+yet cover \emph{what to preserve}. F(AI)\textsuperscript{2}R is the
+proposal that there is a usable answer.

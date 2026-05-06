@@ -62,11 +62,11 @@ NAV: list[tuple[str, str]] = [
 MD_EXT = ["fenced_code", "tables", "toc", "sane_lists"]
 
 TEMPLATE = """<!doctype html>
-<html lang="en">
+<html lang="en" data-variant="a">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>{title} - F(AI^2)R</title>
+<title>{title} - F(AI)²R</title>
 <link rel="stylesheet" href="static/style.css">
 <script type="module">
   import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
@@ -74,14 +74,72 @@ TEMPLATE = """<!doctype html>
 </script>
 </head>
 <body>
-<header>
-  <h1><a href="index.html">F(AI&sup2;)R</a></h1>
-  <p class="tagline">FAIR research with AI in the loop, twice.</p>
-  <nav>{nav}</nav>
-</header>
-<main>{body}</main>
+<div class="utility">
+  <div class="inner">
+    <a href="https://github.com/noheton/f-ai-r">Repository</a>
+    <a href="https://orcid.org/0000-0001-6033-801X">ORCID</a>
+    <span>EN</span>
+  </div>
+</div>
+<div class="header">
+  <div class="inner">
+    <img class="logo" src="static/dlr/dlr-logo.svg" alt="DLR Logo">
+    <div class="org-line">
+      <span class="big">F(AI)²R &mdash; FAIR Research with AI in the Loop, Twice</span>
+      DLR Zentrum für Leichtbauproduktionstechnologie (ZLP), Augsburg
+      &middot; Helmholtz-Gemeinschaft &middot; NFDI4Ing &middot; HMC
+    </div>
+  </div>
+</div>
+<nav class="nav">
+  <div class="inner">{nav}</div>
+</nav>
+<section class="hero">
+  <div class="inner">
+    <div class="eyebrow">{eyebrow}</div>
+    <h1>{hero_title}</h1>
+  </div>
+</section>
+<main>
+  <aside class="sidebar">
+    <h4>On this site</h4>
+    <ul>{sidebar}</ul>
+    <h4>External</h4>
+    <ul>
+      <li><a href="https://github.com/noheton/f-ai-r">GitHub repository</a></li>
+      <li><a href="https://orcid.org/0000-0001-6033-801X">ORCID 0000-0001-6033-801X</a></li>
+      <li><a href="https://www.dlr.de/zlp">DLR ZLP Augsburg</a></li>
+    </ul>
+  </aside>
+  <article class="content">{body}</article>
+</main>
 <footer>
-  <p>Built {built} from <a href="https://github.com/noheton/f-ai-r">noheton/f-ai-r</a>. Code: MIT. Prose: CC-BY-4.0.</p>
+  <div class="inner">
+    <div>
+      <h4>F(AI)²R</h4>
+      <p>FAIR research with AI in the loop, twice. Working paper plus
+         reproducible writing pipeline. Built {built} from
+         <a href="https://github.com/noheton/f-ai-r">noheton/f-ai-r</a>.</p>
+    </div>
+    <div>
+      <h4>Imprint</h4>
+      <p>Florian Krebs<br>
+         ORCID 0000-0001-6033-801X<br>
+         DLR ZLP, Augsburg</p>
+    </div>
+    <div>
+      <h4>Affiliations</h4>
+      <p><a href="https://www.helmholtz.de/">Helmholtz-Gemeinschaft</a><br>
+         <a href="https://nfdi4ing.de/">NFDI4Ing</a><br>
+         <a href="https://helmholtz-metadaten.de/">HMC</a></p>
+    </div>
+  </div>
+  <div class="legal">
+    <div class="inner">
+      <span>Code: MIT &middot; Prose: CC-BY-4.0</span>
+      <span>Photo credit (where present): DLR (CC BY-NC-ND 3.0) sofern nicht anders angegeben.</span>
+    </div>
+  </div>
 </footer>
 </body>
 </html>
@@ -109,17 +167,28 @@ def nav_html(active: str) -> str:
     for slug, title in NAV:
         cls = ' class="active"' if slug == active else ""
         parts.append(f'<a href="{slug}.html"{cls}>{title}</a>')
-    return " &middot; ".join(parts)
+    return "".join(parts)
 
 
-def write_page(slug: str, title: str, body_html: str) -> None:
+def sidebar_html(active: str) -> str:
+    parts: list[str] = []
+    for slug, title in NAV:
+        cls = ' class="active"' if slug == active else ""
+        parts.append(f'<li><a href="{slug}.html"{cls}>{title}</a></li>')
+    return "".join(parts)
+
+
+def write_page(slug: str, title: str, body_html: str, eyebrow: str = "F(AI)²R") -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     out = OUT / f"{slug}.html"
     out.write_text(
         TEMPLATE.format(
             title=html.escape(title),
+            hero_title=html.escape(title),
+            eyebrow=html.escape(eyebrow),
             body=body_html,
             nav=nav_html(slug),
+            sidebar=sidebar_html(slug),
             built=_dt.date.today().isoformat(),
         ),
         encoding="utf-8",

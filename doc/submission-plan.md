@@ -4,12 +4,19 @@ A living checklist of where this paper might land.
 
 ## Candidate venues
 
-| Venue | Form | Page limit | Fit | Status |
-|---|---|---|---|---|
-| TBD workshop on AI & scholarly communication | short | 4 | high | shortlist |
-| TBD journal on research data management       | full  | 12-20 | high | shortlist |
-| arXiv (cs.DL)                                  | preprint | none | always | planned |
-| Zenodo deposit                                 | archival | none | always | planned |
+F(AI)²R is published as a single short-form manuscript: ~10 pages of
+body, plus references and appendices.
+
+| Venue | Page limit | Fit | Status |
+|---|---|---|---|
+| arXiv (cs.DL)                                       | none | always | planned |
+| Zenodo deposit (Helmholtz / NFDI4Ing / HMC tagged)  | none | always | planned |
+| FORCE11 workshop / scholarly-communication track    | ~10  | high   | shortlist |
+| RDA plenary working-group presentation              | ~10  | high   | shortlist |
+| HMC FAIR-metadata symposium                         | ~10  | high   | shortlist |
+| Helmholtz Open-Science publication channel          | ~12  | medium | shortlist |
+| *Quantitative Science Studies* (MIT Press)          | full | medium | candidate |
+| *Data Intelligence* (MIT Press)                     | full | medium | candidate |
 
 ## Pre-submission checklist
 
@@ -17,7 +24,8 @@ A living checklist of where this paper might land.
 - [ ] All `\todo` removed from `paper/main.tex`.
 - [ ] FAIR audit report passes (`doc/fair-audit-*.md`).
 - [ ] Provenance graph validates (`riot --validate`).
-- [ ] Condensed version compiles within page limit.
+- [ ] Body within page budget (`make -C paper pages` ≤ `PAGE_BUDGET`,
+      default 10) excluding references and appendices.
 - [ ] Camera-ready figures vector or ≥300dpi raster.
 - [ ] Bibliography reviewed for hallucinated entries.
 - [ ] Acknowledgements include AI tooling per venue policy.
