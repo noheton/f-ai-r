@@ -1,0 +1,7 @@
+# Marp output (rendered from the .md sources via slides/Makefile or
+# the build-slides workflow); not committed because the .md sources
+# plus the vendored DLR theme are the source of truth.
+dist/
+*.pptx
+*.pdf
+*.html

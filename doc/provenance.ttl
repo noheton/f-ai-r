@@ -1540,6 +1540,72 @@ hc:obs-prompt-accretion       a fair2r:MetaContribution ;
     fair2r:promotedToPaper "pending" ;
     dcterms:created "2026-05-06"^^xsd:date .
 
+#-------------------------------------------------------------------------
+# Slide decks as a fourth primary artefact
+#-------------------------------------------------------------------------
+
+fair2r:Slidedeck             a owl:Class ; rdfs:subClassOf prov:Entity ;
+    rdfs:label "Slide deck"@en ;
+    rdfs:comment "Marp-rendered slide deck under slides/. Source-of-truth is the .md file; rendered .pdf / .pptx / .html are derived artefacts."@en .
+
+ent:slidedeck-pitch          a fair2r:Slidedeck ;
+    rdfs:label "F(AI)^2R --- 5-minute pitch deck"@en ;
+    dcterms:source <slides/pitch-5min.md> ;
+    prov:wasAttributedTo agent:scientific-writer , agent:human-author .
+
+ent:slidedeck-conference     a fair2r:Slidedeck ;
+    rdfs:label "F(AI)^2R --- 25+5 conference deck"@en ;
+    dcterms:source <slides/conference-30min.md> ;
+    prov:wasAttributedTo agent:scientific-writer , agent:human-author .
+
+ent:prompt-presentation      a fair2r:Prompt ;
+    dcterms:source <agents/presentation.md> ;
+    rdfs:label "Presentation agent prompt (slide-deck custodian)"@en .
+
+agent:presentation           a fair2r:AIAgent ;
+    foaf:name "Presentation" ;
+    prov:actedOnBehalfOf agent:human-author .
+
+ent:workflow-build-slides    a prov:Entity ;
+    rdfs:label ".github/workflows/build-slides.yml"@en ;
+    dcterms:source <.github/workflows/build-slides.yml> .
+
+act:rev-add-slide-decks      a prov:Activity ;
+    rdfs:label "Add 5-minute pitch + 25+5 conference decks; vendor marp-dlr theme; presentation agent; CI for slides; promote slides to fourth primary artefact"@en ;
+    prov:startedAtTime "2026-05-06T00:00:00Z"^^xsd:dateTime ;
+    prov:endedAtTime   "2026-05-06T00:00:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith agent:claude-opus-4-7 ;
+    prov:wasAssociatedWith agent:human-author ;
+    prov:generated ent:slidedeck-pitch ,
+                   ent:slidedeck-conference ,
+                   ent:prompt-presentation ,
+                   ent:workflow-build-slides .
+
+ent:slidedeck-pitch          prov:wasGeneratedBy act:rev-add-slide-decks .
+ent:slidedeck-conference     prov:wasGeneratedBy act:rev-add-slide-decks .
+ent:prompt-presentation      prov:wasGeneratedBy act:rev-add-slide-decks .
+ent:workflow-build-slides    prov:wasGeneratedBy act:rev-add-slide-decks .
+
+claim:slides-as-primary-artefact  a fair2r:Claim ;
+    rdfs:label "Slide decks (slides/*.md) join the manuscript, the PROV-O graph, and the logbook as the fourth primary artefact under the consistency invariant. A claim graduates to a slide only after it has graduated to the paper text; a slide that contradicts the paper is a defect surfaced by the FAIR Aligner."@en ;
+    prov:wasAttributedTo agent:human-author ;
+    prov:wasGeneratedBy  act:rev-add-slide-decks ;
+    fair2r:verificationState verif:human-confirmed ;
+    dcterms:created "2026-05-06"^^xsd:date .
+
+hc:slide-decks               a fair2r:HumanContribution ;
+    rdfs:label "Researcher request: two slide decks (5-minute pitch + 25+5 conference) on the DLR design system, treated as primary artefacts, included in CI; create a fitting presentation agent"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "structural-decision" ;
+    fair2r:contributionLeverage "high" ;
+    rdfs:comment "Researcher proposed: 'every paper needs a slide deck. I want you to design 2 slide decks. A 5 minute pitch deck and a 25+5 conference deck for the paper. can you generate it using the DLR DESIGN system. both should be treated as primary artifacts. included in ci. create a fitting presentation agent'. Two decks added under slides/, vendored marp-dlr theme under slides/static/dlr/, slides/Makefile + .github/workflows/build-slides.yml for CI, agents/presentation.md as the slide-deck custodian, CLAUDE.md and doc/methodology.md updated to make slides the fourth primary artefact."@en ;
+    dcterms:created "2026-05-06"^^xsd:date ;
+    prov:influenced ent:slidedeck-pitch ,
+                    ent:slidedeck-conference ,
+                    ent:prompt-presentation ,
+                    ent:workflow-build-slides ,
+                    claim:slides-as-primary-artefact .
+
 hc:obs-latency-as-feature      a fair2r:MetaContribution ;
     rdfs:label "Latency between prompt and response is a cognitive feature, not a bug; it allows formulation work and short context switches (e.g. checking on a coding agent in another window)"@en ;
     fair2r:contributedBy agent:human-author ;

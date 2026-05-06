@@ -6,18 +6,22 @@ says.
 
 ## Primary artifacts (invariant)
 
-Three artifacts are primary and must be **consistent and up to date at all
+Four artifacts are primary and must be **consistent and up to date at all
 times**:
 
-1. The **manuscript** (`paper/main.tex`, `paper/main-condensed.tex`,
-   `paper/sections/*.tex`).
+1. The **manuscript** (`paper/main.tex`, `paper/sections/*.tex`).
 2. The **PROV-O graph** (`doc/provenance.ttl`).
 3. The **logbook** (`doc/logbook.md`).
+4. The **slide decks** — `slides/pitch-5min.md` (5-minute pitch) and
+   `slides/conference-30min.md` (25 + 5 conference talk). Rendered
+   PDF / PPTX outputs in `slides/dist/` are derivatives.
 
-A working session is not complete until all three are in sync. A commit
+A working session is not complete until all four are in sync. A commit
 that updates one of them and leaves the others lagging is a defect, even
 if the build passes. This invariant supersedes any per-agent style rule
-elsewhere in this repository.
+elsewhere in this repository. The slide decks are downstream of the
+manuscript: a claim that appears on a slide must already appear in the
+paper text.
 
 ## Pipeline overview
 

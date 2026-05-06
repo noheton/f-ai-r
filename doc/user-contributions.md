@@ -279,6 +279,27 @@ primary-artefact consistency invariant.
 `agents/orchestrator.md`.
 *Provenance IRI:* `fair2r:hc-contribution-rule`
 
+### 2026-05-06 --- Two slide decks + presentation agent + slides as fourth primary artefact
+*Type:* `structural-decision`
+*Leverage:* high
+*Triggered:* New `slides/` tree with the vendored marp-dlr theme
+under `slides/static/dlr/`; two source decks
+(`slides/pitch-5min.md` for the 5-minute pitch and
+`slides/conference-30min.md` for the 25 + 5 conference talk);
+`slides/Makefile` (`make all`, `make pitch`, `make conference`,
+`make watch`); new `.github/workflows/build-slides.yml` workflow
+that renders both decks to PDF + PPTX + HTML on every push and
+publishes the rendered files to a rolling `latest-draft-slides`
+GitHub Release on `main`; new `agents/presentation.md` as the
+slide-deck custodian; **slides promoted to fourth primary artefact**
+in `CLAUDE.md` and `doc/methodology.md`. README and `site/index.md`
+gain prominent download links to both decks (PDF and PPTX).
+*Artefacts touched:* `slides/`, `.github/workflows/build-slides.yml`,
+`agents/presentation.md`, `CLAUDE.md`, `doc/methodology.md`,
+`doc/provenance.ttl`, `doc/user-contributions.md`,
+`doc/logbook.md`, `README.md`, `site/index.md`.
+*Provenance IRI:* `fair2r:hc-slide-decks`
+
 ### 2026-05-06 --- "yes" --- promote the longer-arc paragraph into the Conclusion
 *Type:* `structural-decision`
 *Leverage:* medium
