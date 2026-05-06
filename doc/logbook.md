@@ -358,3 +358,56 @@ requires an actual fetch of the source plus a quoted snippet for
 `ai-confirmed`, and a human reader for `lit-read`.
 *Next:* Await the source-verification subagent; merge its
 results in a follow-up commit.
+
+## 2026-05-06 — Second-pass source research, scientific-repository tool list, institutional-access channel
+*Author:* claude-opus-4-7 (orchestrator) + source-research subagent
+*Touched:* `paper/references.bib` (eleven new entries),
+`paper/sections/intro.tex`, `paper/sections/background.tex`,
+`paper/sections/failure-modes.tex`,
+`paper/sections/sustainability.tex`, `doc/sources.md`,
+`agents/source-analyzer.md`, `doc/research-protocol.md`,
+new `doc/sources-needing-institutional-access.md`,
+`doc/provenance.ttl`.
+*Decision / outcome:* The second-pass source-research subagent
+ran against the verification ladder of `doc/methodology.md` and
+returned eleven new BibTeX entries, all identifier-verified,
+all flagged TODO-VERIFY at `lit-read` pending human reading:
+`luccioni2024power`, `patterson2021carbon`, `li2023thirsty`,
+`strubell2019energy`, `birhane2022values` (sustainability
+paragraph); `shumailov2024collapse`, `alemohammad2023mad`
+(model-collapse row in the failure-modes table); `chen2023drift`
+(frontier-model dependence in sustainability); `thorp2023chatgpt`
+(intro editorial position); `usco2023ai` (US Copyright Office
+2023 Federal Register guidance) and `urhg2` (German UrhG §2)
+covering the legal-honesty-about-authorship paragraph in
+`background.tex`. Each new citation lands with an inline
+`\todo[inline]{verify}` placeholder so the human author can
+confirm at `lit-read`. The subagent terminated with a 529
+overload after 45 tool calls, having completed the canonical
+work; nothing was lost.
+
+The source workflow is extended with a full catalogue of
+scientific repositories: arXiv, OpenAlex, Crossref, PubMed /
+EuropePMC, IEEE Xplore, Springer Link, ACM Digital Library,
+ScienceDirect / Elsevier, plus the standards-track surfaces W3C
+/ RDA / NIST / ISO. `agents/source-analyzer.md` and
+`doc/research-protocol.md` both carry the binding catalogue.
+
+The institutional-access channel is a new file
+`doc/sources-needing-institutional-access.md` ---
+**append-only**, schema-tight. When a source is necessary for a
+load-bearing claim but the full text is paywalled and the
+abstract is insufficient, the agent appends a structured request
+(bibkey, identifier, why-needed, specifically-need, abstract-ok?,
+status). The human author has DLR institutional access via TIB
+/ ZB MED / Helmholtz e-journals / direct publisher
+subscriptions, and supplies the PDF; once supplied, the source
+moves to `source-vendored` under `doc/sources/<bibkey>/`. A
+pending request older than 30 days is a soft `warn` from the
+Aligner; a claim unverified for more than 90 days must be hedged
+in prose or removed. This is the explicit escalation path
+that replaces the silent downgrade / synthesised-quotation
+failure mode named in `§\ref{sec:failure-modes}`.
+*Next:* Visual review of the eleven new citations; on the next
+session, advance some of them to `lit-read` and curate per-claim
+`prov:wasDerivedFrom` triples in the graph.
