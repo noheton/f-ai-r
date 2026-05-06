@@ -1140,6 +1140,136 @@ hc:third-pass-research        a fair2r:HumanContribution ;
     prov:influenced ent:manuscript .
 
 #-------------------------------------------------------------------------
+# Section-graph repair: section entities for the position-paper additions
+# (caught by the third-pass context-data scan); section-discussion marked
+# invalidated since the file was retired during the position-paper reframe.
+#-------------------------------------------------------------------------
+
+ent:section-position           a fair2r:Section ;
+    rdfs:label "Position"@en ;
+    prov:hadPrimarySource ent:manuscript ;
+    prov:wasGeneratedBy act:rev-short-form-pivot ;
+    prov:wasAttributedTo agent:scientific-writer , agent:human-author .
+
+ent:section-objections         a fair2r:Section ;
+    rdfs:label "Anticipated Objections"@en ;
+    prov:hadPrimarySource ent:manuscript ;
+    prov:wasGeneratedBy act:rev-short-form-pivot ;
+    prov:wasAttributedTo agent:scientific-writer , agent:human-author .
+
+ent:section-authors-note       a fair2r:Section ;
+    rdfs:label "Author's Note --- Advice for reading"@en ;
+    prov:hadPrimarySource ent:manuscript ;
+    prov:wasGeneratedBy act:rev-short-form-pivot ;
+    prov:wasAttributedTo agent:scientific-writer , agent:human-author .
+
+ent:section-statement-of-authorship  a fair2r:Section ;
+    rdfs:label "Statement of authorship and AI use"@en ;
+    prov:hadPrimarySource ent:manuscript ;
+    prov:wasGeneratedBy act:rev-short-form-pivot ;
+    prov:wasAttributedTo agent:human-author .
+
+act:invalidate-discussion-section  a prov:Activity ;
+    rdfs:label "Retire ent:section-discussion (file superseded by position.tex + objections.tex + statement-of-authorship.tex)"@en ;
+    prov:startedAtTime "2026-05-06T00:00:00Z"^^xsd:dateTime ;
+    prov:endedAtTime   "2026-05-06T00:00:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith agent:claude-opus-4-7 ;
+    prov:invalidated ent:section-discussion .
+
+#-------------------------------------------------------------------------
+# Eleven new sources from the third-pass research (lit-retrieved)
+#-------------------------------------------------------------------------
+
+src:clark1998extended          a fair2r:Source ;
+    dcterms:title "The Extended Mind"@en ;
+    dcterms:identifier "doi:10.1093/analys/58.1.7" ;
+    fair2r:verificationState verif:lit-retrieved .
+
+src:hutchins1995cognition      a fair2r:Source ;
+    dcterms:title "Cognition in the Wild"@en ;
+    dcterms:identifier "isbn:9780262581462" ;
+    fair2r:verificationState verif:lit-retrieved .
+
+src:clark2025extending         a fair2r:Source ;
+    dcterms:title "Extending Minds with Generative AI"@en ;
+    dcterms:identifier "Nature Communications 2025 (DOI deferred)" ;
+    fair2r:verificationState verif:lit-retrieved .
+
+src:anderson2024homogenization a fair2r:Source ;
+    dcterms:title "Homogenization Effects of Large Language Models on Human Creative Ideation"@en ;
+    dcterms:identifier "doi:10.1145/3635636.3656204" ;
+    fair2r:verificationState verif:lit-retrieved .
+
+src:kuteeva2024diversity       a fair2r:Source ;
+    dcterms:title "Diversity and Standards in Writing for Publication in the Age of AI"@en ;
+    dcterms:identifier "doi:10.1093/applin/amae025" ;
+    fair2r:verificationState verif:lit-retrieved .
+
+src:reynolds2021prompt         a fair2r:Source ;
+    dcterms:title "Prompt Programming for Large Language Models: Beyond the Few-Shot Paradigm"@en ;
+    dcterms:identifier "doi:10.1145/3411763.3451760" ;
+    fair2r:verificationState verif:lit-retrieved .
+
+src:liu2023prompt              a fair2r:Source ;
+    dcterms:title "Pre-train, Prompt, and Predict: A Systematic Survey of Prompting Methods in Natural Language Processing"@en ;
+    dcterms:identifier "doi:10.1145/3560815" ;
+    fair2r:verificationState verif:lit-retrieved .
+
+src:sadasivan2023reliably      a fair2r:Source ;
+    dcterms:title "Can AI-Generated Text be Reliably Detected?"@en ;
+    dcterms:identifier "arXiv:2303.11156" ;
+    fair2r:verificationState verif:lit-retrieved .
+
+src:curdt2025hmc               a fair2r:Source ;
+    dcterms:title "Helmholtz Metadata Collaboration position paper"@en ;
+    dcterms:identifier "doi:10.5281/zenodo.15113717" ;
+    fair2r:verificationState verif:lit-retrieved .
+
+src:schmitt2020nfdi4ing        a fair2r:Source ;
+    dcterms:title "NFDI4Ing --- The National Research Data Infrastructure for Engineering Sciences"@en ;
+    dcterms:identifier "doi:10.5281/zenodo.4015201" ;
+    fair2r:verificationState verif:lit-retrieved .
+
+#-------------------------------------------------------------------------
+# Three new figures
+#-------------------------------------------------------------------------
+
+ent:figure-ladder-fsm          a fair2r:Figure ;
+    rdfs:label "Verification ladder as FSM"@en ;
+    dcterms:source <paper/figures/ladder-fsm.tex> ;
+    prov:wasAttributedTo agent:illustration , agent:human-author .
+
+ent:figure-axes                a fair2r:Figure ;
+    rdfs:label "F(AI)^2R axes (4x2 grid)"@en ;
+    dcterms:source <paper/figures/axes.tex> ;
+    prov:wasAttributedTo agent:illustration , agent:human-author .
+
+ent:figure-coupling-rule       a fair2r:Figure ;
+    rdfs:label "Coupling rule (prose-craft / abstracting partition)"@en ;
+    dcterms:source <paper/figures/coupling-rule.tex> ;
+    prov:wasAttributedTo agent:illustration , agent:human-author .
+
+act:rev-readability-figures    a prov:Activity ;
+    rdfs:label "Add three readability-improving figures (ladder FSM, axes grid, coupling rule)"@en ;
+    prov:startedAtTime "2026-05-06T00:00:00Z"^^xsd:dateTime ;
+    prov:endedAtTime   "2026-05-06T00:00:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith agent:claude-opus-4-7 ;
+    prov:wasAssociatedWith agent:human-author ;
+    prov:generated ent:figure-ladder-fsm , ent:figure-axes , ent:figure-coupling-rule .
+
+ent:figure-ladder-fsm          prov:wasGeneratedBy act:rev-readability-figures .
+ent:figure-axes                prov:wasGeneratedBy act:rev-readability-figures .
+ent:figure-coupling-rule       prov:wasGeneratedBy act:rev-readability-figures .
+
+hc:readability-figures         a fair2r:HumanContribution ;
+    rdfs:label "Researcher request: more illustrations to improve readability"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "content-prompt" ;
+    fair2r:contributionLeverage "medium" ;
+    dcterms:created "2026-05-06"^^xsd:date ;
+    prov:influenced ent:figure-ladder-fsm , ent:figure-axes , ent:figure-coupling-rule .
+
+#-------------------------------------------------------------------------
 # Back-filled MetaContribution instances (mirror of doc/user-observations-log.md)
 #-------------------------------------------------------------------------
 

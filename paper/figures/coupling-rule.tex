@@ -1,0 +1,72 @@
+% Coupling rule: prose-craft / abstracting partition with accelerator-vs-
+% blender outcomes. Visualises the second-order finding in the Author's
+% Note (sec:authors-note, "What surprised me about the cooperation").
+% Loaded by paper/sections/authors-note.tex via \input.
+\begin{figure}[!t]
+\centering
+\begin{tikzpicture}[
+  node distance=0pt,
+  every node/.style={font=\sffamily\footnotesize, align=center,
+                     inner sep=5pt},
+  layer/.style={draw, line width=0.5pt, minimum width=44mm,
+                minimum height=11mm, text=black},
+  abstract/.style={layer, fill=dlrGruen5, draw=dlrGruen1},
+  prose/.style={layer, fill=dlrBlau5, draw=dlrBlau1},
+  human/.style={fill=dlrGruen1, draw=dlrGruen1, text=white,
+                minimum width=22mm, minimum height=8mm,
+                font=\sffamily\bfseries\footnotesize, align=center},
+  ai/.style={fill=dlrBlau1, draw=dlrBlau1, text=white,
+             minimum width=22mm, minimum height=8mm,
+             font=\sffamily\bfseries\footnotesize, align=center},
+  ok/.style={font=\sffamily\bfseries\small, text=dlrGruen1},
+  bad/.style={font=\sffamily\bfseries\small, text=dlrGelb1},
+  arrow/.style={-{Latex[length=1.5mm]}, draw=dlrGrau1, line width=0.4pt},
+  note/.style={font=\sffamily\itshape\footnotesize, text=dlrGrau1},
+]
+% Two cognitive layers, abstract on top, prose-craft below
+\node[abstract] (abs) at (0,0) {\textbf{Abstracting layer}\\
+  deciding, framing, position-taking};
+\node[prose]    (pro) at (0,-1.4) {\textbf{Prose-craft layer}\\
+  drafting, structuring, cross-referencing};
+
+% Agent stand-ins
+\node[human] (H) at (-3.4,0)   {human};
+\node[ai]    (M) at (-3.4,-1.4) {model};
+
+% Couplings: human stays on abstract; model stays on prose-craft = OK
+\draw[arrow] (H) -- (abs);
+\draw[arrow] (M) -- (pro);
+
+% Outcome arrows on the right
+\node[ok]  (acc) at (4.0, 0)    {accelerator};
+\node[bad] (bld) at (4.0, -1.4) {cultural blender};
+
+\draw[arrow] (abs) -- (acc);
+\draw[arrow] (pro) -- (acc);
+
+% Crossover (model into abstract layer) shown as dashed danger
+\draw[arrow, dashed, draw=dlrGelb1, line width=0.4pt]
+  (M) to[bend left=18] node[note, midway, above]
+    {if the model crosses up} (abs.south west);
+\draw[arrow, dashed, draw=dlrGelb1, line width=0.4pt]
+  (abs.east) to[bend left=18] (bld.west);
+
+% Diagnostic question, bottom
+\node[note] (q) at (0,-2.7)
+  {\textit{Diagnostic:} would the abstraction have been thinkable
+   without the model?};
+\node[ok, anchor=west]  at ([xshift=4mm]q.east) {if yes: accelerator};
+\node[bad, anchor=west] at ([xshift=4mm,yshift=-3.5mm]q.east) {if no: open question};
+\end{tikzpicture}
+\caption{The coupling rule that sharpens the human-deciding /
+model-drafting partition into a normative diagnostic. The cooperation
+works as an \emph{accelerator} (right-top, green) when the model
+stays on the prose-craft side of the partition (solid arrow). It
+collapses toward a \emph{cultural blender} (right-bottom, yellow)
+when the model is allowed across into the abstracting layer (dashed
+arrows). The honest diagnostic, recorded in
+\texttt{doc/user-observations-log.md}: \emph{ask whether the
+abstraction would have been thinkable without the model.} See
+\S\ref{sec:authors-note}.}
+\label{fig:coupling-rule}
+\end{figure}

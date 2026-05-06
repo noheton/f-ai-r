@@ -582,3 +582,61 @@ commit.
 *Next:* Fold the subagent's bibliography additions and the context-
 data findings; commit + PR + merge; trigger the build-paper workflow
 on `main` to refresh the `latest-draft` PDF.
+
+## 2026-05-06 — Three illustrations + 11 new sources + section-graph repair
+*Author:* claude-opus-4-7 (under direction of repo owner)
+*Touched:* new `paper/figures/ladder-fsm.tex`, new
+`paper/figures/axes.tex`, new `paper/figures/coupling-rule.tex`;
+`paper/sections/pattern.tex` (figures wired in §3.1 *Axes* and §3.3
+*FSM*); `paper/sections/authors-note.tex` (coupling-rule figure
+wired; four new `\cite{}` keys: `clark1998extended`,
+`hutchins1995cognition`, `clark2025extending`,
+`anderson2024homogenization`); `paper/sections/intro.tex`
+(`\cite{sadasivan2023reliably}` added to the
+detection-arms-race sentence); `paper/sections/evolution.tex`
+(`\cite{kuteeva2024diversity}` for humanities-exception;
+`\cite{reynolds2021prompt,liu2023prompt}` for prompt-as-programming);
+`paper/sections/statement-of-authorship.tex` (`\cite{curdt2025hmc}`
+and `\cite{schmitt2020nfdi4ing}` added to the institutional-context
+paragraph); `paper/references.bib` (11 new entries, all
+`lit-retrieved`); `doc/sources.md` (new entries indexed);
+`doc/provenance.ttl` (four new `fair2r:Section` IRIs for
+`section-position`, `section-objections`, `section-authors-note`,
+`section-statement-of-authorship`; one
+`prov:Invalidation` for `ent:section-discussion`; ten new
+`fair2r:Source` entities; three new `fair2r:Figure` entities; new
+`act:rev-readability-figures` activity; new
+`hc:readability-figures` HumanContribution).
+*Decision / outcome:* Researcher noted the paper is "still a bit
+hard to read" and asked for more illustrations. Three TikZ figures
+were added on the DLR token palette so they fit the existing
+visual grammar: (a) the verification ladder as a finite-state
+machine with five colour-coded rungs and the dashed retraction
+back-edge; (b) the F(AI)\textsuperscript{2}R axes as a $4\times 2$
+grid showing the (AI)\textsuperscript{2} factor multiplied through
+every axis with one row per pass; (c) the coupling rule from the
+Author's Note rendered as a two-layer partition with accelerator /
+cultural-blender outcomes and the diagnostic question along the
+bottom. Each figure replaces a paragraph that had been carrying
+load by prose alone.
+A third-pass source-research subagent ran in parallel and added
+eleven new bibliography entries (Clark \& Chalmers 1998,
+Hutchins 1995, Clark 2025, Anderson et al. 2024, Kuteeva \&
+Andersson 2024, Reynolds \& McDonell 2021, Liu et al. 2023,
+Sadasivan et al. 2023, Curdt et al. 2025 HMC,
+Schmitt et al. 2020 NFDI4Ing) and ran a context-data pass that
+caught three section-graph mismatches: `ent:section-discussion`
+existed in the graph after its file was retired; the four
+position-paper section files had no corresponding
+`fair2r:Section` IRIs. All three issues are repaired in this
+commit. The subagent reported zero dangling `\cite{}` keys, zero
+orphan `hc:` IRIs.
+The Consensus tool reports 3 searches remaining this month
+(resets June 1st); the project should plan further peer-reviewed
+verification accordingly.
+*Next:* Trigger the build-paper workflow on `main` to refresh the
+`latest-draft` PDF with three new figures and the citations;
+visual confirmation; advance the eleven new `lit-retrieved`
+entries to `lit-read` once the human author has read them; on
+endorsement, draft a companion `doc/ai-contributions.md` so the
+partition the Author's Note describes is symmetric.
