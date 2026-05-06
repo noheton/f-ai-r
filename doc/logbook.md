@@ -777,3 +777,33 @@ Local smoke test: provenance.ttl parses to **1262 triples** (up
 from 1250); reading queue stable at 45 entries.
 *Next:* Trigger build-paper on `main` to refresh the
 `latest-draft` PDF with the new Conclusion paragraph.
+
+## 2026-05-06 — Latency-as-feature observation logged
+*Author:* claude-opus-4-7 (under direction of repo owner)
+*Touched:* `doc/user-observations-log.md`, `doc/provenance.ttl`,
+`doc/logbook.md`.
+*Decision / outcome:* Researcher posed a meta-observation about
+cooperative writing: "the experience of using LLM for work would be
+fundamentally different if results were near-instantaneous; this
+prompt / meta-conversation planning keeps the ball rolling", then
+extended it with "and allows for short context switches --- e.g.
+checking on a coding agent". The model offered a perspective in
+chat: latency is doing real cognitive work (formulation pauses are
+exactly the abstracting-layer work the partition needs), and the
+wait window is not idle but productive parallel-tracking time
+amortising the cognitive cost of context-switching across slow
+loops the human author is already running. A counter-claim is
+recorded honestly: instantaneous response could be a different
+kind of beneficial (closer to typing assistance, model-as-keyboard
+rather than model-as-conversation-partner). The observation is
+logged as `hc:obs-latency-as-feature`
+(`fair2r:MetaContribution`, leverage high, promotedToPaper
+pending) and points to two candidate paper edits: a sentence in
+authors-note.tex's coupling-rule paragraph naming latency as part
+of the defence, and a candidate ninth integrated practice (the
+supervisory-glance / multi-tracked-research pattern) marked for a
+future revision.
+*Next:* On researcher endorsement, fold the latency-as-feature
+sentence into authors-note.tex; consider whether the supervisory-
+glance pattern warrants graduation to a numbered practice or
+remains as a field-note in evolution.tex.

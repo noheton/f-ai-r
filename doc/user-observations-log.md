@@ -196,6 +196,84 @@ produce a histogram of "clauses added per session", giving an
 empirical curve for "experience with the tool". Candidate for the
 \texttt{provenance\_analysis.py} extractor in a follow-up commit.}
 
+## 2026-05-06 — Latency as cognitive feature, not bug
+*Source:* session 2026-05-06 (user message after the
+"The longer arc" paragraph was merged into the Conclusion)
+*Stage:* hypothesis
+*Promoted-to-paper:* pending — strong candidate for one or two
+sentences in `paper/sections/authors-note.tex` extending the
+coupling-rule paragraph, or for a new field-note in
+`paper/sections/evolution.tex`.
+
+The user observed: "I think the experience of using LLM for work
+would be fundamentally different if results were near-instantaneous;
+this prompt / meta-conversation planning keeps the ball rolling."
+
+\emph{The model offered a perspective in chat. The observation is
+sharper than it looks: latency between prompt and response forces
+the user into formulation work --- "what do I want to say next?" ---
+which is the abstracting layer of the partition the Author's Note
+describes (§authors-note, "What surprised me about the
+cooperation"). If responses were near-instantaneous, the user-as-
+co-author would degrade toward user-as-consumer: read, approve,
+scroll, repeat. The decision points the deciding layer needs would
+compress out of existence. There is a slow-tools-beat-fast-tools
+literature on this in cognitive science --- constraints,
+intermediate states, and unhurried loops often improve creative
+output rather than reduce it. Programming has the same shape:
+compile-and-run cycles create decision points an instantly-
+evaluating REPL collapses.}
+
+\emph{Counter-claim worth recording: instant response might be a
+different kind of beneficial --- closer to typing assistance, where
+the human stays on the abstracting layer the whole time and the
+model handles low-level wordsmithing transparently. In that mode
+the latency-bonus disappears because the model has become part of
+the keyboard rather than part of the conversation. Whether that is
+better depends on whether the human can hold the abstracting layer
+without the periodic pause prompt-craft currently provides.}
+
+\emph{For F(AI)\textsuperscript{2}R: the partition is sustainable
+in part because of the friction that lets the human stay on the
+deciding side. If we lose the friction, the partition needs a
+different defence than "the model takes a moment to respond".
+Recommendation: extend the coupling-rule paragraph in
+authors-note.tex with one sentence naming latency as part of the
+defence, and flag the counter-claim honestly so the paper does not
+pretend the question is settled.}
+
+The user extended: "and allows for short context switches --- e.g.
+checking on a coding agent."
+
+\emph{Important addition. The latency window is not idle waiting; it
+is productive parallel work on another track. Cooperative writing
+sessions are typically running alongside other slow loops --- a
+coding agent compiling, a CI workflow finishing, a paper PDF
+rebuilding, a colleague's Slack thread waiting for a reply. The
+seconds-to-minutes wait between prompt and response is exactly the
+right shape for those context switches: too short to start
+something genuinely new, just long enough to glance at one of the
+other parallel tracks. The cognitive overhead of the switch itself
+is amortised across the wait that was happening anyway.}
+
+\emph{This is a generalisation of the slow-tools-beat-fast-tools
+finding: the slow loop is good for the work-currently-in-hand
+\textbf{and} good for the supervisory glance at the work-in-progress
+elsewhere. Instantaneous response would collapse both gains
+simultaneously --- no formulation pause for the current task, no
+natural breakpoint to check on the parallel one. The cooperative-
+writing pattern, in this light, is part of a broader
+multi-tracked-research workflow that the human author is running
+across several slow loops, not a thing happening in isolation.}
+
+\emph{Implication for the paper: the eight integrated practices
+include "transcript preservation" but say nothing about the
+researcher's actual work-pattern (which loops they are running
+in parallel, how the cognitive switching cost is amortised). A
+candidate ninth practice --- or a footnote to the existing eight ---
+might name the supervisory-glance pattern as part of why the
+cooperation works. We mark this for a future revision.}
+
 ## 2026-05-06 — Accelerator or cultural blender? — the cognition question
 *Source:* session 2026-05-06 (user message after the position-paper
 completion was merged)
