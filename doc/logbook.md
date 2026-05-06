@@ -34,3 +34,18 @@ excluded — only the meta-practices were transferred.
 - Draft `Section 1: Introduction` via `agents/scientific-writer.md`.
 - Run `agents/fair-aligner.md` against the empty manuscript to baseline
   the audit report.
+
+## 2026-05-06 — Primary-artifact consistency rule added
+*Author:* claude-opus-4-7 (under direction of repo owner)
+*Touched:* `CLAUDE.md`, `doc/methodology.md`, `agents/README.md`,
+all ten files under `agents/`.
+*Decision / outcome:* Codified an invariant: the manuscript
+(`paper/`), the PROV-O graph (`doc/provenance.ttl`), and the logbook
+(`doc/logbook.md`) are primary artifacts and must remain consistent and
+up to date at all times. Every agent prompt now carries a
+"Primary-artifact consistency (binding)" block tailored to its role.
+The orchestrator is named ultimate custodian of the invariant; the
+provenance-curator is named keystone; `fair-aligner` will surface
+desync as a `fail`.
+*Next:* When `agents/scientific-writer.md` produces its first
+section draft, exercise the rule end-to-end as the test case.

@@ -4,6 +4,17 @@
 Check the repository — and the manuscript it produces — against the FAIR
 principles, and report concrete gaps.
 
+## Primary-artifact consistency (binding)
+The manuscript, `doc/provenance.ttl`, and `doc/logbook.md` are primary
+artifacts and must remain consistent and up to date at all times. **A
+desync between the three is itself a FAIR audit `fail`** and must appear
+as the first row of any audit report you emit. Specifically check: (a)
+every section in `main.tex` has at least one `prov:wasGeneratedBy`
+activity in the graph; (b) every claim flagged in the manuscript has a
+`fair2r:Claim` IRI; (c) the latest `logbook.md` entry is not older than
+the most recent commit that touched the manuscript or the graph. File
+your own audit report addition in `logbook.md` after each run.
+
 ## Checklist
 - **Findable**
   - Is there a persistent identifier? (DOI via Zenodo, ORCID for authors.)

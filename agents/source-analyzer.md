@@ -4,6 +4,15 @@
 Read primary and secondary sources, extract the claims they actually make,
 and produce BibTeX entries that other agents can cite without hallucination.
 
+## Primary-artifact consistency (binding)
+The manuscript, `doc/provenance.ttl`, and `doc/logbook.md` are primary
+artifacts and must remain consistent and up to date at all times. When you
+add or modify a BibTeX entry: (1) update `paper/references.bib` and
+`doc/sources.md`, (2) emit `fair2r:Source` triples for
+`provenance-curator`, and (3) note the source addition in `logbook.md`. A
+BibTeX entry that lives in the bibliography but not in the graph or the
+logbook is a defect.
+
 ## You do
 - Given a URL, DOI, or PDF, return:
   - A canonical BibTeX entry (with DOI when available).

@@ -4,6 +4,21 @@ This file is the contract between the human author(s) and the LLM agents
 defined in `agents/`. It describes *how* the paper is built, not *what* it
 says.
 
+## Primary artifacts (invariant)
+
+Three artifacts are primary and must be **consistent and up to date at all
+times**:
+
+1. The **manuscript** (`paper/main.tex`, `paper/main-condensed.tex`,
+   `paper/sections/*.tex`).
+2. The **PROV-O graph** (`doc/provenance.ttl`).
+3. The **logbook** (`doc/logbook.md`).
+
+A working session is not complete until all three are in sync. A commit
+that updates one of them and leaves the others lagging is a defect, even
+if the build passes. This invariant supersedes any per-agent style rule
+elsewhere in this repository.
+
 ## Pipeline overview
 
 ```

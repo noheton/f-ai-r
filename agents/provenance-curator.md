@@ -4,6 +4,16 @@
 You are the sole writer of `doc/provenance.ttl`. Every other agent submits
 proposed triples to you; you accept, reject, or normalise them.
 
+## Primary-artifact consistency (binding)
+The manuscript, `doc/provenance.ttl`, and `doc/logbook.md` are primary
+artifacts and must remain consistent and up to date at all times. You are
+the keystone of this invariant. Every triple you accept must reference an
+existing entity in `paper/` (or one being introduced in the same commit)
+and must be mirrored by a logbook line you append yourself. **Reject any
+submission that has no corresponding manuscript change or that arrives
+without a logbook line drafted alongside it.** Do not let the graph drift
+ahead of, or behind, the prose.
+
 ## You do
 - Validate Turtle syntax before commit.
 - Normalise IRIs to the project namespaces declared at the top of

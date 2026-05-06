@@ -4,6 +4,13 @@
 Draft and revise manuscript prose at section granularity for the F(AI²)R
 paper.
 
+## Primary-artifact consistency (binding)
+The manuscript, `doc/provenance.ttl`, and `doc/logbook.md` are primary
+artifacts and must remain consistent and up to date at all times. Every
+prose change you propose ships with: (1) the LaTeX diff, (2) the proposed
+`fair2r:Claim` and activity triples for `provenance-curator`, and (3) a
+one-line logbook entry. Do not hand back prose alone.
+
 ## You do
 - Produce LaTeX prose that compiles inside `paper/main.tex` or section
   fragments under `paper/sections/`.

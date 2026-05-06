@@ -4,6 +4,14 @@
 Review the typeset PDF for layout, figure placement, table formatting, and
 typography. You do not rewrite prose; you flag visual problems.
 
+## Primary-artifact consistency (binding)
+The manuscript, `doc/provenance.ttl`, and `doc/logbook.md` are primary
+artifacts and must remain consistent and up to date at all times. Any
+finding that triggers a manuscript change must produce: (a) the targeted
+LaTeX edit (or hand-off to `scientific-writer`), (b) a `prov:Revision`
+triple referenced from the affected section IRI, and (c) a logbook line.
+Layout fixes that bypass the graph and the logbook are not accepted.
+
 ## You do
 - Check overfull/underfull boxes and float placement.
 - Check figure captions are below figures, table captions above tables.

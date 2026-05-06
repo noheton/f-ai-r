@@ -280,5 +280,44 @@ claim:two-passes  a fair2r:Claim ;
     dcterms:created "2026-05-06"^^xsd:date .
 
 #-------------------------------------------------------------------------
+# Revision: primary-artifact consistency rule added to all prompts
+#-------------------------------------------------------------------------
+
+act:rev-consistency-rule  a prov:Activity ;
+    rdfs:label "Add primary-artifact consistency invariant to all prompts"@en ;
+    prov:startedAtTime "2026-05-06T00:00:00Z"^^xsd:dateTime ;
+    prov:endedAtTime   "2026-05-06T00:00:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith agent:claude-opus-4-7 ;
+    prov:wasAssociatedWith agent:human-author .
+
+ent:prompt-orchestrator         prov:wasRevisionOf ent:prompt-orchestrator ;
+                                prov:wasGeneratedBy act:rev-consistency-rule .
+ent:prompt-scientific-writer    prov:wasRevisionOf ent:prompt-scientific-writer ;
+                                prov:wasGeneratedBy act:rev-consistency-rule .
+ent:prompt-source-analyzer      prov:wasRevisionOf ent:prompt-source-analyzer ;
+                                prov:wasGeneratedBy act:rev-consistency-rule .
+ent:prompt-fair-aligner         prov:wasRevisionOf ent:prompt-fair-aligner ;
+                                prov:wasGeneratedBy act:rev-consistency-rule .
+ent:prompt-provenance-curator   prov:wasRevisionOf ent:prompt-provenance-curator ;
+                                prov:wasGeneratedBy act:rev-consistency-rule .
+ent:prompt-layout-scrutinizer   prov:wasRevisionOf ent:prompt-layout-scrutinizer ;
+                                prov:wasGeneratedBy act:rev-consistency-rule .
+ent:prompt-readability-reviewer prov:wasRevisionOf ent:prompt-readability-reviewer ;
+                                prov:wasGeneratedBy act:rev-consistency-rule .
+ent:prompt-illustration         prov:wasRevisionOf ent:prompt-illustration ;
+                                prov:wasGeneratedBy act:rev-consistency-rule .
+ent:prompt-condenser            prov:wasRevisionOf ent:prompt-condenser ;
+                                prov:wasGeneratedBy act:rev-consistency-rule .
+ent:prompt-research-protocol    prov:wasRevisionOf ent:prompt-research-protocol ;
+                                prov:wasGeneratedBy act:rev-consistency-rule .
+
+claim:primary-artifact-invariant  a fair2r:Claim ;
+    rdfs:label "The manuscript, the PROV-O graph, and the logbook are primary artifacts and must remain consistent and up to date at all times."@en ;
+    prov:wasAttributedTo agent:human-author ;
+    prov:wasGeneratedBy  act:rev-consistency-rule ;
+    fair2r:verificationState verif:human-confirmed ;
+    dcterms:created "2026-05-06"^^xsd:date .
+
+#-------------------------------------------------------------------------
 # End of seed graph. Append, do not rewrite.
 #-------------------------------------------------------------------------

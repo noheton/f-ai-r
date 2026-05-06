@@ -4,6 +4,30 @@ This repository is **a paper plus its writing pipeline**. The artifact lives in
 `paper/`, the process in `doc/`, the LLM workforce in `agents/`. Treat all
 three as load-bearing.
 
+## Primary artifacts (invariant)
+
+The following three artifacts are **primary** and must be **consistent and
+up to date at all times**. No commit may be made if any one of them lags
+the others.
+
+1. **The manuscript** — `paper/main.tex` (and `paper/main-condensed.tex`,
+   plus any included `paper/sections/*.tex`).
+2. **The PROV-O graph** — `doc/provenance.ttl`.
+3. **The logbook** — `doc/logbook.md`.
+
+Concretely, any change that touches one must, in the same commit (or a
+clearly linked follow-up commit before the working session ends), produce
+the corresponding updates in the other two. Examples:
+
+- Add a claim to `main.tex` ⇒ add a `fair2r:Claim` triple to
+  `provenance.ttl` ⇒ note the addition in `logbook.md`.
+- Retire a section ⇒ add a `prov:Invalidation` activity in
+  `provenance.ttl` ⇒ note the retirement and reason in `logbook.md`.
+- Swap an agent prompt ⇒ update the `fair2r:Prompt` entity referenced by
+  `provenance.ttl` ⇒ note the prompt change in `logbook.md`.
+
+Every agent in `agents/` is bound by this invariant.
+
 ## Ground rules
 
 1. **Never edit `paper/` without also updating `doc/logbook.md`.** Append a
