@@ -279,6 +279,19 @@ primary-artefact consistency invariant.
 `agents/orchestrator.md`.
 *Provenance IRI:* `fair2r:hc-contribution-rule`
 
+### 2026-05-06 --- "Its still a bit hard to read" --- more illustrations
+*Type:* `content-prompt`
+*Leverage:* medium
+*Triggered:* Three TikZ figures added on the DLR token palette: the
+verification-ladder FSM, the F(AI)\textsuperscript{2}R axes
+$4\times 2$ grid, the accelerator-vs-blender coupling-rule partition.
+Each replaces a paragraph that was carrying load by prose alone.
+*Artefacts touched:* `paper/figures/ladder-fsm.tex`,
+`paper/figures/axes.tex`, `paper/figures/coupling-rule.tex`,
+`paper/sections/pattern.tex`, `paper/sections/authors-note.tex`,
+`doc/provenance.ttl`.
+*Provenance IRI:* `fair2r:hc-readability-figures`
+
 ### 2026-05-06 --- "yes, also perform another pass on the context data"
 *Type:* `content-prompt`
 *Leverage:* high

@@ -286,3 +286,112 @@
   url          = {https://www.gesetze-im-internet.de/urhg/__2.html},
   note         = {Statutory definition of protected works in German copyright; requires ``pers\"onliche geistige Sch\"opfung'' (personal intellectual creation by a human). Cited in background.tex for the German leg of the legal-honesty claim.}
 }
+
+% --- Third-pass additions: distributed-cognition philosophical grounding,
+% manifold / homogenisation framing for the accelerator-or-blender coupling
+% rule, prompt-engineering literature, humanities-LLM critique, and
+% institutional FAIR position pieces. All identifier-verified by
+% source-analyzer (lit-retrieved); none yet read by the human author.
+
+@article{clark1998extended,
+  title   = {The Extended Mind},
+  author  = {Clark, Andy and Chalmers, David},
+  journal = {Analysis},
+  volume  = {58},
+  number  = {1},
+  pages   = {7--19},
+  year    = {1998},
+  doi     = {10.1093/analys/58.1.7},
+  note    = {Canonical statement of active externalism: cognitive processes can extend beyond the skull when an external resource plays the same functional role as an internal one. Cited in authors-note.tex as the philosophical precedent for the human-LLM partition (TODO-VERIFY at lit-read).}
+}
+
+@book{hutchins1995cognition,
+  title     = {Cognition in the Wild},
+  author    = {Hutchins, Edwin},
+  publisher = {MIT Press},
+  address   = {Cambridge, MA},
+  year      = {1995},
+  isbn      = {9780262581462},
+  note      = {Ethnographic study of ship-navigation that grounds the distributed-cognition programme. Cited in authors-note.tex alongside clark1998extended for the cognitive-science precedent of the human-tool partition (TODO-VERIFY at lit-read).}
+}
+
+@article{clark2025extending,
+  title   = {Extending Minds with Generative {AI}},
+  author  = {Clark, Andy},
+  journal = {Nature Communications},
+  year    = {2025},
+  note    = {Twenty-seven-years-later restatement of the extended-mind thesis under generative-AI conditions. Cited in authors-note.tex as the live anchor for the accelerator-or-blender coupling rule (TODO-VERIFY at lit-read; DOI to be confirmed at lit-read rung).}
+}
+
+@inproceedings{anderson2024homogenization,
+  title     = {Homogenization Effects of Large Language Models on Human Creative Ideation},
+  author    = {Anderson, Barrett R. and Shah, Jash Hemant and Kreminski, Max},
+  booktitle = {Proceedings of the 16th Conference on Creativity \& Cognition},
+  year      = {2024},
+  doi       = {10.1145/3635636.3656204},
+  note      = {36-participant comparative user study; ChatGPT users produced less semantically distinct ideas than users of an alternative creativity-support tool. Cited in authors-note.tex / objections.tex for the cultural-blender pole of the coupling rule (TODO-VERIFY at lit-read).}
+}
+
+@article{kuteeva2024diversity,
+  title   = {Diversity and Standards in Writing for Publication in the Age of {AI}---Between a Rock and a Hard Place},
+  author  = {Kuteeva, Maria and Andersson, Marta},
+  journal = {Applied Linguistics},
+  year    = {2024},
+  doi     = {10.1093/applin/amae025},
+  note    = {Argues that LLMs drive language use and knowledge construction toward homogeneity, reproducing dominant Global-North norms; humanities-and-applied-linguistics critique of LLM writing assistance. Cited in evolution.tex for the paper-driven-disciplines exception (TODO-VERIFY at lit-read).}
+}
+
+@inproceedings{reynolds2021prompt,
+  title     = {Prompt Programming for Large Language Models: Beyond the Few-Shot Paradigm},
+  author    = {Reynolds, Laria and McDonell, Kyle},
+  booktitle = {Extended Abstracts of the 2021 CHI Conference on Human Factors in Computing Systems},
+  year      = {2021},
+  doi       = {10.1145/3411763.3451760},
+  eprint    = {2102.07350},
+  archivePrefix = {arXiv},
+  note      = {Argues that prompt design for GPT-3 is closer to programming than to natural-language drafting; introduces metaprompting. Cited in evolution.tex for the prompt-craft-as-programming-cousin observation (TODO-VERIFY at lit-read).}
+}
+
+@article{liu2023prompt,
+  title   = {Pre-train, Prompt, and Predict: A Systematic Survey of Prompting Methods in Natural Language Processing},
+  author  = {Liu, Pengfei and Yuan, Weizhe and Fu, Jinlan and Jiang, Zhengbao and Hayashi, Hiroaki and Neubig, Graham},
+  journal = {ACM Computing Surveys},
+  volume  = {55},
+  number  = {9},
+  pages   = {1--35},
+  year    = {2023},
+  doi     = {10.1145/3560815},
+  eprint  = {2107.13586},
+  archivePrefix = {arXiv},
+  note    = {Canonical survey establishing prompt-based learning as a paradigm. Cited in evolution.tex alongside reynolds2021prompt for the prompt-engineering-as-discipline anchor (TODO-VERIFY at lit-read).}
+}
+
+@article{sadasivan2023reliably,
+  title   = {Can {AI}-Generated Text be Reliably Detected?},
+  author  = {Sadasivan, Vinu Sankar and Kumar, Aounon and Balasubramanian, Sriram and Wang, Wenxiao and Feizi, Soheil},
+  year    = {2023},
+  journal = {arXiv preprint},
+  eprint  = {2303.11156},
+  archivePrefix = {arXiv},
+  note    = {Theoretical impossibility result: as LLMs better emulate human text, the best-possible detector's performance approaches a chance baseline. Recursive paraphrasing attack defeats watermarking, neural-classifier, zero-shot, and retrieval-based detectors. Cited in failure-modes.tex for the residual-detection row (TODO-VERIFY at lit-read).}
+}
+
+@misc{curdt2025hmc,
+  title        = {Helmholtz Metadata Collaboration (HMC) --- Building a Sustainable {FAIR} Data Ecosystem in a Changing Research Landscape},
+  author       = {Curdt, Constanze and K{\"o}stner, Nicole and {HMC Office Team}},
+  year         = {2025},
+  publisher    = {Zenodo},
+  doi          = {10.5281/zenodo.15113717},
+  url          = {https://archiv.ub.uni-heidelberg.de/volltextserver/36330/2/Curdt_Helmholtz_Metadata_Collaboration_2025.pdf},
+  note         = {Position-paper-style overview of the HMC's mission, three workstreams, and metadata-hub structure across the 18 Helmholtz centres. Cited as the institutional FAIR-context anchor for the imprint and acknowledgements (TODO-VERIFY at lit-read).}
+}
+
+@misc{schmitt2020nfdi4ing,
+  title        = {{NFDI4Ing} --- the National Research Data Infrastructure for Engineering Sciences},
+  author       = {Schmitt, Robert H. and Anthofer, Volker and Auer, S{\"o}ren and others},
+  year         = {2020},
+  publisher    = {Zenodo},
+  doi          = {10.5281/zenodo.4015201},
+  url          = {https://nfdi4ing.de/},
+  note         = {Foundational document for the German NFDI consortium covering engineering RDM; introduces the workflow-archetype model and shared base services. Cited as the institutional FAIR-context anchor alongside curdt2025hmc (TODO-VERIFY at lit-read).}
+}

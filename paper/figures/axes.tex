@@ -1,0 +1,64 @@
+% F(AI)^2R: the four FAIR axes with the (AI) factor multiplied through.
+% Visualises the squared-AI claim (\S\ref{sec:axes}) as a 4x2 grid:
+% one column per FAIR letter, two rows for the authoring (AI_1) and
+% audit (AI_2) passes that the (AI) factor demands per axis.
+% Loaded by paper/sections/pattern.tex via \input.
+\begin{figure}[!t]
+\centering
+\begin{tikzpicture}[
+  node distance=0pt,
+  every node/.style={font=\sffamily\footnotesize, align=center,
+                     inner sep=4pt},
+  axis/.style={draw, line width=0.5pt, draw=dlrGrau1,
+               minimum width=28mm, minimum height=8mm,
+               fill=dlrGrau5, text=dlrGrau1, font=\sffamily\bfseries},
+  authoring/.style={draw, line width=0.5pt, draw=dlrBlau1,
+                    fill=dlrBlau5, text=black,
+                    minimum width=28mm, minimum height=12mm,
+                    text width=26mm, align=center},
+  audit/.style={draw, line width=0.5pt, draw=dlrGruen1,
+                fill=dlrGruen5, text=black,
+                minimum width=28mm, minimum height=12mm,
+                text width=26mm, align=center},
+  rowlabel/.style={font=\sffamily\bfseries\footnotesize,
+                   text=dlrGrau1, anchor=east, align=right},
+]
+% Header row: F | A | I | R, on a grey strip
+\node[axis] (HF) at (0,0)   {Findable};
+\node[axis] (HA) at (3,0)   {Accessible};
+\node[axis] (HI) at (6,0)   {Interoperable};
+\node[axis] (HR) at (9,0)   {Reusable};
+
+% Authoring row (AI_1)
+\node[authoring] (A1) at (0,-1)   {DOI / ORCID;\\IRIs minted};
+\node[authoring] (A2) at (3,-1)   {clone-and-build;\\licences};
+\node[authoring] (A3) at (6,-1)   {Turtle graph;\\fair2r:\ namespace};
+\node[authoring] (A4) at (9,-1)   {prompts;\\Makefile;\\logbook};
+
+% Audit row (AI_2)
+\node[audit]    (B1) at (0,-2.2)  {metadata\\agree;\\IRIs unique};
+\node[audit]    (B2) at (3,-2.2)  {paywalled\\sources\\vendored};
+\node[audit]    (B3) at (6,-2.2)  {Turtle\\validates;\\SHACL};
+\node[audit]    (B4) at (9,-2.2)  {clone replays;\\drift\\reported};
+
+% Row labels
+\node[rowlabel] at ([xshift=-19mm]A1.west) {(AI)\textsubscript{1}\\authoring pass};
+\node[rowlabel] at ([xshift=-19mm]B1.west) {(AI)\textsubscript{2}\\audit pass};
+
+% Top-edge brace label "(AI)^2 multiplied through every axis"
+\draw[draw=dlrGrau1, line width=0.4pt]
+  ([yshift=4mm]HF.north west) -- ([yshift=4mm]HR.north east);
+\node[font=\sffamily\itshape\footnotesize, text=dlrGrau1]
+  at ($([yshift=8mm]HF.north west)!0.5!([yshift=8mm]HR.north east)$)
+  {(AI)\textsuperscript{2} factor multiplied through every axis};
+\end{tikzpicture}
+\caption{The F(AI)\textsuperscript{2}R pattern as a $4 \times 2$
+grid. The four FAIR axes (top, grey) each carry an authoring pass
+$\mathrm{AI}_{1}$ (blue, middle row) and an audit pass
+$\mathrm{AI}_{2}$ (green, bottom row); the squared notation is the
+typographic commitment that the (AI) factor is multiplied through
+every axis rather than appended as a fifth one. Cell contents
+summarise \S\ref{sec:axes}; the full mapping is in
+Appendix~\ref{app:fair-cells}.}
+\label{fig:axes}
+\end{figure}

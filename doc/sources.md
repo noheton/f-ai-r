@@ -1,7 +1,69 @@
 # Sources
 
 Index of sources cited or vendored for the F(AI)²R paper. Maintained by
-`agents/source-analyzer.md`. Last updated 2026-05-06 (second pass).
+`agents/source-analyzer.md`. Last updated 2026-05-06 (third pass).
+
+## Third-pass log (2026-05-06)
+
+The third pass added eleven new `lit-retrieved` entries to back the
+position-paper extensions (`paper/sections/position.tex`,
+`paper/sections/objections.tex`), the field-notes block in
+`paper/sections/evolution.tex`, the accelerator-or-blender coupling
+rule in `paper/sections/authors-note.tex`, and the institutional
+FAIR-context citations in the imprint:
+
+- `clark1998extended` --- Clark & Chalmers, *Analysis* 58:7--19, the
+  canonical Extended-Mind paper. 5300+ citations confirmed.
+- `hutchins1995cognition` --- Hutchins, *Cognition in the Wild*, MIT
+  Press 1995. ISBN 9780262581462. The distributed-cognition canonical.
+- `clark2025extending` --- Clark, "Extending Minds with Generative
+  AI," *Nature Communications* 2025. The 27-years-later restatement
+  under generative-AI conditions; DOI not yet captured (deferred to
+  lit-read rung).
+- `anderson2024homogenization` --- Anderson, Shah, Kreminski, ACM
+  C&C 2024, DOI 10.1145/3635636.3656204. Empirical homogenisation
+  evidence (the "cultural blender" pole).
+- `kuteeva2024diversity` --- Kuteeva & Andersson, *Applied
+  Linguistics* 2024, DOI 10.1093/applin/amae025. Humanities /
+  applied-linguistics critique of LLM writing assistance --- the
+  paper-driven-disciplines exception named in `evolution.tex`.
+- `reynolds2021prompt` --- Reynolds & McDonell, CHI '21 Extended
+  Abstracts, DOI 10.1145/3411763.3451760. Canonical
+  prompt-as-programming source.
+- `liu2023prompt` --- Liu et al., *ACM Computing Surveys* 55:9, DOI
+  10.1145/3560815. The four-thousand-citation prompt-survey.
+- `sadasivan2023reliably` --- promoted from "proposed addition"
+  (already in `doc/sources.md`) to a real bib entry. Backs the
+  detection-impossibility claim in `failure-modes.tex`.
+- `curdt2025hmc` --- HMC 2025 position paper, Zenodo
+  10.5281/zenodo.15113717. Replaces the bare URL the imprint
+  previously carried.
+- `schmitt2020nfdi4ing` --- NFDI4Ing foundational document, Zenodo
+  10.5281/zenodo.4015201. Same role as `curdt2025hmc`.
+
+The eleven new entries are all `lit-retrieved`. Six (`reynolds2021prompt`,
+`liu2023prompt`, `anderson2024homogenization`, `kuteeva2024diversity`,
+`sadasivan2023reliably`, `clark1998extended`) have published DOIs that
+resolve and were confirmed via Consensus search; three
+(`hutchins1995cognition`, `curdt2025hmc`, `schmitt2020nfdi4ing`) carry
+ISBN or Zenodo identifiers verified via web search; one
+(`clark2025extending`) is identifier-confirmed by a Consensus hit but
+the DOI was not captured at the search depth used --- the bib entry
+notes this and the human author should resolve the DOI before
+condensation. None has been read in full by the human author.
+
+The third pass also ran a context-data audit (orphan IRIs, dangling
+cites, section-graph mismatches, unactioned `Next:` todos in
+`logbook.md`); findings are reported in the assistant message that
+accompanies this commit. Three section-graph mismatches were found:
+the `provenance.ttl` graph still has `ent:section-discussion` even
+though `discussion.tex` was retired in the position-paper reframing,
+and the new sections `position`, `objections`, `authors-note`, and
+`statement-of-authorship` exist as `.tex` files without
+corresponding `fair2r:Section` entities. These are flagged for the
+provenance-curator to resolve in a follow-up commit.
+
+## Second-pass log (2026-05-06)
 
 ## Second-pass log (2026-05-06)
 
