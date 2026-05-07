@@ -2498,3 +2498,31 @@ hc:senior-researcher-bridge-claim  a fair2r:HumanContribution ;
     rdfs:comment "Researcher proposed: 'we as senior researchers who know the way how things were done and why they were done that have a responsibility to help build bridges to the unthinkable of the past (a similar situation as xennials)'. Graduated to paper text as a new paragraph in the Conclusion titled 'The bridge to what is now unthinkable.', positioned between 'The longer arc.' and the closing emphasis line. The paragraph names the Xennial generational analogue (born late enough to remember pre-internet working life, early enough to have spent professional life inside it), maps it onto senior researchers who span pre-LLM and LLM-era scholarship, and frames F(AI)^2R as one articulation of disciplines that a tooling-native cohort cannot reconstruct unaided. One new bib entry: shafer2014xennials (lit-retrieved). The claim is born with a parent activity (act:meta-cooperation-2026-05-07-senior-researcher-bridge) per the no-parentless-claim rule from the 2026-05-07 curator pass."@en ;
     dcterms:created "2026-05-07"^^xsd:date ;
     prov:influenced claim:senior-researcher-bridge .
+
+#-------------------------------------------------------------------------
+# 2026-05-07 --- Process-evolution summary table added to evolution.tex
+# and mirrored on doc/methodology.md (and therefore on the Pages site's
+# Methodology page).
+#-------------------------------------------------------------------------
+
+act:meta-cooperation-2026-05-07-evolution-summary  a prov:Activity ;
+    rdfs:label "Meta-cooperation: synthesise the evolutions table from logbook + user-contributions"@en ;
+    prov:startedAtTime "2026-05-07T00:00:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith agent:human-author , agent:claude-opus-4-7 ;
+    rdfs:comment "Researcher prompt: 'update the section about the method with a summary maybe a table what evolutions (rules, agents, ...) during the process of writing the paper occurred'. Activity minted at claim-add time so the new claim is born with a generating parent. Synthesised the evolutions table directly from doc/logbook.md and doc/user-contributions.md (48 typed entries) into a 20-row deduplicated digest with five evolution classes: rule, agent, schema, pipeline, manuscript."@en .
+
+claim:evolution-summary-table  a fair2r:Claim ;
+    rdfs:label "The cooperation that produced this paper imposed twenty structurally-significant changes on its own scaffolding while the work was underway; they fall into five classes (rule, agent, schema, pipeline, manuscript) and are summarised in Table 1 of the manuscript and in the Methodology page on the Pages site."@en ;
+    prov:wasGeneratedBy act:meta-cooperation-2026-05-07-evolution-summary ;
+    prov:wasAttributedTo agent:human-author ;
+    fair2r:verificationState verif:human-confirmed ;
+    dcterms:created "2026-05-07"^^xsd:date .
+
+hc:evolution-summary-table  a fair2r:HumanContribution ;
+    rdfs:label "Researcher prompt: add summary table of process evolutions (rules / agents / schema / pipeline / manuscript) to the methodology section"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "content-prompt" ;
+    fair2r:contributionLeverage "high" ;
+    rdfs:comment "User asked for a summary --- 'maybe a table' --- of what evolved (rules, agents, ...) during the cooperative writing process. Graduated to paper text as a 20-row longtable in paper/sections/evolution.tex (right after the opening paragraph, before the per-paragraph chronology) and mirrored as a Markdown table on doc/methodology.md so the Pages site shows the same digest. Five evolution classes documented: rule, agent, schema, pipeline, manuscript. tabularx + longtable required, added to paper/style/fair2r.sty. The full chronology lives in doc/logbook.md and doc/user-contributions.md (48 typed entries) --- the table is a deduplicated digest, not the full set."@en ;
+    dcterms:created "2026-05-07"^^xsd:date ;
+    prov:influenced claim:evolution-summary-table .
