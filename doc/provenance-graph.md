@@ -108,3 +108,128 @@ manuscript and emits the PDF, and is reproducible from the repository
 alone. That reproducibility is the F(AI)²R closure: the audit AI can
 replay the build, walk the graph, and verify that every claim in the
 PDF traces back to either a human author or a vendored source.
+
+## Worked verification example
+
+The schematic above shows what the graph *should* look like; this
+section shows what it currently *does* look like, walked by a few
+SPARQL queries against the live `doc/provenance.ttl`. The longer
+treatment of the verification programme (SHACL, SPARQL, model
+checking, theorem proving) lives in
+[Provenance verification](provenance-verification.html). The point of
+the example below is concrete: a reader of this site, today, can run
+the same queries with `rdflib` (or Apache Jena `arq`) and reproduce
+the numbers without trusting the prose.
+
+### 1. Per-claim provenance trail (a sample)
+
+The shape of a complete claim record is `(claim, activity, agent,
+rung)` — a four-element tuple stating *who* generated *what*
+through *which* activity, and at *which* level of confidence. The
+following query returns one row per claim and lets a reader
+recompute the rung distribution without re-reading the prose.
+
+```sparql
+PREFIX fair2r: <https://noheton.org/f-ai-r/ns#>
+PREFIX prov:   <http://www.w3.org/ns/prov#>
+SELECT ?claim ?rung WHERE {
+  ?claim a fair2r:Claim ;
+         prov:wasGeneratedBy   ?activity ;
+         prov:wasAttributedTo  ?agent ;
+         fair2r:verificationState ?rung .
+} ORDER BY ?rung ?claim LIMIT 8
+```
+
+A representative slice of the result against the graph at the time of
+this commit:
+
+| Claim                            | Rung               |
+|----------------------------------|--------------------|
+| `ai-rise-motivation`             | `ai-confirmed`     |
+| `base-rates-distinct`            | `ai-confirmed`     |
+| `practice-disclosure`            | `ai-confirmed`     |
+| `cache-bust-versioning`          | `human-confirmed`  |
+| `consensus-scholar-default`      | `human-confirmed`  |
+| `equity-not-neutral`             | `human-confirmed`  |
+| `frontier-model-dependence`      | `human-confirmed`  |
+| `consistency-invariant-binding`  | `source-vendored`  |
+
+Aggregating across all claims gives the canonical distribution table:
+21 `human-confirmed`, 9 `source-vendored`, 5 `ai-confirmed`, 2
+`needs-research`. This is the same distribution that
+`scripts/provenance_analysis.py` writes into the auto-generated
+table consumed by `paper/sections/provenance-analysis.tex`; the
+manuscript and the graph agree because they are reading the same
+source.
+
+### 2. Structural defect detection (a SHACL preview)
+
+`SELECT` queries surface what is present; the more interesting use is
+surfacing what is *missing*. The implicit invariant for a well-formed
+claim — at least one `prov:wasGeneratedBy`, at least one
+`prov:wasAttributedTo`, exactly one `fair2r:verificationState` — is
+not yet enforced in `doc/provenance.ttl`. A starter SHACL shape would
+be:
+
+```turtle
+fair2r:ClaimShape  a sh:NodeShape ;
+    sh:targetClass fair2r:Claim ;
+    sh:property [ sh:path prov:wasGeneratedBy ; sh:minCount 1 ] ;
+    sh:property [ sh:path prov:wasAttributedTo ; sh:minCount 1 ] ;
+    sh:property [ sh:path fair2r:verificationState ;
+                  sh:minCount 1 ; sh:maxCount 1 ] .
+```
+
+The same invariant, expressed as a SPARQL conformance query, returns
+the claims a SHACL run would flag:
+
+```sparql
+PREFIX fair2r: <https://noheton.org/f-ai-r/ns#>
+PREFIX prov:   <http://www.w3.org/ns/prov#>
+SELECT ?claim ?missing WHERE {
+  ?claim a fair2r:Claim .
+  OPTIONAL { ?claim prov:wasGeneratedBy ?g . }
+  OPTIONAL { ?claim prov:wasAttributedTo ?a . }
+  OPTIONAL { ?claim fair2r:verificationState ?v . }
+  BIND( IF(!BOUND(?g), "wasGeneratedBy",
+        IF(!BOUND(?a), "wasAttributedTo",
+        IF(!BOUND(?v), "verificationState", "OK"))) AS ?missing)
+  FILTER(?missing != "OK")
+}
+```
+
+Run against the current graph the query returns **8 claims missing a
+`prov:wasGeneratedBy` triple** — a real, currently-uncorrected
+structural defect that the prose has not yet noticed:
+
+| Claim                              | Missing property         |
+|------------------------------------|--------------------------|
+| `domain-ontologies-extension`      | `prov:wasGeneratedBy`    |
+| `reproducibility-baseline-poor`    | `prov:wasGeneratedBy`    |
+| `reviewer-side-ai-policies`        | `prov:wasGeneratedBy`    |
+| `bioinformatics-precedent`         | `prov:wasGeneratedBy`    |
+| `journal-as-distribution-in-decline` | `prov:wasGeneratedBy`  |
+| `authors-note-voice-exception`     | `prov:wasGeneratedBy`    |
+| `formal-methods-cousin`            | `prov:wasGeneratedBy`    |
+| `contribution-tracking-rule`       | `prov:wasGeneratedBy`    |
+
+The defect is benign — these claims were authored by the human in a
+prompt-driven session and the activity was conflated with the
+session-level `act:author-*` parent. A SHACL pass added to CI would
+fail the build and force the curator to add the missing edges. That
+is the first concrete win the verification programme would buy.
+
+### 3. Reproducing locally
+
+```bash
+python3 -c "
+from rdflib import Graph
+g = Graph(); g.parse('doc/provenance.ttl', format='turtle')
+print(len(g), 'triples')
+"
+```
+
+Then either paste the queries above into `g.query(...)` or, for a
+heavier session, load the same file into Apache Jena's `arq` REPL.
+The `pyshacl` runner against the starter shapes is the next step the
+[verification scoping doc](provenance-verification.html) describes.
