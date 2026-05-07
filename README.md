@@ -12,15 +12,14 @@
 | Artefact | Latest draft (auto-built on every push to `main`) |
 |---|---|
 | **Paper PDF** (DRAFT watermark) | [`releases/download/latest-draft/main.pdf`](https://github.com/noheton/f-ai-r/releases/download/latest-draft/main.pdf) |
-| **Pitch deck** (5 min) — PDF | [`releases/download/latest-draft-slides/pitch-5min.pdf`](https://github.com/noheton/f-ai-r/releases/download/latest-draft-slides/pitch-5min.pdf) |
-| **Pitch deck** (5 min) — PPTX | [`releases/download/latest-draft-slides/pitch-5min.pptx`](https://github.com/noheton/f-ai-r/releases/download/latest-draft-slides/pitch-5min.pptx) |
-| **Conference deck** (25 + 5 min) — PDF | [`releases/download/latest-draft-slides/conference-30min.pdf`](https://github.com/noheton/f-ai-r/releases/download/latest-draft-slides/conference-30min.pdf) |
-| **Conference deck** (25 + 5 min) — PPTX | [`releases/download/latest-draft-slides/conference-30min.pptx`](https://github.com/noheton/f-ai-r/releases/download/latest-draft-slides/conference-30min.pptx) |
+| **Pitch deck** (5 min) | [`releases/download/latest-draft-slides/pitch-5min.pdf`](https://github.com/noheton/f-ai-r/releases/download/latest-draft-slides/pitch-5min.pdf) |
+| **Conference deck** (25 + 5 min) | [`releases/download/latest-draft-slides/conference-30min.pdf`](https://github.com/noheton/f-ai-r/releases/download/latest-draft-slides/conference-30min.pdf) |
 
-Both decks are rendered from versioned Markdown sources under
-[`slides/`](slides/) using the **DLR Corporate Design** Marp theme
-(vendored under [`slides/static/dlr/`](slides/static/dlr/)). They are
-**primary artefacts** under the consistency invariant, alongside the
+Both decks are Beamer-rendered from versioned `.tex` sources under
+[`slides/`](slides/) using the DLR Corporate Design Beamer style
+([`slides/style/fair2r-beamer.sty`](slides/style/fair2r-beamer.sty)),
+which mirrors `paper/style/fair2r.sty`. They are **primary
+artefacts** under the consistency invariant, alongside the
 manuscript, the PROV-O graph, and the logbook.
 
 The full site renders the methodology, the agent prompts, the logbook,
@@ -56,8 +55,8 @@ alongside the source.
 ├── paper/        LaTeX sources, bibliography, Makefile  → the artifact
 │   └── style/    paper/style/fair2r.sty (DLR Corporate Design)
 ├── doc/          methodology, FAIR notes, logbook, PROV-O graph → the process
-├── slides/       Marp slide decks: pitch-5min.md + conference-30min.md
-│   └── static/dlr/  vendored DLR Marp theme (dlr.css, mermaid.css, logos)
+├── slides/       Beamer slide decks: pitch-5min.tex + conference-30min.tex
+│   └── style/    fair2r-beamer.sty (DLR Corporate Design, mirrors paper/style/)
 ├── agents/       LLM agent prompts (one role per file)  → the workforce
 ├── site/         GitHub Pages source (DLR-aligned static site)
 │   └── static/dlr/  vendored DLR design tokens (colors_and_type.css,

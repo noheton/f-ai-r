@@ -12,9 +12,10 @@ times**:
 1. The **manuscript** (`paper/main.tex`, `paper/sections/*.tex`).
 2. The **PROV-O graph** (`doc/provenance.ttl`).
 3. The **logbook** (`doc/logbook.md`).
-4. The **slide decks** — `slides/pitch-5min.md` (5-minute pitch) and
-   `slides/conference-30min.md` (25 + 5 conference talk). Rendered
-   PDF / PPTX outputs in `slides/dist/` are derivatives.
+4. The **slide decks** — `slides/pitch-5min.tex` (5-minute pitch) and
+   `slides/conference-30min.tex` (25 + 5 conference talk), Beamer +
+   DLR Corporate Design (`slides/style/fair2r-beamer.sty`). Rendered
+   PDFs are derivatives.
 
 A working session is not complete until all four are in sync. A commit
 that updates one of them and leaves the others lagging is a defect, even

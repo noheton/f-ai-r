@@ -1,0 +1,115 @@
+% F(AI)^2R --- 5-minute pitch deck.
+% Beamer source. Renders to PDF via latexmk; no Chromium / Marp.
+% Style mirrors paper/style/fair2r.sty (DLR Corporate Design).
+
+\documentclass[aspectratio=169,11pt]{beamer}
+
+\usepackage{style/fair2r-beamer}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning, shapes.geometric}
+\usepackage{booktabs}
+
+\title{F(AI)\textsuperscript{2}R}
+\subtitle{FAIR research with AI in the loop, twice}
+\author{Florian Krebs}
+\institute{%
+  ORCID: \href{https://orcid.org/0000-0001-6033-801X}{0000-0001-6033-801X}\\
+  DLR Zentrum f\"ur Leichtbauproduktionstechnologie (ZLP), Augsburg\\
+  Helmholtz \textperiodcentered{} NFDI4Ing \textperiodcentered{} HMC%
+}
+\date{\today \quad\textcolor{dlrAccent}{\textbf{DRAFT --- not yet peer-reviewed}}}
+
+\begin{document}
+
+% ---- 1. Title -----------------------------------------------------
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+% ---- 2. Problem ---------------------------------------------------
+\begin{frame}{The problem}
+  \begin{itemize}
+    \item FAIR was drafted for \textbf{data}; FAIR4RS for software; FAIR4ML for models.
+    \item LLM-assisted scholarly writing produces \textbf{new artefact classes}:
+          transcripts, prompts, version manifests, verification ladders,
+          redaction policies, \emph{per-claim provenance maps}.
+    \item Volume problem on top: detection-only is an arms race the reviewer side does not win.
+    \item \textbf{Reported fabrication base rates: 18--55\,\% (Walters \& Wilder), 17--34\,\% (Magesh et al.).}
+  \end{itemize}
+\end{frame}
+
+% ---- 3. Position --------------------------------------------------
+\sectiondivider{Position}
+
+\begin{frame}{F(AI)\textsuperscript{2}R}
+  \begin{block}{The position, in one line}
+    The canonical FAIR axes with an \emph{(AI)} factor multiplied through them ---
+    \textbf{squared} because each axis demands two passes: an authoring pass and an audit pass.
+  \end{block}
+
+  \vspace{0.4em}
+  \begin{itemize}
+    \item Multiplicative, not appended (\emph{4AI hei{\ss}t alles}).
+    \item \textbf{Eight integrated practices} as the minimum discipline.
+    \item Specialisation reduces hallucination at the seam.
+    \item Naming the practice is the first step toward contesting it.
+  \end{itemize}
+\end{frame}
+
+% ---- 4. Eight practices -------------------------------------------
+\begin{frame}{Eight integrated practices}
+  \footnotesize
+  \begin{tabular}{rlp{4.4cm}}
+    \toprule
+    \# & Practice & Failure mode addressed \\
+    \midrule
+    1 & Transcript preservation             & session loss \\
+    2 & Verification-status labelling (FSM) & claim--evidence drift \\
+    3 & Per-claim provenance maps           & fabricated citations \\
+    4 & Mirror discipline                   & placeholder dishonesty \\
+    5 & Recursive meta-process documentation & methodological-tract failure \\
+    6 & Base-rate-anchored AI disclosure    & perfunctory disclosure \\
+    7 & Legal honesty about authorship      & inflated co-author claims \\
+    8 & FAIR alignment as \textbf{precondition} & retrofit cost \\
+    \bottomrule
+  \end{tabular}
+
+  \vspace{0.6em}
+  \textit{The integration is the contribution.} None of the eight is novel on its own.
+\end{frame}
+
+% ---- 5. Worked example --------------------------------------------
+\begin{frame}{Worked example: this paper}
+  \begin{itemize}
+    \item Ten-stage agent pipeline (orchestrator, writer, source-analyser, scrutinizers, curator, site agent) with \textbf{handback discipline}.
+    \item Verification ladder as a \textbf{finite-state machine}.
+    \item Repository ships: prompts, build CI, PROV-O graph, public site, draft PDF, slide decks.
+    \item \texttt{github.com/noheton/f-ai-r}\quad\textbf{|}\quad\texttt{noheton.github.io/f-ai-r}
+  \end{itemize}
+
+  \vspace{0.6em}
+  \begin{block}{Replay it}
+    \texttt{git clone \dots\ \&\&\ make -C paper pdf}\\
+    \texttt{make -C slides all}
+  \end{block}
+\end{frame}
+
+% ---- 6. Thanks ----------------------------------------------------
+\sectiondivider{Try it}
+
+\begin{frame}{Thank you}
+  \textbf{Repository.} \texttt{github.com/noheton/f-ai-r}\\
+  \textbf{Site.} \texttt{noheton.github.io/f-ai-r}\\
+  \textbf{Draft PDF.} \texttt{github.com/noheton/f-ai-r/releases}
+
+  \vspace{0.8em}
+  We invite a second case study --- by a different author, on a different
+  paper, in a different domain --- as the precondition for community-
+  recommendation submission.
+
+  \vspace{0.6em}
+  \emph{Naming what we are already doing is the first step toward surrendering
+  it to peer scrutiny.}
+\end{frame}
+
+\end{document}

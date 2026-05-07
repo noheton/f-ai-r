@@ -1549,14 +1549,43 @@ fair2r:Slidedeck             a owl:Class ; rdfs:subClassOf prov:Entity ;
     rdfs:comment "Marp-rendered slide deck under slides/. Source-of-truth is the .md file; rendered .pdf / .pptx / .html are derived artefacts."@en .
 
 ent:slidedeck-pitch          a fair2r:Slidedeck ;
-    rdfs:label "F(AI)^2R --- 5-minute pitch deck"@en ;
-    dcterms:source <slides/pitch-5min.md> ;
+    rdfs:label "F(AI)^2R --- 5-minute pitch deck (Beamer)"@en ;
+    dcterms:source <slides/pitch-5min.tex> ;
     prov:wasAttributedTo agent:scientific-writer , agent:human-author .
 
 ent:slidedeck-conference     a fair2r:Slidedeck ;
-    rdfs:label "F(AI)^2R --- 25+5 conference deck"@en ;
-    dcterms:source <slides/conference-30min.md> ;
+    rdfs:label "F(AI)^2R --- 25+5 conference deck (Beamer)"@en ;
+    dcterms:source <slides/conference-30min.tex> ;
     prov:wasAttributedTo agent:scientific-writer , agent:human-author .
+
+ent:slide-style              a prov:Entity ;
+    rdfs:label "slides/style/fair2r-beamer.sty (DLR Beamer style)"@en ;
+    dcterms:source <slides/style/fair2r-beamer.sty> .
+
+act:rev-beamer-slides        a prov:Activity ;
+    rdfs:label "Switch slide pipeline from Marp to Beamer; remove Marp theme + preprocessor + decks; add Beamer style and Beamer source for both decks; update CI to use xu-cheng/latex-action like the paper"@en ;
+    prov:startedAtTime "2026-05-06T00:00:00Z"^^xsd:dateTime ;
+    prov:endedAtTime   "2026-05-06T00:00:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith agent:claude-opus-4-7 ;
+    prov:wasAssociatedWith agent:human-author ;
+    prov:generated ent:slide-style ,
+                   ent:slidedeck-pitch ,
+                   ent:slidedeck-conference ,
+                   ent:workflow-build-slides .
+
+ent:slide-style              prov:wasGeneratedBy act:rev-beamer-slides .
+
+hc:beamer-only-slides        a fair2r:HumanContribution ;
+    rdfs:label "Researcher decision: only ship Beamer (drop Marp); equivalent Beamer is OK as well"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "structural-decision" ;
+    fair2r:contributionLeverage "high" ;
+    rdfs:comment "After the Marp asset-inlining fix landed (PR #18), the researcher decided 'only ship beamer'. Beamer reuses the existing LaTeX toolchain (xu-cheng/latex-action), the DLR colours from paper/style/fair2r.sty, and the same TikZ idiom as the paper figures; no Chromium / Node / Marp / theme-inlining preprocessor. New slides/style/fair2r-beamer.sty is the slide companion to paper/style/fair2r.sty (mid-grey frame titles, DLR-Blue accent rule, hairline rules, the \\sectiondivider helper). Both decks rewritten in Beamer; slides/Makefile and the build-slides workflow now use latexmk + xu-cheng/latex-action mirroring paper/Makefile and build-paper.yml. README and site/index.md updated to point at the Beamer PDFs only (no PPTX); CLAUDE.md and doc/methodology.md primary-artefact list updated to .tex sources; agents/presentation.md rewritten as Beamer-only with explicit refusal to reintroduce a Marp / HTML / PPTX path."@en ;
+    dcterms:created "2026-05-06"^^xsd:date ;
+    prov:influenced ent:slide-style ,
+                    ent:slidedeck-pitch ,
+                    ent:slidedeck-conference ,
+                    ent:workflow-build-slides .
 
 ent:prompt-presentation      a fair2r:Prompt ;
     dcterms:source <agents/presentation.md> ;

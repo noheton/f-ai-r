@@ -14,10 +14,10 @@ them lags the others.
    `paper/sections/*.tex`.
 2. **The PROV-O graph** — `doc/provenance.ttl`.
 3. **The logbook** — `doc/logbook.md`.
-4. **The slide decks** — `slides/pitch-5min.md` and
-   `slides/conference-30min.md` (DLR-themed Marp Markdown). Rendered
-   outputs (`slides/dist/*.{pdf,pptx,html}`) are derived; the `.md`
-   sources are the primary artefact.
+4. **The slide decks** — `slides/pitch-5min.tex` and
+   `slides/conference-30min.tex` (Beamer; DLR Corporate Design via
+   `slides/style/fair2r-beamer.sty`). Rendered PDFs are derived; the
+   `.tex` sources are the primary artefact.
 
 Concretely, any change that touches one must, in the same commit (or a
 clearly linked follow-up commit before the working session ends), produce

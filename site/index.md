@@ -19,22 +19,17 @@ published version is explicitly authorised. Replay it locally with
 
 ## Slide decks
 
-Two Marp-rendered slide decks ship as primary artefacts alongside the
-manuscript, on the **DLR Corporate Design** Marp theme (rendered via
-the asset-inlining preprocessor `scripts/build_slides.py`, the Python
-port of marp-dlr's `run-marp.mjs`, so the DLR background plates and
-logos actually load in headless Chromium). Both auto-build on every
-push to <code>main</code> and live on the
+Two Beamer-rendered slide decks ship as primary artefacts alongside
+the manuscript, on the **DLR Corporate Design** Beamer style
+(`slides/style/fair2r-beamer.sty`, mirroring the paper's
+`paper/style/fair2r.sty`). Same toolchain as the paper PDF
+(latexmk + xu-cheng/latex-action); no Marp / Chromium / Node. Both
+auto-build on every push to <code>main</code> and live on the
 <code>latest-draft-slides</code> release.
 
 <div class="cta-row">
   <a class="cta secondary" href="https://github.com/noheton/f-ai-r/releases/download/latest-draft-slides/pitch-5min.pdf">Pitch deck — 5 min (PDF)</a>
-  <a class="cta secondary" href="https://github.com/noheton/f-ai-r/releases/download/latest-draft-slides/pitch-5min.pptx">Pitch deck — PPTX</a>
-</div>
-
-<div class="cta-row">
   <a class="cta secondary" href="https://github.com/noheton/f-ai-r/releases/download/latest-draft-slides/conference-30min.pdf">Conference deck — 25 + 5 min (PDF)</a>
-  <a class="cta secondary" href="https://github.com/noheton/f-ai-r/releases/download/latest-draft-slides/conference-30min.pptx">Conference deck — PPTX</a>
 </div>
 
 ## What is F(AI)²R?
