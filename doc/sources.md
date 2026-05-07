@@ -1,7 +1,314 @@
 # Sources
 
 Index of sources cited or vendored for the F(AI)²R paper. Maintained by
-`agents/source-analyzer.md`. Last updated 2026-05-07 (fourth pass).
+`agents/source-analyzer.md`. Last updated 2026-05-07 (fifth pass).
+
+## Fifth-pass log (2026-05-07)
+
+The fifth pass advanced 19 further sources from `lit-retrieved` to
+`ai-confirmed` by fetching publisher abstract pages, arXiv records,
+ACL Anthology pages, and one open-access PDF (the JSTOR-hosted Clark
+& Chalmers 1998 *Analysis* preprint). The agent reading these sources
+is `claude-opus-4-7[1m]` operating under the source-analyzer prompt;
+direct `WebFetch` returned 403 Forbidden at every publisher domain in
+this pass, so all retrievals went through the Exa `web_fetch` MCP
+tool, with two assists from `web_search_exa` for the two Oxford
+Academic landing pages that returned `SOURCE_NOT_AVAILABLE` to Exa
+itself (Clark & Chalmers 1998; Kuteeva & Andersson 2024 - the latter
+abstract was captured verbatim from the author's official Stockholm
+University faculty page). All three previously-escalated sources
+(`vannoorden2023chatgpt`, `neurips_llm_policy`, `iclr_llm_policy`)
+remain at `lit-retrieved`; this pass did not retry them. After the
+fifth pass, the queue contains zero sources at `lit-retrieved` outside
+the institutional-access escalation list. The promoted sources are
+listed below with their quoted snippets and the section of the
+manuscript each one underwrites.
+
+### `clarke2009modelchecking` --- ai-confirmed
+
+- **Quoted snippet (verbatim from the *Communications of the ACM*
+  Vol 52 No 11 abstract, ACM DL).**
+  "The progression of model checking to the point where it can be
+  successfully used for complex systems has required the development
+  of sophisticated means of coping with what is known as the state
+  explosion problem. ... Model checking tools, created by both
+  academic and industrial teams, have resulted in an entirely novel
+  approach to verification and test case generation."
+- **Used in.** `position.tex` / §11 (the formal-methods-cousin
+  claim).
+
+### `klein2009sel4` --- ai-confirmed
+
+- **Quoted snippet (verbatim from the SOSP 2009 abstract, ACM DL).**
+  "We present our experience in performing the formal,
+  machine-checked verification of the seL4 microkernel from an
+  abstract specification down to its C implementation. ... To our
+  knowledge, this is the first formal proof of functional correctness
+  of a complete, general-purpose operating-system kernel."
+- **Used in.** `position.tex` / §11 (proof-checker / artefact-discipline
+  precedent alongside `clarke2009modelchecking`).
+
+### `alemohammad2023mad` --- ai-confirmed
+
+- **Quoted snippet (verbatim from the arXiv:2307.01850 abstract).**
+  "Our primary conclusion across all scenarios is that without enough
+  fresh real data in each generation of an autophagous loop, future
+  generative models are doomed to have their quality (precision) or
+  diversity (recall) progressively decrease. We term this condition
+  Model Autophagy Disorder (MAD), making analogy to mad cow disease."
+- **Used in.** `failure-modes.tex` (model-collapse row, alongside
+  `shumailov2024collapse`).
+
+### `shumailov2024collapse` --- ai-confirmed
+
+- **Quoted snippet (verbatim from the *Nature* 631:755--759
+  abstract).**
+  "We find that indiscriminate use of model-generated content in
+  training causes irreversible defects in the resulting models, in
+  which tails of the original content distribution disappear. We
+  refer to this effect as 'model collapse' and show that it can occur
+  in LLMs as well as in variational autoencoders (VAEs) and Gaussian
+  mixture models (GMMs)."
+- **Used in.** `failure-modes.tex` (model-collapse row).
+
+### `chen2023drift` --- ai-confirmed
+
+- **Quoted snippet (verbatim from the arXiv:2307.09009 abstract).**
+  "GPT-4 (March 2023) was reasonable at identifying prime vs.
+  composite numbers (84% accuracy) but GPT-4 (June 2023) was poor on
+  these same questions (51% accuracy). ... Overall, our findings show
+  that the behavior of the 'same' LLM service can change substantially
+  in a relatively short amount of time."
+- **Used in.** `sustainability.tex` (frontier-model-dependence
+  paragraph).
+
+### `luccioni2024power` --- ai-confirmed
+
+- **Quoted snippet (verbatim from the FAccT 2024 / arXiv:2311.16863
+  abstract).**
+  "We measure deployment cost as the amount of energy and carbon
+  required to perform 1,000 inferences on representative benchmark
+  dataset using these models. We find that multi-purpose, generative
+  architectures are orders of magnitude more expensive than
+  task-specific systems for a variety of tasks, even when controlling
+  for the number of model parameters."
+- **Used in.** `sustainability.tex` (inference-cost anchor).
+
+### `patterson2021carbon` --- ai-confirmed
+
+- **Quoted snippet (verbatim from the arXiv:2104.10350 abstract).**
+  "We calculate the energy use and carbon footprint of several recent
+  large models---T5, Meena, GShard, Switch Transformer, and GPT-3---and
+  refine earlier estimates for the neural architecture search that
+  found Evolved Transformer. ... Remarkably, the choice of DNN,
+  datacenter, and processor can reduce the carbon footprint up to
+  ~100--1000X."
+- **Used in.** `sustainability.tex` (training-time carbon footprint,
+  alongside `strubell2019energy`).
+
+### `strubell2019energy` --- ai-confirmed
+
+- **Quoted snippet (verbatim from the ACL 2019 / Anthology P19-1355
+  abstract).**
+  "These accuracy improvements depend on the availability of
+  exceptionally large computational resources that necessitate
+  similarly substantial energy consumption. As a result these models
+  are costly to train and develop, both financially, due to the cost
+  of hardware and electricity or cloud compute time, and
+  environmentally, due to the carbon footprint required to fuel
+  modern tensor processing hardware."
+- **Used in.** `sustainability.tex` (training-side energy cost
+  paragraph).
+
+### `li2023thirsty` --- ai-confirmed
+
+- **Quoted snippet (verbatim from the arXiv:2304.03271 abstract;
+  later published as *Communications of the ACM* DOI
+  10.1145/3724499).**
+  "Training the GPT-3 language model in Microsoft's state-of-the-art
+  U.S. data centers can directly evaporate 700,000 liters of clean
+  freshwater, but such information has been kept a secret. More
+  critically, the global AI demand is projected to account for
+  4.2--6.6 billion cubic meters of water withdrawal in 2027."
+- **Used in.** `sustainability.tex` (water-footprint half of the
+  resource-cost paragraph).
+
+### `birhane2022values` --- ai-confirmed
+
+- **Quoted snippet (verbatim from the FAccT 2022 abstract).**
+  "We find that few of the papers justify how their project connects
+  to a societal need (15%) and far fewer discuss negative potential
+  (1%). ... Notably, we find systematic textual evidence that these
+  top values are being defined and applied with assumptions and
+  implications generally supporting the centralization of power.
+  Finally, we find increasingly close ties between these highly cited
+  papers and tech companies and elite universities."
+- **Used in.** `sustainability.tex` (equity / industry-capture
+  paragraph).
+
+### `thorp2023chatgpt` --- ai-confirmed
+
+- **Quoted snippet (verbatim from the *Science* editorial 379:313).**
+  "We are now updating our license and Editorial Policies to specify
+  that text generated by ChatGPT (or any other AI tools) cannot be
+  used in the work, nor can figures, images, or graphics be the
+  products of such tools. And an AI program cannot be an author. A
+  violation of these policies will constitute scientific misconduct
+  no different from altered images or plagiarism of existing works."
+- **Used in.** `intro.tex` (alongside `else2023chatgpt` as the
+  *Science* counterpart to the *Nature* editorial).
+
+### `sadasivan2023reliably` --- ai-confirmed
+
+- **Quoted snippet (verbatim from the arXiv:2303.11156 abstract via
+  Semantic Scholar / arXiv mirror; also visible in the appendix
+  proof of Theorem 1).**
+  "We introduce recursive paraphrasing attack to stress test a wide
+  range of detection schemes, including the ones using the
+  watermarking as well as neural network-based detectors, zero shot
+  classifiers, and retrieval-based detectors. ... Finally, we provide
+  a theoretical framework connecting the AUROC of the best possible
+  detector to the Total Variation distance between human and AI text
+  distributions."
+- **Used in.** `failure-modes.tex` (residual-detection /
+  paraphrase-attack row).
+
+### `reynolds2021prompt` --- ai-confirmed
+
+- **Quoted snippet (verbatim from the CHI EA 2021 abstract).**
+  "Using GPT-3 as a case study, we show that 0-shot prompts can
+  significantly outperform few-shot prompts. ... Informed by this
+  more encompassing theory of prompt programming, we also introduce
+  the idea of a metaprompt that seeds the model to generate its own
+  natural language prompts for a range of tasks."
+- **Used in.** `evolution.tex` (prompt-craft-as-programming-cousin
+  observation).
+
+### `liu2023prompt` --- ai-confirmed
+
+- **Quoted snippet (verbatim from the *ACM Computing Surveys* 55:9
+  abstract).**
+  "This article surveys and organizes research works in a new
+  paradigm in natural language processing, which we dub
+  'prompt-based learning.' ... It allows the language model to be
+  pre-trained on massive amounts of raw text, and by defining a new
+  prompting function the model is able to perform few-shot or even
+  zero-shot learning, adapting to new scenarios with few or no
+  labeled data."
+- **Used in.** `evolution.tex` (prompt-engineering-as-discipline
+  anchor alongside `reynolds2021prompt`).
+
+### `anderson2024homogenization` --- ai-confirmed
+
+- **Quoted snippet (verbatim from the ACM C&C 2024 abstract).**
+  "We conducted a 36-participant comparative user study and found,
+  in accordance with the homogenization hypothesis, that different
+  users tended to produce less semantically distinct ideas with
+  ChatGPT than with an alternative CST. Additionally, ChatGPT users
+  generated a greater number of more detailed ideas, but felt less
+  responsible for the ideas they generated."
+- **Used in.** `authors-note.tex` / `objections.tex` (cultural-blender
+  pole of the coupling rule).
+
+### `kuteeva2024diversity` --- ai-confirmed
+
+- **Quoted snippet (verbatim from the *Applied Linguistics* 45(3)
+  abstract; mirror at the author's Stockholm University faculty page,
+  https://su.se/english/profiles/mkute, retrieved 2026-05-07; the
+  Oxford Academic landing page was not reachable to Exa).**
+  "While artificial intelligence-supported large language models
+  (LLMs) can help with access to knowledge generated in the Global
+  North and demystify publication practices, they are still biased
+  toward dominant norms and knowledge paradigms. ... Thus, LLMs are
+  likely to drive both language use and knowledge construction
+  towards homogeneity and uniformity, reproducing already existing
+  biases and structural inequalities."
+- **Used in.** `evolution.tex` (paper-driven-disciplines
+  exception / humanities critique of LLM writing assistance).
+
+### `clark1998extended` --- ai-confirmed
+
+- **Quoted snippet (verbatim from the open JSTOR-hosted PDF of
+  *Analysis* 58.1, pp. 7--19, 1998).**
+  "We propose to pursue a third position. We advocate a very
+  different sort of externalism: an active externalism, based on the
+  active role of the environment in driving cognitive processes. ...
+  Epistemic action, we suggest, demands spread of epistemic credit.
+  If, as we confront some task, a part of the world functions as a
+  process which, were it done in the head, we would have no
+  hesitation in recognizing as part of the cognitive process, then
+  that part of the world is (so we claim) part of the cognitive
+  process."
+- **Used in.** `authors-note.tex` (philosophical precedent for the
+  human-LLM partition; the Otto-and-Inga thought experiment is the
+  canonical anchor).
+
+### `clark2025extending` --- ai-confirmed
+
+- **Citation completion.** Confirmed at *Nature Communications*
+  16:4627 (2025), DOI 10.1038/s41467-025-59906-9, published
+  19 May 2025. The current bib entry (`clark2025extending`) carries
+  no DOI; this DOI should be added on the next bib pass.
+- **Quoted snippet (verbatim from the *Nature Communications* 2025
+  open-access article).**
+  "As human-AI collaborations become the norm, we should remind
+  ourselves that it is our basic nature to build hybrid thinking
+  systems --- ones that fluidly incorporate non-biological resources.
+  Recognizing this invites us to change the way we think about both
+  the threats and promises of the coming age."
+- **Used in.** `authors-note.tex` (live anchor for the
+  accelerator-or-blender coupling rule, as the 27-years-later
+  restatement of `clark1998extended`).
+
+### `hutchins1995cognition` --- ai-confirmed
+
+- **Quoted snippet (verbatim from the MIT Press publisher description
+  of *Cognition in the Wild*, ISBN 9780262581462, retrieved
+  2026-05-07).**
+  "Hutchins examines a set of phenomena that have fallen in the
+  cracks between the established disciplines of psychology and
+  anthropology, bringing to light a new set of relationships between
+  culture and cognition. ... Hutchins argues instead that cultural
+  activity systems have cognitive properties of their own that are
+  different from the cognitive properties of the individuals who
+  participate in them."
+- **Used in.** `authors-note.tex` (distributed-cognition canonical,
+  alongside `clark1998extended`).
+- **Note for `references.bib`.** The MIT Press paperback record
+  shows publication 26 August 1996 (paperback) following hardcover
+  10 February 1995. The current bib entry uses `year = {1995}`,
+  which matches the original hardcover and is therefore correct;
+  flagged here only for completeness.
+
+### Items the fifth pass did **not** advance
+
+The three previously-escalated paywalled / login-walled sources
+(`vannoorden2023chatgpt`, `neurips_llm_policy`, `iclr_llm_policy`)
+remain at `lit-retrieved` per the existing entries in
+`doc/sources-needing-institutional-access.md`. No new escalations
+were added in this pass.
+
+### Bib corrections flagged in the fifth pass
+
+1. **`clark2025extending`** --- the current `references.bib` entry
+   has no `doi` and no `volume`/`pages`. The canonical record is
+   *Nature Communications* 16, Article 4627 (2025), DOI
+   10.1038/s41467-025-59906-9, published 19 May 2025. Recommend
+   adding `doi = {10.1038/s41467-025-59906-9}`, `volume = {16}`,
+   `pages = {4627}` on the next bib pass.
+2. **`kuteeva2024diversity`** --- the canonical citation is
+   *Applied Linguistics* 45(3), 561--567, 2024. The bib entry
+   currently has no `volume`, `number`, or `pages`. Recommend
+   filling those in.
+3. **`liu2023prompt`** --- pages should be confirmed. *ACM Computing
+   Surveys* 55(9), Article 195 (paginated 1--35) is the canonical
+   citation; the current bib's `pages = {1--35}` is consistent but
+   the article number `195` is missing.
+4. **`li2023thirsty`** --- the bib mixes the arXiv preprint and the
+   2025 CACM final version, which is acceptable given the bibkey
+   stability rule, but the title should be updated to reflect the
+   final published version (CACM 2025) when the human author next
+   touches the entry.
 
 ## Fourth-pass log (2026-05-07)
 

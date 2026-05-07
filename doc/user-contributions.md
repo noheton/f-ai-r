@@ -625,3 +625,30 @@ unactioned-`Next:` todos in `doc/logbook.md`.
 
 These are reconstructions; the count is a lower bound on the actual
 number of contributions, since some sessions made several at once.
+
+### 2026-05-07 --- Add-illustrations pass: hero graphic + two supporting figures
+*Type:* `content-prompt`
+*Leverage:* medium
+*Triggered:* Researcher reported the paper "felt a bit hard to read"
+and asked for a hero graphic plus two to three supporting
+illustrations. The illustration subagent added one hero
+(`paper/figures/hero.tex` plus a `hero.standalone.tex` wrapper) wired
+into `paper/main.tex` front matter and `slides/pitch-5min.tex` title
+slide; one writer/reader dual-loop figure
+(`paper/figures/dual-loop.tex`) placed in `paper/sections/intro.tex`;
+one failure-mode coverage heat-strip
+(`paper/figures/failure-mode-coverage.tex`) placed in
+`paper/sections/failure-modes.tex` below Table 1. Each figure ships
+with a `.figspec.md` per the illustration agent's output format. No
+new TikZ libraries required. Provenance updated:
+`act:add-illustrations-pass`, `ai:add-illustrations-pass` (first
+`fair2r:AIContribution` recorded in the graph), and matching
+`ent:figure-*` entities; rdflib re-parse: 1531 -> 1591 triples (+60).
+*Artefacts touched:* `paper/figures/hero.tex`,
+`paper/figures/hero.standalone.tex`, `paper/figures/dual-loop.tex`,
+`paper/figures/failure-mode-coverage.tex`, the three matching
+`.figspec.md` files, `paper/main.tex`, `paper/sections/intro.tex`,
+`paper/sections/failure-modes.tex`, `slides/pitch-5min.tex`,
+`doc/provenance.ttl`, `doc/logbook.md`.
+*Provenance IRI:* `fair2r:hc-add-illustrations-prompt`
+(matching AI mirror: `fair2r:ai-add-illustrations-pass`)

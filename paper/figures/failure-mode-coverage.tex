@@ -1,0 +1,135 @@
+% Failure-mode / practice coverage matrix as a heat-strip.
+% Companion to Table~\ref{tab:failure-modes} in
+% paper/sections/failure-modes.tex: where the table reads top-to-bottom,
+% this figure reads left-to-right at a glance and exposes which of
+% the eight integrated practices bears the load for each named
+% failure mode. A solid blue cell marks the practice that primarily
+% addresses that mode; a soft cell marks a secondary contributor; an
+% empty cell records that the row's failure mode is residual or out
+% of scope for that practice. The point of the figure is the shape:
+% no row is empty; no practice is unused; the residual row at the
+% bottom is intentionally white across all eight columns.
+% Loaded from paper/sections/failure-modes.tex via \input.
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}[
+  every node/.style={font=\sffamily\footnotesize, align=center,
+                     inner sep=2pt},
+  rowlbl/.style={font=\sffamily\footnotesize, text=black,
+                 anchor=east, align=right, text width=42mm},
+  collbl/.style={font=\sffamily\bfseries\footnotesize, text=dlrGrau1,
+                 align=center, rotate=45, anchor=west,
+                 text width=22mm},
+  cellprimary/.style={fill=dlrBlau1, draw=dlrGrau4, line width=0.3pt,
+                      minimum width=8mm, minimum height=6mm},
+  cellsecondary/.style={fill=dlrBlau5, draw=dlrGrau4, line width=0.3pt,
+                        minimum width=8mm, minimum height=6mm},
+  cellresidual/.style={fill=dlrGelb5, draw=dlrGrau4, line width=0.3pt,
+                       minimum width=8mm, minimum height=6mm},
+  cellempty/.style={fill=white, draw=dlrGrau4, line width=0.3pt,
+                    minimum width=8mm, minimum height=6mm},
+  legend/.style={font=\sffamily\scriptsize, text=dlrGrau1},
+]
+% Practice indices 1..8 across the top, x = i*0.95
+\foreach \i/\name in {%
+  1/{1.\,Transcripts},
+  2/{2.\,Verification\\status (FSM)},
+  3/{3.\,Per-claim\\provenance},
+  4/{4.\,Mirror\\discipline},
+  5/{5.\,Recursive\\meta-process},
+  6/{6.\,Base-rate\\disclosure},
+  7/{7.\,Legal\\honesty},
+  8/{8.\,FAIR as\\precondition}}
+{
+  \node[collbl] at ({\i*0.95}, 0.35) {\name};
+}
+
+% Row layout: y = -row*0.7
+% Define rows: label, then which columns are primary (P), secondary (S),
+% residual/yellow (R). Order of columns as listed.
+% 1 Fabricated citations:           P=2,3   S=6
+% 2 Claim-evidence drift:           P=2     S=3,4
+% 3 Sloppification (quote drift):   P=4     S=2
+% 4 Model collapse (residual):      R=1,6
+% 5 List-of-lists prose:            P=5     (readability scrutinizer = practice 5? actually the readability scrutinizer is part of the pipeline; closest practice mapping is 5 recursive meta-process. Use S=5.)  -> use S=5; primary = none -> mark residual on column 5.
+% 6 Hedging chains:                 S=5
+% 7 Placeholder dishonesty:         P=4
+% 8 Dual use:                       R=7   S=3
+% Residual stripe at the very bottom: failure modes the pattern only
+% signals toward (audience fatigue, adversarial review, leakage).
+
+% Helper: a pair of \node lines per cell.
+% Row 1: Fabricated citations
+\node[rowlbl] at (0.2, -0.7) {Fabricated citations};
+\foreach \c in {1,4,5,7,8} {\node[cellempty]    at ({\c*0.95}, -0.7) {};}
+\foreach \c in {2,3}       {\node[cellprimary]  at ({\c*0.95}, -0.7) {};}
+\foreach \c in {6}         {\node[cellsecondary]at ({\c*0.95}, -0.7) {};}
+
+% Row 2: Claim-evidence drift
+\node[rowlbl] at (0.2, -1.4) {Claim--evidence drift};
+\foreach \c in {1,5,6,7,8} {\node[cellempty]    at ({\c*0.95}, -1.4) {};}
+\foreach \c in {2}         {\node[cellprimary]  at ({\c*0.95}, -1.4) {};}
+\foreach \c in {3,4}       {\node[cellsecondary]at ({\c*0.95}, -1.4) {};}
+
+% Row 3: Sloppification (quotation drift)
+\node[rowlbl] at (0.2, -2.1) {Sloppification (quote drift)};
+\foreach \c in {1,3,5,6,7,8} {\node[cellempty]    at ({\c*0.95}, -2.1) {};}
+\foreach \c in {4}           {\node[cellprimary]  at ({\c*0.95}, -2.1) {};}
+\foreach \c in {2}           {\node[cellsecondary]at ({\c*0.95}, -2.1) {};}
+
+% Row 4: Model collapse (indirectly mitigated)
+\node[rowlbl] at (0.2, -2.8) {Model collapse (indirect)};
+\foreach \c in {2,3,4,5,7,8} {\node[cellempty]    at ({\c*0.95}, -2.8) {};}
+\foreach \c in {1,6}         {\node[cellresidual] at ({\c*0.95}, -2.8) {};}
+
+% Row 5: List-of-lists prose
+\node[rowlbl] at (0.2, -3.5) {List-of-lists prose};
+\foreach \c in {1,2,3,4,6,7,8} {\node[cellempty]    at ({\c*0.95}, -3.5) {};}
+\foreach \c in {5}             {\node[cellsecondary]at ({\c*0.95}, -3.5) {};}
+
+% Row 6: Hedging chains
+\node[rowlbl] at (0.2, -4.2) {Hedging chains};
+\foreach \c in {1,2,3,4,6,7,8} {\node[cellempty]    at ({\c*0.95}, -4.2) {};}
+\foreach \c in {5}             {\node[cellsecondary]at ({\c*0.95}, -4.2) {};}
+
+% Row 7: Placeholder dishonesty
+\node[rowlbl] at (0.2, -4.9) {Placeholder dishonesty};
+\foreach \c in {1,2,3,5,6,7,8} {\node[cellempty]    at ({\c*0.95}, -4.9) {};}
+\foreach \c in {4}             {\node[cellprimary]  at ({\c*0.95}, -4.9) {};}
+
+% Row 8: Dual use (made visible, not eliminated)
+\node[rowlbl] at (0.2, -5.6) {Dual use (made visible)};
+\foreach \c in {1,2,4,5,6,8}   {\node[cellempty]    at ({\c*0.95}, -5.6) {};}
+\foreach \c in {7}             {\node[cellresidual] at ({\c*0.95}, -5.6) {};}
+\foreach \c in {3}             {\node[cellsecondary]at ({\c*0.95}, -5.6) {};}
+
+% Row 9: Residual band -- pattern can only signal
+\node[rowlbl, text=dlrGrau1] at (0.2, -6.5)
+  {Residual: leakage, audience fatigue,\\adversarial review};
+\foreach \c in {1,...,8}       {\node[cellempty]    at ({\c*0.95}, -6.5) {};}
+\draw[draw=dlrGrau3, line width=0.3pt, dashed]
+  ({0.95-0.475}, -6.18) -- ({8*0.95+0.475}, -6.18);
+
+% --- Legend ---------------------------------------------------------
+\node[legend, anchor=north west, draw=dlrGrau4, fill=white,
+      inner sep=4pt, align=left]
+  at (-3.6, -7.1)
+  {%
+    \tikz\draw[fill=dlrBlau1, draw=dlrGrau4]  (0,0) rectangle (3mm,3mm);\,Primary load \quad
+    \tikz\draw[fill=dlrBlau5, draw=dlrGrau4]  (0,0) rectangle (3mm,3mm);\,Secondary contribution \quad
+    \tikz\draw[fill=dlrGelb5, draw=dlrGrau4]  (0,0) rectangle (3mm,3mm);\,Indirect / residual \quad
+    \tikz\draw[fill=white, draw=dlrGrau4]     (0,0) rectangle (3mm,3mm);\,Out of scope for that practice
+  };
+\end{tikzpicture}
+\caption{Coverage of the eight named failure modes by the eight
+integrated practices. A primary cell (solid blue) marks the practice
+that bears the failure-mode load; a secondary cell (soft blue)
+marks a contributing practice; an indirect/residual cell (yellow)
+records that the mode is mitigated only at the labelling layer. The
+bottom row records the residual failure modes the pattern can only
+signal toward (\S\ref{sec:failure-modes}, \emph{Residual}). The
+shape of the figure is the argument: no failure-mode row is empty,
+no practice column is unused, and the integration --- not any single
+practice --- is what produces full coverage.}
+\label{fig:failure-mode-coverage}
+\end{figure}

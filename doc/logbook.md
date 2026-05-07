@@ -1434,3 +1434,72 @@ pure citation-record maintenance and will produce identical
 *Next:* Trigger the build-paper workflow on `main` so the
 bibliography refreshes; promote these sources to `lit-read` once the
 human author has read them in full.
+
+## 2026-05-07 — Add-illustrations pass: hero graphic + two supporting figures
+*Author:* claude-opus-4-7 (illustration subagent, under direction of repo owner)
+*Touched:* `paper/figures/hero.tex` (new),
+`paper/figures/hero.standalone.tex` (new),
+`paper/figures/dual-loop.tex` (new),
+`paper/figures/failure-mode-coverage.tex` (new),
+`paper/figures/hero.figspec.md` (new),
+`paper/figures/dual-loop.figspec.md` (new),
+`paper/figures/failure-mode-coverage.figspec.md` (new),
+`paper/main.tex`,
+`paper/sections/intro.tex`,
+`paper/sections/failure-modes.tex`,
+`slides/pitch-5min.tex`,
+`doc/provenance.ttl`,
+`doc/user-contributions.md`,
+`doc/logbook.md`.
+*Decision / outcome:* Researcher reported the paper "felt a bit hard
+to read". Three figures added on the DLR token palette.
+
+1. **Hero** (`paper/figures/hero.tex`, plus a standalone wrapper
+   `hero.standalone.tex` for PDF/PNG export): the manuscript bundle
+   on a hairline grey strip in the middle (claims, sources, prompts,
+   transcripts, provenance graph), with the (AI)\textsubscript{1}
+   authoring pass arching over it (writes, blue) and the
+   (AI)\textsubscript{2} audit pass arching under it (reads, green).
+   Right-edge synthesis: `F(AI)^2R` with the gloss "two passes
+   through every artefact". Wired into `paper/main.tex` after
+   `\maketitle` (front-matter `figure*`) and into the title slide of
+   `slides/pitch-5min.tex` (`\resizebox{0.85\textwidth}` of the same
+   `\input`).
+2. **Dual loop** (`paper/figures/dual-loop.tex`): writer/reader
+   partition with the manuscript bundle as shared substrate; dashed
+   yellow handback edge underneath. Placed in
+   `paper/sections/intro.tex` immediately after the squared-notation
+   paragraph, framing the pattern visually before §3 formalises it.
+3. **Failure-mode coverage** (`paper/figures/failure-mode-coverage.tex`):
+   a heat-strip mapping the eight failure modes onto the eight
+   integrated practices (primary load = solid blue, secondary = soft
+   blue, indirect/residual = yellow, out of scope = white). Placed
+   below Table 1 in `paper/sections/failure-modes.tex`.
+
+No new TikZ libraries required: `arrows.meta`, `positioning`, and
+`shapes.geometric` were already loaded by `paper/style/fair2r.sty`,
+and the new figures stay within those plus core PGF (`\foreach`,
+`to[out=…,in=…]`, `to[bend …]`). All colours from the existing DLR
+ramp; hairline rules at 0.3--0.8 pt; no rounded corners, no shadows,
+no emoji.
+
+Provenance: new `act:add-illustrations-pass` activity generates the
+four figure entities (`ent:figure-hero`, `ent:figure-hero-standalone`,
+`ent:figure-dual-loop`, `ent:figure-failure-mode-coverage`) and uses
+the three sections they illustrate (intro, pattern, failure-modes).
+First `fair2r:AIContribution` in the graph, `ai:add-illustrations-pass`,
+attributed to `agent:illustration`; matching
+`hc:add-illustrations-prompt` records the human author's triggering
+prompt. New `ent:section-failure-modes` section IRI added (it had not
+been backfilled previously). Triple count: 1531 → 1591 (+60), parsed
+clean with `rdflib`.
+
+Build status: `make -C paper pdf` was *not* run from this session
+because no LaTeX toolchain (`latexmk`, `pdflatex`, or `tlmgr`) is
+available in the working environment; the figures and wiring are
+typeset by inspection against the existing `paper/figures/*.tex`
+sources and the DLR style. Human author or CI to confirm the build
+on next push.
+*Next:* Confirm the `build-paper.yml` workflow renders the three new
+figures cleanly; export `paper/figures/hero.standalone.pdf` and a
+PNG for the README and the Pages site hero.
