@@ -1585,6 +1585,16 @@ hc:fix-beamer-conference-build  a fair2r:HumanContribution ;
     prov:influenced ent:slide-style ,
                     ent:slidedeck-conference .
 
+hc:fix-beamer-conference-build-attempt-2  a fair2r:HumanContribution ;
+    rdfs:label "Second attempt at fixing the conference-deck Beamer compile: log-dump-on-failure + replace inline TikZ"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "corrective-intervention" ;
+    fair2r:contributionLeverage "medium" ;
+    rdfs:comment "Attempt 1 (PR #21 first commit) failed CI as well. Two changes: (1) build-slides.yml now runs latex-action with continue_on_error=true and adds an `if: failure()` step that tails the .log file into the workflow output; the next failure will show actual LaTeX error lines without auth. (2) The two inline TikZ figures in conference-30min.tex (ten-stage pipeline, verification ladder) are replaced with simpler tabular and framed-text layouts; TikZ is the most likely culprit and removing it restores a compilable deck while we wait for the log to confirm. Pitch deck unchanged."@en ;
+    dcterms:created "2026-05-07"^^xsd:date ;
+    prov:influenced ent:workflow-build-slides ,
+                    ent:slidedeck-conference .
+
 hc:pages-staleness-fix       a fair2r:HumanContribution ;
     rdfs:label "Researcher report: the deployed Pages site does not seem up to date"@en ;
     fair2r:contributedBy agent:human-author ;

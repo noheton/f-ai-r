@@ -1104,3 +1104,42 @@ verify the rendered conference deck looks clean. If still failing,
 the next-most-likely cause is the inline TikZ for the pipeline
 diagram --- in which case I'll simplify or move to an external
 pre-rendered SVG/PNG.
+
+## 2026-05-07 — Second attempt: log-dump-on-failure + replace conference-deck inline TikZ
+*Author:* claude-opus-4-7 (under direction of repo owner)
+*Touched:* `.github/workflows/build-slides.yml`,
+`slides/conference-30min.tex`, `doc/provenance.ttl`,
+`doc/user-contributions.md`, `doc/logbook.md`.
+*Decision / outcome:* PR \#21's first attempt at fixing the
+conference-deck Beamer compile failed CI again --- the four
+defensive fixes in fair2r-beamer.sty did not catch the actual
+error. Workflow logs are auth-protected; my speculation about
+which Beamer pitfall was at fault was, on present evidence,
+wrong. Two changes ship together:
+\begin{enumerate}
+  \item \textbf{Log dump on failure.} `build-slides.yml` now runs
+        the latex-action with \texttt{continue\_on\_error: true}
+        and an \texttt{if: failure()} step that tails the
+        corresponding \texttt{.log} file into the workflow output.
+        On the next run the actual LaTeX error lines will be
+        visible without auth.
+  \item \textbf{Replace inline TikZ in conference deck.} The two
+        TikZ figures (pipeline, ladder FSM) are replaced with
+        simpler tabular / framed-text layouts. TikZ is the most
+        complex part of the deck and the most likely source of a
+        Beamer-specific compile error; removing it now restores a
+        compilable deck while we wait for the log to surface the
+        next time.
+\end{enumerate}
+The pitch deck did not change.
+The user also reported that GitHub said "Could not change default
+branch" when trying to switch the default from
+\texttt{claude/init-fair-paper-repo-2d64T} to \texttt{main} ---
+both branches exist (per \texttt{list\_branches}, neither
+protected), so the error is most likely a transient UI / token /
+session issue. Recommended workaround: \texttt{gh repo edit
+noheton/f-ai-r --default-branch main} from the local \texttt{gh}
+CLI.
+*Next:* On the next CI run, read the dumped \texttt{.log} tail to
+identify the actual error, then restore the TikZ figures with the
+correct fix.
