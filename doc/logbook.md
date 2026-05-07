@@ -952,3 +952,63 @@ on the rendered PDF + PPTX of `pitch-5min` and `conference-30min` to
 confirm the DLR theme actually applies; on the same push, the
 `pages.yml` rebuild should refresh the site and remove the "old
 page" cache. If either still misbehaves, escalate.
+
+## 2026-05-06 — Beamer-only switch (drop Marp)
+*Author:* claude-opus-4-7 (under direction of repo owner)
+*Touched:* `slides/pitch-5min.tex` (new), `slides/conference-30min.tex`
+(new), `slides/style/fair2r-beamer.sty` (new), `slides/Makefile`
+(rewritten), `slides/.gitignore` (rewritten);
+deleted `slides/pitch-5min.md`, `slides/conference-30min.md`,
+`slides/static/dlr/dlr.css`, `slides/static/dlr/mermaid.css`,
+`slides/static/dlr/assets/{slide_back.png, title_back.png,
+dlr-logo.svg, dlr-logo-white.svg}`,
+`scripts/build_slides.py`;
+`.github/workflows/build-slides.yml` (rewritten);
+`agents/presentation.md`, `CLAUDE.md`, `doc/methodology.md`,
+`doc/provenance.ttl`, `doc/user-contributions.md`, `README.md`,
+`site/index.md`.
+*Decision / outcome:* Researcher said "only ship beamer". The
+Marp pipeline was working after PR \#18 but the researcher decided
+the additional toolchain (Node + Chromium + asset-inlining
+preprocessor) was not justified when Beamer reuses the
+already-vendored TeX Live install, the DLR colour ramps from
+`paper/style/fair2r.sty`, and the TikZ idiom from
+`paper/figures/*.tex`. Beamer also produces single-file PDFs
+identical in toolchain to the paper, which keeps the build
+surface uniform.
+Implementation: \\
+\, --- \, New `slides/style/fair2r-beamer.sty` is the Beamer
+companion to `paper/style/fair2r.sty`. Mid-grey frame titles, a
+DLR-Blue accent rule under each title, hairline rules in tables, a
+\texttt{\\textbackslash{}sectiondivider\{...\}} helper for chapter
+breaks (light-blue plate, big mid-grey title). Mirrors the paper's
+typography (helvet $\to$ Arial fallback, Frutiger optional). \\
+\, --- \, `slides/pitch-5min.tex` (six frames, ~50\,s each) and
+`slides/conference-30min.tex` (~28 frames including
+\texttt{\\textbackslash{}sectiondivider}-keyed section breaks and a
+backup cluster) carry the same content the Marp decks did. Inline
+TikZ for the pipeline and the verification-ladder FSM; tabular
+layouts for the cell mapping, the eight-practice list, and the
+objections. \\
+\, --- \, `slides/Makefile` drives latexmk; CI uses
+\texttt{xu-cheng/latex-action} on each deck; `latest-draft-slides`
+release is updated on `main` with the two PDFs. \\
+\, --- \, Removed Marp decks, the `slides/static/dlr/` vendored
+Marp theme, and the Python asset-inlining preprocessor
+\texttt{scripts/build\_slides.py}; the Marp-only path is gone. \\
+\, --- \, `agents/presentation.md` rewritten Beamer-only, with
+explicit refusal to reintroduce a Marp / HTML / PPTX path. \\
+\, --- \, Primary-artefact list in `CLAUDE.md` and
+`doc/methodology.md` updated to `.tex` sources. \\
+\, --- \, README and `site/index.md` link Beamer PDFs only
+(no PPTX downloads).
+Local smoke test: TTL parses; the Beamer rendering can only be
+verified end-to-end in CI (no full TeX Live install locally).
+The new Beamer style file is small and the inline TikZ in the decks
+uses libraries already loaded by `paper/style/fair2r.sty`, so
+compile errors should be visible immediately in the build-slides
+workflow if any.
+*Next:* Watch the build-slides CI; verify the rendered PDFs look
+clean (frame title with the blue rule, section dividers, tabular
+spacing); on the same push the Pages workflow runs because
+`site/index.md` is touched.

@@ -1,7 +1,20 @@
-# Marp output (rendered from the .md sources via slides/Makefile or
-# the build-slides workflow); not committed because the .md sources
-# plus the vendored DLR theme are the source of truth.
-dist/
-*.pptx
-*.pdf
-*.html
+# LaTeX intermediate / output (mirrors paper/.gitignore)
+*.aux
+*.log
+*.out
+*.toc
+*.bbl
+*.blg
+*.bcf
+*.run.xml
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.nav
+*.snm
+*.vrb
+
+# Built PDFs (rendered by the build-slides workflow into the
+# 'latest-draft-slides' release; not committed).
+pitch-5min.pdf
+conference-30min.pdf

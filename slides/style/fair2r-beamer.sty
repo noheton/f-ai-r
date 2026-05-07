@@ -1,0 +1,159 @@
+% =====================================================================
+% fair2r-beamer.sty --- Beamer style for the F(AI)^2R slide decks,
+% aligned with the DLR Corporate Design (CD-Handbuch §10.1, §4).
+%
+% The companion to paper/style/fair2r.sty. Reuses the same DLR colour
+% ramps, the same Helvetica/Arial-equivalent face (helvet), and the
+% same square-corner / hairline-rule discipline. Pulls in the paper's
+% TikZ figures directly via \input so the deck never drifts from the
+% manuscript's visual identity.
+%
+% Variant switch (default blue): \def\faiarVariant{a|b|c} BEFORE
+% \usepackage{style/fair2r-beamer}.
+% =====================================================================
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{fair2r-beamer}[2026/05/06 F(AI^2)R Beamer style]
+
+\providecommand{\faiarVariant}{a}
+
+% --- Fonts and encoding --------------------------------------------
+\RequirePackage[T1]{fontenc}
+\RequirePackage[utf8]{inputenc}
+\RequirePackage{textcomp}
+\RequirePackage[scaled=1.0]{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+\RequirePackage{microtype}
+\RequirePackage{xcolor}
+\RequirePackage{colortbl}
+\RequirePackage{booktabs}
+\RequirePackage{array}
+\RequirePackage{tikz}
+\usetikzlibrary{arrows.meta, positioning, shapes.geometric}
+\RequirePackage{ifthen}
+
+% --- DLR colour ramps (mirror of paper/style/fair2r.sty) -----------
+\definecolor{dlrBlau1}{HTML}{00658B}
+\definecolor{dlrBlau2}{HTML}{3B98CB}
+\definecolor{dlrBlau5}{HTML}{D1E8FA}
+\definecolor{dlrGruen1}{HTML}{82A043}
+\definecolor{dlrGruen5}{HTML}{E6EAAF}
+\definecolor{dlrGelb1}{HTML}{D2AE3D}
+\definecolor{dlrGelb5}{HTML}{FFF8BE}
+\definecolor{dlrGrau1}{HTML}{666666}
+\definecolor{dlrGrau3}{HTML}{B1B1B1}
+\definecolor{dlrGrau4}{HTML}{CFCFCF}
+\definecolor{dlrGrau5}{HTML}{EBEBEB}
+\definecolor{dlrLink}{HTML}{00B0F0}
+
+\ifthenelse{\equal{\faiarVariant}{b}}{%
+  \colorlet{dlrAccent}{dlrGruen1}\colorlet{dlrAccentSoft}{dlrGruen5}%
+}{}
+\ifthenelse{\equal{\faiarVariant}{c}}{%
+  \colorlet{dlrAccent}{dlrGelb1}\colorlet{dlrAccentSoft}{dlrGelb5}%
+}{}
+\ifthenelse{\equal{\faiarVariant}{a}}{%
+  \colorlet{dlrAccent}{dlrBlau1}\colorlet{dlrAccentSoft}{dlrBlau5}%
+}{}
+\providecolor{dlrAccent}{HTML}{00658B}
+\providecolor{dlrAccentSoft}{HTML}{D1E8FA}
+
+% --- Beamer theme tweaks: stripped-down DLR look -------------------
+\usetheme{default}
+\usecolortheme{default}
+\useinnertheme{default}
+\useoutertheme{default}
+\setbeamertemplate{navigation symbols}{}
+
+% Frame title: Arial bold, mid-grey, single hairline accent rule under.
+\setbeamercolor{frametitle}{fg=dlrGrau1}
+\setbeamerfont{frametitle}{family=\sffamily, series=\bfseries, size=\large}
+\setbeamertemplate{frametitle}{%
+  \vspace{0.4em}%
+  \insertframetitle\par
+  {\color{dlrAccent}\rule{\textwidth}{0.6pt}}%
+  \vspace{0.3em}%
+}
+
+% Title block: large, mid-grey, with DLR-Blue rule.
+\setbeamercolor{title}{fg=dlrGrau1}
+\setbeamerfont{title}{family=\sffamily, series=\bfseries, size=\Huge}
+\setbeamercolor{subtitle}{fg=black}
+\setbeamerfont{subtitle}{family=\sffamily, size=\large}
+\setbeamercolor{author}{fg=black}
+\setbeamerfont{author}{family=\sffamily, size=\small}
+\setbeamercolor{institute}{fg=dlrGrau1}
+\setbeamerfont{institute}{family=\sffamily, size=\footnotesize}
+\setbeamercolor{date}{fg=dlrGrau1}
+\setbeamerfont{date}{family=\sffamily, size=\footnotesize}
+
+\setbeamertemplate{title page}{%
+  \vfill
+  {\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle\par}%
+  \vskip0.5em
+  {\color{dlrAccent}\rule{\textwidth}{1.2pt}}\par
+  \vskip0.6em
+  {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
+  \vskip2em
+  {\usebeamerfont{author}\usebeamercolor[fg]{author}\insertauthor\par}%
+  \vskip0.6em
+  {\usebeamerfont{institute}\usebeamercolor[fg]{institute}\insertinstitute\par}%
+  \vskip0.6em
+  {\usebeamerfont{date}\usebeamercolor[fg]{date}\insertdate\par}%
+  \vfill
+}
+
+% Footer: mid-grey, page count + author + topic.
+\setbeamercolor{footline}{fg=dlrGrau1}
+\setbeamerfont{footline}{family=\sffamily, size=\tiny}
+\setbeamertemplate{footline}{%
+  \hbox{%
+    \begin{beamercolorbox}[wd=\paperwidth, ht=2.25ex, dp=1ex,
+                           leftskip=1.2em, rightskip=1.2em]{footline}%
+      F(AI)\textsuperscript{2}R --- Florian Krebs, DLR ZLP \hfill
+      \insertframenumber{} / \inserttotalframenumber%
+    \end{beamercolorbox}%
+  }%
+}
+
+% Lists: tight, accent for first level.
+\setbeamertemplate{itemize item}{\textcolor{dlrAccent}{\textbullet}}
+\setbeamertemplate{itemize subitem}{\textcolor{dlrGrau1}{--}}
+\setbeamertemplate{enumerate item}{\textcolor{dlrAccent}{\arabic{enumi}.}}
+
+\setbeamercolor{block title}{bg=dlrAccentSoft, fg=dlrGrau1}
+\setbeamerfont{block title}{family=\sffamily, series=\bfseries, size=\normalsize}
+\setbeamercolor{block body}{bg=white, fg=black}
+
+% Hyperref colours.
+\hypersetup{
+  colorlinks=true,
+  linkcolor=dlrAccent,
+  citecolor=dlrAccent,
+  urlcolor=dlrLink,
+}
+
+% Tables: hairline rules.
+\arrayrulecolor{dlrGrau4}
+\setlength{\heavyrulewidth}{0.6pt}
+\setlength{\lightrulewidth}{0.3pt}
+
+% Convenience macro.
+\newcommand{\faiar}{F(AI)\textsuperscript{2}R}
+
+% Section divider helper: \sectiondivider{Title}
+\newcommand{\sectiondivider}[1]{%
+  {%
+    \setbeamercolor{background canvas}{bg=dlrAccentSoft}%
+    \setbeamertemplate{footline}{}%
+    \begin{frame}[plain]%
+      \vfill
+      {\sffamily\bfseries\Huge\color{dlrAccent}#1\par}%
+      \vskip0.5em
+      {\color{dlrAccent}\rule{0.45\textwidth}{1.2pt}}\par
+      \vfill
+    \end{frame}%
+  }%
+}
+
+\endinput

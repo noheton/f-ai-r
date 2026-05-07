@@ -279,6 +279,32 @@ primary-artefact consistency invariant.
 `agents/orchestrator.md`.
 *Provenance IRI:* `fair2r:hc-contribution-rule`
 
+### 2026-05-06 --- Beamer-only: drop Marp, ship Beamer slide decks
+*Type:* `structural-decision`
+*Leverage:* high
+*Triggered:* Switched the slide pipeline from Marp to Beamer at
+researcher request ("only ship beamer"). Removed
+`slides/pitch-5min.md`, `slides/conference-30min.md`,
+`slides/static/dlr/` (vendored Marp theme + assets), and
+`scripts/build_slides.py` (the Marp asset-inlining preprocessor).
+Added `slides/style/fair2r-beamer.sty` (Beamer companion to
+`paper/style/fair2r.sty`); two Beamer decks
+`slides/pitch-5min.tex` and `slides/conference-30min.tex`; rewrote
+`slides/Makefile` to drive latexmk; rewrote
+`.github/workflows/build-slides.yml` to use
+`xu-cheng/latex-action` exactly like `build-paper.yml`. Updated
+`agents/presentation.md` to be Beamer-only (with explicit refusal
+to reintroduce a Marp / HTML / PPTX path); `CLAUDE.md` and
+`doc/methodology.md` primary-artefact list now names `.tex`
+sources; README and `site/index.md` link the Beamer PDFs only
+(no PPTX downloads).
+*Artefacts touched:* `slides/`, `agents/presentation.md`,
+`.github/workflows/build-slides.yml`, `CLAUDE.md`,
+`doc/methodology.md`, `doc/provenance.ttl`,
+`doc/user-contributions.md`, `doc/logbook.md`, `README.md`,
+`site/index.md`.
+*Provenance IRI:* `fair2r:hc-beamer-only-slides`
+
 ### 2026-05-06 --- Fix slide rendering (DLR theme) + trigger Pages rebuild
 *Type:* `corrective-intervention`
 *Leverage:* high
