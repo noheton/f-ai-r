@@ -1284,3 +1284,38 @@ inventory.
 *Next:* Beamer log tail (still pending); promote some of the 48
 queue items from `lit-retrieved` to `lit-read` once the human has
 read them.
+
+## 2026-05-07 — Beamer log paste arrived; enumitem + Beamer enumerate-template conflict diagnosed and fixed
+*Author:* claude-opus-4-7 (under direction of repo owner)
+*Touched:* `slides/conference-30min.tex`, `doc/provenance.ttl`,
+`doc/user-contributions.md`, `doc/logbook.md`.
+*Decision / outcome:* User pasted the build-slides workflow log
+tail. Real cause located on line 44 of the conference deck:
+\begin{quote}
+\texttt{TeX capacity exceeded, sorry [grouping levels=255].\\
+\textbackslash labelenumi -> \{ \textbackslash labelenumi \}}
+\end{quote}
+This is a recursive macro definition triggered by loading
+\texttt{enumitem} alongside Beamer's
+\texttt{\textbackslash setbeamertemplate\{enumerate item\}}
+(in \texttt{slides/style/fair2r-beamer.sty}). enumitem and
+Beamer's enumerate template both touch \texttt{\textbackslash labelenumi};
+loaded together they create a circular definition and TeX hits
+the \texttt{grouping levels=255} ceiling before producing any
+output. The pitch deck never used \texttt{\textbackslash begin\{enumerate\}}
+so it compiled fine; the conference deck did, with three
+enumitem-style call sites.
+Fix in one commit: removed
+\texttt{\textbackslash usepackage\{enumitem\}} from
+\texttt{slides/conference-30min.tex}; stripped
+\texttt{[leftmargin=1.5em,itemsep=...pt]} from all three
+\texttt{\textbackslash begin\{enumerate\}} calls. Plain Beamer
+enumerate handles the layout adequately at slide scale.
+Earlier defensive commits (PR \#21 fair2r-beamer.sty cleanups, the
+TikZ removal) were not the cause and could be reverted, but the
+simpler tabular versions are also legible at the slide aspect.
+We will restore the inline TikZ figures in a follow-up if the
+researcher prefers them visually.
+*Next:* Watch CI go green; merge; the
+\texttt{latest-draft-slides} release will populate with the
+conference-deck PDF for the first time.

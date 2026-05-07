@@ -279,6 +279,24 @@ primary-artefact consistency invariant.
 `agents/orchestrator.md`.
 *Provenance IRI:* `fair2r:hc-contribution-rule`
 
+### 2026-05-07 --- Fix Beamer conference deck: enumitem + Beamer enumerate-template conflict
+*Type:* `corrective-intervention`
+*Leverage:* high
+*Triggered:* User pasted the conference-30min.log tail from the
+failing build-slides run. Real error:
+`TeX capacity exceeded, sorry [grouping levels=255]. \labelenumi -> { \labelenumi }`
+--- a recursive macro definition caused by loading `enumitem`
+alongside Beamer's `\setbeamertemplate{enumerate item}` in
+`slides/style/fair2r-beamer.sty`. Removed `\usepackage{enumitem}`
+from `slides/conference-30min.tex` and stripped
+`[leftmargin=...,itemsep=...]` from all three `\begin{enumerate}`
+calls. The pitch deck never used enumerate, which is why it
+compiled all along.
+*Artefacts touched:* `slides/conference-30min.tex`,
+`doc/provenance.ttl`, `doc/user-contributions.md`,
+`doc/logbook.md`.
+*Provenance IRI:* `fair2r:hc-fix-beamer-enumitem-conflict`
+
 ### 2026-05-07 --- Reconcile provenance + new eight-practices figure + scrutiny pass
 *Type:* `rule-shape`
 *Leverage:* medium
