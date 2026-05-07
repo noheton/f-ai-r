@@ -1,7 +1,59 @@
 # Sources
 
 Index of sources cited or vendored for the F(AI)²R paper. Maintained by
-`agents/source-analyzer.md`. Last updated 2026-05-07 (fifth pass).
+`agents/source-analyzer.md`. Last updated 2026-05-07 (sixth pass).
+
+## Sixth-pass log (2026-05-07)
+
+The sixth pass closed the loop on the one outstanding `lit-retrieved`
+source that had been added since the fifth pass: `shafer2014xennials`
+(PR #33), the GOOD Magazine piece popularising the Xennial
+bridge-generation framing. The agent reading the source is
+`claude-opus-4-7[1m]` operating under the source-analyzer prompt.
+Direct `WebFetch` returned 403 Forbidden against `good.is`; retrieval
+went through the Exa `web_fetch` MCP tool, which returned the article
+in clean markdown.
+
+The fetch surfaced a **bibliographic correction**: the article is
+co-authored by **Sarah Stankorb and Jed Oelbaum**, not "Sarah
+Shafer" (the bibkey was a half-remembered authorship), and its
+canonical title is *"Reasonable People Disagree about the Post-Gen
+X, Pre-Millennial Generation"* with the dual-byline structure
+"Glad to be a Xennial" / "Bah! We Xennials are a Sad, Sorry Lot",
+not the abbreviated *"Generation Xennial"*. The bibkey
+`shafer2014xennials` is kept stable for citation continuity (it is
+already referenced by `claim:senior-researcher-bridge` and would
+break a stable IRI if renamed); the `author` and `title` fields in
+`paper/references.bib` and the `dcterms:creator` / `dcterms:title`
+fields in `doc/provenance.ttl` were corrected. The published date
+`2014-09-25` was added.
+
+The three previously-escalated paywalled / per-cycle URL sources
+(`vannoorden2023chatgpt`, `neurips_llm_policy`, `iclr_llm_policy`)
+remain at `lit-retrieved` on the institutional-access queue and were
+not retried. After the sixth pass, the reading queue contains zero
+sources at `lit-retrieved` outside that escalation list.
+
+### `shafer2014xennials` --- ai-confirmed
+
+- **Quoted snippet (verbatim from the GOOD Magazine article, fetched
+  via the Exa `web_fetch` MCP tool, 2026-05-07).**
+  "Meet Generation Xennial (because no one uses Generation Y), born
+  between 1979 and 1983. ... We call them the Xennials---a
+  micro-generation that serves as a bridge between the disaffection
+  of Gen X and the blithe optimism of Millennials. ... The internet
+  was not a part of our childhoods, but computers existed and there
+  was something special about the opportunity to use one. ...
+  Technology unfolded around us, but we got to ease into it during
+  that brief period before it became ubiquitous."
+- **Used in.** `conclusion.tex` paragraph "The bridge to what is now
+  unthinkable" --- the Xennial micro-generation is invoked as a
+  generational analogue for senior researchers who span pre-LLM and
+  LLM-era scholarship.
+- **Bib correction logged.** Author and title fields rewritten;
+  bibkey kept stable.
+
+---
 
 ## Fifth-pass log (2026-05-07)
 
@@ -1455,3 +1507,11 @@ flagged for the human author.)
    one.
 5. **USCO 2023** is cited in `background.tex` without a bib entry —
    `usco2023ai` is proposed above.
+6. **`shafer2014xennials`**: bibkey author was wrong --- the GOOD
+   Magazine article is by **Stankorb and Oelbaum**, not "Shafer" ---
+   and the canonical title is *"Reasonable People Disagree about the
+   Post-Gen X, Pre-Millennial Generation"*, not *"Generation
+   Xennial"*. Both fields corrected in the bib and in
+   `doc/provenance.ttl` during the sixth pass; bibkey kept stable for
+   citation continuity. Flagged here for the human author's
+   awareness.

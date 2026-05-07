@@ -2061,3 +2061,131 @@ methodology page) rather than letting them drift. The
 methodology page is the canonical place to point a reader
 who wants the digest; the paper table is the snapshot at
 submission.
+
+## 2026-05-07 --- Verification pass 3 (source-analyzer subagent, sixth pass)
+
+Sixth source-analyzer pass, run by `claude-opus-4-7[1m]` under
+the source-analyzer prompt at the human author's "complete
+loop" prompt. The pass closed the only outstanding new
+`lit-retrieved` source since the fifth pass --- `shafer2014xennials`
+(GOOD Magazine, popularising the Xennial bridge-generation
+framing).
+
+**Advanced (1):** `shafer2014xennials` --- GOOD Magazine article
+fetched via the Exa `web_fetch` MCP tool (direct `WebFetch`
+returned 403 Forbidden against `good.is`, mirroring the fifth-pass
+pattern at publisher domains). Verbatim snippet preserved in
+`doc/sources.md` under the new sixth-pass log block. Verification
+state advanced from `lit-retrieved` to `ai-confirmed` in
+`doc/provenance.ttl`.
+
+**Escalated (0):** No new escalations. The three previously-
+escalated sources (`vannoorden2023chatgpt`, `neurips_llm_policy`,
+`iclr_llm_policy`) remain on
+`doc/sources-needing-institutional-access.md` and were not retried.
+
+**Bib correction flagged.** The fetch revealed that the article
+is co-authored by **Sarah Stankorb and Jed Oelbaum** (not
+"Sarah Shafer", which was a half-remembered authorship on the
+bibkey), and the canonical title is *"Reasonable People
+Disagree about the Post-Gen X, Pre-Millennial Generation"*
+(not *"Generation Xennial"*, which is the colloquial gloss
+used in the article body). The bibkey `shafer2014xennials` is
+**kept stable** for citation continuity --- `claim:senior-researcher-bridge`
+already references `src:shafer2014xennials`, and renaming the
+IRI would break a stable identifier. Author and title were
+corrected in `paper/references.bib` and in the `dcterms:creator`
+/ `dcterms:title` triples in `doc/provenance.ttl`. Logged at
+the end of `doc/sources.md` under the bib-corrections summary.
+
+**Rung distribution after the pass.** Queue contains 51
+sources: 3 at `lit-retrieved` (the institutional-access
+escalation list), 47 at `ai-confirmed`, 1 without a rung
+(`w3c2013provo`, a long-standing graph-cleanliness defect
+unrelated to this pass).
+
+**Provenance.** New activity
+`act:meta-cooperation-2026-05-07-verification-pass-3` (parent
+activity minted at claim-add time per the no-parentless-claim
+rule), with two `Contribution` mirrors:
+`hc:complete-loop-prompt-2026-05-07` (HumanContribution,
+`responsibility-uptake` --- the human author closing the
+verification loop with a "complete loop" prompt) and
+`ac:verification-pass-3-2026-05-07` (AIContribution, the
+verification work itself). Triple count 2014 → 2016 (+2 net,
+after rewriting the Shafer source block in place).
+
+**Anything weird.** The bibkey author was wrong, not just
+incomplete --- a reminder that bibkeys are nicknames and
+should never be trusted as bibliographic ground truth without
+a fetch. Caught early because the source had only one
+dependent claim and was on the new-source watch list; would
+have been a defect if it had been buried in a bulk-import
+pass.
+
+## 2026-05-07 — Complete-loop fix pass: small fixes from the audit ensemble
+
+*Author:* claude-opus-4-7 (under direction of repo owner)
+*Touched:* `paper/sections/intro.tex`,
+`paper/sections/objections.tex`,
+`paper/sections/appendix-a-ladder.tex`,
+`paper/sections/failure-modes.tex`,
+`paper/figures/src/provenance-topology.py`,
+`slides/pitch-5min.tex`, `slides/conference-30min.tex`,
+`doc/provenance.ttl`, `doc/logbook.md`,
+`doc/user-contributions.md`.
+
+The complete-loop audit ensemble (five subagents: source-analyzer,
+fair-aligner, layout-scrutinizer, readability-reviewer, condenser)
+returned a punch list. The page-budget cuts (~13–18 pp over a
+10-pp target) and the Xennial-paragraph split are taste calls and
+were deferred. The small, safe fixes landed here:
+
+1. **Broken cross-references** (readability reviewer findings).
+   `intro.tex:113` referenced a non-existent `sec:discussion`;
+   replaced with `sec:sustainability`–`sec:objections` plus
+   `sec:conclusion` (the actual sections that took over the
+   discussion role). `objections.tex:11,90` referenced
+   `sec:fm-residual`; added the matching
+   `\label{sec:fm-residual}` after `\paragraph{Residual.}` in
+   `failure-modes.tex:59`. `appendix-a-ladder.tex:56` referenced
+   `sec:practice-disclosure`; rewrote as `(\S\ref{sec:eight},
+   item~6)` to match the convention used elsewhere.
+
+2. **Voice drift**: `objections.tex:58` had `source-analyser`
+   (British verb form) where every other site uses the proper
+   noun `Source Analyzer`; harmonised to the proper noun.
+
+3. **Missing graph entity** (FAIR aligner finding). `ravi2024fair4ml`
+   is cited five times in the prose with a bib entry but had no
+   `fair2r:Source` triple in the graph. Added the entity at
+   `ai-confirmed` rung with `dcterms:title`, `dcterms:creator`
+   (Castro / Garijo / RDA WG), `dcterms:identifier` (Zenodo DOI),
+   and an `rdfs:comment` recording the audit that surfaced the
+   defect.
+
+4. **Palette comment drift** (layout scrutinizer finding).
+   `paper/figures/src/provenance-topology.py:27` documented
+   `dlrGrau1` as `#4D5258`; `paper/style/fair2r.sty:59` defines
+   it as `#666666`. Style file is authoritative; comment fixed.
+
+5. **AI² grid wired into both decks** (layout scrutinizer
+   finding). PR #33's claim that the figure "lands on the
+   position frame" was unmet: the grid was paper-only. Added a
+   dedicated frame in each deck:
+   `slides/pitch-5min.tex` Position section (resized to 0.78
+   linewidth); `slides/conference-30min.tex` Position section
+   with a one-line caption naming the diagonal-disclosure
+   pattern.
+
+Triple count 2042 → 2050 (+8). No-parentless-claim invariant
+still 0. Site rebuilds 26 pages clean. SPARQL conformance
+unchanged.
+
+*Deferred to a separate decision:* the page-budget cuts
+(condenser proposal: trim `pattern.tex` F/A/I/R duplication;
+trim `evolution.tex` paragraph re-narrations now that the table
+covers them; tighten `authors-note.tex`) and the Xennial
+paragraph split (readability reviewer proposal: split after
+*"F(AI)^2R is in part an attempt to encode it."* into two
+paragraphs). Both touch authorial voice and need a human call.
