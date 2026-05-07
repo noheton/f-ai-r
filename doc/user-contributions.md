@@ -279,6 +279,19 @@ primary-artefact consistency invariant.
 `agents/orchestrator.md`.
 *Provenance IRI:* `fair2r:hc-contribution-rule`
 
+### 2026-05-06 --- Pages staleness: defensive fixes + forced deploy
+*Type:* `corrective-intervention`
+*Leverage:* low
+*Triggered:* `scripts/build_provenance_site.py` now writes
+`_site/.nojekyll`; the page template's hero section gains a
+visible `build-tag` printing the cache-bust hash; touching the
+script + CSS matches `pages.yml`'s path filter so the merge
+triggers a fresh deploy and busts the CDN cache.
+*Artefacts touched:* `scripts/build_provenance_site.py`,
+`site/static/style.css`, `doc/provenance.ttl`,
+`doc/user-contributions.md`, `doc/logbook.md`.
+*Provenance IRI:* `fair2r:hc-pages-staleness-fix`
+
 ### 2026-05-06 --- Beamer-only: drop Marp, ship Beamer slide decks
 *Type:* `structural-decision`
 *Leverage:* high

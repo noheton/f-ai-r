@@ -1575,6 +1575,15 @@ act:rev-beamer-slides        a prov:Activity ;
 
 ent:slide-style              prov:wasGeneratedBy act:rev-beamer-slides .
 
+hc:pages-staleness-fix       a fair2r:HumanContribution ;
+    rdfs:label "Researcher report: the deployed Pages site does not seem up to date"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "corrective-intervention" ;
+    fair2r:contributionLeverage "low" ;
+    rdfs:comment "Researcher reported the Pages site appears stale after PR #19. Sandbox cannot fetch the live URL to confirm. Three defensive fixes: (1) scripts/build_provenance_site.py now writes _site/.nojekyll so GitHub Pages does not run Jekyll on the artefact (Jekyll can misbehave on the static/ tree); (2) the page template's hero section gains a visible build-tag printing the cache-bust hash, so the researcher can confirm at a glance which bundle their browser is rendering; (3) touching scripts/build_provenance_site.py and site/static/style.css matches pages.yml's path filter, so the merge triggers a fresh pages.yml run and forces the CDN cache (max-age=600) to refresh."@en ;
+    dcterms:created "2026-05-06"^^xsd:date ;
+    prov:influenced ent:script-build-provenance-site .
+
 hc:beamer-only-slides        a fair2r:HumanContribution ;
     rdfs:label "Researcher decision: only ship Beamer (drop Marp); equivalent Beamer is OK as well"@en ;
     fair2r:contributedBy agent:human-author ;
