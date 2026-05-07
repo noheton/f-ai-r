@@ -11,8 +11,8 @@ Once a source has been read, advance its rung in `doc/provenance.ttl` and (optio
 ## State at the time of this build
 
 - Sources in queue: **51**
-- Sources at `lit-retrieved`: 4
-- Sources at `ai-confirmed`: 46
+- Sources at `lit-retrieved`: 3
+- Sources at `ai-confirmed`: 47
 - Sources without a rung (graph cleanliness defect): 1
 
 ## Queue (highest leverage first)
@@ -295,9 +295,9 @@ Once a source has been read, advance its rung in `doc/provenance.ttl` and (optio
 
 ---
 
-### 21. `shafer2014xennials` --- rung: `lit-retrieved`, dependent claims: **1**
+### 21. `shafer2014xennials` --- rung: `ai-confirmed`, dependent claims: **1**
 
-**Citation.** Shafer, Sarah. (2014). "Generation {X}ennial". *GOOD Magazine*. <https://www.good.is/articles/generation-xennial>
+**Citation.** Stankorb, Sarah and Oelbaum, Jed. (2014). "Reasonable People Disagree about the Post-{G}en {X}, Pre-{M}illennial Generation". *GOOD Magazine*. <https://www.good.is/articles/generation-xennial>
 
 **Dependent claims** (advancing this source to `lit-read` would unblock):
 
@@ -305,7 +305,7 @@ Once a source has been read, advance its rung in `doc/provenance.ttl` and (optio
 
 **Open via URL:** <https://www.good.is/articles/generation-xennial>
 
-**Note from the bib.** Original popularisation of the ``Xennial'' bridge-generation framing (born late 1970s to early 1980s; analog childhood, digital adulthood). Cited as a generational analogue for senior researchers who span pre-LLM and LLM-era scholarship and who, like Xennials, can articulate the disciplines a tooling-native cohort cannot reconstruct unaided. Bibkey kept stable; rung at lit-retrieved pending human read.
+**Note from the bib.** Original popularisation of the ``Xennial'' bridge-generation framing (micro-generation born between 1979 and 1983; analog childhood, digital adulthood). Cited as a generational analogue for senior researchers who span pre-LLM and LLM-era scholarship and who, like Xennials, can articulate the disciplines a tooling-native cohort cannot reconstruct unaided. Bibkey kept stable for citation-key continuity; author and title corrected during verification-pass 6 (2026-05-07) --- the article is by Stankorb and Oelbaum, not ``Shafer''; the canonical title is the dual-byline form, not ``Generation Xennial''.
 
 ---
 

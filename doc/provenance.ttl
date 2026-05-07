@@ -2470,11 +2470,12 @@ hc:rerun-illustrations-pass-4-prompt  a fair2r:HumanContribution ;
 #-------------------------------------------------------------------------
 
 src:shafer2014xennials  a fair2r:Source ;
-    dcterms:title "Generation Xennial" ;
-    dcterms:creator "Sarah Shafer" ;
+    dcterms:title "Reasonable People Disagree about the Post-Gen X, Pre-Millennial Generation" ;
+    dcterms:creator "Sarah Stankorb" , "Jed Oelbaum" ;
+    dcterms:date "2014-09-25"^^xsd:date ;
     dcterms:identifier "https://www.good.is/articles/generation-xennial" ;
-    fair2r:verificationState verif:lit-retrieved ;
-    rdfs:comment "Original popularisation of the 'Xennial' bridge-generation framing (born late 1970s to early 1980s; analog childhood, digital adulthood). Cited as a generational analogue for senior researchers who span pre-LLM and LLM-era scholarship, in conclusion.tex paragraph 'The bridge to what is now unthinkable.'"@en .
+    fair2r:verificationState verif:ai-confirmed ;
+    rdfs:comment "Original popularisation of the 'Xennial' bridge-generation framing (born 1979-1983; analog childhood, digital adulthood). Cited as a generational analogue for senior researchers who span pre-LLM and LLM-era scholarship, in conclusion.tex paragraph 'The bridge to what is now unthinkable.' Bibkey kept stable for citation continuity; author and title corrected during verification-pass 6 (2026-05-07): the article is co-authored by Stankorb and Oelbaum, not 'Shafer'; canonical title is the dual-byline form, not 'Generation Xennial'."@en .
 
 act:meta-cooperation-2026-05-07-senior-researcher-bridge  a prov:Activity ;
     rdfs:label "Meta-cooperation: graduate senior-researcher bridge claim into the Conclusion"@en ;
