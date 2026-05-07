@@ -1,0 +1,36 @@
+% Standalone wrapper for paper/figures/hero.tex.
+% Build with: latexmk -pdf hero.standalone.tex
+% Output:     hero.standalone.pdf  (and .png via pdftoppm)
+%
+% Mirrors the colour ramps and TikZ libraries from
+% paper/style/fair2r.sty so the figure renders identically when
+% compiled outside the paper.
+\documentclass[tikz,border=4mm]{standalone}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{textcomp}
+\usepackage[scaled=1.0]{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning, shapes.geometric}
+
+% --- DLR colour ramps (mirror of paper/style/fair2r.sty) -------------
+\definecolor{dlrBlau1}{HTML}{00658B}
+\definecolor{dlrBlau5}{HTML}{D1E8FA}
+\definecolor{dlrGruen1}{HTML}{82A043}
+\definecolor{dlrGruen5}{HTML}{E6EAAF}
+\definecolor{dlrGelb1}{HTML}{D2AE3D}
+\definecolor{dlrGelb5}{HTML}{FFF8BE}
+\definecolor{dlrGrau1}{HTML}{666666}
+\definecolor{dlrGrau3}{HTML}{B1B1B1}
+\definecolor{dlrGrau4}{HTML}{CFCFCF}
+\definecolor{dlrGrau5}{HTML}{EBEBEB}
+\colorlet{dlrAccent}{dlrBlau1}
+\colorlet{dlrAccentSoft}{dlrBlau5}
+
+\begin{document}
+\input{hero.tex}
+\end{document}

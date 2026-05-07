@@ -24,6 +24,14 @@
 % ---- 1. Title -----------------------------------------------------
 \begin{frame}[plain]
   \titlepage
+  \vspace{-1.0em}
+  \begin{center}
+    % Hero graphic (paper/figures/hero.tex) scaled to the title slide.
+    % The TikZ source lives in the paper tree; we re-input it here so
+    % the deck and the manuscript stay in lock-step. The 0.55x scale
+    % keeps it inside the 16:9 frame under the title block.
+    \resizebox{0.85\textwidth}{!}{\input{../paper/figures/hero}}
+  \end{center}
 \end{frame}
 
 % ---- 2. Problem ---------------------------------------------------

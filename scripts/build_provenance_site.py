@@ -48,6 +48,7 @@ PAGES: list[tuple[str, str, Path]] = [
     ("reading-queue",        "Reading queue",          ROOT / "doc" / "reading-queue.md"),
     ("provenance-graph",     "Provenance topology",    ROOT / "doc" / "provenance-graph.md"),
     ("provenance-explorer",  "Provenance explorer",    SITE_SRC / "provenance-explorer.md"),
+    ("provenance-verification", "Provenance verification", ROOT / "doc" / "research" / "provenance-verification.md"),
 ]
 
 # Order in which nav items appear, with their final slugs.
@@ -64,6 +65,7 @@ NAV: list[tuple[str, str]] = [
     ("provenance",           "Provenance"),
     ("provenance-explorer",  "Explorer"),
     ("provenance-graph",     "Topology"),
+    ("provenance-verification", "Verification"),
     ("submission",           "Submission"),
 ]
 

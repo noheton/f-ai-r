@@ -1,59 +1,23 @@
-% Verification ladder as a finite-state machine.
-% Five states with monotone non-decreasing transitions, plus the
-% retraction transition that returns a claim to invalidated.
-% Loaded by paper/sections/pattern.tex via \input.
+% F(AI)^2R verification ladder as a finite-state machine.
+% Source of truth: paper/figures/ladder-fsm.mmd (Mermaid stateDiagram).
+% Build: rendered to paper/figures/ladder-fsm.pdf via mmdc; the
+% Pages site renders the same .mmd client-side via mermaid.min.js so
+% paper and site stay in lock-step. See paper/figures/ladder-fsm.figspec.md.
+% This .tex shim is what \input{figures/ladder-fsm} from
+% paper/sections/pattern.tex resolves to: it wraps the rendered PDF
+% in a figure float with the manuscript caption.
 \begin{figure}[!t]
 \centering
-\begin{tikzpicture}[
-  node distance=2mm and 7mm,
-  every node/.style={font=\sffamily\footnotesize, align=center,
-                     inner sep=4pt, minimum height=8mm,
-                     rounded corners=0pt},
-  state/.style={draw, line width=0.5pt, minimum width=22mm,
-                minimum height=10mm, fill=white,
-                draw=dlrGrau1, text=black},
-  ai/.style={fill=dlrBlau5, draw=dlrBlau1},
-  human/.style={fill=dlrGruen5, draw=dlrGruen1},
-  ext/.style={fill=dlrGrau5, draw=dlrGrau1, text=dlrGrau1},
-  arrow/.style={-{Latex[length=1.5mm]}, draw=dlrGrau1, line width=0.4pt},
-  retract/.style={-{Latex[length=1.5mm]}, draw=dlrGelb1, line width=0.4pt, dashed},
-  legend/.style={font=\sffamily\scriptsize, text=dlrGrau1},
-]
-\node[state, ext] (un)   {\textsc{unverified-}\\\textsc{external}};
-\node[state, ext, right=of un] (need) {\textsc{needs-}\\\textsc{research}};
-\node[state, right=of need] (ret)  {\textsc{lit-}\\\textsc{retrieved}};
-\node[state, ai, right=of ret]  (aic)  {\textsc{ai-}\\\textsc{confirmed}};
-\node[state, human, right=of aic] (read) {\textsc{lit-}\\\textsc{read}};
-
-% Forward (monotone) transitions
-\draw[arrow] (un)   -- node[legend, above] {recognise gap}    (need);
-\draw[arrow] (need) -- node[legend, above] {DOI / URL}         (ret);
-\draw[arrow] (ret)  -- node[legend, above] {AI fetch + quote}  (aic);
-\draw[arrow] (aic)  -- node[legend, above] {human reads}       (read);
-
-% Retraction (back-edge) on the bottom, dashed
-\draw[retract] (read.south) to[out=-90, in=-90, looseness=0.5]
-  node[legend, below, midway] {\textit{prov:Invalidation}}
-  ([yshift=-1mm]un.south);
-
-% Legend
-\node[legend, anchor=north west, draw=dlrGrau4, fill=white,
-      inner sep=4pt, align=left]
-  at ([xshift=0mm, yshift=-12mm]un.south west)
-  {%
-    \tikz\draw[fill=dlrGrau5, draw=dlrGrau1] (0,0) rectangle (3mm,3mm);\,External / pre-research \quad
-    \tikz\draw[fill=white, draw=dlrGrau1] (0,0) rectangle (3mm,3mm);\,Identifier resolves \quad
-    \tikz\draw[fill=dlrBlau5, draw=dlrBlau1] (0,0) rectangle (3mm,3mm);\,AI-only ceiling \quad
-    \tikz\draw[fill=dlrGruen5, draw=dlrGruen1] (0,0) rectangle (3mm,3mm);\,Human-confirmed
-  };
-\end{tikzpicture}
+\includegraphics[width=0.92\linewidth]{figures/ladder-fsm.pdf}
 \caption{The verification ladder as a finite-state machine. A
 \texttt{fair2r:Claim} progresses left-to-right as evidence
 accumulates; \textsc{ai-confirmed} is the ceiling an LLM agent can
 deliver on its own (\S\ref{sec:ladder}). Retraction is the only
-back-edge (dashed) and is recorded as a \texttt{prov:Invalidation}
-activity in \texttt{doc/provenance.ttl}, never as a deletion. A
-claim may be \emph{invoked} at its current rung or below; load-bearing
-or contested claims still require \textsc{lit-read}.}
+back-edge and is recorded as a \texttt{prov:Invalidation} activity
+in \texttt{doc/provenance.ttl}, never as a deletion. A claim may be
+\emph{invoked} at its current rung or below; load-bearing or
+contested claims still require \textsc{lit-read}. Source: Mermaid
+\texttt{stateDiagram-v2} at \texttt{paper/figures/ladder-fsm.mmd},
+mirrored on the public site.}
 \label{fig:ladder-fsm}
 \end{figure}

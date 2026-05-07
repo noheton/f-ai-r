@@ -29,10 +29,25 @@ GROUP BY ?state}
 
 \input{sections/_generated/rung-distribution.tex}
 
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.92\linewidth]{figures/rung-distribution.pdf}
+\caption{Verification-rung distribution at submission time, as a
+single-glance companion to the auto-generated table above. Sources
+sit one row up, claims one row down; segment widths are entity
+counts. Soft fills mark AI-only rungs (\textsc{ai-confirmed}) and
+the hairline cell marks \textsc{lit-retrieved}; the green segments
+are human-confirmed and the solid blue segment is
+\textsc{source-vendored}. The figure is regenerated on every build
+by \texttt{paper/figures/src/rung-distribution.py}.}
+\label{fig:rung-distribution}
+\end{figure}
+
 \noindent A submission whose load-bearing claims sit below
 \textsc{lit-read} fails the FAIR audit unless the manuscript hedges
 explicitly --- the rung distribution tells the reviewer where
-hedging is mandatory and where it would be over-cautious.
+hedging is mandatory and where it would be over-cautious
+(Figure~\ref{fig:rung-distribution}).
 
 \paragraph{Section-to-claim coverage.}
 Every section in \texttt{paper/main.tex} should appear in the graph
