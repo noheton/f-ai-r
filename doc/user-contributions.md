@@ -59,6 +59,29 @@ The entries below were reconstructed in one batch on 2026-05-06 from
 the available evidence. Future sessions append in real time.
 
 
+### 2026-05-07 --- Rule shape: expand illustration toolset; pin DLR-CD constraint
+*Type:* `rule-shape`
+*Leverage:* medium
+*Triggered:* User flagged that "Mermaid, matplotlib, and other
+publication-ready tools can also be used by the illustrator. if
+unsure ask" and, on a follow-up, "but keep dlr design system in
+mind". `agents/illustration.md` updated: the "TikZ-only" implicit
+rule is retired; the prompt now records the full toolset
+(matplotlib, seaborn, plotly, scienceplots, cmocean, colorcet,
+proplot, TikZ, PGFPlots, svgwrite, drawsvg, schemdraw,
+matplotlib-scalebar, diagrams, graphviz, networkx, mermaid-py,
+gridspec, plotnine, patchworklib, bokeh, ipywidgets, plus
+molecular / image-processing libraries for sub-domain
+instantiations). The DLR Corporate Design (Arial / Helvetica
+fallback, `dlrBlau1 #00658B` accent, mid-grey neutrals, square
+corners only, hairline rules at 0.4pt, no shadows / glows /
+gradients / 3D, no emoji, no clip-art) is now a binding section
+above the toolset list and explicitly applies to every tool —
+default tool theming counts as an unfinished figure.
+*Artefacts touched:* `agents/illustration.md`, `doc/logbook.md`,
+`doc/user-contributions.md`, `doc/provenance.ttl`.
+*Provenance IRI:* `fair2r:hc-illustration-toolset-and-dlr-cd`
+
 ### 2026-05-07 --- Verification pass: 16 sources advanced + 3 bib corrections applied
 *Type:* `rule-shape`
 *Leverage:* high

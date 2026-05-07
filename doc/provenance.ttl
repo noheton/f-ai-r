@@ -2092,3 +2092,31 @@ hc:rerun-illustrations-prompt  a fair2r:HumanContribution ;
     rdfs:comment "User asked the illustration agent to decide afresh on the figure set, with the TikZ-only constraint lifted: Mermaid, matplotlib, Inkscape SVG, d2 and graphviz were allowed where genuinely better. The prompt requested a 6-9 figure budget across the paper, a published audit verdict (which figures stay TikZ, which are replaced and in what medium, which are added), and primary-artefact synchronisation (manuscript + provenance.ttl + logbook + slides) in a single pass."@en ;
     dcterms:created "2026-05-07"^^xsd:date ;
     prov:influenced ai:add-illustrations-pass-2 .
+
+# Rule-shape contribution: expand illustration toolset; pin DLR CD as
+# binding for every tool. This is a rule edit on agents/illustration.md
+# rather than a figure-generating activity, so it does not have a
+# corresponding fair2r:Figure. The activity points at the agent prompt
+# as its output.
+
+act:expand-illustration-toolset  a prov:Activity ;
+    rdfs:label "Expand illustration agent toolset; pin DLR CD as binding"@en ;
+    prov:startedAtTime "2026-05-07T00:00:00Z"^^xsd:dateTime ;
+    prov:endedAtTime   "2026-05-07T00:00:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith agent:claude-opus-4-7 ,
+                           agent:human-author ;
+    prov:used    ent:prompt-illustration ;
+    prov:generated ent:prompt-illustration .
+
+ent:prompt-illustration  a fair2r:Prompt ;
+    rdfs:label "Illustration agent prompt (agents/illustration.md)"@en ;
+    dcterms:source <agents/illustration.md> .
+
+hc:illustration-toolset-and-dlr-cd  a fair2r:HumanContribution ;
+    rdfs:label "Researcher prompt: expand illustration toolset; keep DLR design system binding"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "rule-shape" ;
+    fair2r:contributionLeverage "medium" ;
+    rdfs:comment "Two paired user instructions retired the implicit TikZ-only rule for the illustration agent: 'Mermaid, matplotlib, and other publication-ready tools can also be used by the illustrator' and 'but keep dlr design system in mind'. The agent prompt at agents/illustration.md now records the full toolset and elevates the DLR CD constraint (Arial fallback, dlrBlau1 #00658B accent, mid-grey neutrals, square corners, hairline rules, no shadows/3D, no emoji) to a binding section that applies to every tool, with default theming counted as an unfinished figure."@en ;
+    dcterms:created "2026-05-07"^^xsd:date ;
+    prov:influenced act:expand-illustration-toolset .
