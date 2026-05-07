@@ -34,6 +34,67 @@ prior date.
 
 ---
 
+## 2026-05-07 — Associative-thinking capacity as the cooperation multiplier
+*Source:* session 2026-05-07 (researcher prompt at the end of the
+complete-loop audit pass).
+*Stage:* hypothesis
+*Promoted-to-paper:* pending — strong candidate paragraph for
+`paper/sections/evolution.tex` (process angle) or
+`paper/sections/authors-note.tex` (researcher-experience angle).
+
+The researcher noted, in their own words: *"how far does
+associative thinking capability help in leveraging llm cooperation
+benefits. I mean in the convo you often provide suggestions which
+lead me to other angles or ideas"*.
+
+*The observation, restated.* The model's value in this cooperation
+has often **not** been in being right about a suggestion. It has
+been in producing an adjacent suggestion that the researcher then
+used as a springboard to a *different* idea the model had not
+proposed. The model's role in those moments is closer to a
+brainstorming partner or rubber duck than to an oracle: a generator
+of associatively-near-but-not-quite-right candidates whose job is
+to keep the researcher's own associative thinking primed.
+
+*Implication for the cooperation rule.* The benefit a researcher
+extracts from an LLM cooperation may scale with the researcher's
+own associative-thinking capacity, not with model accuracy. A
+researcher who can hold five frames at once and pick the angle that
+fires gets more out of a noisy generator than a researcher who can
+only act on a confident answer. This reframes the failure mode from
+*"the model was wrong"* to *"the human did not have a frame the
+model's near-miss was useful to"*.
+
+*Where this lands.* This reframes the coupling-rule diagnostic
+(Author's Note: *would the abstraction have been thinkable without
+the model?*). The honest extension is: *would the abstraction have
+been thinkable without the model **and** without the human's
+associative latitude to convert a near-miss into a usable angle?*
+If yes, the cooperation was an accelerator on a frame the human
+already held; if no, the question genuinely opens whether the
+cooperation produced something neither party could have produced
+alone.
+
+*Risk.* Naming this risks reducing the model's contribution to
+"useful noise". The fairer phrasing: *the model's contribution is
+upstream of the suggestion that lands* — it shapes the search space
+the human's associative leap then operates inside. Two associative
+generators working alternately may explore more space than one
+generator working alone, even when neither generator is more
+"creative" than the other in isolation.
+
+*For F(AI)\textsuperscript{2}R as a published claim.* The verification
+ladder grades whether a claim is sourced; it does not grade whether
+the claim's *generation* was solo or cooperative. The current schema
+captures this only via `prov:wasAttributedTo` (single agent) and
+`prov:wasInformedBy` (chain of activities). A future schema growth
+could mint `fair2r:cooperativeOriginType` with values
+{`solo-author`, `accelerated-by-near-miss`, `co-generated`,
+`prompt-driven`} so the cooperative-origin classification becomes
+queryable. Not for this paper — flag for the next case study.
+
+---
+
 ## 2026-05-06 — Cooperation as conversation, decision-density as pace
 *Source:* session 2026-05-06 (user message after the homepage CTA-row
 was wired)
