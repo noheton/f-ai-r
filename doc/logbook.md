@@ -1713,3 +1713,32 @@ renderer.
 *Next:* Track which figures still ship with tool-default theming
 on the next layout-scrutinizer pass; if any do, the prompt update
 has not landed in practice and we adjust.
+
+## 2026-05-07 — Topology site: worked provenance-verification example added
+
+*Author:* claude-opus-4-7 (under direction of repo owner)
+*Touched:* `doc/provenance-graph.md`.
+*Decision / outcome:* User asked to "integrate a example for prov
+verification on the topology site". The topology page now carries
+a *Worked verification example* section beneath the schema diagram
+and the "Reading the graph" loops summary. It includes:
+(1) a per-claim provenance-trail SPARQL query plus a sample of the
+live result; (2) the canonical rung distribution (21 human-confirmed,
+9 source-vendored, 5 ai-confirmed, 2 needs-research) re-verifying
+that the graph and `paper/sections/provenance-analysis.tex` agree;
+(3) a starter SHACL shape (`fair2r:ClaimShape`) plus the equivalent
+SPARQL conformance query, which against the current graph surfaces
+**8 claims missing a `prov:wasGeneratedBy` triple** — a real
+structural defect (claims `domain-ontologies-extension`,
+`reproducibility-baseline-poor`, `reviewer-side-ai-policies`,
+`bioinformatics-precedent`, `journal-as-distribution-in-decline`,
+`authors-note-voice-exception`, `formal-methods-cousin`,
+`contribution-tracking-rule`) that the prose had not yet
+acknowledged; (4) a one-liner local reproduction recipe with
+`rdflib` linking forward to the verification scoping doc. The
+addition is read-only against the graph (no new triples generated)
+and confined to the topology page; no manuscript edits.
+*Next:* Repair the eight defective claims by adding their missing
+`prov:wasGeneratedBy` edges in a separate provenance-curator pass.
+The defect is now visible on the public topology page — leaving it
+unrepaired turns the example into a stale claim.
