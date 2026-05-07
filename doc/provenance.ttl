@@ -50,6 +50,16 @@ fair2r:VerificationState a owl:Class .
 fair2r:contradicts       a owl:ObjectProperty ;
     rdfs:domain fair2r:Claim ; rdfs:range fair2r:Claim .
 
+# Repair edges: an activity that fixes a structural defect on a claim
+# (e.g. backfilling a missing prov:wasGeneratedBy edge surfaced by the
+# SPARQL conformance query). Lighter than a prov:Invalidation: the
+# claim's content stands; only the metadata about how it was generated
+# is being amended. Schema growth is explicit per the curator rule.
+fair2r:repairs           a owl:ObjectProperty ;
+    rdfs:domain prov:Activity ; rdfs:range fair2r:Claim ;
+    rdfs:label "repairs"@en ;
+    rdfs:comment "Object property linking a repair activity to the claim whose provenance metadata it is amending."@en .
+
 # Verification ladder (rungs as individuals)
 verif:unverified       a fair2r:VerificationState ; rdfs:label "unverified"@en .
 verif:needs-research   a fair2r:VerificationState ; rdfs:label "needs research"@en .
@@ -2168,3 +2178,202 @@ hc:rerun-illustrations-pass-3-prompt  a fair2r:HumanContribution ;
     rdfs:comment "User asked the illustration agent to take advantage of the now-broader toolset (matplotlib, seaborn, plotly, scienceplots, graphviz, networkx, mermaid-py, etc.) recorded in agents/illustration.md. The prompt was scoped to either replacing one figure with a better-rendered version or adding 1-2 high-payoff new figures, capped at 10 total figures, with the DLR Corporate Design held binding for every tool. The agent's audit verdict was 'keep all eight; add one --- the provenance-topology preview', shipped as paper/figures/provenance-topology.{pdf,png} and source paper/figures/src/provenance-topology.py."@en ;
     dcterms:created "2026-05-07"^^xsd:date ;
     prov:influenced ai:add-illustrations-pass-3 .
+
+#-------------------------------------------------------------------------
+# Provenance-verification pass: SPARQL conformance audit run against
+# the live graph; surfaced 8 fair2r:Claim entities missing a
+# prov:wasGeneratedBy edge. The defects were already published on the
+# topology page (doc/provenance-graph.md) as a worked example. This
+# section repairs them in the open: each missing edge is added; each
+# repair carries a one-sentence rdfs:comment explaining why the edge
+# was missing in the first place, so the cooperative process can
+# learn from the pattern.
+#-------------------------------------------------------------------------
+
+act:provenance-verification-pass  a fair2r:AuditPass ;
+    rdfs:label "Provenance-verification pass: run the SPARQL conformance query against the live graph; surface the 8 claims missing prov:wasGeneratedBy"@en ;
+    prov:startedAtTime "2026-05-07T00:00:00Z"^^xsd:dateTime ;
+    prov:endedAtTime   "2026-05-07T00:00:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith agent:provenance-curator ;
+    prov:wasAssociatedWith agent:claude-opus-4-7 ;
+    prov:wasAssociatedWith agent:human-author ;
+    rdfs:comment "Audit ran the conformance SPARQL query published on doc/provenance-graph.md ('Worked verification example', §2). Result: 8 fair2r:Claim entities lack prov:wasGeneratedBy. The audit does not generate new claims; it generates a defect list that the repair activities below act on."@en .
+
+# Synthetic meta-cooperation activities for claims that landed in
+# sessions which did not mint an act:rev-* parent. The pattern
+# (graduated content-prompt + new bib + new HumanContribution but no
+# corresponding act:rev-*) is exactly what doc/user-observations-log.md
+# entry 'Why audited defects are pedagogical' surfaces.
+
+act:meta-cooperation-2026-05-06-contribution-tracking-rule  a prov:Activity ;
+    rdfs:label "Meta-cooperation activity: introduce contribution-tracking rule (back-filled parent for claim:contribution-tracking-rule)"@en ;
+    prov:startedAtTime "2026-05-06T00:00:00Z"^^xsd:dateTime ;
+    prov:endedAtTime   "2026-05-06T00:00:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith agent:claude-opus-4-7 ;
+    prov:wasAssociatedWith agent:human-author ;
+    rdfs:comment "Synthetic parent activity for the contribution-tracking rule. The original landing commit (18480ed, 'Position-paper completion + Contribution entity + ...') did not mint an act:rev-* activity for the rule itself; the claim was added to the seed graph alongside the new doc/user-contributions.md and doc/user-observations-log.md scaffolding. Minted retroactively by the 2026-05-07 provenance-verification pass."@en .
+
+act:meta-cooperation-2026-05-06-reproducibility-baseline-poor  a prov:Activity ;
+    rdfs:label "Meta-cooperation activity: gap-fill reproducibility-crisis literature (back-filled parent for claim:reproducibility-baseline-poor)"@en ;
+    prov:startedAtTime "2026-05-06T00:00:00Z"^^xsd:dateTime ;
+    prov:endedAtTime   "2026-05-06T00:00:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith agent:claude-opus-4-7 ;
+    prov:wasAssociatedWith agent:human-author ;
+    prov:used src:ioannidis2005 , src:pineau2021reproducibility ;
+    rdfs:comment "Synthetic parent activity for the reproducibility-baseline-poor claim. The landing commit (555d70d) recorded hc:gap-fill-reproducibility-and-policies and three new bib entries plus citation inserts in intro.tex and background.tex, but did not mint an act:rev-* activity. Minted retroactively by the 2026-05-07 provenance-verification pass."@en .
+
+act:meta-cooperation-2026-05-06-reviewer-side-ai-policies  a prov:Activity ;
+    rdfs:label "Meta-cooperation activity: gap-fill reviewer-side AI policies (back-filled parent for claim:reviewer-side-ai-policies)"@en ;
+    prov:startedAtTime "2026-05-06T00:00:00Z"^^xsd:dateTime ;
+    prov:endedAtTime   "2026-05-06T00:00:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith agent:claude-opus-4-7 ;
+    prov:wasAssociatedWith agent:human-author ;
+    prov:used src:neurips_llm_policy , src:iclr_llm_policy , src:aclrr_llm_policy ;
+    rdfs:comment "Synthetic parent activity for the reviewer-side-ai-policies claim. Same landing commit as reproducibility-baseline-poor (555d70d): hc:gap-fill-reproducibility-and-policies plus citation inserts in background.tex, no act:rev-* minted at the time. Minted retroactively by the 2026-05-07 provenance-verification pass."@en .
+
+act:meta-cooperation-2026-05-07-journal-as-distribution-in-decline  a prov:Activity ;
+    rdfs:label "Meta-cooperation activity: graduate journal-as-distribution-in-decline to intro.tex (back-filled parent)"@en ;
+    prov:startedAtTime "2026-05-07T00:00:00Z"^^xsd:dateTime ;
+    prov:endedAtTime   "2026-05-07T00:00:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith agent:claude-opus-4-7 ;
+    prov:wasAssociatedWith agent:human-author ;
+    prov:used src:eisen2018preprints , src:tennant2016open , src:conroy2023sleuths ;
+    rdfs:comment "Synthetic parent activity for the journal-as-distribution-in-decline claim. The landing commit (495ec89, 'Graduate new claim to intro') added a paragraph to paper/sections/intro.tex, three bib entries, and hc:journal-decline, but did not mint an act:rev-* activity. Minted retroactively by the 2026-05-07 provenance-verification pass."@en .
+
+act:meta-cooperation-2026-05-07-formal-methods-cousin  a prov:Activity ;
+    rdfs:label "Meta-cooperation activity: graduate formal-methods-cousin to related-work (back-filled parent)"@en ;
+    prov:startedAtTime "2026-05-07T00:00:00Z"^^xsd:dateTime ;
+    prov:endedAtTime   "2026-05-07T00:00:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith agent:claude-opus-4-7 ;
+    prov:wasAssociatedWith agent:human-author ;
+    prov:used src:clarke2009modelchecking , src:klein2009sel4 ;
+    rdfs:comment "Synthetic parent activity for the formal-methods-cousin claim. The landing commit (7176ed1, 'Graduate new claim: F(AI)^2R as cousin of model checking') added a paragraph to paper/sections/related-work.tex (§11), two bib entries, and hc:formal-methods-relationship, but did not mint an act:rev-* activity. Minted retroactively by the 2026-05-07 provenance-verification pass."@en .
+
+# Repair edges: add the missing prov:wasGeneratedBy on each defective
+# claim, and a per-claim repair activity carrying the one-line reason
+# the edge was missing in the first place.
+
+claim:domain-ontologies-extension       prov:wasGeneratedBy act:rev-domain-ontologies .
+claim:reproducibility-baseline-poor     prov:wasGeneratedBy act:meta-cooperation-2026-05-06-reproducibility-baseline-poor .
+claim:reviewer-side-ai-policies         prov:wasGeneratedBy act:meta-cooperation-2026-05-06-reviewer-side-ai-policies .
+claim:bioinformatics-precedent          prov:wasGeneratedBy act:rev-research-infrastructure .
+claim:journal-as-distribution-in-decline  prov:wasGeneratedBy act:meta-cooperation-2026-05-07-journal-as-distribution-in-decline .
+claim:authors-note-voice-exception      prov:wasGeneratedBy act:rev-reconcile-and-illustrate .
+claim:formal-methods-cousin             prov:wasGeneratedBy act:meta-cooperation-2026-05-07-formal-methods-cousin .
+claim:contribution-tracking-rule        prov:wasGeneratedBy act:meta-cooperation-2026-05-06-contribution-tracking-rule .
+
+act:repair-claim-domain-ontologies-extension  a prov:Activity ;
+    rdfs:label "Repair: add missing prov:wasGeneratedBy on claim:domain-ontologies-extension"@en ;
+    prov:startedAtTime "2026-05-07T00:00:00Z"^^xsd:dateTime ;
+    prov:endedAtTime   "2026-05-07T00:00:00Z"^^xsd:dateTime ;
+    prov:wasInformedBy act:provenance-verification-pass ;
+    prov:wasAssociatedWith agent:claude-opus-4-7 ;
+    prov:wasAssociatedWith agent:human-author ;
+    fair2r:repairs claim:domain-ontologies-extension ;
+    rdfs:comment "Curator-pass oversight: an act:rev-domain-ontologies activity existed for the section that holds this claim (paper/sections/pattern.tex §3.5), but the prov:wasGeneratedBy edge was attached only to the section entity (ent:section-pattern-domain-ontologies) and not also to the claim. Pattern: section-level edges added but claim-level edges dropped when the curator batched several entities under one activity."@en .
+
+act:repair-claim-reproducibility-baseline-poor  a prov:Activity ;
+    rdfs:label "Repair: add missing prov:wasGeneratedBy on claim:reproducibility-baseline-poor"@en ;
+    prov:startedAtTime "2026-05-07T00:00:00Z"^^xsd:dateTime ;
+    prov:endedAtTime   "2026-05-07T00:00:00Z"^^xsd:dateTime ;
+    prov:wasInformedBy act:provenance-verification-pass ;
+    prov:wasAssociatedWith agent:claude-opus-4-7 ;
+    prov:wasAssociatedWith agent:human-author ;
+    fair2r:repairs claim:reproducibility-baseline-poor ;
+    rdfs:comment "Claim was added in a session that did not author a section --- the gap-fill landed citation inserts into existing intro.tex and background.tex paragraphs, not new sections, so no act:author-* or act:rev-* activity existed for the curator to point at. Synthetic act:meta-cooperation-2026-05-06-reproducibility-baseline-poor minted at repair time."@en .
+
+act:repair-claim-reviewer-side-ai-policies  a prov:Activity ;
+    rdfs:label "Repair: add missing prov:wasGeneratedBy on claim:reviewer-side-ai-policies"@en ;
+    prov:startedAtTime "2026-05-07T00:00:00Z"^^xsd:dateTime ;
+    prov:endedAtTime   "2026-05-07T00:00:00Z"^^xsd:dateTime ;
+    prov:wasInformedBy act:provenance-verification-pass ;
+    prov:wasAssociatedWith agent:claude-opus-4-7 ;
+    prov:wasAssociatedWith agent:human-author ;
+    fair2r:repairs claim:reviewer-side-ai-policies ;
+    rdfs:comment "Same root cause as claim:reproducibility-baseline-poor: a citation-insert gap-fill, no new section authored, and the curator pass batched both claims under the single hc:gap-fill-reproducibility-and-policies HumanContribution without minting a generating activity. Pattern: gap-fill sessions need a synthetic activity at promotion time."@en .
+
+act:repair-claim-bioinformatics-precedent  a prov:Activity ;
+    rdfs:label "Repair: add missing prov:wasGeneratedBy on claim:bioinformatics-precedent"@en ;
+    prov:startedAtTime "2026-05-07T00:00:00Z"^^xsd:dateTime ;
+    prov:endedAtTime   "2026-05-07T00:00:00Z"^^xsd:dateTime ;
+    prov:wasInformedBy act:provenance-verification-pass ;
+    prov:wasAssociatedWith agent:claude-opus-4-7 ;
+    prov:wasAssociatedWith agent:human-author ;
+    fair2r:repairs claim:bioinformatics-precedent ;
+    rdfs:comment "Curator-pass oversight: act:rev-research-infrastructure activity existed for §3.6 of pattern.tex (where this claim sits) and was attached to ent:section-pattern-research-infrastructure and to the sibling claim:future-research-infrastructure (via act:rev-conclusion-longer-arc), but the bioinformatics-precedent claim was the one that did not pick up its parent edge in the same pass."@en .
+
+act:repair-claim-journal-as-distribution-in-decline  a prov:Activity ;
+    rdfs:label "Repair: add missing prov:wasGeneratedBy on claim:journal-as-distribution-in-decline"@en ;
+    prov:startedAtTime "2026-05-07T00:00:00Z"^^xsd:dateTime ;
+    prov:endedAtTime   "2026-05-07T00:00:00Z"^^xsd:dateTime ;
+    prov:wasInformedBy act:provenance-verification-pass ;
+    prov:wasAssociatedWith agent:claude-opus-4-7 ;
+    prov:wasAssociatedWith agent:human-author ;
+    fair2r:repairs claim:journal-as-distribution-in-decline ;
+    rdfs:comment "Claim was graduated from a researcher quote into a new paragraph in paper/sections/intro.tex; the landing commit recorded hc:journal-decline and three bib entries but did not mint an act:rev-* activity for the paragraph addition itself. Pattern: paragraph-grade graduations to existing sections lack a natural act:author-* parent --- the section's act:author-intro is too coarse to honestly attribute to."@en .
+
+act:repair-claim-authors-note-voice-exception  a prov:Activity ;
+    rdfs:label "Repair: add missing prov:wasGeneratedBy on claim:authors-note-voice-exception"@en ;
+    prov:startedAtTime "2026-05-07T00:00:00Z"^^xsd:dateTime ;
+    prov:endedAtTime   "2026-05-07T00:00:00Z"^^xsd:dateTime ;
+    prov:wasInformedBy act:provenance-verification-pass ;
+    prov:wasAssociatedWith agent:claude-opus-4-7 ;
+    prov:wasAssociatedWith agent:human-author ;
+    fair2r:repairs claim:authors-note-voice-exception ;
+    rdfs:comment "Curator-pass oversight: act:rev-reconcile-and-illustrate is the activity that documented the Author's Note voice exception (it was one of three things in that PR), and the activity correctly listed claim:authors-note-voice-exception under prov:influenced for hc:reconcile-illustrate-scrutinize, but the symmetric prov:wasGeneratedBy edge on the claim itself was not added. Pattern: meta-decision claims that ride alongside other PR contents lose attention at curator time."@en .
+
+act:repair-claim-formal-methods-cousin  a prov:Activity ;
+    rdfs:label "Repair: add missing prov:wasGeneratedBy on claim:formal-methods-cousin"@en ;
+    prov:startedAtTime "2026-05-07T00:00:00Z"^^xsd:dateTime ;
+    prov:endedAtTime   "2026-05-07T00:00:00Z"^^xsd:dateTime ;
+    prov:wasInformedBy act:provenance-verification-pass ;
+    prov:wasAssociatedWith agent:claude-opus-4-7 ;
+    prov:wasAssociatedWith agent:human-author ;
+    fair2r:repairs claim:formal-methods-cousin ;
+    rdfs:comment "Same pattern as journal-as-distribution-in-decline: a researcher quote graduated to a new paragraph in an existing section (paper/sections/related-work.tex §11), accompanied by hc:formal-methods-relationship and two new bib entries, but no act:rev-* activity minted for the paragraph addition. Synthetic act:meta-cooperation-2026-05-07-formal-methods-cousin minted at repair time."@en .
+
+act:repair-claim-contribution-tracking-rule  a prov:Activity ;
+    rdfs:label "Repair: add missing prov:wasGeneratedBy on claim:contribution-tracking-rule"@en ;
+    prov:startedAtTime "2026-05-07T00:00:00Z"^^xsd:dateTime ;
+    prov:endedAtTime   "2026-05-07T00:00:00Z"^^xsd:dateTime ;
+    prov:wasInformedBy act:provenance-verification-pass ;
+    prov:wasAssociatedWith agent:claude-opus-4-7 ;
+    prov:wasAssociatedWith agent:human-author ;
+    fair2r:repairs claim:contribution-tracking-rule ;
+    rdfs:comment "Claim was a meta-observation about the cooperation (the rule that material contributions are logged), introduced alongside doc/user-contributions.md and doc/user-observations-log.md scaffolding rather than as part of a section author-pass. The schema did not yet have a clear act:meta-* family at the time the claim was added, so the curator had no natural parent to attach to. Synthetic act:meta-cooperation-2026-05-06-contribution-tracking-rule minted at repair time."@en .
+
+# Human-authored prompt for the repair pass + AI mirror
+
+hc:prov-curator-repair-pass-2026-05-07  a fair2r:HumanContribution ;
+    rdfs:label "Researcher prompt: run provenance-curator repair pass with per-defect reasons + WIP topology-page transparency"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "rule-shape" ;
+    fair2r:contributionLeverage "high" ;
+    rdfs:comment "User dispatched the provenance-curator subagent to repair the 8 fair2r:Claim entities surfaced by the topology page's Worked verification example as missing prov:wasGeneratedBy. The prompt added two binding shapes beyond the repair itself: (a) capture, per defect, a one-sentence reason as an rdfs:comment on a new repair activity, so the cooperative process can learn from the pattern --- 'we can learn for our collaborative process'; (b) make the topology page an honest two-state walkthrough (WIP disclaimer + BEFORE table preserved + AFTER table added + 'Why those edges were missing' subsection + forward-looking next-likely-defect line), not a sanitised after-image. Schema growth made explicit: fair2r:repairs added as an owl:ObjectProperty (domain prov:Activity, range fair2r:Claim) per the curator agent rule that schema growth must be explicit. Output also appends the cooperative-process observation to doc/user-observations-log.md (hypothesis stage; suggests a 'no claim without a parent activity' refusal rule for agents/provenance-curator.md)."@en ;
+    dcterms:created "2026-05-07"^^xsd:date ;
+    prov:influenced act:provenance-verification-pass ,
+                    act:repair-claim-domain-ontologies-extension ,
+                    act:repair-claim-reproducibility-baseline-poor ,
+                    act:repair-claim-reviewer-side-ai-policies ,
+                    act:repair-claim-bioinformatics-precedent ,
+                    act:repair-claim-journal-as-distribution-in-decline ,
+                    act:repair-claim-authors-note-voice-exception ,
+                    act:repair-claim-formal-methods-cousin ,
+                    act:repair-claim-contribution-tracking-rule .
+
+ai:prov-curator-repair-pass-2026-05-07  a fair2r:AIContribution ;
+    rdfs:label "Provenance-curator subagent: 8 missing prov:wasGeneratedBy edges repaired in the open, with per-defect reasons captured"@en ;
+    fair2r:contributedBy agent:provenance-curator ;
+    fair2r:contributionType "rule-shape" ;
+    fair2r:contributionLeverage "high" ;
+    rdfs:comment "Provenance-curator subagent ran the SPARQL conformance query against the live graph, classified each of the 8 defective claims by reason (5 had no parent activity in the landing commit; 3 had a parent activity but the symmetric edge on the claim was dropped at curator time), minted 5 synthetic act:meta-cooperation-<date>-<slug> activities for the parentless claims, attached the existing act:rev-* activity for the other 3, and recorded a per-claim repair activity carrying fair2r:repairs and a one-sentence rdfs:comment. Topology page rewritten as an honest two-state walkthrough. Cooperative-process observation appended to doc/user-observations-log.md as 'Why audited defects are pedagogical, not embarrassing' (hypothesis stage). Schema growth: fair2r:repairs added explicitly. rdflib re-parse: 1736 -> 1906 triples (+170), clean. Post-repair conformance query: 0 rows."@en ;
+    dcterms:created "2026-05-07"^^xsd:date ;
+    prov:influenced act:provenance-verification-pass ,
+                    act:repair-claim-domain-ontologies-extension ,
+                    act:repair-claim-reproducibility-baseline-poor ,
+                    act:repair-claim-reviewer-side-ai-policies ,
+                    act:repair-claim-bioinformatics-precedent ,
+                    act:repair-claim-journal-as-distribution-in-decline ,
+                    act:repair-claim-authors-note-voice-exception ,
+                    act:repair-claim-formal-methods-cousin ,
+                    act:repair-claim-contribution-tracking-rule .

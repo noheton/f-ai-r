@@ -416,3 +416,51 @@ about the cooperation* paragraph with one sentence stating the
 coupling rule explicitly. The current paragraph already names the
 partition; this observation supplies the reason the partition
 matters.}
+
+## 2026-05-07 — Why audited defects are pedagogical, not embarrassing
+*Source:* session 2026-05-07 (provenance-curator repair pass on the
+8 claims surfaced by the topology page's Worked verification
+example)
+*Stage:* hypothesis
+*Promoted-to-paper:* pending — strong candidate for a sentence in
+`paper/sections/provenance-analysis.tex` once a second audit cycle
+confirms the pattern.
+
+The provenance-verification pass surfaced 8 `fair2r:Claim` entities
+missing `prov:wasGeneratedBy`. The repair pass classified each one
+and a clear pattern fell out: **claims that are graduated from
+researcher quotes into existing sections, or that ride alongside
+meta-decision PRs, tend to skip the section-authoring activity ---
+the curator has no `act:author-*` parent to attach to**. Five of the
+eight needed a synthetic `act:meta-cooperation-<date>-<slug>`
+activity minted at repair time; the other three had a real
+`act:rev-*` parent but the curator pass dropped the edge on the
+claim while keeping it on the section entity.
+
+\emph{The model offered a perspective in chat. The cooperative-process
+implication is uncomfortable but useful: an audit that surfaces
+nothing has stopped looking. Defects that surface, get classified,
+and are repaired in the open are the audit doing its job; the
+embarrassment-vs-pedagogy framing is a design choice the project
+makes about its own posture. The substantive rule the pattern
+suggests is concrete: every claim-add step must mint or attach to
+some activity, even a synthetic
+`act:meta-cooperation-<date>-<slug>`. The provenance-curator agent
+prompt should grow a refusal condition: refuse a claim with no
+parent activity. The schema already supports this; the curator
+just needs to enforce it. The topology page itself was rewritten
+in this session as a two-state walkthrough (BEFORE table preserved,
+AFTER table added, work-in-progress disclaimer) to make the
+audit-then-repair cycle visible to a reader of the public site.}
+
+\emph{Recommendation:} (a) add the refusal rule to
+`agents/provenance-curator.md`: *no `fair2r:Claim` triple without a
+`prov:wasGeneratedBy` edge --- if no natural `act:author-*` or
+`act:rev-*` parent exists, mint a synthetic
+`act:meta-cooperation-<date>-<slug>` activity at claim-add time*;
+(b) consider promoting one sentence to
+`paper/sections/provenance-analysis.tex` after a second audit cycle
+confirms the pattern; (c) flag the next likely defect class
+(`prov:wasDerivedFrom` missing on `verif:ai-confirmed` /
+`verif:source-vendored` claims) in the same observation so the
+audit programme has a forward edge.
