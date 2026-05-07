@@ -2015,3 +2015,49 @@ condensed form on the conference deck title slide as an answer
 to "why this paper, why now". The Xennial framing is unusual
 enough that a layout-scrutinizer pass should check that the
 analogy reads cleanly to a non-Anglophone audience.
+
+## 2026-05-07 — Process-evolution summary table added
+
+*Author:* claude-opus-4-7 (under direction of repo owner)
+*Touched:* `paper/sections/evolution.tex`,
+`paper/style/fair2r.sty` (tabularx + longtable),
+`doc/methodology.md`, `doc/provenance.ttl`,
+`doc/logbook.md`, `doc/user-contributions.md`.
+
+*Decision / outcome.* User asked for a summary —
+*"maybe a table"* — of what evolved (rules, agents, ...)
+during the cooperative writing process. Graduated to paper
+text as a 20-row longtable at the top of `evolution.tex`
+(right after the opening paragraph, before the per-paragraph
+chronology) and mirrored as a Markdown table on
+`doc/methodology.md` so the Pages site carries the same
+digest.
+
+Five evolution classes documented: **rule** (binding
+constraint added to one or more agent prompts), **agent**
+(new specialised agent in `agents/`), **schema** (class /
+property added to `doc/provenance.ttl`), **pipeline** (build
+/ render / deploy change), **manuscript** (structural
+reframing). Twenty rows total — a deduplicated digest of
+the structurally-significant evolutions, auditable against
+the 48 typed entries in `doc/user-contributions.md` and the
+prose chronology in this file.
+
+Cut-off rule: *"would a future researcher following this
+methodology run into the same decision?"* — if yes, the row
+appears in the table; if no (pure prose edits, single-
+paragraph content prompts, figure refinements that did not
+change the scaffolding), it stays in the per-entry log.
+
+Provenance: `act:meta-cooperation-2026-05-07-evolution-summary`
+(parent activity minted at claim-add time, per the no-
+parentless-claim rule); `claim:evolution-summary-table`
+(`human-confirmed`); `hc:evolution-summary-table`. Triple
+count 1994 → 2014 (+20).
+
+*Next:* When the cooperation imposes another evolution,
+append a new row to the digest in both files (paper +
+methodology page) rather than letting them drift. The
+methodology page is the canonical place to point a reader
+who wants the digest; the paper table is the snapshot at
+submission.

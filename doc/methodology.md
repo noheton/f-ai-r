@@ -165,3 +165,44 @@ the title block of `paper/main.tex`, the `Acknowledgements` section,
 the public site footer, `CITATION.cff`, `codemeta.json`, and
 `.zenodo.json`. Drift between any pair is a defect surfaced by the
 FAIR aligner.
+
+## Process evolutions during cooperative writing
+
+The methodology above is the *current* state. The cooperation that
+produced this paper imposed roughly twenty structurally-significant
+changes on its own scaffolding while the work was underway; they are
+worth surfacing because a future cohort following this methodology
+will land at most of them again. The full chronology lives in
+[`doc/logbook.md`](logbook.md); the summary below groups by class.
+The same digest appears as Table 1 in
+`paper/sections/evolution.tex`.
+
+| When | Class | What changed | Trigger / impact |
+|---|---|---|---|
+| 2026-05-06 | Rule | Primary-artefact consistency invariant | Researcher direction; orchestrator named keystone; FAIR-aligner surfaces desync as audit `fail`. |
+| 2026-05-06 | Rule | Chapter-per-file rule for `.tex` | `paper/main.tex` refactored as a thin assembler; one `\section{}` per file; enabled chapter-level handback. |
+| 2026-05-06 | Rule | Page budget (~10 pp body) and short-form pivot | Researcher framing as a position paper; `condenser` agent repurposed as page-budget enforcer. |
+| 2026-05-06 | Rule | Source-research mandate; Consensus / Scholar default | Cut hallucinated-citation surface; paywall-escalation sub-rule shipped together. |
+| 2026-05-06 | Rule | Contribution-tracking rule | Researcher question *"what is my contribution?"*; spawned `user-contributions.md` and the `fair2r:Contribution` schema branch. |
+| 2026-05-06 | Schema | `fair2r:Contribution` class with seven sub-types | Operationalises the partition the Author's Note describes; mirrors per-side audit. |
+| 2026-05-06 | Schema | `ai-confirmed` verification rung added | Felt cost of single-tier verification; rung added rather than weakening the existing two. |
+| 2026-05-06 | Schema | `fair2r:Slidedeck` class; slides as fourth primary artefact | Researcher request for two decks; `presentation` agent owns them. |
+| 2026-05-06 | Agent | `presentation` agent added to `agents/` | Slides became binding artefact; new prompt minted rather than overloading `scientific-writer`. |
+| 2026-05-06 | Manuscript | Position-paper reframing | Researcher direction *"fair should be more a position paper"*; reshaped the contribution narrative. |
+| 2026-05-06 | Manuscript | Author's Note carried over from `noheton/Obscurity-Is-Dead` | Voice-and-stance anchor; the methodology's first-person register lives there only. |
+| 2026-05-06 | Pipeline | Static site builder + Pages workflow + paper-build CI | Made the artefact public from day one; cache-bust on the deployed site followed when staleness surfaced. |
+| 2026-05-06 | Pipeline | Marp slide pipeline retired; Beamer-only | Researcher direction *"only ship beamer"*; one toolchain to maintain instead of two. |
+| 2026-05-07 | Rule | DLR Corporate Design pinned for every illustrator tool | Default tool theming counts as an unfinished figure; written above the tool list, not below. |
+| 2026-05-07 | Rule | Illustration toolset opened beyond TikZ (matplotlib, mermaid, networkx, graphviz, …) | Researcher direction; `ladder-populations` and `contribution-histogram` matplotlib figures unlocked. |
+| 2026-05-07 | Rule | No-parentless-claim rule (every claim must name a generating activity) | Eight-claim defect found by the verification example; rule landed by the curator pass to prevent recurrence. |
+| 2026-05-07 | Schema | `fair2r:repairs` object property | Curator pass: per-claim repair activity carries the reason as `rdfs:comment`; reasons are queryable. |
+| 2026-05-07 | Agent | `research-protocol` agent added to `agents/` | Standalone prompt for verification-axis research notes; produced `provenance-verification.md`. |
+| 2026-05-07 | Pipeline | Pages source switched from branch deploy to GitHub Actions | Default branch became `main`; CI is single source of truth for the live site. |
+| 2026-05-07 | Pipeline | LaTeX-fragment stripper in the site builder | Markdown sources embedded `\emph{}`, `\textsc{}`, `\begin{enumerate}`; the rendered Pages site needed a clean prose pass. |
+
+The catalogue is partial by construction — pure prose edits, single-paragraph
+content prompts, and figure refinements that did not change the scaffolding
+are recorded in `doc/user-contributions.md` (forty-eight typed entries at
+time of writing) but not promoted into this digest. The cut-off rule is
+*"would a future researcher following this methodology run into the same
+decision?"*; if yes, the row appears here.

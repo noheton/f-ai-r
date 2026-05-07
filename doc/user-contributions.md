@@ -59,6 +59,24 @@ The entries below were reconstructed in one batch on 2026-05-06 from
 the available evidence. Future sessions append in real time.
 
 
+### 2026-05-07 --- Content prompt: summary table of process evolutions
+*Type:* `content-prompt`
+*Leverage:* high
+*Triggered:* User asked for "a summary maybe a table what evolutions
+(rules, agents, ...) during the process of writing the paper
+occurred". Graduated to paper text as a 20-row `longtable` at the
+top of `paper/sections/evolution.tex` (Table~1) and mirrored as a
+Markdown table on `doc/methodology.md` (and therefore on the
+Pages site). Five evolution classes documented: rule, agent,
+schema, pipeline, manuscript. `tabularx` + `longtable` added to
+`paper/style/fair2r.sty`. New `claim:evolution-summary-table`
+born with parent activity per the no-parentless-claim rule.
+*Artefacts touched:* `paper/sections/evolution.tex`,
+`paper/style/fair2r.sty`, `doc/methodology.md`,
+`doc/provenance.ttl`, `doc/logbook.md`,
+`doc/user-contributions.md`.
+*Provenance IRI:* `fair2r:hc-evolution-summary-table`
+
 ### 2026-05-07 --- New claim: senior-researcher Xennial-like bridging responsibility
 *Type:* `content-prompt`
 *Leverage:* high
