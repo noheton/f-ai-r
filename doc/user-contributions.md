@@ -59,6 +59,24 @@ The entries below were reconstructed in one batch on 2026-05-06 from
 the available evidence. Future sessions append in real time.
 
 
+### 2026-05-07 --- New claim: senior-researcher Xennial-like bridging responsibility
+*Type:* `content-prompt`
+*Leverage:* high
+*Triggered:* User proposed: "we as senior researchers who know the
+way how things were done and why they were done that have a
+responsibility to help build bridges to the unthinkable of the
+past (a similar situation as xennials)". Graduated to a new
+paragraph *The bridge to what is now unthinkable.* in the
+Conclusion (between *The longer arc.* and the closing emphasis
+line). New bib entry `shafer2014xennials` (lit-retrieved). New
+`claim:senior-researcher-bridge` born with an explicit parent
+activity per the no-parentless-claim rule from the 2026-05-07
+curator pass.
+*Artefacts touched:* `paper/sections/conclusion.tex`,
+`paper/references.bib`, `doc/provenance.ttl`, `doc/logbook.md`,
+`doc/user-contributions.md`.
+*Provenance IRI:* `fair2r:hc-senior-researcher-bridge-claim`
+
 ### 2026-05-07 --- Rule shape: expand illustration toolset; pin DLR-CD constraint
 *Type:* `rule-shape`
 *Leverage:* medium

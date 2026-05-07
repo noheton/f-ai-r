@@ -1975,3 +1975,43 @@ and `hc:rerun-illustrations-pass-4-prompt` mirrored.
 `rdflib` re-parse: 1906 -> 1967 triples (+61), clean.
 
 **Net figure count.** 10 (was 9; -2 +3 = +1, exactly at the cap).
+
+## 2026-05-07 — New claim: senior researchers as Xennial-like bridge to the unthinkable past
+
+*Author:* claude-opus-4-7 (under direction of repo owner)
+*Touched:* `paper/sections/conclusion.tex`, `paper/references.bib`,
+`doc/provenance.ttl`, `doc/logbook.md`, `doc/user-contributions.md`.
+
+*Decision / outcome.* User proposed: "we as senior researchers
+who know the way how things were done and why they were done
+that have a responsibility to help build bridges to the
+unthinkable of the past (a similar situation as xennials)".
+Graduated to paper text as a new paragraph in the Conclusion
+titled *The bridge to what is now unthinkable.*, positioned
+between *The longer arc.* and the closing emphasis line. The
+paragraph names the Xennial generational analogue (Shafer 2014:
+born late enough to grow up without the internet, early enough
+to spend professional life inside it), maps it onto senior
+researchers who span pre-LLM and LLM-era scholarship, and frames
+F(AI)²R as one articulation in machine-readable form of
+disciplines that a tooling-native cohort cannot reconstruct
+unaided.
+
+One new bib entry: `shafer2014xennials` (lit-retrieved; the
+GOOD Magazine piece that popularised the framing). New claim
+`claim:senior-researcher-bridge` (`human-confirmed`, derived
+from `src:shafer2014xennials`). Per the no-parentless-claim
+rule landed by the 2026-05-07 curator pass, the claim is born
+with a parent activity
+(`act:meta-cooperation-2026-05-07-senior-researcher-bridge`)
+that explicitly documents the graduation step rather than
+relying on a synthetic backdated parent. New
+`hc:senior-researcher-bridge-claim` HumanContribution.
+Triple count 1967 → 1994 (+27).
+
+*Next:* Verify `shafer2014xennials` URL at lit-read time;
+consider whether the same paragraph should reappear in
+condensed form on the conference deck title slide as an answer
+to "why this paper, why now". The Xennial framing is unusual
+enough that a layout-scrutinizer pass should check that the
+analogy reads cleanly to a non-Anglophone audience.

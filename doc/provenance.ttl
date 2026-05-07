@@ -2462,3 +2462,39 @@ hc:rerun-illustrations-pass-4-prompt  a fair2r:HumanContribution ;
     rdfs:comment "User signalled that PR #31 (one new figure: provenance-topology) had been too modest a return on the now-broader illustration toolset and asked for substantially more new illustrations. The prompt scoped the rerun to four candidate figures, capped the total at 10, and required that any over-cap addition be paid for by retiring an existing figure. The agent's audit verdict was 'retire eight-practices and rung-distribution; add ladder-populations, ai-squared-grid, contribution-histogram', shipped as paper/figures/{ladder-populations.{pdf,png}, ai-squared-grid.tex, contribution-histogram.{pdf,png}} with sources under paper/figures/src/."@en ;
     dcterms:created "2026-05-07"^^xsd:date ;
     prov:influenced ai:add-illustrations-pass-4 .
+
+#-------------------------------------------------------------------------
+# 2026-05-07 --- Senior-researcher bridging-responsibility claim
+# (graduated from a researcher prompt; born with a parent activity per
+# the no-parentless-claim rule landed in the 2026-05-07 curator pass).
+#-------------------------------------------------------------------------
+
+src:shafer2014xennials  a fair2r:Source ;
+    dcterms:title "Generation Xennial" ;
+    dcterms:creator "Sarah Shafer" ;
+    dcterms:identifier "https://www.good.is/articles/generation-xennial" ;
+    fair2r:verificationState verif:lit-retrieved ;
+    rdfs:comment "Original popularisation of the 'Xennial' bridge-generation framing (born late 1970s to early 1980s; analog childhood, digital adulthood). Cited as a generational analogue for senior researchers who span pre-LLM and LLM-era scholarship, in conclusion.tex paragraph 'The bridge to what is now unthinkable.'"@en .
+
+act:meta-cooperation-2026-05-07-senior-researcher-bridge  a prov:Activity ;
+    rdfs:label "Meta-cooperation: graduate senior-researcher bridge claim into the Conclusion"@en ;
+    prov:startedAtTime "2026-05-07T00:00:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith agent:human-author , agent:claude-opus-4-7 ;
+    rdfs:comment "Researcher proposed a bridging-responsibility claim during the iterative session: senior researchers who lived through pre-LLM scholarship are positioned (analogously to Xennials, who lived through pre-internet daily life) to articulate the disciplines and constraints a tooling-native cohort cannot reconstruct unaided. Activity minted at claim-add time so the claim is born with a generating parent rather than retroactively repaired."@en .
+
+claim:senior-researcher-bridge  a fair2r:Claim ;
+    rdfs:label "Senior researchers --- analogous to the Xennial bridge generation --- carry a responsibility to articulate, in machine-readable form, the previously-unthinkable-to-question scholarly disciplines so they survive translation into a tooling-native research culture; F(AI)^2R is one such articulation."@en ;
+    prov:wasGeneratedBy act:meta-cooperation-2026-05-07-senior-researcher-bridge ;
+    prov:wasAttributedTo agent:human-author ;
+    prov:wasDerivedFrom  src:shafer2014xennials ;
+    fair2r:verificationState verif:human-confirmed ;
+    dcterms:created "2026-05-07"^^xsd:date .
+
+hc:senior-researcher-bridge-claim  a fair2r:HumanContribution ;
+    rdfs:label "Researcher claim: senior researchers have a Xennial-like bridging responsibility to articulate previously unthinkable disciplines"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "content-prompt" ;
+    fair2r:contributionLeverage "high" ;
+    rdfs:comment "Researcher proposed: 'we as senior researchers who know the way how things were done and why they were done that have a responsibility to help build bridges to the unthinkable of the past (a similar situation as xennials)'. Graduated to paper text as a new paragraph in the Conclusion titled 'The bridge to what is now unthinkable.', positioned between 'The longer arc.' and the closing emphasis line. The paragraph names the Xennial generational analogue (born late enough to remember pre-internet working life, early enough to have spent professional life inside it), maps it onto senior researchers who span pre-LLM and LLM-era scholarship, and frames F(AI)^2R as one articulation of disciplines that a tooling-native cohort cannot reconstruct unaided. One new bib entry: shafer2014xennials (lit-retrieved). The claim is born with a parent activity (act:meta-cooperation-2026-05-07-senior-researcher-bridge) per the no-parentless-claim rule from the 2026-05-07 curator pass."@en ;
+    dcterms:created "2026-05-07"^^xsd:date ;
+    prov:influenced claim:senior-researcher-bridge .
