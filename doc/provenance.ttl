@@ -2527,3 +2527,38 @@ hc:evolution-summary-table  a fair2r:HumanContribution ;
     rdfs:comment "User asked for a summary --- 'maybe a table' --- of what evolved (rules, agents, ...) during the cooperative writing process. Graduated to paper text as a 20-row longtable in paper/sections/evolution.tex (right after the opening paragraph, before the per-paragraph chronology) and mirrored as a Markdown table on doc/methodology.md so the Pages site shows the same digest. Five evolution classes documented: rule, agent, schema, pipeline, manuscript. tabularx + longtable required, added to paper/style/fair2r.sty. The full chronology lives in doc/logbook.md and doc/user-contributions.md (48 typed entries) --- the table is a deduplicated digest, not the full set."@en ;
     dcterms:created "2026-05-07"^^xsd:date ;
     prov:influenced claim:evolution-summary-table .
+
+#-------------------------------------------------------------------------
+# 2026-05-07 --- Verification pass 3 (sixth source-analyzer pass):
+# close out the one outstanding lit-retrieved source introduced since
+# the fifth pass (shafer2014xennials, GOOD Magazine, the Xennial
+# bridge-generation popularisation).
+#-------------------------------------------------------------------------
+
+act:meta-cooperation-2026-05-07-verification-pass-3  a prov:Activity ;
+    rdfs:label "Sixth source-analyzer pass: advance shafer2014xennials from lit-retrieved to ai-confirmed; flag bib correction (author + title)"@en ;
+    prov:startedAtTime "2026-05-07T00:00:00Z"^^xsd:dateTime ;
+    prov:endedAtTime   "2026-05-07T00:00:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith agent:source-analyzer-subagent ,
+                           agent:claude-opus-4-7 ,
+                           agent:human-author ;
+    prov:wasInformedBy act:rev-verification-pass-2 ;
+    rdfs:comment "Subagent run on the 'complete the loop' prompt: walk the one new lit-retrieved source introduced since the fifth pass (shafer2014xennials, GOOD Magazine, the Xennial bridge-generation popularisation), fetch via Exa web_fetch (direct WebFetch returned 403 against good.is), capture verbatim quoted snippet in the new sixth-pass log of doc/sources.md, advance verif:lit-retrieved -> verif:ai-confirmed, flag bib correction. Bib correction: author was wrong (Stankorb + Oelbaum, not Shafer); title was wrong (Reasonable People Disagree about the Post-Gen X, Pre-Millennial Generation, not Generation Xennial). Bibkey kept stable for citation continuity. No new escalations; the three previously-escalated paywalled / per-cycle URL sources (vannoorden2023chatgpt, neurips_llm_policy, iclr_llm_policy) were not retried."@en .
+
+hc:complete-loop-prompt-2026-05-07  a fair2r:HumanContribution ;
+    rdfs:label "Researcher prompt: complete the loop --- close out the one new lit-retrieved source from PR #33 within the same session"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "responsibility-uptake" ;
+    fair2r:contributionLeverage "medium" ;
+    rdfs:comment "User dispatched a third source-analyzer subagent run to close the loop opened by PR #33, which had added a single new lit-retrieved source (shafer2014xennials). The 'complete the loop' framing is the corrective-loop counterpart to the larger fifth-pass sweep: rather than let one new lit-retrieved entry sit on the queue, the user required it be verified and either advanced or escalated within the same session it was added. Counts as responsibility-uptake because the prompt is about closing an audit gap rather than producing new content; the human author is putting their name to the discipline of 'no lit-retrieved source sits on the queue past the session that introduces it'."@en ;
+    dcterms:created "2026-05-07"^^xsd:date ;
+    prov:influenced act:meta-cooperation-2026-05-07-verification-pass-3 .
+
+ai:verification-pass-3-2026-05-07  a fair2r:AIContribution ;
+    rdfs:label "Source-analyzer subagent: sixth verification pass --- one source advanced, one bib correction flagged"@en ;
+    fair2r:contributedBy agent:source-analyzer-subagent , agent:claude-opus-4-7 ;
+    fair2r:contributionType "corrective-intervention" ;
+    fair2r:contributionLeverage "medium" ;
+    rdfs:comment "Source-analyzer subagent (claude-opus-4-7[1m] under the source-analyzer prompt) executed the complete-the-loop prompt: walked the one outstanding lit-retrieved source introduced since the fifth pass (shafer2014xennials), fetched the GOOD Magazine article via the Exa web_fetch MCP tool, captured a verbatim quoted snippet in the new sixth-pass log of doc/sources.md, advanced the source from verif:lit-retrieved to verif:ai-confirmed in this graph, and flagged a bib correction (author Stankorb + Oelbaum, title 'Reasonable People Disagree about the Post-Gen X, Pre-Millennial Generation'). Bibkey kept stable for citation continuity (claim:senior-researcher-bridge already references src:shafer2014xennials). Re-parsed the graph via rdflib and regenerated doc/reading-queue.md (51 entries, 3 lit-retrieved on the institutional-access list, 47 ai-confirmed, 1 no-rung). Logged here as the AI mirror per the no-parentless-claim rule; parent activity act:meta-cooperation-2026-05-07-verification-pass-3."@en ;
+    dcterms:created "2026-05-07"^^xsd:date ;
+    prov:influenced act:meta-cooperation-2026-05-07-verification-pass-3 .

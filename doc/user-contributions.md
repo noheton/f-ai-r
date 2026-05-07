@@ -927,3 +927,58 @@ from this file).
 `doc/user-contributions.md`.
 *Provenance IRI:* `fair2r:hc-rerun-illustrations-pass-4-prompt`
 (matching AI mirror: `fair2r:ai-add-illustrations-pass-4`)
+
+
+### 2026-05-07 --- "complete the loop": close the one outstanding lit-retrieved source
+*Type:* `responsibility-uptake`
+*Leverage:* medium
+*Triggered:* User dispatched a third source-analyzer subagent run
+to close the loop opened by PR #33, which had added a single new
+`lit-retrieved` source (`shafer2014xennials`, the GOOD Magazine
+piece popularising the Xennial bridge-generation framing). The
+"complete the loop" framing is the corrective-loop counterpart to
+the larger fifth-pass (verification-pass-2) sweep: rather than
+let one new lit-retrieved entry sit on the queue, the user
+required it be verified and either advanced or escalated within
+the same session it was added. Result: source advanced to
+`ai-confirmed`, no new escalations, one bib correction flagged
+(author was wrong --- "Stankorb and Oelbaum", not "Shafer" ---
+title was wrong; bibkey kept stable for citation continuity).
+The contribution is `responsibility-uptake` because the prompt is
+about closing an audit gap rather than producing new content; the
+human author is putting their name to the discipline of "no
+lit-retrieved source sits on the queue past the session that
+introduces it".
+*Artefacts touched:* `doc/sources.md`, `paper/references.bib`,
+`doc/provenance.ttl`, `doc/reading-queue.md` (regenerated),
+`doc/user-contributions.md`, `doc/logbook.md`.
+*Provenance IRI:* `fair2r:hc-complete-loop-prompt-2026-05-07`
+(matching AI mirror: `fair2r:ac-verification-pass-3-2026-05-07`;
+parent activity: `fair2r:act-meta-cooperation-2026-05-07-verification-pass-3`)
+
+
+### 2026-05-07 --- Verification pass 3 (AI mirror): close out shafer2014xennials
+*Type:* `corrective-intervention`
+*Leverage:* medium
+*Triggered:* Source-analyzer subagent run (`claude-opus-4-7[1m]`
+under the source-analyzer prompt) executed the complete-the-loop
+prompt: walked the one outstanding `lit-retrieved` source
+introduced since the fifth pass (`shafer2014xennials`), fetched
+the GOOD Magazine article via the Exa `web_fetch` MCP tool
+(direct `WebFetch` returned 403 against `good.is`), captured a
+verbatim quoted snippet in the new sixth-pass log of
+`doc/sources.md`, advanced the source from `lit-retrieved` to
+`ai-confirmed`, and flagged a bib correction (the article is by
+**Stankorb and Oelbaum**, not "Shafer"; title is *"Reasonable
+People Disagree about the Post-Gen X, Pre-Millennial
+Generation"*, not *"Generation Xennial"*). Bibkey kept stable
+for citation continuity. Re-parsed the graph via rdflib (2014 →
+2016 triples, +2 net) and regenerated `doc/reading-queue.md` (51
+entries, 3 lit-retrieved on the institutional-access list, 47
+ai-confirmed, 1 no-rung). Logged this entry as the AI mirror per
+the no-parentless-claim rule: parent activity
+`act:meta-cooperation-2026-05-07-verification-pass-3`.
+*Artefacts touched:* `doc/sources.md`, `paper/references.bib`,
+`doc/provenance.ttl`, `doc/reading-queue.md` (regenerated),
+`doc/user-contributions.md`, `doc/logbook.md`.
+*Provenance IRI:* `fair2r:ac-verification-pass-3-2026-05-07`

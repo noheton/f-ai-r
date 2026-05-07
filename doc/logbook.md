@@ -2061,3 +2061,64 @@ methodology page) rather than letting them drift. The
 methodology page is the canonical place to point a reader
 who wants the digest; the paper table is the snapshot at
 submission.
+
+## 2026-05-07 --- Verification pass 3 (source-analyzer subagent, sixth pass)
+
+Sixth source-analyzer pass, run by `claude-opus-4-7[1m]` under
+the source-analyzer prompt at the human author's "complete
+loop" prompt. The pass closed the only outstanding new
+`lit-retrieved` source since the fifth pass --- `shafer2014xennials`
+(GOOD Magazine, popularising the Xennial bridge-generation
+framing).
+
+**Advanced (1):** `shafer2014xennials` --- GOOD Magazine article
+fetched via the Exa `web_fetch` MCP tool (direct `WebFetch`
+returned 403 Forbidden against `good.is`, mirroring the fifth-pass
+pattern at publisher domains). Verbatim snippet preserved in
+`doc/sources.md` under the new sixth-pass log block. Verification
+state advanced from `lit-retrieved` to `ai-confirmed` in
+`doc/provenance.ttl`.
+
+**Escalated (0):** No new escalations. The three previously-
+escalated sources (`vannoorden2023chatgpt`, `neurips_llm_policy`,
+`iclr_llm_policy`) remain on
+`doc/sources-needing-institutional-access.md` and were not retried.
+
+**Bib correction flagged.** The fetch revealed that the article
+is co-authored by **Sarah Stankorb and Jed Oelbaum** (not
+"Sarah Shafer", which was a half-remembered authorship on the
+bibkey), and the canonical title is *"Reasonable People
+Disagree about the Post-Gen X, Pre-Millennial Generation"*
+(not *"Generation Xennial"*, which is the colloquial gloss
+used in the article body). The bibkey `shafer2014xennials` is
+**kept stable** for citation continuity --- `claim:senior-researcher-bridge`
+already references `src:shafer2014xennials`, and renaming the
+IRI would break a stable identifier. Author and title were
+corrected in `paper/references.bib` and in the `dcterms:creator`
+/ `dcterms:title` triples in `doc/provenance.ttl`. Logged at
+the end of `doc/sources.md` under the bib-corrections summary.
+
+**Rung distribution after the pass.** Queue contains 51
+sources: 3 at `lit-retrieved` (the institutional-access
+escalation list), 47 at `ai-confirmed`, 1 without a rung
+(`w3c2013provo`, a long-standing graph-cleanliness defect
+unrelated to this pass).
+
+**Provenance.** New activity
+`act:meta-cooperation-2026-05-07-verification-pass-3` (parent
+activity minted at claim-add time per the no-parentless-claim
+rule), with two `Contribution` mirrors:
+`hc:complete-loop-prompt-2026-05-07` (HumanContribution,
+`responsibility-uptake` --- the human author closing the
+verification loop with a "complete loop" prompt) and
+`ac:verification-pass-3-2026-05-07` (AIContribution, the
+verification work itself). Triple count 2014 → 2016 (+2 net,
+after rewriting the Shafer source block in place).
+
+**Anything weird.** The bibkey author was wrong, not just
+incomplete --- a reminder that bibkeys are nicknames and
+should never be trusted as bibliographic ground truth without
+a fetch. Caught early because the source had only one
+dependent claim and was on the new-source watch list; would
+have been a defect if it had been buried in a bulk-import
+pass.
