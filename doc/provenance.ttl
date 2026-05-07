@@ -2377,3 +2377,88 @@ ai:prov-curator-repair-pass-2026-05-07  a fair2r:AIContribution ;
                     act:repair-claim-authors-note-voice-exception ,
                     act:repair-claim-formal-methods-cousin ,
                     act:repair-claim-contribution-tracking-rule .
+
+#-------------------------------------------------------------------------
+# Pass 4 (2026-05-07): substantially-more-illustrations rerun. The
+# illustration subagent reran on the user's "still waiting for that
+# new illustrations" prompt with the full toolset now licensed and
+# the cap of 10 figures binding. Audit verdict: retire two figures
+# whose visual payoff was modest (eight-practices, a textual named
+# grid; rung-distribution, a horizontal stacked bar that lost the
+# topology) and add three new high-payoff figures
+# (ladder-populations, ai-squared-grid, contribution-histogram).
+# Net figure count: 10 (was 9; -2 +3 = +1).
+#-------------------------------------------------------------------------
+
+ent:figure-ladder-populations  a fair2r:Figure ;
+    rdfs:label "Verification ladder with live rung populations: FSM topology + count-proportional node sizes read from doc/provenance.ttl"@en ;
+    dcterms:source <paper/figures/src/ladder-populations.py> ;
+    prov:wasAttributedTo agent:illustration , agent:human-author ;
+    prov:wasDerivedFrom ent:figure-rung-distribution ,
+                        ent:figure-ladder-fsm-mermaid .
+
+ent:figure-ai-squared-grid  a fair2r:Figure ;
+    rdfs:label "(AI)^2 factor unpacked as a 2x2 writer-vs-reader grid: classical scholarship / LLM-assisted writing / AI-assisted reading / AI-to-AI corpus"@en ;
+    dcterms:source <paper/figures/ai-squared-grid.tex> ;
+    prov:wasAttributedTo agent:illustration , agent:human-author .
+
+ent:figure-contribution-histogram  a fair2r:Figure ;
+    rdfs:label "Human-author contributions to the manuscript by type, read from doc/user-contributions.md"@en ;
+    dcterms:source <paper/figures/src/contribution-histogram.py> ;
+    prov:wasAttributedTo agent:illustration , agent:human-author .
+
+act:add-illustrations-pass-4  a prov:Activity ;
+    rdfs:label "Add-illustrations pass 4: retire eight-practices and rung-distribution; add ladder-populations, ai-squared-grid, contribution-histogram"@en ;
+    prov:startedAtTime "2026-05-07T00:00:00Z"^^xsd:dateTime ;
+    prov:endedAtTime   "2026-05-07T00:00:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith agent:illustration ;
+    prov:wasAssociatedWith agent:claude-opus-4-7 ;
+    prov:wasAssociatedWith agent:human-author ;
+    prov:wasInformedBy act:add-illustrations-pass-3 ;
+    prov:used ent:section-pattern ,
+              ent:section-provenance-analysis ,
+              ent:section-authors-note ;
+    prov:generated ent:figure-ladder-populations ,
+                   ent:figure-ai-squared-grid ,
+                   ent:figure-contribution-histogram .
+
+ent:figure-ladder-populations    prov:wasGeneratedBy act:add-illustrations-pass-4 ;
+                                 prov:used ent:section-provenance-analysis .
+ent:figure-ai-squared-grid       prov:wasGeneratedBy act:add-illustrations-pass-4 ;
+                                 prov:used ent:section-pattern .
+ent:figure-contribution-histogram prov:wasGeneratedBy act:add-illustrations-pass-4 ;
+                                  prov:used ent:section-authors-note .
+
+# Retired figures: eight-practices (named-grid; subsumed by the
+# failure-mode-coverage matrix's column headers, which already read
+# the eight practices and show which one bears the load for each
+# failure mode), and rung-distribution (horizontal stacked bar; the
+# new ladder-populations figure shows the same counts plus the FSM
+# topology, the model-ceiling boundary, and the retraction back-edge).
+ent:figure-eight-practices    prov:wasInvalidatedBy act:add-illustrations-pass-4 ;
+    rdfs:comment "Retired in pass 4: the named-grid was a list rendered as a grid. Subsumed by Figure failure-mode-coverage, whose column headers already read the eight practices and whose body shows the practice<->failure-mode coverage matrix. The eight-practices.tex source is preserved in paper/figures/ for forensics but is no longer included by any section."@en .
+
+ent:figure-rung-distribution  prov:wasInvalidatedBy act:add-illustrations-pass-4 ;
+    rdfs:comment "Retired in pass 4: the horizontal stacked bar showed rung populations as percentages but lost the FSM topology, the model-ceiling boundary, and the retraction edge. ent:figure-ladder-populations supersedes it via a single figure that carries both the topology and the live counts (sqrt-scaled circle areas). The rung-distribution.{py,pdf,png,figspec.md} sources are preserved in paper/figures/ for forensics but are no longer included by any section."@en .
+
+ai:add-illustrations-pass-4  a fair2r:AIContribution ;
+    rdfs:label "Illustration agent pass 4: substantially-more-illustrations rerun --- retire 2, add 3, net +1, end at the 10-figure cap"@en ;
+    fair2r:contributedBy agent:illustration ;
+    fair2r:contributionType "content-prompt" ;
+    fair2r:contributionLeverage "medium" ;
+    rdfs:comment "Illustration subagent reran on the 'still waiting for that new illustrations' prompt with the full toolset now licensed and the 10-figure cap binding. Audit verdict: keep hero, axes, pipeline, ladder-fsm, failure-mode-coverage, coupling-rule, provenance-topology (seven solid figures); retire eight-practices (textual named grid, low visual payoff, subsumed by failure-mode-coverage column headers); retire rung-distribution (horizontal stacked bar that lost the FSM topology); add three new figures: (1) paper/figures/src/ladder-populations.py --- the verification ladder rendered as an FSM where each rung's circle area is proportional (sqrt-scaled) to the count of fair2r:Claim entities at that rung in doc/provenance.ttl, with a dotted vertical 'model ceiling' rule between ai-confirmed and lit-read and a dotted yellow back-edge marking retraction as prov:Invalidation; (2) paper/figures/ai-squared-grid.tex --- a 2x2 TikZ matrix of writer (columns: human / AI) x reader (rows: human / AI) carrying the four cells classical-scholarship, LLM-assisted-writing, AI-assisted-reading, AI-to-AI-corpus, with the disclosure surface widening monotonically along the diagonal; (3) paper/figures/src/contribution-histogram.py --- a horizontal bar chart of human-author contributions to the manuscript by type, read from doc/user-contributions.md, ordered by leverage and grouped by family. Wire-in: ladder-populations into provenance-analysis.tex (replaces rung-distribution slot); ai-squared-grid into pattern.tex S axes; contribution-histogram into authors-note.tex. Net figure count: 10 (was 9; -2 +3 = +1, exactly at the cap). DLR CD held: Helvetica/Arial fallback, dlrBlau1 #00658B accent, square edges, hairline 0.4-0.6pt strokes, AI ceiling rung carries // hatch for greyscale legibility, no shadows / glows / gradients / 3D / emoji."@en ;
+    dcterms:created "2026-05-07"^^xsd:date ;
+    prov:influenced ent:figure-ladder-populations ,
+                    ent:figure-ai-squared-grid ,
+                    ent:figure-contribution-histogram ,
+                    ent:figure-eight-practices ,
+                    ent:figure-rung-distribution .
+
+hc:rerun-illustrations-pass-4-prompt  a fair2r:HumanContribution ;
+    rdfs:label "Researcher prompt: still waiting for that new illustrations --- give me substantially more"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "content-prompt" ;
+    fair2r:contributionLeverage "medium" ;
+    rdfs:comment "User signalled that PR #31 (one new figure: provenance-topology) had been too modest a return on the now-broader illustration toolset and asked for substantially more new illustrations. The prompt scoped the rerun to four candidate figures, capped the total at 10, and required that any over-cap addition be paid for by retiring an existing figure. The agent's audit verdict was 'retire eight-practices and rung-distribution; add ladder-populations, ai-squared-grid, contribution-histogram', shipped as paper/figures/{ladder-populations.{pdf,png}, ai-squared-grid.tex, contribution-histogram.{pdf,png}} with sources under paper/figures/src/."@en ;
+    dcterms:created "2026-05-07"^^xsd:date ;
+    prov:influenced ai:add-illustrations-pass-4 .

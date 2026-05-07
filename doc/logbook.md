@@ -1890,3 +1890,88 @@ verification ladder), so no auto-generated LaTeX edits required.
 *Next:* Anchor the *no claim without a parent activity* rule into
 `agents/provenance-curator.md` so the next claim-add step cannot
 recreate the defect class.
+
+## 2026-05-07 --- Add-illustrations pass 4: substantially-more-illustrations rerun
+
+**Trigger.** Researcher prompt: *"still waiting for that new
+illustrations"*. Pass 3 (PR #31) had added one figure
+(`provenance-topology`); the user asked for substantially more.
+The illustration subagent reran with the full toolset licensed and
+the 10-figure cap binding.
+
+**Audit verdict.** Keep seven existing figures (`hero`, `axes`,
+`pipeline`, `ladder-fsm`, `failure-mode-coverage`, `coupling-rule`,
+`provenance-topology`); retire two whose visual payoff was modest
+(`eight-practices` --- a textual named grid subsumed by the
+column headers of `failure-mode-coverage`; `rung-distribution`
+--- a horizontal stacked bar that lost the FSM topology); add
+three new figures.
+
+**Figures added.**
+- `paper/figures/ladder-populations.{pdf,png}` (source
+  `paper/figures/src/ladder-populations.py`): the verification
+  ladder rendered as a left-to-right FSM where each rung's circle
+  area is proportional (sqrt-scaled) to the count of
+  `fair2r:Claim` entities at that rung in `doc/provenance.ttl`,
+  with a dotted vertical *model ceiling* rule between
+  `ai-confirmed` and `lit-read` and a dotted yellow back-edge
+  marking retraction as `prov:Invalidation`. Wired into
+  `paper/sections/provenance-analysis.tex` as
+  `Figure~\ref{fig:ladder-populations}`, replacing the
+  `rung-distribution` slot.
+- `paper/figures/ai-squared-grid.tex` (TikZ): the
+  (AI)\textsuperscript{2} factor unpacked as a 2x2 grid of
+  writer (columns: human / AI) x reader (rows: human / AI),
+  carrying the four cells *classical scholarship*,
+  *LLM-assisted writing*, *AI-assisted reading*,
+  *AI-to-AI corpus*, with the disclosure surface widening
+  monotonically along the diagonal. Wired into
+  `paper/sections/pattern.tex` (\S\,axes) as
+  `Figure~\ref{fig:ai-squared-grid}` immediately after
+  `figures/axes`.
+- `paper/figures/contribution-histogram.{pdf,png}` (source
+  `paper/figures/src/contribution-histogram.py`): horizontal
+  bar chart of human-author contributions to the manuscript by
+  type, read from `doc/user-contributions.md`, ordered by
+  leverage and grouped by family
+  (structural / directive / corrective / meta / uptake). Wired
+  into `paper/sections/authors-note.tex` as
+  `Figure~\ref{fig:contribution-histogram}`.
+
+**Figures retired.** `ent:figure-eight-practices` and
+`ent:figure-rung-distribution` carry
+`prov:wasInvalidatedBy act:add-illustrations-pass-4` plus a
+one-sentence `rdfs:comment` explaining why each was retired. The
+source files
+(`paper/figures/eight-practices.tex`,
+`paper/figures/rung-distribution.{py,pdf,png,figspec.md}`) are
+preserved in `paper/figures/` for forensics but no `\input` /
+`\includegraphics` references them now.
+
+**DLR CD.** Held binding for every tool. Helvetica/Arial fallback
+on matplotlib via `rcParams`; `dlrBlau1` `#00658B` accent;
+`dlrGruen1` `#82A043` for the human-author leg of contributions;
+`dlrGelb1` `#D2AE3D` for warning / meta channels; hairline 0.4--0.6\,pt
+strokes; square edges throughout; the `ai-confirmed` rung in
+`ladder-populations` and the `corrective-intervention` /
+`experience-meta` bars in `contribution-histogram` carry a `//`
+hatch in addition to the soft fill so the figures stay
+greyscale-legible. No shadows, glows, gradients, 3D, or emoji.
+
+**Build.** `latexmk` and `pdflatex` are not available in this
+environment; PDF/PNG renders for the two matplotlib figures
+succeeded standalone
+(`python3 paper/figures/src/ladder-populations.py`,
+`python3 paper/figures/src/contribution-histogram.py`). The TikZ
+`ai-squared-grid` figure has no patterns-library dependency (line
+style + colour + caption position carry the four cells) and uses
+only the libraries already loaded by `paper/style/fair2r.sty`.
+
+**Provenance.** `act:add-illustrations-pass-4` minted with
+`prov:wasInformedBy act:add-illustrations-pass-3`. Three new
+`fair2r:Figure` IRIs minted; two retired with
+`prov:wasInvalidatedBy` plus reasons. `ai:add-illustrations-pass-4`
+and `hc:rerun-illustrations-pass-4-prompt` mirrored.
+`rdflib` re-parse: 1906 -> 1967 triples (+61), clean.
+
+**Net figure count.** 10 (was 9; -2 +3 = +1, exactly at the cap).

@@ -860,3 +860,34 @@ this contribution entry. `rdflib` re-parse: 1736 → 1906 triples
 *Provenance IRI:* `fair2r:hc-prov-curator-repair-pass-2026-05-07`
 (matching AI mirror:
 `fair2r:ai-prov-curator-repair-pass-2026-05-07`)
+
+
+### 2026-05-07 --- Content prompt: still waiting for new illustrations
+*Type:* `content-prompt`
+*Leverage:* medium
+*Triggered:* User signalled that PR #31 (one new figure:
+`provenance-topology`) had been too modest a return on the
+broader illustration toolset and asked the illustration subagent
+to deliver substantially more new illustrations under the
+10-figure cap. Pass-4 retired `eight-practices` and
+`rung-distribution` and added three new figures:
+`ladder-populations` (verification ladder FSM with rung counts as
+node areas), `ai-squared-grid` (2x2 writer-vs-reader matrix), and
+`contribution-histogram` (human-author contributions by type, read
+from this file).
+*Artefacts touched:* `paper/figures/ai-squared-grid.tex`,
+`paper/figures/ai-squared-grid.figspec.md`,
+`paper/figures/ladder-populations.{pdf,png}`,
+`paper/figures/ladder-populations.figspec.md`,
+`paper/figures/src/ladder-populations.py`,
+`paper/figures/contribution-histogram.{pdf,png}`,
+`paper/figures/contribution-histogram.figspec.md`,
+`paper/figures/src/contribution-histogram.py`,
+`paper/sections/pattern.tex`,
+`paper/sections/provenance-analysis.tex`,
+`paper/sections/authors-note.tex`,
+`paper/sections/eight-practices.tex` (retired figure include),
+`doc/provenance.ttl`, `doc/logbook.md`,
+`doc/user-contributions.md`.
+*Provenance IRI:* `fair2r:hc-rerun-illustrations-pass-4-prompt`
+(matching AI mirror: `fair2r:ai-add-illustrations-pass-4`)

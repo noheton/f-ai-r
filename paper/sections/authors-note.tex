@@ -79,6 +79,24 @@ suggests on reflection, the answer to the question.
 
 \input{figures/coupling-rule}
 
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.92\linewidth]{figures/contribution-histogram.pdf}
+\caption{Human-author contributions to the manuscript by type, read
+from \texttt{doc/user-contributions.md}. Structural decisions and
+rule-shape interventions (top, dark blue) are rare but high
+leverage --- each one redirects subsequent agent passes for hours.
+Content prompts (mid blue) are the directive bulk; corrective
+interventions (hatched) are the catch-and-fix work. Observation
+and experience-meta entries (yellow) are the meta-cooperation
+notes that sometimes graduate into rule-shape entries.
+Responsibility-uptake (green, bottom) is the leg of the
+contribution that the AI structurally cannot share. The figure
+regenerates on every build by
+\texttt{paper/figures/src/contribution-histogram.py}.}
+\label{fig:contribution-histogram}
+\end{figure}
+
 A second-order finding sharpens the partition into a coupling rule
 (Figure~\ref{fig:coupling-rule}). The cooperation works as an
 \emph{accelerator} when the model stays on the prose-craft side of
