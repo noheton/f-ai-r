@@ -1634,6 +1634,15 @@ claim:authors-note-voice-exception  a fair2r:Claim ;
     fair2r:verificationState verif:human-confirmed ;
     dcterms:created "2026-05-07"^^xsd:date .
 
+hc:fix-beamer-enumitem-conflict  a fair2r:HumanContribution ;
+    rdfs:label "User pasted the Beamer log; root cause = enumitem + Beamer enumerate-template conflict; fix = drop enumitem"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "corrective-intervention" ;
+    fair2r:contributionLeverage "high" ;
+    rdfs:comment "User pasted the conference-30min.log tail from the failing build-slides workflow. Root cause located: 'TeX capacity exceeded, sorry [grouping levels=255]. \\labelenumi -> { \\labelenumi }' --- a recursive macro definition triggered by loading enumitem alongside Beamer's \\setbeamertemplate{enumerate item} (in slides/style/fair2r-beamer.sty). The pitch deck compiled because it never used \\begin{enumerate}; the conference deck did. Fix: removed \\usepackage{enumitem} from slides/conference-30min.tex and stripped the [leftmargin=...,itemsep=...] options from all three \\begin{enumerate} calls. Plain Beamer enumerate is sufficient at slide scale; the visual difference is negligible. Earlier defensive commits (PR #21 fair2r-beamer.sty cleanups, TikZ removal) were unrelated to the actual bug; the TikZ figures could be restored safely now but are kept as compact-tabular for now to keep the fix minimal."@en ;
+    dcterms:created "2026-05-07"^^xsd:date ;
+    prov:influenced ent:slidedeck-conference .
+
 hc:reconcile-illustrate-scrutinize  a fair2r:HumanContribution ;
     rdfs:label "Researcher request: continue with open tasks; reconcile provenance; generate illustration where positive and scrutinize"@en ;
     fair2r:contributedBy agent:human-author ;

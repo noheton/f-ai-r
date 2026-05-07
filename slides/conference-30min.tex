@@ -8,7 +8,10 @@
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta, positioning, shapes.geometric}
 \usepackage{booktabs}
-\usepackage{enumitem}
+% Note: do NOT load enumitem here. enumitem conflicts with Beamer's
+% \setbeamertemplate{enumerate item} (in style/fair2r-beamer.sty)
+% and causes a recursive \labelenumi expansion that hits the
+% TeX grouping limit. Plain Beamer enumerate is sufficient.
 
 \title{F(AI)\textsuperscript{2}R}
 \subtitle{FAIR research with AI in the loop, twice (a position paper)}
@@ -30,7 +33,7 @@
 \end{frame}
 
 \begin{frame}{Agenda}
-  \begin{enumerate}[leftmargin=1.5em,itemsep=2pt]
+  \begin{enumerate}
     \item Motivation: why now
     \item Position: five claims
     \item Pattern: axes, pipeline, ladder, mirror
@@ -95,7 +98,7 @@
 % ===================================================================
 
 \begin{frame}{Five numbered claims}
-  \begin{enumerate}[leftmargin=1.5em,itemsep=4pt]
+  \begin{enumerate}
     \item \textbf{FAIR is insufficient} for LLM-assisted scholarly writing in its current form.
     \item The required extension is \textbf{multiplicative, not appended} --- \emph{4AI hei{\ss}t alles}.
     \item \textbf{Eight integrated practices} are the minimum discipline.
@@ -384,7 +387,7 @@
 
 \begin{frame}{Submission conditions (RDA / FORCE11 / HMC)}
   We will submit F(AI)\textsuperscript{2}R as a candidate community recommendation \textbf{when}:
-  \begin{enumerate}[leftmargin=1.5em,itemsep=4pt]
+  \begin{enumerate}
     \item Human-author consent recorded in \texttt{doc/publication-consent.md} (currently \emph{NOT YET GIVEN}).
     \item \textbf{At least one external case study} has adopted the pattern on a paper unrelated to either the source repository or this one, public under a permissive licence.
   \end{enumerate}
