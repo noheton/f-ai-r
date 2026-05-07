@@ -279,6 +279,24 @@ primary-artefact consistency invariant.
 `agents/orchestrator.md`.
 *Provenance IRI:* `fair2r:hc-contribution-rule`
 
+### 2026-05-07 --- Claim: traditional publishing under stress; journal-as-distribution in decline
+*Type:* `content-prompt`
+*Leverage:* high
+*Triggered:* New third paragraph in §1 of `paper/sections/intro.tex`
+titled "The journal as distribution channel may be in decline.".
+The paragraph escalates the §1 framing from "LLMs cause failure
+modes per paper" to "the journal-as-distribution format itself is
+under structural strain"; cites preprint / open-access / overlay-
+journal alternatives plus a Nature piece on AI-fabricated
+submissions; hedges with "we do not claim the journal is dead".
+Three new bib entries: `eisen2018preprints`, `tennant2016open`,
+`conroy2023sleuths` (all `lit-retrieved`, TODO-VERIFY at
+`lit-read`).
+*Artefacts touched:* `paper/sections/intro.tex`,
+`paper/references.bib`, `doc/provenance.ttl`,
+`doc/user-contributions.md`, `doc/logbook.md`.
+*Provenance IRI:* `fair2r:hc-journal-decline`
+
 ### 2026-05-07 --- Reconcile: main is default; Pages source = GitHub Actions
 *Type:* `rule-shape`
 *Leverage:* high

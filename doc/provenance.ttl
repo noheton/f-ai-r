@@ -1585,6 +1585,37 @@ hc:fix-beamer-conference-build  a fair2r:HumanContribution ;
     prov:influenced ent:slide-style ,
                     ent:slidedeck-conference .
 
+src:eisen2018preprints       a fair2r:Source ;
+    dcterms:title "Implementing a publish-then-review model of publishing"@en ;
+    dcterms:identifier "doi:10.7554/eLife.64910" ;
+    fair2r:verificationState verif:lit-retrieved .
+
+src:tennant2016open          a fair2r:Source ;
+    dcterms:title "The academic, economic and societal impacts of Open Access"@en ;
+    dcterms:identifier "doi:10.12688/f1000research.8460.3" ;
+    fair2r:verificationState verif:lit-retrieved .
+
+src:conroy2023sleuths        a fair2r:Source ;
+    dcterms:title "Scientific sleuths spot dishonest ChatGPT use in papers"@en ;
+    dcterms:identifier "doi:10.1038/d41586-023-02477-w" ;
+    fair2r:verificationState verif:lit-retrieved .
+
+claim:journal-as-distribution-in-decline  a fair2r:Claim ;
+    rdfs:label "Traditional publishing is under stress; the journal-as-distribution concept (which pre-dates the internet by three centuries) is being weakened by preprint servers, overlay journals, registered reports, and artefact-versioned repositories; LLM-generated submissions tip a slow drift into a visible crisis. F(AI)^2R is designed to fit both the legacy and the emerging scholarly-communication ecosystem."@en ;
+    prov:wasAttributedTo agent:human-author ;
+    prov:wasDerivedFrom  src:eisen2018preprints , src:tennant2016open , src:conroy2023sleuths ;
+    fair2r:verificationState verif:human-confirmed ;
+    dcterms:created "2026-05-07"^^xsd:date .
+
+hc:journal-decline           a fair2r:HumanContribution ;
+    rdfs:label "Researcher claim: traditional publishing under stress; journal-as-distribution may be in decline; new forms of scientific communication"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "content-prompt" ;
+    fair2r:contributionLeverage "high" ;
+    rdfs:comment "Researcher proposed during session: 'traditional publishing under Stress due many slop papers, original concept of journals as distribution (even Internet supported) might be in decline. new forms of scientific communication'. Graduated to paper text as a new third paragraph in §1 of intro.tex titled 'The journal as distribution channel may be in decline.' The paragraph is hedged: 'we do not claim the journal is dead' but 'the assumption that the journal is the unproblematic default ... can no longer be taken for granted'. Three new bib entries (eisen2018preprints, tennant2016open, conroy2023sleuths), all lit-retrieved, identifier-verified to the extent possible without full-text reading. New claim:journal-as-distribution-in-decline at human-confirmed."@en ;
+    dcterms:created "2026-05-07"^^xsd:date ;
+    prov:influenced claim:journal-as-distribution-in-decline .
+
 hc:reconcile-default-branch-and-pages-source  a fair2r:HumanContribution ;
     rdfs:label "Reconcile: main is the default branch; Pages source = GitHub Actions"@en ;
     fair2r:contributedBy agent:human-author ;

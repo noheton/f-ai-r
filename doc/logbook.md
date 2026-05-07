@@ -1184,3 +1184,50 @@ it. Asked the human author to paste the relevant
 actual cause can be diagnosed instead of guessed at.
 *Next:* Read the user-pasted log tail; fix the actual error;
 restore the TikZ figures once the deck compiles cleanly.
+
+## 2026-05-07 — New claim graduated: traditional publishing under stress; journal-as-distribution may be in decline
+*Author:* claude-opus-4-7 (under direction of repo owner)
+*Touched:* `paper/sections/intro.tex` (new third paragraph in §1),
+`paper/references.bib` (three new entries: `eisen2018preprints`,
+`tennant2016open`, `conroy2023sleuths`), `doc/provenance.ttl`,
+`doc/user-contributions.md`, `doc/logbook.md`.
+*Decision / outcome:* Researcher posed a new claim:
+\begin{quote}
+\emph{Traditional publishing under stress due many slop papers,
+original concept of journals as distribution (even Internet
+supported) might be in decline. New forms of scientific
+communication.}
+\end{quote}
+Graduated to paper text as a new third paragraph in §1 of
+`intro.tex`, headed "The journal as distribution channel may be in
+decline." The paragraph escalates the §1 framing from "LLMs cause
+failure modes per paper" to "the journal-as-distribution format
+itself is under structural strain", names preprint / overlay /
+registered-reports / artefact-versioned-repository alternatives,
+and reframes F(AI)\textsuperscript{2}R as fitting both the legacy
+journal channel and the emerging artefact-based ecosystem. The
+paragraph is hedged: "we do not claim the journal is dead --- the
+position would be over-strong"; the strong claim is the weaker
+"the assumption that the journal is the unproblematic default
+\dots\ can no longer be taken for granted." The DLR voice rules
+(no marketing register; hedge paired with commitment) are
+respected.
+The user used the term "slop papers"; I rephrased to
+"AI-fabricated submissions" in the paper itself, since "slop" is
+a journalistic register that does not fit the institutional
+voice.
+Three new bib entries, all `lit-retrieved` and flagged
+TODO-VERIFY at `lit-read`: `eisen2018preprints` (eLife,
+publish-then-review model; the DOI shown is approximate, must be
+verified by the human author), `tennant2016open`
+(F1000Research, OA-impact review), `conroy2023sleuths` (Nature
+news on AI papers in submissions). New
+`claim:journal-as-distribution-in-decline` recorded at
+`human-confirmed` because it rests on researcher abstraction
+rather than AI reading of full sources.
+Local smoke test: TTL parses to 1438 triples (up from 1419).
+*Next:* On merge, refresh the latest-draft PDF on
+`latest-draft` release; confirm the new §1 paragraph reads
+cleanly (likely lengthens the intro slightly --- still well
+within the 10-page body budget). Continue to await user-pasted
+log tail to fix the conference-deck slide build.
