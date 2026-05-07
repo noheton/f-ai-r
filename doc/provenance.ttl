@@ -1634,6 +1634,32 @@ claim:authors-note-voice-exception  a fair2r:Claim ;
     fair2r:verificationState verif:human-confirmed ;
     dcterms:created "2026-05-07"^^xsd:date .
 
+src:clarke2009modelchecking  a fair2r:Source ;
+    dcterms:title "Model checking: algorithmic verification and debugging"@en ;
+    dcterms:identifier "doi:10.1145/1592761.1592781" ;
+    fair2r:verificationState verif:lit-retrieved .
+
+src:klein2009sel4            a fair2r:Source ;
+    dcterms:title "seL4: formal verification of an OS kernel"@en ;
+    dcterms:identifier "doi:10.1145/1629575.1629596" ;
+    fair2r:verificationState verif:lit-retrieved .
+
+claim:formal-methods-cousin  a fair2r:Claim ;
+    rdfs:label "F(AI)^2R is structurally a cousin of model checking and theorem proving: each fair2r:Claim is a conjecture, the verification ladder is a proof-state machine, the audit pass is a proof-checker, SHACL shapes are invariants, the handback discipline is the prover/checker separation. Two useful imports we have not yet drawn on: counter-example witnesses attached to retracted claims, and lemma libraries of vetted claims that successor papers can cite by IRI without re-verifying."@en ;
+    prov:wasAttributedTo agent:human-author ;
+    prov:wasDerivedFrom  src:clarke2009modelchecking , src:klein2009sel4 ;
+    fair2r:verificationState verif:human-confirmed ;
+    dcterms:created "2026-05-07"^^xsd:date .
+
+hc:formal-methods-relationship  a fair2r:HumanContribution ;
+    rdfs:label "Researcher claim: F(AI)^2R relates to model checking / automatic theorem proving"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "content-prompt" ;
+    fair2r:contributionLeverage "high" ;
+    rdfs:comment "Researcher proposed: 'i see a relationship between the current method of the paper and model checking or automatic proofing'. Graduated to paper text as a new paragraph in §11 (Related Work) titled 'Formal methods: model checking and theorem proving.' The paragraph maps the F(AI)^2R machinery onto formal-methods vocabulary --- conjecture / proof-state / proof-checker / invariants / prover-checker separation --- and names two future-work imports the analogy suggests: counter-example witnesses on retracted claims, and lemma libraries that successor papers can cite by IRI. Hedged: 'the analogy is partial --- a manuscript is not a transition system'. Two new bib entries: clarke2009modelchecking (CACM 2009 Turing-lecture) and klein2009sel4 (SOSP 2009)."@en ;
+    dcterms:created "2026-05-07"^^xsd:date ;
+    prov:influenced claim:formal-methods-cousin .
+
 hc:fix-beamer-enumitem-conflict  a fair2r:HumanContribution ;
     rdfs:label "User pasted the Beamer log; root cause = enumitem + Beamer enumerate-template conflict; fix = drop enumitem"@en ;
     fair2r:contributedBy agent:human-author ;

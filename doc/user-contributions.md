@@ -279,6 +279,23 @@ primary-artefact consistency invariant.
 `agents/orchestrator.md`.
 *Provenance IRI:* `fair2r:hc-contribution-rule`
 
+### 2026-05-07 --- Claim: F(AI)²R relates to model checking / automatic theorem proving
+*Type:* `content-prompt`
+*Leverage:* high
+*Triggered:* New paragraph in §11 (Related Work) titled
+"Formal methods: model checking and theorem proving." The paragraph
+maps F(AI)²R machinery onto formal-methods vocabulary
+(conjecture / proof-state / proof-checker / invariants /
+prover-checker separation), names two future-work imports the
+analogy suggests (counter-example witnesses on retracted claims;
+lemma libraries citable by IRI), and hedges with "the analogy is
+partial". Two new bib entries: `clarke2009modelchecking` (CACM 2009
+Turing lecture) and `klein2009sel4` (SOSP 2009 verified microkernel).
+*Artefacts touched:* `paper/sections/related.tex`,
+`paper/references.bib`, `doc/provenance.ttl`,
+`doc/user-contributions.md`, `doc/logbook.md`.
+*Provenance IRI:* `fair2r:hc-formal-methods-relationship`
+
 ### 2026-05-07 --- Fix Beamer conference deck: enumitem + Beamer enumerate-template conflict
 *Type:* `corrective-intervention`
 *Leverage:* high

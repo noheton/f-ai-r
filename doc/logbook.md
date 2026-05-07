@@ -1319,3 +1319,38 @@ researcher prefers them visually.
 *Next:* Watch CI go green; merge; the
 \texttt{latest-draft-slides} release will populate with the
 conference-deck PDF for the first time.
+
+## 2026-05-07 — New claim graduated: F(AI)²R as cousin of model checking / theorem proving
+*Author:* claude-opus-4-7 (under direction of repo owner)
+*Touched:* `paper/sections/related.tex` (new paragraph),
+`paper/references.bib` (two new entries: `clarke2009modelchecking`,
+`klein2009sel4`), `doc/provenance.ttl`,
+`doc/user-contributions.md`, `doc/logbook.md`.
+*Decision / outcome:* Researcher posed: "I see a relationship
+between the current method of the paper and model checking or
+automatic proofing." Graduated to paper text as a new paragraph in
+§11 Related Work, headed "Formal methods: model checking and
+theorem proving." The paragraph maps the F(AI)\textsuperscript{2}R
+machinery onto formal-methods vocabulary in five mappings:
+conjecture (\texttt{fair2r:Claim}), proof-state machine
+(verification ladder), proof-checker (audit pass), invariants
+(SHACL shapes from §3.5), prover/checker separation (handback
+discipline). The paragraph names two future-work imports the
+analogy makes available: \emph{counter-example witnesses} attached
+to retracted claims (so a future reader sees \emph{why} a claim
+was invalidated, not only \emph{that} it was), and \emph{lemma
+libraries} of vetted claims that successor papers can cite by IRI
+without re-verifying. Hedged honestly: "the analogy is partial ---
+a manuscript is not a transition system, and \textsc{lit-read} is
+not soundness".
+Two new bib entries, both \texttt{lit-retrieved}: Clarke et al.
+2009 ACM Turing-lecture on model checking (CACM 52:11), and Klein
+et al. 2009 seL4 verified-microkernel paper (SOSP). Both are
+canonical, real, and load-bearing for the analogy.
+The PR \#24 enumitem fix merged successfully a moment before this
+commit; the conference deck now compiles cleanly on \texttt{main}.
+The new related-work paragraph triggers a paper rebuild but not a
+slide rebuild.
+Local smoke test: TTL parses to 1496 triples (up from 1486).
+*Next:* On merge, the latest-draft paper PDF picks up the new
+paragraph; verify the related-work section reads cleanly.
