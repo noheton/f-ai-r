@@ -167,18 +167,10 @@
 
 \begin{frame}{Verification ladder as a finite-state machine}
   \begin{center}
-    \fbox{\sffamily\small\textcolor{dlrGrau1}{unverified}}
-    $\to$
-    \fbox{\sffamily\small\textcolor{dlrGrau1}{needs-research}}
-    $\to$
-    \fbox{\sffamily\small lit-retrieved}
-    $\to$
-    \fbox{\sffamily\small\textcolor{dlrBlau1}{\textbf{ai-confirmed}}}
-    $\to$
-    \fbox{\sffamily\small\textcolor{dlrGruen1}{\textbf{lit-read}}}
+    \includegraphics[width=0.92\textwidth]{../paper/figures/ladder-fsm.pdf}
   \end{center}
 
-  \vspace{0.6em}
+  \vspace{0.4em}
   \begin{itemize}
     \item \textsc{ai-confirmed} is the ceiling an LLM agent can deliver.
     \item Load-bearing claims require \textsc{lit-read}.
@@ -450,15 +442,14 @@
 \end{frame}
 
 \begin{frame}{Verification ladder budget (auto-generated at build)}
-  At build-time, \texttt{scripts/provenance\_analysis.py} regenerates a rung-distribution table from \texttt{doc/provenance.ttl}. Indicative state:
-  \begin{itemize}
-    \item \texttt{human-confirmed}: 50\,\%
-    \item \texttt{source-vendored}: 32\,\%
-    \item \texttt{ai-confirmed}: 11\,\%
-    \item \texttt{needs-research}: 7\,\%
-  \end{itemize}
+  At build-time, \texttt{scripts/provenance\_analysis.py} regenerates a rung-distribution table from \texttt{doc/provenance.ttl}.
 
   \vspace{0.4em}
+  \begin{center}
+    \includegraphics[width=0.92\textwidth]{../paper/figures/rung-distribution.pdf}
+  \end{center}
+
+  \vspace{0.2em}
   Sources are graded independently. Reading queue (\texttt{doc/reading-queue.md}) lists sources still at \texttt{lit-retrieved}, sorted by load-bearing weight.
 \end{frame}
 

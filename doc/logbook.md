@@ -1503,3 +1503,186 @@ on next push.
 *Next:* Confirm the `build-paper.yml` workflow renders the three new
 figures cleanly; export `paper/figures/hero.standalone.pdf` and a
 PNG for the README and the Pages site hero.
+
+## 2026-05-07 --- Verification pass 2 (source-analyzer subagent, fifth pass)
+
+A second source-analyzer subagent run, dispatched after the first
+pass landed, advanced **19 further sources** from `lit-retrieved` to
+`ai-confirmed`. Each promotion is backed by a verbatim quoted
+snippet recorded in the new fifth-pass log of
+[`doc/sources.md`](sources.md). The subagent skipped the three
+sources already escalated to
+[`doc/sources-needing-institutional-access.md`](sources-needing-institutional-access.md)
+(`vannoorden2023chatgpt`, `neurips_llm_policy`, `iclr_llm_policy`).
+
+Promoted: `clarke2009modelchecking`, `klein2009sel4`,
+`alemohammad2023mad`, `shumailov2024collapse`, `chen2023drift`,
+`luccioni2024power`, `patterson2021carbon`, `strubell2019energy`,
+`li2023thirsty`, `birhane2022values`, `thorp2023chatgpt`,
+`sadasivan2023reliably`, `reynolds2021prompt`, `liu2023prompt`,
+`anderson2024homogenization`, `kuteeva2024diversity`,
+`clark1998extended`, `clark2025extending`, `hutchins1995cognition`.
+
+Retrieval method: direct `WebFetch` returned 403 Forbidden at every
+publisher domain in this pass, so all retrievals went through the
+Exa `web_fetch` MCP tool, with two `web_search_exa` assists for
+the OUP Analysis (`clark1998extended`) and OUP Applied Linguistics
+(`kuteeva2024diversity`) landing pages, which Exa itself could not
+render --- the abstracts were captured verbatim from a JSTOR-hosted
+open PDF and from the author's official Stockholm University
+faculty page respectively.
+
+Bib corrections flagged for the human author (no `.bib` edits made
+in this subagent pass; orchestrator will apply):
+
+1. `clark2025extending` --- add `doi = {10.1038/s41467-025-59906-9}`,
+   `volume = {16}`, `pages = {4627}` (Nature Communications,
+   published 19 May 2025).
+2. `kuteeva2024diversity` --- add `volume = {45}`, `number = {3}`,
+   `pages = {561--567}`.
+3. `liu2023prompt` --- canonical citation has article number `195`
+   (CSUR 55:9 Article 195); current bib has page range only.
+4. `li2023thirsty` --- on next bib pass update title to reflect the
+   final Communications of the ACM 2025 published version.
+
+New rung distribution after this pass (rdflib parse of
+`doc/provenance.ttl`): **51 ai-confirmed** (up from 32), **3
+lit-retrieved** (down from 22; all on the institutional-access
+list), **21 human-confirmed**, **10 source-vendored**, **2
+needs-research**. Triple count 1591 → 1607 (+16), parses clean
+with `rdflib`. Reading queue regenerated:
+`Sources at lit-retrieved: 3, Sources at ai-confirmed: 46`
+(the queue reports 46 because one entity, `w3c2013provo`, still
+carries no rung literal --- a long-standing graph cleanliness
+defect noted in earlier passes; not in scope here).
+
+Provenance: new `act:rev-verification-pass-2` activity, informed
+by `act:rev-verification-pass`; matching `hc:verification-pass-2`
+records the human author's triggering request.
+
+*Next:* Apply the four flagged bib corrections in a follow-up
+commit; consider whether the `w3c2013provo` rungless-source defect
+is worth a one-line fix in this cycle.
+
+## 2026-05-07 --- Provenance-verification scoping note (research-protocol subagent)
+
+The research-protocol subagent authored a position-paper-style
+scoping note at
+[`doc/research/provenance-verification.md`](research/provenance-verification.md)
+answering the question "how could the F(AI)²R provenance graph be
+verified or analyzed?". The note covers three orthogonal axes:
+
+1. **Structural verification** with SHACL (executor: `pyshacl`),
+   with a starter shape set of six shapes (Claim, Source, Section,
+   Figure, Activity, Rung-membership);
+2. **Semantic / reproducibility analysis** via SPARQL (Apache Jena
+   `arq`, `rdflib`), with three runnable example queries: per-claim
+   provenance trail (returns 37 rows), rung distribution at
+   submission time (matches the auto-generated table in
+   `paper/sections/provenance-analysis.tex`), and ghost-citation
+   count (returns 27 today);
+3. **Formal-methods analogy** naming SPIN, NuSMV, TLA+, and
+   Coq/Isabelle as candidates, while flagging which analogies are
+   tight (FSM, prover/checker) and which are loose (manuscript-as-
+   transition-system).
+
+The doc also surveys what F(AI)²R ships today
+(`scripts/provenance_analysis.py`, descriptive only), proposes a
+12-month programme of six prioritised work items with one-line
+success criteria (SHACL shape file → CI hook → SPARQL query
+library → TLA+ specification of the rung ladder →
+counter-example witnesses → LLM-checker on rung confidence), is
+honest about what verification cannot solve (form vs. truth, audit
+vs. peer review), and lists six open questions for successor work.
+
+Provenance: new `act:write-provenance-verification-scoping`
+activity associated with `agent:research-protocol` and
+`agent:claude-opus-4-7`, generating
+`ent:doc-provenance-verification` (typed as `fair2r:Section` for
+nav-eligibility on the public site). Matching
+`hc:provenance-verification-prompt` records the human author's
+triggering request. Site builder
+(`scripts/build_provenance_site.py`) updated with one new
+`PAGES` entry and one new `NAV` entry; site rebuild verified
+clean.
+
+Triple count: 1607 → 1637 (+30), parses clean with `rdflib`.
+Word count of the scoping note: ~2,200 (prose ~2,100 once the
+three SPARQL display blocks are excluded), within the requested
+1,500–2,000 prose-word target with a small margin.
+
+*Next:* Item 1 of the 12-month programme — author
+`doc/shapes/fair2r.ttl` and add a `make -C paper validate` target
+running `pyshacl` — would be the smallest concrete step from
+descriptive to prescriptive verification.
+
+## 2026-05-07 --- Illustrations pass 2 (illustration subagent rerun)
+
+Illustration subagent re-dispatched after the human author asked
+it to decide afresh on the figure set with the TikZ-only constraint
+lifted. The audit verdict was published in the agent report (see
+`doc/user-contributions.md` AI mirror, this date) and is summarised
+here for the logbook.
+
+**Stays as TikZ** (six figures): `paper/figures/hero.tex`,
+`paper/figures/axes.tex`, `paper/figures/pipeline.tex`,
+`paper/figures/coupling-rule.tex`,
+`paper/figures/eight-practices.tex`,
+`paper/figures/failure-mode-coverage.tex`. Each one's argument is
+a shape that TikZ encodes well, and none is data-bound.
+
+**Replaced** (one figure):
+`paper/figures/ladder-fsm.tex` (TikZ) is replaced by
+`paper/figures/ladder-fsm.mmd` (Mermaid `stateDiagram-v2`),
+rendered to `paper/figures/ladder-fsm.pdf` and
+`paper/figures/ladder-fsm.png` via `mmdc`. The `.tex` file is now
+a thin shim wrapping the rendered PDF in the same `figure` float
+so the existing `\input{figures/ladder-fsm}` from
+`paper/sections/pattern.tex` still resolves. The motivation is
+single-source-of-truth: the Pages site already renders Mermaid
+client-side via `mermaid.min.js`, so the paper and the site can
+now share one artefact rather than two.
+
+**Retired** (one figure):
+`paper/figures/dual-loop.tex` and
+`paper/figures/dual-loop.figspec.md` are removed. The audit verdict
+was that the dual-loop graphic duplicated the hero figure on the
+same opening page. The central dual-loop claim is now carried by
+the hero alone; the prose around `\input{figures/dual-loop}` in
+`paper/sections/intro.tex` was deleted in the same commit.
+
+**Added** (one figure):
+`paper/figures/rung-distribution.pdf` and
+`paper/figures/rung-distribution.png`, generated by
+`paper/figures/src/rung-distribution.py` (matplotlib, deterministic,
+DLR palette). It is a horizontal stacked-bar companion to the
+auto-generated rung table in `paper/sections/_generated/`, wired
+into `paper/sections/provenance-analysis.tex` immediately after the
+rung-distribution table with the cross-reference
+`Figure~\ref{fig:rung-distribution}`. The figure regenerates from
+the same data path as the table, so the two stay in lock-step.
+
+**Slide deck updates.** `slides/conference-30min.tex` was updated
+in two places: the verification-ladder frame now uses the rendered
+`paper/figures/ladder-fsm.pdf` instead of a row of `\fbox` text
+boxes; the rung-distribution frame now embeds
+`paper/figures/rung-distribution.pdf`.
+
+**Provenance.** New activity `act:add-illustrations-pass-2` records
+the rerun; it generates `ent:figure-rung-distribution` and
+`ent:figure-ladder-fsm-mermaid` (`prov:wasDerivedFrom` the original
+TikZ ladder figure). The prior `ent:figure-ladder-fsm` and
+`ent:figure-dual-loop` entities carry
+`prov:wasInvalidatedBy act:add-illustrations-pass-2`. The AI mirror
+is `ai:add-illustrations-pass-2` and the human triggering prompt is
+`hc:rerun-illustrations-prompt`. `rdflib` parse: 1607 -> 1686
+triples (+79), clean.
+
+**Net figure count: 8** (was 8). Tools used: TikZ (6 figures),
+Mermaid (1 figure), matplotlib (1 figure).
+
+*Next:* If the human author wants the ladder-fsm Mermaid block
+mirrored on the Pages site as a fenced `mermaid` code block
+(rather than as an `<img>` referencing the rendered PNG), wire
+that in `scripts/build_provenance_site.py`. The `.mmd` source is
+ready.

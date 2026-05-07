@@ -652,3 +652,109 @@ new TikZ libraries required. Provenance updated:
 `doc/provenance.ttl`, `doc/logbook.md`.
 *Provenance IRI:* `fair2r:hc-add-illustrations-prompt`
 (matching AI mirror: `fair2r:ai-add-illustrations-pass`)
+
+### 2026-05-07 --- Verification pass 2: 19 further sources advanced + 4 bib corrections flagged
+*Type:* `rule-shape`
+*Leverage:* high
+*Triggered:* User dispatched a second source-analyzer subagent run
+after the first verification pass landed (PR #11). The subagent
+walked the 22 remaining `lit-retrieved` entries (skipping the 3
+already on the institutional-access list) and advanced **19** of
+them to `ai-confirmed`, each with a verbatim quoted snippet in the
+new fifth-pass log of `doc/sources.md`: `clarke2009modelchecking`,
+`klein2009sel4`, `alemohammad2023mad`, `shumailov2024collapse`,
+`chen2023drift`, `luccioni2024power`, `patterson2021carbon`,
+`strubell2019energy`, `li2023thirsty`, `birhane2022values`,
+`thorp2023chatgpt`, `sadasivan2023reliably`, `reynolds2021prompt`,
+`liu2023prompt`, `anderson2024homogenization`,
+`kuteeva2024diversity`, `clark1998extended`, `clark2025extending`,
+`hutchins1995cognition`. Direct `WebFetch` returned 403 at every
+publisher domain in this pass; all retrievals went through the Exa
+`web_fetch` MCP tool, with two `web_search_exa` assists for OUP
+Analysis and OUP Applied Linguistics. Four bib corrections flagged
+for the orchestrator to apply: `clark2025extending` DOI / volume /
+pages; `kuteeva2024diversity` volume / number / pages;
+`liu2023prompt` article number; `li2023thirsty` final-version
+title. Result: rdflib re-parse 1591 → 1607 triples (+16); rung
+distribution **51 ai-confirmed**, **3 lit-retrieved** (all on the
+institutional-access list), 21 human-confirmed, 10
+source-vendored, 2 needs-research.
+*Artefacts touched:* `doc/sources.md`, `doc/provenance.ttl`,
+`doc/reading-queue.md` (regenerated),
+`doc/user-contributions.md`, `doc/logbook.md`.
+*Provenance IRI:* `fair2r:hc-verification-pass-2`
+
+
+### 2026-05-07 --- Scoping prompt: provenance verification programme
+*Type:* `content-prompt`
+*Leverage:* medium
+*Triggered:* User dispatched the research-protocol subagent to
+author a position-paper-style scoping document at
+[`doc/research/provenance-verification.md`](research/provenance-verification.md)
+answering the question "how could the F(AI)²R provenance graph
+be verified or analyzed?". The doc covers three orthogonal axes
+(structural / SHACL, semantic / SPARQL, formal / model checking
+and theorem proving), surveys what is in place today
+(`scripts/provenance_analysis.py`), proposes a six-item 12-month
+verification programme with one-line success criteria, and is
+explicit about what verification cannot solve (form vs. truth).
+Three runnable SPARQL examples are inlined and were verified
+against the live graph before being pasted in. The doc was
+registered in the public site nav (one `PAGES` entry plus one
+`NAV` entry in `scripts/build_provenance_site.py`).
+*Artefacts touched:* `doc/research/provenance-verification.md`
+(new), `doc/provenance.ttl` (+30 triples; new
+`ent:doc-provenance-verification`,
+`act:write-provenance-verification-scoping`,
+`hc:provenance-verification-prompt`),
+`scripts/build_provenance_site.py`,
+`doc/logbook.md`, `doc/user-contributions.md`.
+*Provenance IRI:* `hc:provenance-verification-prompt`
+
+### 2026-05-07 --- Illustrations pass 2: ladder-fsm to Mermaid, rung-distribution figure added, dual-loop retired
+*Type:* `content-prompt`
+*Leverage:* medium
+*Triggered:* Researcher prompt: "rerun illustrator with new info ---
+Mermaid, matplotlib, and other publication-ready tools can also be
+used". The illustration subagent re-ran on the full paper, with no
+privilege given to the prior TikZ-only pass, and published an audit
+verdict: keep the six TikZ figures whose argument is shape (hero,
+axes, pipeline, coupling-rule, eight-practices,
+failure-mode-coverage); replace the verification-ladder FSM with a
+Mermaid `stateDiagram-v2` source
+(`paper/figures/ladder-fsm.mmd`, rendered to `.pdf` and `.png` via
+`mmdc`) so the manuscript and the Pages site can share one
+source-of-truth artefact; retire the dual-loop figure that had
+duplicated the hero on the same opening page; add a matplotlib
+rung-distribution figure
+(`paper/figures/src/rung-distribution.py`, deterministic, DLR
+palette, rendered to `.pdf` and `.png`) as a one-glance companion
+to the auto-generated rung table in
+`paper/sections/provenance-analysis.tex`. Conference deck updated
+in two frames (verification-ladder frame; rung-distribution frame)
+to use the rendered PDFs. Provenance updated:
+`act:add-illustrations-pass-2` (informed by the first illustrations
+activity), `ai:add-illustrations-pass-2`,
+`hc:rerun-illustrations-prompt`, two new `ent:figure-*` entities
+(`rung-distribution`, `ladder-fsm-mermaid` with
+`prov:wasDerivedFrom ent:figure-ladder-fsm`), and
+`prov:wasInvalidatedBy` triples on the prior `ent:figure-ladder-fsm`
+and `ent:figure-dual-loop`. rdflib re-parse: 1607 -> 1686 triples
+(+79). Net figure count: 8 (was 8). Tools used: TikZ (6 figures),
+Mermaid (1 figure), matplotlib (1 figure).
+*Artefacts touched:* `paper/figures/ladder-fsm.mmd`,
+`paper/figures/ladder-fsm.pdf`, `paper/figures/ladder-fsm.png`,
+`paper/figures/ladder-fsm.tex` (now a thin shim around the rendered
+PDF), `paper/figures/ladder-fsm.figspec.md`,
+`paper/figures/rung-distribution.pdf`,
+`paper/figures/rung-distribution.png`,
+`paper/figures/rung-distribution.figspec.md`,
+`paper/figures/src/rung-distribution.py`,
+`paper/sections/intro.tex` (dual-loop input removed),
+`paper/sections/provenance-analysis.tex`,
+`slides/conference-30min.tex` (two frames updated),
+`paper/figures/dual-loop.tex` (deleted),
+`paper/figures/dual-loop.figspec.md` (deleted),
+`doc/provenance.ttl`, `doc/logbook.md`.
+*Provenance IRI:* `fair2r:hc-rerun-illustrations-prompt`
+(matching AI mirror: `fair2r:ai-add-illustrations-pass-2`)

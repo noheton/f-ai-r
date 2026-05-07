@@ -1,0 +1,32 @@
+%% F(AI)^2R verification ladder as a finite-state machine.
+%% Loaded into the manuscript as a rendered PDF
+%% (paper/figures/ladder-fsm.pdf, produced by mmdc); mirrored on the
+%% Pages site as a Mermaid block. DLR Corporate Design palette:
+%%   dlrBlau1  #00658B  authoring rung accent
+%%   dlrGruen1 #82A043  human-confirmed rung accent
+%%   dlrGrau1  #4D5258  external / pre-research rungs
+%% No rounded corners, no shadows, hairline rules.
+stateDiagram-v2
+    direction LR
+    [*] --> unverified_external
+    unverified_external: unverified-external
+    needs_research: needs-research
+    lit_retrieved: lit-retrieved
+    ai_confirmed: ai-confirmed
+    lit_read: lit-read
+
+    unverified_external --> needs_research: recognise gap
+    needs_research --> lit_retrieved: DOI / URL resolves
+    lit_retrieved --> ai_confirmed: AI fetch + quoted snippet
+    ai_confirmed --> lit_read: human reads
+    lit_read --> unverified_external: prov:Invalidation (retraction)
+
+    classDef external fill:#EBEBEB,stroke:#4D5258,stroke-width:0.5px,color:#000;
+    classDef neutral  fill:#FFFFFF,stroke:#4D5258,stroke-width:0.5px,color:#000;
+    classDef ai       fill:#D1E8FA,stroke:#00658B,stroke-width:0.5px,color:#000;
+    classDef human    fill:#E6EAAF,stroke:#82A043,stroke-width:0.5px,color:#000;
+
+    class unverified_external,needs_research external
+    class lit_retrieved neutral
+    class ai_confirmed ai
+    class lit_read human

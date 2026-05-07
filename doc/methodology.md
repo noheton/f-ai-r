@@ -85,6 +85,29 @@ A `fair2r:Claim` carries one of:
 A claim must reach `human-confirmed` (or `source-vendored`) before it can
 appear in `main-condensed.tex`.
 
+The states form a finite-state machine, monotone non-decreasing modulo
+explicit retraction (the only legal back-edge, recorded as a
+`prov:Invalidation` activity in `doc/provenance.ttl`). The diagram
+below mirrors `paper/figures/ladder-fsm.mmd`, the source-of-truth
+artefact for the manuscript figure of the same name.
+
+```mermaid
+stateDiagram-v2
+    direction LR
+    [*] --> unverified_external
+    unverified_external: unverified-external
+    needs_research: needs-research
+    lit_retrieved: lit-retrieved
+    ai_confirmed: ai-confirmed
+    lit_read: lit-read
+
+    unverified_external --> needs_research: recognise gap
+    needs_research --> lit_retrieved: DOI / URL resolves
+    lit_retrieved --> ai_confirmed: AI fetch + quoted snippet
+    ai_confirmed --> lit_read: human reads
+    lit_read --> unverified_external: prov:Invalidation (retraction)
+```
+
 ## Definition of done for a section
 
 1. Prose compiles in `paper/main.tex` with no `\todo` left.

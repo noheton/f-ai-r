@@ -1973,3 +1973,122 @@ hc:verification-pass-2  a fair2r:HumanContribution ;
     rdfs:comment "User dispatched a second source-analyzer pass after the first pass landed (PR #11). The subagent retried the 22 remaining lit-retrieved entries (skipping the 3 already in doc/sources-needing-institutional-access.md). Direct WebFetch returned 403 at every publisher domain in this pass; all retrievals went through the Exa web_fetch MCP tool, with two web_search_exa assists for OUP Analysis (clark1998extended) and OUP Applied Linguistics (kuteeva2024diversity). The subagent advanced 19 fair2r:Source entities from verif:lit-retrieved to verif:ai-confirmed (each with a verbatim quoted snippet recorded in the fifth-pass log of doc/sources.md), and flagged 4 further bib corrections (clark2025extending DOI, kuteeva2024diversity volume/pages, liu2023prompt article number, li2023thirsty published-version title). Result: 3 sources at lit-retrieved (all on the institutional-access list), 51 at ai-confirmed."@en ;
     dcterms:created "2026-05-07"^^xsd:date ;
     prov:influenced act:rev-verification-pass-2 .
+
+#-------------------------------------------------------------------------
+# Provenance-verification scoping doc (research-protocol subagent, 2026-05-07)
+# A position-paper-style scoping note at doc/research/provenance-verification.md
+# answering the question "how could the F(AI)^2R provenance graph be
+# verified or analyzed?". Authored as a research artefact, not a runbook;
+# audience is panel-level reviewers preparing the paper for venue defence.
+#-------------------------------------------------------------------------
+
+ent:doc-provenance-verification  a fair2r:Section ;
+    rdfs:label "Provenance verification: a scoping note"@en ;
+    dcterms:source <doc/research/provenance-verification.md> ;
+    dcterms:created "2026-05-07"^^xsd:date ;
+    prov:hadPrimarySource ent:manuscript ;
+    rdfs:comment "Research-side scoping document covering three orthogonal axes of provenance verification (structural via SHACL, semantic via SPARQL, formal via model checking / theorem proving), what is in place today, a 12-month verification programme, what verification cannot solve, and open questions. Referenced from the public site nav as 'Provenance verification'."@en .
+
+act:write-provenance-verification-scoping  a prov:Activity ;
+    rdfs:label "Author the provenance-verification scoping note"@en ;
+    prov:startedAtTime "2026-05-07T00:00:00Z"^^xsd:dateTime ;
+    prov:endedAtTime   "2026-05-07T00:00:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith agent:research-protocol ;
+    prov:wasAssociatedWith agent:claude-opus-4-7 ;
+    prov:wasAssociatedWith agent:human-author ;
+    prov:qualifiedAssociation [
+        a prov:Association ;
+        prov:agent agent:research-protocol ;
+        prov:hadPlan ent:prompt-research-protocol
+    ] ;
+    prov:generated ent:doc-provenance-verification .
+
+ent:doc-provenance-verification  prov:wasGeneratedBy act:write-provenance-verification-scoping ;
+                                 prov:wasAttributedTo agent:research-protocol ,
+                                                      agent:claude-opus-4-7 ,
+                                                      agent:human-author .
+
+hc:provenance-verification-prompt  a fair2r:HumanContribution ;
+    rdfs:label "Researcher prompt: scoping note on how the F(AI)^2R provenance graph could be verified or analyzed"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "content-prompt" ;
+    fair2r:contributionLeverage "medium" ;
+    rdfs:comment "Human author dispatched the research-protocol subagent to author a position-paper-style scoping document at doc/research/provenance-verification.md. The prompt specified three orthogonal axes of verification (structural / SHACL, semantic / SPARQL, formal / model checking and theorem proving), required runnable SPARQL examples verified against the live graph, and a 12-month programme of work items with success criteria. Output ~2,100 prose words plus three SPARQL examples; site nav updated."@en ;
+    dcterms:created "2026-05-07"^^xsd:date ;
+    prov:influenced act:write-provenance-verification-scoping .
+
+#-------------------------------------------------------------------------
+# Illustrations pass 2 (2026-05-07): rerun the illustration agent with
+# the TikZ-only constraint lifted. The audit verdict was: keep the
+# six TikZ figures whose argument is shape (hero, axes, pipeline,
+# coupling-rule, eight-practices, failure-mode-coverage); replace the
+# verification-ladder figure with a Mermaid stateDiagram (the Pages
+# site already renders Mermaid client-side, so paper and site share a
+# single source); retire the dual-loop figure (it duplicated the hero
+# graphic on the same page); add a matplotlib rung-distribution
+# figure to provenance-analysis as a one-glance companion to the
+# auto-generated rung-distribution table. Net figure count: 8.
+#-------------------------------------------------------------------------
+
+ent:figure-rung-distribution  a fair2r:Figure ;
+    rdfs:label "Verification-rung distribution: stacked-bar companion to the auto-generated rung table"@en ;
+    dcterms:source <paper/figures/src/rung-distribution.py> ;
+    prov:wasAttributedTo agent:illustration , agent:human-author .
+
+ent:figure-ladder-fsm-mermaid  a fair2r:Figure ;
+    rdfs:label "Verification ladder as a finite-state machine, Mermaid stateDiagram"@en ;
+    dcterms:source <paper/figures/ladder-fsm.mmd> ;
+    prov:wasAttributedTo agent:illustration , agent:human-author ;
+    prov:wasDerivedFrom ent:figure-ladder-fsm .
+
+act:add-illustrations-pass-2  a prov:Activity ;
+    rdfs:label "Add-illustrations pass 2: replace ladder-fsm with Mermaid; retire dual-loop; add matplotlib rung-distribution"@en ;
+    prov:startedAtTime "2026-05-07T00:00:00Z"^^xsd:dateTime ;
+    prov:endedAtTime   "2026-05-07T00:00:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith agent:illustration ;
+    prov:wasAssociatedWith agent:claude-opus-4-7 ;
+    prov:wasAssociatedWith agent:human-author ;
+    prov:wasInformedBy act:add-illustrations-pass ;
+    prov:used ent:section-intro ,
+              ent:section-pattern ,
+              ent:section-provenance-analysis ;
+    prov:generated ent:figure-rung-distribution ,
+                   ent:figure-ladder-fsm-mermaid .
+
+ent:figure-rung-distribution    prov:wasGeneratedBy act:add-illustrations-pass-2 ;
+                                prov:used ent:section-provenance-analysis .
+ent:figure-ladder-fsm-mermaid   prov:wasGeneratedBy act:add-illustrations-pass-2 ;
+                                prov:used ent:section-pattern .
+
+# The original TikZ ladder-fsm source is invalidated; the .tex file
+# now exists as a thin shim that wraps the Mermaid-rendered PDF in a
+# figure float, but the TikZ source-of-truth is retired.
+ent:figure-ladder-fsm           prov:wasInvalidatedBy act:add-illustrations-pass-2 .
+
+# The dual-loop figure is retired wholesale: paper/figures/dual-loop.tex
+# and paper/figures/dual-loop.figspec.md are removed in the same
+# commit. The audit verdict was that the dual-loop graphic duplicated
+# the hero figure on the same opening page; the central dual-loop
+# claim is now carried by the hero alone.
+ent:figure-dual-loop            prov:wasInvalidatedBy act:add-illustrations-pass-2 .
+
+ai:add-illustrations-pass-2  a fair2r:AIContribution ;
+    rdfs:label "Illustration agent rerun: medium-choice freed (TikZ + Mermaid + matplotlib); replace ladder-fsm, retire dual-loop, add rung-distribution"@en ;
+    fair2r:contributedBy agent:illustration ;
+    fair2r:contributionType "content-prompt" ;
+    fair2r:contributionLeverage "medium" ;
+    rdfs:comment "Illustration subagent re-ran with no privilege given to the prior TikZ-only output. Audit verdict and decisions: (i) keep the six TikZ figures whose argument is shape (hero, axes, pipeline, coupling-rule, eight-practices, failure-mode-coverage); (ii) replace the TikZ verification-ladder FSM with a Mermaid stateDiagram-v2 source (paper/figures/ladder-fsm.mmd, rendered to .pdf and .png via mmdc) so the manuscript and the Pages site share one source-of-truth artefact; (iii) retire the dual-loop figure that had duplicated the hero graphic on the same opening page; (iv) add a matplotlib rung-distribution figure (paper/figures/src/rung-distribution.py, rendered to .pdf and .png) as a one-glance companion to the auto-generated rung table in provenance-analysis. Net figure count: 8 (was 8). Conference deck updated to use the rendered ladder-fsm.pdf and rung-distribution.pdf."@en ;
+    dcterms:created "2026-05-07"^^xsd:date ;
+    prov:influenced ent:figure-rung-distribution ,
+                    ent:figure-ladder-fsm-mermaid ,
+                    ent:figure-ladder-fsm ,
+                    ent:figure-dual-loop .
+
+hc:rerun-illustrations-prompt  a fair2r:HumanContribution ;
+    rdfs:label "Researcher prompt: rerun illustrator with new info (Mermaid, matplotlib, and other publication-ready tools allowed)"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "content-prompt" ;
+    fair2r:contributionLeverage "medium" ;
+    rdfs:comment "User asked the illustration agent to decide afresh on the figure set, with the TikZ-only constraint lifted: Mermaid, matplotlib, Inkscape SVG, d2 and graphviz were allowed where genuinely better. The prompt requested a 6-9 figure budget across the paper, a published audit verdict (which figures stay TikZ, which are replaced and in what medium, which are added), and primary-artefact synchronisation (manuscript + provenance.ttl + logbook + slides) in a single pass."@en ;
+    dcterms:created "2026-05-07"^^xsd:date ;
+    prov:influenced ai:add-illustrations-pass-2 .
