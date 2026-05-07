@@ -2189,6 +2189,7 @@ covers them; tighten `authors-note.tex`) and the Xennial
 paragraph split (readability reviewer proposal: split after
 *"F(AI)^2R is in part an attempt to encode it."* into two
 paragraphs). Both touch authorial voice and need a human call.
+<<<<<<< HEAD
 
 ## 2026-05-07 — Researcher observation: associative thinking as the cooperation multiplier
 
@@ -2229,3 +2230,5 @@ whether to graduate this observation into `evolution.tex`
 (process angle) or `authors-note.tex` (researcher-experience
 angle). Both are candidate homes; the choice depends on which
 cooperation rule the paper wants to commit to publishing.
+=======
+>>>>>>> origin/main
