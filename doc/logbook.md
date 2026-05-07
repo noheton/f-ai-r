@@ -1055,3 +1055,52 @@ rebuild is clean; the \texttt{build-tag} is visible in
 *Next:* On merge, watch the Pages deploy; if the build-tag in the
 rendered hero matches the new commit's cache-bust hash (10-char
 hex), the cache has refreshed.
+
+## 2026-05-07 — Verify CI: fix conference-deck Beamer compile failure
+*Author:* claude-opus-4-7 (under direction of repo owner)
+*Touched:* `slides/style/fair2r-beamer.sty`,
+`slides/conference-30min.tex`, `doc/provenance.ttl`,
+`doc/user-contributions.md`, `doc/logbook.md`.
+*Decision / outcome:* Researcher asked "verify CI as well".
+PR \#19's check_runs showed two `build-slides.yml` failures at the
+"Compile conference deck" step (exit code 12), still standing on
+`main` because PR \#20 didn't touch `slides/`. The pitch deck
+compiled successfully; the conference deck did not. Workflow logs
+are auth-protected; defensive fix targets four likely Beamer
+pitfalls in `slides/style/fair2r-beamer.sty`:
+\begin{enumerate}
+  \item Removed \texttt{\textbackslash renewcommand\{\textbackslash familydefault\}\{\textbackslash sfdefault\}}.
+        Beamer's default theme manages the family default; the
+        explicit override could clash with its setup.
+  \item Simplified \texttt{\textbackslash sectiondivider} to a
+        plain frame with centred title and accent rule.
+        The previous version did
+        \texttt{\{\textbackslash setbeamercolor\{background canvas\}\dots\}}
+        in a TeX group around the frame, a known Beamer pitfall.
+  \item Reduced \texttt{helvet} scaling to \texttt{[scaled=0.95]}
+        (closer to slide-font expectations than 1.0).
+  \item Wrapped \texttt{\textbackslash insertframetitle} in a
+        \texttt{minipage} so long titles don't break Beamer's
+        vertical-mode handling in the frametitle template.
+\end{enumerate}
+Companion fix in \texttt{slides/conference-30min.tex}: subtitle is
+now a single line (no \texttt{\textbackslash\textbackslash}) so
+the title-page template's \texttt{\textbackslash insertsubtitle}
+expansion is unambiguous. The pitch deck did not change.
+The CI status across recent PRs:
+- PR \#18 (slide rendering fix): all green.
+- PR \#19 (Beamer-only switch): build-slides.yml failed twice on
+  Compile conference deck.
+- PR \#20 (defensive Pages fixes): pages.yml green; build-slides
+  and build-paper did not re-run because path filters didn't
+  match. Therefore the failure standing on `main` is from PR \#19's
+  merge run; this commit is the first that re-touches `slides/`
+  and so re-fires `build-slides.yml`.
+Local smoke test: TTL parses to 1404 triples (up from 1395).
+Beamer compile cannot be verified locally (no full TeX Live in
+the sandbox); CI is the canonical test.
+*Next:* On merge to `main`, watch `build-slides.yml` for green;
+verify the rendered conference deck looks clean. If still failing,
+the next-most-likely cause is the inline TikZ for the pipeline
+diagram --- in which case I'll simplify or move to an external
+pre-rendered SVG/PNG.

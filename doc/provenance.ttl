@@ -1575,6 +1575,16 @@ act:rev-beamer-slides        a prov:Activity ;
 
 ent:slide-style              prov:wasGeneratedBy act:rev-beamer-slides .
 
+hc:fix-beamer-conference-build  a fair2r:HumanContribution ;
+    rdfs:label "Researcher request: verify CI; fix the conference-deck Beamer compile failure introduced by PR #19"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "corrective-intervention" ;
+    fair2r:contributionLeverage "high" ;
+    rdfs:comment "Researcher asked 'verify CI as well'. Inspection of PR #19's check_runs showed two build-slides.yml failures (one push, one pull_request) at the 'Compile conference deck' step (exit code 12). Logs are auth-protected; defensive fix targets four likely Beamer pitfalls in fair2r-beamer.sty: (1) removed \\renewcommand{\\familydefault}{\\sfdefault} so Beamer's own theme manages the family default; (2) simplified \\sectiondivider to a plain frame with centred text, removing the group-local \\setbeamercolor{background canvas} that Beamer is known to mishandle; (3) helvet now loaded with [scaled=0.95] (closer to slide-font expectations); (4) frametitle template wraps the title in a minipage so long frame titles don't break vertical-mode handling. Companion fix in conference-30min.tex: subtitle now a single line (no \\\\) so the title-page template's \\insertsubtitle expansion is unambiguous."@en ;
+    dcterms:created "2026-05-07"^^xsd:date ;
+    prov:influenced ent:slide-style ,
+                    ent:slidedeck-conference .
+
 hc:pages-staleness-fix       a fair2r:HumanContribution ;
     rdfs:label "Researcher report: the deployed Pages site does not seem up to date"@en ;
     fair2r:contributedBy agent:human-author ;

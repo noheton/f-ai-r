@@ -279,6 +279,22 @@ primary-artefact consistency invariant.
 `agents/orchestrator.md`.
 *Provenance IRI:* `fair2r:hc-contribution-rule`
 
+### 2026-05-07 --- Verify CI; fix the conference-deck Beamer compile failure
+*Type:* `corrective-intervention`
+*Leverage:* high
+*Triggered:* Inspection of PR \#19's check_runs surfaced two
+build-slides.yml failures at the "Compile conference deck" step
+(exit code 12); logs auth-protected. Four defensive fixes in
+`slides/style/fair2r-beamer.sty`: removed `\\renewcommand{\\familydefault}`,
+simplified `\\sectiondivider` (no group-local background canvas),
+reduced helvet scaling to 0.95, wrapped frametitle in a minipage.
+Companion fix in `slides/conference-30min.tex`: single-line
+subtitle.
+*Artefacts touched:* `slides/style/fair2r-beamer.sty`,
+`slides/conference-30min.tex`, `doc/provenance.ttl`,
+`doc/user-contributions.md`, `doc/logbook.md`.
+*Provenance IRI:* `fair2r:hc-fix-beamer-conference-build`
+
 ### 2026-05-06 --- Pages staleness: defensive fixes + forced deploy
 *Type:* `corrective-intervention`
 *Leverage:* low

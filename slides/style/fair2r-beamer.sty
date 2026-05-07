@@ -3,25 +3,25 @@
 % aligned with the DLR Corporate Design (CD-Handbuch §10.1, §4).
 %
 % The companion to paper/style/fair2r.sty. Reuses the same DLR colour
-% ramps, the same Helvetica/Arial-equivalent face (helvet), and the
-% same square-corner / hairline-rule discipline. Pulls in the paper's
-% TikZ figures directly via \input so the deck never drifts from the
-% manuscript's visual identity.
+% ramps and the same Helvetica/Arial-equivalent face (helvet). Beamer
+% manages its own font setup, so this style stays minimal: it does
+% NOT redefine \familydefault or touch background canvas inside groups.
 %
 % Variant switch (default blue): \def\faiarVariant{a|b|c} BEFORE
 % \usepackage{style/fair2r-beamer}.
 % =====================================================================
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{fair2r-beamer}[2026/05/06 F(AI^2)R Beamer style]
+\ProvidesPackage{fair2r-beamer}[2026/05/07 F(AI^2)R Beamer style v2]
 
 \providecommand{\faiarVariant}{a}
 
 % --- Fonts and encoding --------------------------------------------
+% Beamer already uses sans-serif by default; we only ensure helvet is
+% loaded so the rendering matches the paper's Helvetica/Arial face.
 \RequirePackage[T1]{fontenc}
 \RequirePackage[utf8]{inputenc}
 \RequirePackage{textcomp}
-\RequirePackage[scaled=1.0]{helvet}
-\renewcommand{\familydefault}{\sfdefault}
+\RequirePackage[scaled=0.95]{helvet}
 
 \RequirePackage{microtype}
 \RequirePackage{xcolor}
@@ -46,36 +46,31 @@
 \definecolor{dlrGrau5}{HTML}{EBEBEB}
 \definecolor{dlrLink}{HTML}{00B0F0}
 
+% Set accent ramp by variant; default to blue.
+\colorlet{dlrAccent}{dlrBlau1}
+\colorlet{dlrAccentSoft}{dlrBlau5}
 \ifthenelse{\equal{\faiarVariant}{b}}{%
   \colorlet{dlrAccent}{dlrGruen1}\colorlet{dlrAccentSoft}{dlrGruen5}%
 }{}
 \ifthenelse{\equal{\faiarVariant}{c}}{%
   \colorlet{dlrAccent}{dlrGelb1}\colorlet{dlrAccentSoft}{dlrGelb5}%
 }{}
-\ifthenelse{\equal{\faiarVariant}{a}}{%
-  \colorlet{dlrAccent}{dlrBlau1}\colorlet{dlrAccentSoft}{dlrBlau5}%
-}{}
-\providecolor{dlrAccent}{HTML}{00658B}
-\providecolor{dlrAccentSoft}{HTML}{D1E8FA}
 
-% --- Beamer theme tweaks: stripped-down DLR look -------------------
+% --- Beamer theme (use the no-frills default + colour overrides) ----
 \usetheme{default}
-\usecolortheme{default}
-\useinnertheme{default}
-\useoutertheme{default}
 \setbeamertemplate{navigation symbols}{}
 
-% Frame title: Arial bold, mid-grey, single hairline accent rule under.
+% Frame title: mid-grey, accent rule under.
 \setbeamercolor{frametitle}{fg=dlrGrau1}
 \setbeamerfont{frametitle}{family=\sffamily, series=\bfseries, size=\large}
 \setbeamertemplate{frametitle}{%
-  \vspace{0.4em}%
-  \insertframetitle\par
+  \vspace{0.5em}%
+  \begin{minipage}[t]{\textwidth}\insertframetitle\end{minipage}\par
   {\color{dlrAccent}\rule{\textwidth}{0.6pt}}%
-  \vspace{0.3em}%
+  \vspace{0.2em}%
 }
 
-% Title block: large, mid-grey, with DLR-Blue rule.
+% Title page: large mid-grey title, DLR-Blue rule, then subtitle/author/etc.
 \setbeamercolor{title}{fg=dlrGrau1}
 \setbeamerfont{title}{family=\sffamily, series=\bfseries, size=\Huge}
 \setbeamercolor{subtitle}{fg=black}
@@ -90,20 +85,20 @@
 \setbeamertemplate{title page}{%
   \vfill
   {\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle\par}%
+  \vskip0.4em
+  {\color{dlrAccent}\rule{0.7\textwidth}{1.2pt}}\par
   \vskip0.5em
-  {\color{dlrAccent}\rule{\textwidth}{1.2pt}}\par
-  \vskip0.6em
   {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
-  \vskip2em
+  \vskip1.5em
   {\usebeamerfont{author}\usebeamercolor[fg]{author}\insertauthor\par}%
-  \vskip0.6em
+  \vskip0.5em
   {\usebeamerfont{institute}\usebeamercolor[fg]{institute}\insertinstitute\par}%
-  \vskip0.6em
+  \vskip0.5em
   {\usebeamerfont{date}\usebeamercolor[fg]{date}\insertdate\par}%
   \vfill
 }
 
-% Footer: mid-grey, page count + author + topic.
+% Footer: mid-grey, page count.
 \setbeamercolor{footline}{fg=dlrGrau1}
 \setbeamerfont{footline}{family=\sffamily, size=\tiny}
 \setbeamertemplate{footline}{%
@@ -141,19 +136,20 @@
 % Convenience macro.
 \newcommand{\faiar}{F(AI)\textsuperscript{2}R}
 
-% Section divider helper: \sectiondivider{Title}
+% --- Section divider helper -----------------------------------------
+% A simple, group-free section divider: a frame with the title centred
+% in DLR-blue and a thin rule. Avoids the well-known Beamer pitfall of
+% trying to scope `background canvas` to a single frame inside a TeX
+% group.
 \newcommand{\sectiondivider}[1]{%
-  {%
-    \setbeamercolor{background canvas}{bg=dlrAccentSoft}%
-    \setbeamertemplate{footline}{}%
-    \begin{frame}[plain]%
-      \vfill
-      {\sffamily\bfseries\Huge\color{dlrAccent}#1\par}%
-      \vskip0.5em
-      {\color{dlrAccent}\rule{0.45\textwidth}{1.2pt}}\par
-      \vfill
-    \end{frame}%
-  }%
+  \begin{frame}[plain]%
+    \centering
+    \vfill
+    {\sffamily\bfseries\Huge\color{dlrAccent}#1\par}%
+    \vskip0.5em
+    {\color{dlrAccent}\rule{0.45\textwidth}{1.2pt}}\par
+    \vfill
+  \end{frame}%
 }
 
 \endinput
