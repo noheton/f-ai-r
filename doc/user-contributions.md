@@ -781,3 +781,45 @@ PDF), `paper/figures/ladder-fsm.figspec.md`,
 `doc/provenance.ttl`, `doc/logbook.md`.
 *Provenance IRI:* `fair2r:hc-rerun-illustrations-prompt`
 (matching AI mirror: `fair2r:ai-add-illustrations-pass-2`)
+
+### 2026-05-07 — Rerun illustrator with new toolset (pass 3)
+*Type:* `content-prompt`
+*Leverage:* medium
+*Triggered:* Researcher prompt: "run the illustrator again with the
+broader toolset now pinned in `agents/illustration.md` --- decide
+per-figure whether to refine, replace, or add, capped at 10 total
+figures; DLR Corporate Design held binding for every tool". The
+illustration subagent re-ran on the full paper. Audit verdict:
+keep all eight prior figures (`hero`, `axes`, `pipeline`,
+`coupling-rule`, `eight-practices`, `failure-mode-coverage` in
+TikZ; `ladder-fsm` in Mermaid; `rung-distribution` in matplotlib)
+--- their renderings are already DLR-CD-compliant and no default
+theming has leaked through. Add one new figure: a
+**provenance-topology preview**
+(`paper/figures/provenance-topology.{pdf,png}`, source
+`paper/figures/src/provenance-topology.py`), a node-link drawing
+of the F(AI)\textsuperscript{2}R provenance schema with five
+PROV-O lanes (Agents / Plans / Activities / Entities / Claims)
+hand-laid for honest schema-shape but each node's `n=<count>`
+badge read at render time from `doc/provenance.ttl` via `rdflib`.
+Wired into `paper/sections/provenance-analysis.tex` at the section
+opening, so the reader sees the shape of the graph before reading
+the audit numbers drawn from it. AI-only nodes carry a `//` hatch
+in addition to the soft-blue fill (greyscale-legible). Provenance
+updated: `act:add-illustrations-pass-3` (informed by
+`act:add-illustrations-pass-2`), `ai:add-illustrations-pass-3`,
+`hc:rerun-illustrations-pass-3-prompt`, one new
+`ent:figure-provenance-topology`. `rdflib` re-parse: 1703 -> 1736
+triples (+33). Net figure count: 9 (was 8; cap is 10). Tools used
+(cumulative): TikZ (6 figures), Mermaid (1 figure), matplotlib
+(2 figures). `latexmk`/`pdflatex` are not present in the current
+environment, so `make -C paper pdf` could not be exercised; the
+figure render was verified independently by running the script.
+*Artefacts touched:* `paper/figures/src/provenance-topology.py`
+(new), `paper/figures/provenance-topology.pdf` (new),
+`paper/figures/provenance-topology.png` (new),
+`paper/figures/provenance-topology.figspec.md` (new),
+`paper/sections/provenance-analysis.tex`, `doc/provenance.ttl`,
+`doc/logbook.md`, `doc/user-contributions.md`.
+*Provenance IRI:* `fair2r:hc-rerun-illustrations-pass-3-prompt`
+(matching AI mirror: `fair2r:ai-add-illustrations-pass-3`)

@@ -7,6 +7,26 @@ is a queryable structure whose health, taken section by section,
 section describes the queries the audit runs in practice, with worked
 examples on the present manuscript.
 
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.96\linewidth]{figures/provenance-topology.pdf}
+\caption{Shape of the F(AI)\textsuperscript{2}R provenance graph,
+read from the live \texttt{doc/provenance.ttl} at compile time.
+Five PROV-O lanes (Agents, Plans, Activities, Entities, Claims)
+carry the backbone of the schema; the satellite band underneath
+carries the Contribution mirror that records who --- human or AI
+--- did what (\S\ref{sec:authors-note}). Each node is decorated
+with its instance count; the figure regenerates from the same
+graph the queries below run against, so a future audit pass that
+shifts the cardinalities shifts this figure too.}
+\label{fig:provenance-topology}
+\end{figure}
+
+\noindent The lanes shown in Figure~\ref{fig:provenance-topology}
+are the same partition the four audit queries below read against;
+the queries do not invent structure, they read what the graph
+already commits to.
+
 The three numbers below are produced by
 \texttt{scripts/provenance\_analysis.py}, which the build pipeline
 re-runs on every commit. They reflect the state of
