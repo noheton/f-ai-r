@@ -1820,3 +1820,73 @@ Existing figure renderings are unchanged.
 provenance-curator pass are repaired, this figure's `Claim`
 badge updates automatically on the next compile; the prose
 around the figure stays put.
+
+
+## 2026-05-07 — Provenance-curator repair pass: 8 missing `prov:wasGeneratedBy` edges fixed in the open
+
+*Author:* claude-opus-4-7 (provenance-curator subagent, under
+direction of repo owner)
+*Touched:* `doc/provenance.ttl` (schema growth + 8 repair
+activities + 5 synthetic meta-cooperation activities + 1
+provenance-verification audit activity + 8 missing edges added),
+`doc/provenance-graph.md` (Worked verification example rewritten
+as an honest two-state walkthrough: WIP disclaimer, BEFORE table
+preserved, AFTER table added, "Why those edges were missing"
+subsection, forward-looking next-likely-defect line),
+`doc/logbook.md`, `doc/user-contributions.md`,
+`doc/user-observations-log.md`.
+
+**Repair summary.** The SPARQL conformance query published on the
+topology page (Worked verification example, §2) returned 8
+`fair2r:Claim` entities missing `prov:wasGeneratedBy`. All 8
+edges added; query now returns 0 rows.
+
+**Reason taxonomy.** Two patterns across the 8:
+- *Claim has no parent activity* (5/8):
+  `reproducibility-baseline-poor`,
+  `reviewer-side-ai-policies`,
+  `journal-as-distribution-in-decline`,
+  `formal-methods-cousin`,
+  `contribution-tracking-rule`. These claims landed via
+  citation-insert gap-fills, paragraph-grade graduations to
+  existing sections, or alongside meta-decision PRs; no
+  `act:author-*` or `act:rev-*` was minted at the time. Synthetic
+  `act:meta-cooperation-<date>-<slug>` activities minted at repair
+  time.
+- *Claim has parent activity but the edge was dropped at curator
+  time* (3/8): `domain-ontologies-extension`,
+  `bioinformatics-precedent`, `authors-note-voice-exception`. Each
+  had a real `act:rev-*` activity attached to the section entity
+  but missing the symmetric edge on the claim.
+
+**Schema growth.** One new object property:
+`fair2r:repairs` (domain `prov:Activity`, range `fair2r:Claim`),
+with one-line `rdfs:comment`. The property is lighter than a
+`prov:Invalidation` qualifier: the claim's content stands; only
+its provenance metadata is being amended. Each repair carries the
+new property plus an `rdfs:comment` literal explaining why the
+edge was missing.
+
+**Topology-page transparency.** The Worked verification example
+section now opens with a work-in-progress disclaimer, preserves
+the BEFORE table verbatim ("Before the 2026-05-07 repair pass"),
+adds an AFTER table showing 0 rows, summarises the dominant
+reason pattern in a "Why those edges were missing" subsection,
+and ends with a forward-looking next-likely-defect line
+(`prov:wasDerivedFrom` on `verif:ai-confirmed` /
+`verif:source-vendored` claims).
+
+**Cooperative-process observation.** Logged at
+`doc/user-observations-log.md` as "Why audited defects are
+pedagogical, not embarrassing". Hypothesis stage; suggests the
+curator agent prompt grow a refusal rule: *no claim without a
+parent activity, even a synthetic `act:meta-cooperation-*` one*.
+
+**Validation.** `rdflib` re-parse: 1736 → 1906 triples (+170),
+clean. SPARQL conformance query against the post-repair graph:
+0 rows. `paper/sections/provenance-analysis.tex` rung-distribution
+fragments unchanged (`prov:wasGeneratedBy` is not part of the
+verification ladder), so no auto-generated LaTeX edits required.
+*Next:* Anchor the *no claim without a parent activity* rule into
+`agents/provenance-curator.md` so the next claim-add step cannot
+recreate the defect class.

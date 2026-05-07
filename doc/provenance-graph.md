@@ -121,6 +121,17 @@ the example below is concrete: a reader of this site, today, can run
 the same queries with `rdflib` (or Apache Jena `arq`) and reproduce
 the numbers without trusting the prose.
 
+> **Work-in-progress disclaimer.** This repository is an actively
+> maintained research artefact; the public topology page reflects
+> the live state of the graph rather than a sanitised after-image.
+> Defects appear, are surfaced by the audit, and are repaired in
+> the open. The previous version of this page advertised **8
+> defective claims** missing `prov:wasGeneratedBy` edges; this
+> version shows the same conformance query before and after the
+> 2026-05-07 repair pass. Reading the page as a snapshot of work
+> caught and fixed in flight is the intended frame; an audit that
+> never surfaces anything is an audit that has stopped looking.
+
 ### 1. Per-claim provenance trail (a sample)
 
 The shape of a complete claim record is `(claim, activity, agent,
@@ -198,26 +209,64 @@ SELECT ?claim ?missing WHERE {
 }
 ```
 
-Run against the current graph the query returns **8 claims missing a
+**Before the 2026-05-07 repair pass.** Run against the graph as
+published, the query returned **8 claims missing a
 `prov:wasGeneratedBy` triple** — a real, currently-uncorrected
-structural defect that the prose has not yet noticed:
+structural defect that the prose had not yet noticed:
 
-| Claim                              | Missing property         |
-|------------------------------------|--------------------------|
-| `domain-ontologies-extension`      | `prov:wasGeneratedBy`    |
-| `reproducibility-baseline-poor`    | `prov:wasGeneratedBy`    |
-| `reviewer-side-ai-policies`        | `prov:wasGeneratedBy`    |
-| `bioinformatics-precedent`         | `prov:wasGeneratedBy`    |
-| `journal-as-distribution-in-decline` | `prov:wasGeneratedBy`  |
-| `authors-note-voice-exception`     | `prov:wasGeneratedBy`    |
-| `formal-methods-cousin`            | `prov:wasGeneratedBy`    |
-| `contribution-tracking-rule`       | `prov:wasGeneratedBy`    |
+| Claim                                | Missing property         |
+|--------------------------------------|--------------------------|
+| `domain-ontologies-extension`        | `prov:wasGeneratedBy`    |
+| `reproducibility-baseline-poor`      | `prov:wasGeneratedBy`    |
+| `reviewer-side-ai-policies`          | `prov:wasGeneratedBy`    |
+| `bioinformatics-precedent`           | `prov:wasGeneratedBy`    |
+| `journal-as-distribution-in-decline` | `prov:wasGeneratedBy`    |
+| `authors-note-voice-exception`       | `prov:wasGeneratedBy`    |
+| `formal-methods-cousin`              | `prov:wasGeneratedBy`    |
+| `contribution-tracking-rule`         | `prov:wasGeneratedBy`    |
 
-The defect is benign — these claims were authored by the human in a
-prompt-driven session and the activity was conflated with the
-session-level `act:author-*` parent. A SHACL pass added to CI would
-fail the build and force the curator to add the missing edges. That
-is the first concrete win the verification programme would buy.
+**After the 2026-05-07 repair pass.** The provenance-curator added
+the missing edges (and, where no parent activity existed, minted
+synthetic `act:meta-cooperation-*` activities and recorded a
+one-sentence reason on each repair). The same query now returns:
+
+| Claim | Missing property |
+|---|---|
+| *(no rows)* | — |
+
+Each repair is recorded as a first-class `prov:Activity` carrying
+`fair2r:repairs <claim>` and an `rdfs:comment` with the reason the
+edge was missing in the first place; the schema gained one new
+property (`fair2r:repairs`, domain `prov:Activity`, range
+`fair2r:Claim`).
+
+### Why those edges were missing
+
+The dominant pattern across the eight defects was the same:
+**claims that were graduated from a researcher quote into an
+existing section, or that rode alongside a meta-decision PR, lacked
+a natural `act:author-*` or `act:rev-*` parent for the curator to
+point at.** Five of the eight (`reproducibility-baseline-poor`,
+`reviewer-side-ai-policies`, `journal-as-distribution-in-decline`,
+`formal-methods-cousin`, `contribution-tracking-rule`) needed a
+synthetic `act:meta-cooperation-<date>-<slug>` activity minted at
+repair time; the other three (`domain-ontologies-extension`,
+`bioinformatics-precedent`, `authors-note-voice-exception`) had a
+real activity in the graph but the curator pass had attached it to
+the section entity and dropped the symmetric edge on the claim.
+The cooperative-process lesson, recorded in
+[`doc/user-observations-log.md`](user-observations-log.md), is that
+**every claim-add step needs to mint or attach to *some* activity
+— even a synthetic meta-cooperation one — and the curator agent
+prompt should refuse a claim that arrives with no parent**.
+
+A SHACL pass added to CI would fail the build and force the curator
+to add the missing edges. That is the first concrete win the
+verification programme would buy. **The next missing-property class
+likely to surface is `fair2r:Claim` entities lacking a
+`prov:wasDerivedFrom` source for any claim with `verif:ai-confirmed`
+or `verif:source-vendored`** — the analogous chain on the
+evidence-trail rather than the activity-trail.
 
 ### 3. Reproducing locally
 

@@ -823,3 +823,40 @@ figure render was verified independently by running the script.
 `doc/logbook.md`, `doc/user-contributions.md`.
 *Provenance IRI:* `fair2r:hc-rerun-illustrations-pass-3-prompt`
 (matching AI mirror: `fair2r:ai-add-illustrations-pass-3`)
+
+
+### 2026-05-07 --- Rule shape: run provenance-curator repair pass with reasons + WIP topology-page transparency
+*Type:* `rule-shape`
+*Leverage:* high
+*Triggered:* Researcher prompt: dispatch the provenance-curator
+subagent to repair the 8 claims missing `prov:wasGeneratedBy` that
+the public topology page advertises (Worked verification example,
+§2), and *while doing so, capture, for each defect, a one-sentence
+reason*: "we can learn for our collaborative process". Plus a
+transparency requirement: the topology page must show both states
+(BEFORE / AFTER) so a reader sees the audit working, not a
+sanitised after-image. The provenance-curator subagent: (a) added
+the 8 missing `prov:wasGeneratedBy` edges, attaching three to
+existing `act:rev-*` activities and minting five synthetic
+`act:meta-cooperation-<date>-<slug>` activities for the claims
+whose landing commits had no `act:rev-*` parent; (b) recorded a
+per-claim repair activity carrying `fair2r:repairs` (new schema
+property, domain `prov:Activity`, range `fair2r:Claim`) plus an
+`rdfs:comment` literal explaining why the edge was missing; (c)
+rewrote the Worked verification example as an honest two-state
+walkthrough (WIP disclaimer, BEFORE table preserved, AFTER table
+added, "Why those edges were missing" subsection summarising the
+dominant pattern, forward-looking next-likely-defect line); (d)
+appended the cooperative-process observation "Why audited defects
+are pedagogical, not embarrassing" to
+`doc/user-observations-log.md` (hypothesis stage; recommends a
+*no claim without a parent activity* refusal rule for
+`agents/provenance-curator.md`); (e) appended a logbook entry and
+this contribution entry. `rdflib` re-parse: 1736 → 1906 triples
+(+170). Conformance query against the post-repair graph: 0 rows.
+*Artefacts touched:* `doc/provenance.ttl`,
+`doc/provenance-graph.md`, `doc/logbook.md`,
+`doc/user-contributions.md`, `doc/user-observations-log.md`.
+*Provenance IRI:* `fair2r:hc-prov-curator-repair-pass-2026-05-07`
+(matching AI mirror:
+`fair2r:ai-prov-curator-repair-pass-2026-05-07`)
