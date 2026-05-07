@@ -26,18 +26,43 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Compile pitch deck
+        id: pitch
         uses: xu-cheng/latex-action@v3
         with:
           working_directory: slides
           root_file: pitch-5min.tex
-          args: -pdf -interaction=nonstopmode -halt-on-error -file-line-error
+          args: -pdf -interaction=nonstopmode -file-line-error
+          continue_on_error: true
+
+      - name: Dump pitch log on failure
+        if: steps.pitch.outcome == 'failure'
+        run: |
+          echo "::group::pitch-5min.log (tail)"
+          tail -120 slides/pitch-5min.log || true
+          echo "::endgroup::"
 
       - name: Compile conference deck
+        id: conf
         uses: xu-cheng/latex-action@v3
         with:
           working_directory: slides
           root_file: conference-30min.tex
-          args: -pdf -interaction=nonstopmode -halt-on-error -file-line-error
+          args: -pdf -interaction=nonstopmode -file-line-error
+          continue_on_error: true
+
+      - name: Dump conference log on failure
+        if: steps.conf.outcome == 'failure'
+        run: |
+          echo "::group::conference-30min.log (tail)"
+          tail -200 slides/conference-30min.log || true
+          echo "::endgroup::"
+
+      - name: Fail the job if either deck failed
+        if: steps.pitch.outcome == 'failure' || steps.conf.outcome == 'failure'
+        run: |
+          echo "Pitch outcome:      ${{ steps.pitch.outcome }}"
+          echo "Conference outcome: ${{ steps.conf.outcome }}"
+          exit 1
 
       - name: Upload decks as workflow artefact
         uses: actions/upload-artifact@v4

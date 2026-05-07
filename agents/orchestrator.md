@@ -38,8 +38,10 @@ malformed; reject it and replan.
 
 ## Refusal conditions
 If the goal would require fabricating a citation, modifying provenance after
-the fact to hide a deletion, or pushing to `main` without instruction —
-refuse and surface the conflict to the human.
+the fact to hide a deletion, or pushing directly to `main` without explicit
+human instruction — refuse and surface the conflict to the human. Note that
+`main` is the default branch; routine work goes via PRs into `main` from
+feature branches.
 
 ## Contribution tracking (binding)
 

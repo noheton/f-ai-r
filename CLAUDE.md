@@ -104,5 +104,22 @@ succeeded.
 
 ## Branch policy
 
-Development happens on `claude/init-fair-paper-repo-2d64T` (and successor
-feature branches). Do not push to `main` without explicit instruction.
+`main` is the default branch. Development happens on feature branches
+off `main`; PRs target `main`. Direct pushes to `main` require explicit
+human-author instruction --- everything else lands via pull request.
+
+The legacy long-lived working branch
+`claude/init-fair-paper-repo-2d64T` is the current de-facto feature
+branch and continues to receive in-flight work between PRs; new
+sessions may either stay on it or open a fresh branch off `main`.
+Either path is acceptable as long as the PR-into-`main` invariant
+holds.
+
+## Pages source
+
+GitHub Pages is configured with **Source = GitHub Actions**, not
+"Deploy from a branch". The site deploys exclusively via
+[`.github/workflows/pages.yml`](.github/workflows/pages.yml), which
+uploads `_site/` as a Pages artefact and runs `actions/deploy-pages`
+on the merge commit. No legacy `gh-pages` branch exists or is
+required.

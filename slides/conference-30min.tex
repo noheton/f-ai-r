@@ -11,7 +11,7 @@
 \usepackage{enumitem}
 
 \title{F(AI)\textsuperscript{2}R}
-\subtitle{FAIR research with AI in the loop, twice ---\\a position paper}
+\subtitle{FAIR research with AI in the loop, twice (a position paper)}
 \author{Florian Krebs}
 \institute{%
   ORCID: \href{https://orcid.org/0000-0001-6033-801X}{0000-0001-6033-801X}\\
@@ -134,81 +134,55 @@
 \end{frame}
 
 \begin{frame}{Ten-stage pipeline (handback-disciplined)}
-  \centering
-  \begin{tikzpicture}[
-    every node/.style={font=\sffamily\scriptsize, align=center,
-                       inner sep=3pt, minimum height=6mm, minimum width=15mm},
-    auth/.style={draw=dlrBlau1, fill=dlrBlau5, line width=0.4pt},
-    audit/.style={draw=dlrGruen1, fill=dlrGruen5, line width=0.4pt},
-    cur/.style={draw=dlrGelb1, fill=dlrGelb5, line width=0.4pt},
-    orc/.style={draw=dlrGrau1, fill=dlrGrau5, line width=0.4pt, text=dlrGrau1},
-    arrow/.style={-{Latex[length=1mm]}, draw=dlrGrau1, line width=0.3pt},
-  ]
-    \node[orc]   (orc)   {0. Orch.};
-    \node[auth, right=2mm of orc]  (res)   {1. Research};
-    \node[auth, right=2mm of res]  (sa)    {1.5 SA};
-    \node[auth, right=2mm of sa]   (sw)    {2. Writer};
-    \node[auth, right=2mm of sw]   (ill)   {3. Illust.};
-    \node[audit, below=8mm of ill] (lay)   {4. Layout};
-    \node[audit, left=2mm of lay]  (read)  {5. Read.};
-    \node[audit, left=2mm of read] (ali)   {6. Aligner};
-    \node[cur,  left=2mm of ali]   (pc)    {7. Curator};
-    \node[orc,  left=2mm of pc]    (site)  {8. Site};
-    \draw[arrow] (orc) -- (res);
-    \draw[arrow] (res) -- (sa);
-    \draw[arrow] (sa)  -- (sw);
-    \draw[arrow] (sw)  -- (ill);
-    \draw[arrow] (ill.south) |- (lay.east);
-    \draw[arrow] (lay)  -- (read);
-    \draw[arrow] (read) -- (ali);
-    \draw[arrow] (ali)  -- (pc);
-    \draw[arrow] (pc)   -- (site);
-    \draw[arrow, dashed, draw=dlrGrau3] (lay.south) to[bend right=20]
-      node[font=\sffamily\tiny, below, midway, text=dlrGrau1] {hand-back} (orc.south);
-  \end{tikzpicture}
+  \footnotesize
+  \begin{center}
+  \begin{tabular}{llll}
+    \toprule
+    Stage & Role & Pass & Edits prose? \\
+    \midrule
+    0   & Orchestrator                    & both     & no  \\
+    1   & Research                        & authoring & yes \\
+    1.5 & Source Analyzer                 & authoring & no \\
+    2   & Scientific Writer               & authoring & yes \\
+    3   & Illustration                    & authoring & yes \\
+    4   & Layout Scrutinizer              & audit    & no  \\
+    5   & Readability \& Novelty          & audit    & no  \\
+    6   & Aligner (FAIR)                  & audit    & no  \\
+    7   & Provenance Curator              & curate   & no  \\
+    8   & Site Agent                      & coord.   & no  \\
+    \bottomrule
+  \end{tabular}
+  \end{center}
 
   \vspace{0.4em}
-  \footnotesize
-  \textcolor{dlrBlau1}{\textbullet} Authoring \quad
-  \textcolor{dlrGruen1}{\textbullet} Audit \quad
-  \textcolor{dlrGelb1}{\textbullet} Curate \quad
-  \textcolor{dlrGrau1}{\textbullet} Orchestration / Site
+  \normalsize
+  Audit stages never edit source; they file defect registries under
+  \texttt{doc/handbacks/}. The repair lands in a separate commit by
+  the prose owner. \emph{Specialisation reduces hallucination at the
+  seam.}
 \end{frame}
 
 \begin{frame}{Verification ladder as a finite-state machine}
-  \centering
-  \footnotesize
-  \begin{tikzpicture}[
-    every node/.style={font=\sffamily\scriptsize, align=center,
-                       inner sep=3pt, minimum height=7mm, minimum width=18mm,
-                       draw=dlrGrau1, line width=0.4pt},
-    arrow/.style={-{Latex[length=1.4mm]}, draw=dlrGrau1, line width=0.4pt},
-    retract/.style={-{Latex[length=1.4mm]}, draw=dlrGelb1, line width=0.4pt, dashed},
-    ext/.style={fill=dlrGrau5, text=dlrGrau1},
-    ai/.style={fill=dlrBlau5},
-    human/.style={fill=dlrGruen5},
-  ]
-    \node[ext]   (un)   at (0,0)   {unverified};
-    \node[ext, right=3mm of un]  (need) {needs-research};
-    \node[right=3mm of need]     (ret)  {lit-retrieved};
-    \node[ai, right=3mm of ret]  (aic)  {ai-confirmed};
-    \node[human, right=3mm of aic] (read) {lit-read};
-    \draw[arrow] (un) -- (need);
-    \draw[arrow] (need) -- (ret);
-    \draw[arrow] (ret) -- (aic);
-    \draw[arrow] (aic) -- (read);
-    \draw[retract] (read.south) to[out=-90, in=-90, looseness=0.4]
-      node[font=\sffamily\tiny, below, midway, text=dlrGrau1, draw=none] {prov:Invalidation}
-      ([yshift=-1mm]un.south);
-  \end{tikzpicture}
+  \begin{center}
+    \fbox{\sffamily\small\textcolor{dlrGrau1}{unverified}}
+    $\to$
+    \fbox{\sffamily\small\textcolor{dlrGrau1}{needs-research}}
+    $\to$
+    \fbox{\sffamily\small lit-retrieved}
+    $\to$
+    \fbox{\sffamily\small\textcolor{dlrBlau1}{\textbf{ai-confirmed}}}
+    $\to$
+    \fbox{\sffamily\small\textcolor{dlrGruen1}{\textbf{lit-read}}}
+  \end{center}
 
-  \vspace{0.4em}
-  \scriptsize
+  \vspace{0.6em}
   \begin{itemize}
     \item \textsc{ai-confirmed} is the ceiling an LLM agent can deliver.
     \item Load-bearing claims require \textsc{lit-read}.
-    \item Crosswalk: PRISMA Identification / Screening / Included; GRADE floor: low / moderate.
-    \item Retraction is \texttt{prov:Invalidation}, never deletion.
+    \item Crosswalk: PRISMA Identification / Screening / Included;
+          GRADE floor: low / moderate.
+    \item Retraction is \texttt{prov:Invalidation}, never deletion
+          (the only legal back-edge in the FSM).
   \end{itemize}
 \end{frame}
 

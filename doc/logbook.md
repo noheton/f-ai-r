@@ -1055,3 +1055,132 @@ rebuild is clean; the \texttt{build-tag} is visible in
 *Next:* On merge, watch the Pages deploy; if the build-tag in the
 rendered hero matches the new commit's cache-bust hash (10-char
 hex), the cache has refreshed.
+
+## 2026-05-07 — Verify CI: fix conference-deck Beamer compile failure
+*Author:* claude-opus-4-7 (under direction of repo owner)
+*Touched:* `slides/style/fair2r-beamer.sty`,
+`slides/conference-30min.tex`, `doc/provenance.ttl`,
+`doc/user-contributions.md`, `doc/logbook.md`.
+*Decision / outcome:* Researcher asked "verify CI as well".
+PR \#19's check_runs showed two `build-slides.yml` failures at the
+"Compile conference deck" step (exit code 12), still standing on
+`main` because PR \#20 didn't touch `slides/`. The pitch deck
+compiled successfully; the conference deck did not. Workflow logs
+are auth-protected; defensive fix targets four likely Beamer
+pitfalls in `slides/style/fair2r-beamer.sty`:
+\begin{enumerate}
+  \item Removed \texttt{\textbackslash renewcommand\{\textbackslash familydefault\}\{\textbackslash sfdefault\}}.
+        Beamer's default theme manages the family default; the
+        explicit override could clash with its setup.
+  \item Simplified \texttt{\textbackslash sectiondivider} to a
+        plain frame with centred title and accent rule.
+        The previous version did
+        \texttt{\{\textbackslash setbeamercolor\{background canvas\}\dots\}}
+        in a TeX group around the frame, a known Beamer pitfall.
+  \item Reduced \texttt{helvet} scaling to \texttt{[scaled=0.95]}
+        (closer to slide-font expectations than 1.0).
+  \item Wrapped \texttt{\textbackslash insertframetitle} in a
+        \texttt{minipage} so long titles don't break Beamer's
+        vertical-mode handling in the frametitle template.
+\end{enumerate}
+Companion fix in \texttt{slides/conference-30min.tex}: subtitle is
+now a single line (no \texttt{\textbackslash\textbackslash}) so
+the title-page template's \texttt{\textbackslash insertsubtitle}
+expansion is unambiguous. The pitch deck did not change.
+The CI status across recent PRs:
+- PR \#18 (slide rendering fix): all green.
+- PR \#19 (Beamer-only switch): build-slides.yml failed twice on
+  Compile conference deck.
+- PR \#20 (defensive Pages fixes): pages.yml green; build-slides
+  and build-paper did not re-run because path filters didn't
+  match. Therefore the failure standing on `main` is from PR \#19's
+  merge run; this commit is the first that re-touches `slides/`
+  and so re-fires `build-slides.yml`.
+Local smoke test: TTL parses to 1404 triples (up from 1395).
+Beamer compile cannot be verified locally (no full TeX Live in
+the sandbox); CI is the canonical test.
+*Next:* On merge to `main`, watch `build-slides.yml` for green;
+verify the rendered conference deck looks clean. If still failing,
+the next-most-likely cause is the inline TikZ for the pipeline
+diagram --- in which case I'll simplify or move to an external
+pre-rendered SVG/PNG.
+
+## 2026-05-07 — Second attempt: log-dump-on-failure + replace conference-deck inline TikZ
+*Author:* claude-opus-4-7 (under direction of repo owner)
+*Touched:* `.github/workflows/build-slides.yml`,
+`slides/conference-30min.tex`, `doc/provenance.ttl`,
+`doc/user-contributions.md`, `doc/logbook.md`.
+*Decision / outcome:* PR \#21's first attempt at fixing the
+conference-deck Beamer compile failed CI again --- the four
+defensive fixes in fair2r-beamer.sty did not catch the actual
+error. Workflow logs are auth-protected; my speculation about
+which Beamer pitfall was at fault was, on present evidence,
+wrong. Two changes ship together:
+\begin{enumerate}
+  \item \textbf{Log dump on failure.} `build-slides.yml` now runs
+        the latex-action with \texttt{continue\_on\_error: true}
+        and an \texttt{if: failure()} step that tails the
+        corresponding \texttt{.log} file into the workflow output.
+        On the next run the actual LaTeX error lines will be
+        visible without auth.
+  \item \textbf{Replace inline TikZ in conference deck.} The two
+        TikZ figures (pipeline, ladder FSM) are replaced with
+        simpler tabular / framed-text layouts. TikZ is the most
+        complex part of the deck and the most likely source of a
+        Beamer-specific compile error; removing it now restores a
+        compilable deck while we wait for the log to surface the
+        next time.
+\end{enumerate}
+The pitch deck did not change.
+The user also reported that GitHub said "Could not change default
+branch" when trying to switch the default from
+\texttt{claude/init-fair-paper-repo-2d64T} to \texttt{main} ---
+both branches exist (per \texttt{list\_branches}, neither
+protected), so the error is most likely a transient UI / token /
+session issue. Recommended workaround: \texttt{gh repo edit
+noheton/f-ai-r --default-branch main} from the local \texttt{gh}
+CLI.
+*Next:* On the next CI run, read the dumped \texttt{.log} tail to
+identify the actual error, then restore the TikZ figures with the
+correct fix.
+
+## 2026-05-07 — Reconcile: main is the default branch; Pages source = GitHub Actions
+*Author:* claude-opus-4-7 (under direction of repo owner)
+*Touched:* `CLAUDE.md`, `agents/orchestrator.md`,
+`doc/methodology.md`, `doc/provenance.ttl`,
+`doc/user-contributions.md`, `doc/logbook.md`.
+*Decision / outcome:* User performed two repo-settings changes:
+(a) switched the GitHub default branch to `main`; (b) confirmed the
+Pages source is set to **GitHub Actions** rather than "Deploy from
+a branch". The repository docs are reconciled to match.
+\begin{itemize}
+  \item `CLAUDE.md`'s branch-policy paragraph rewritten: `main`
+        is the default; development happens on feature branches off
+        `main`; PRs target `main`; direct pushes to `main` require
+        explicit human-author instruction. The legacy long-lived
+        `claude/init-fair-paper-repo-2d64T` branch is documented
+        as the current de-facto feature branch but no longer
+        privileged. A new "Pages source" subsection states that
+        the Pages source is GitHub Actions and points at
+        `.github/workflows/pages.yml`.
+  \item `agents/orchestrator.md` refusal-conditions clause updated
+        to match: pushes to `main` are normally via PR, with
+        direct pushes requiring explicit instruction.
+  \item `doc/methodology.md` gains a "Branch and deployment policy"
+        subsection mirroring the same.
+\end{itemize}
+The `pages.yml` workflow itself does not need to change; its
+configure-pages + upload-pages-artefact + deploy-pages chain is
+exactly the canonical pattern for "Source = GitHub Actions". The
+prior staleness was either a misconfigured Pages source (now
+fixed) or a CDN cache that the next deploy will refresh.
+
+CI status note: PR \#21's second-attempt commit (TikZ removal +
+log-dump) **still fails** the conference-deck Beamer compile.
+TikZ was therefore not the cause. The log-dump step is in place
+but the workflow log page is auth-protected; WebFetch cannot read
+it. Asked the human author to paste the relevant
+\texttt{conference-30min.log} tail in the next message so the
+actual cause can be diagnosed instead of guessed at.
+*Next:* Read the user-pasted log tail; fix the actual error;
+restore the TikZ figures once the deck compiles cleanly.

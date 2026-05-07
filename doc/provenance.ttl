@@ -1575,6 +1575,35 @@ act:rev-beamer-slides        a prov:Activity ;
 
 ent:slide-style              prov:wasGeneratedBy act:rev-beamer-slides .
 
+hc:fix-beamer-conference-build  a fair2r:HumanContribution ;
+    rdfs:label "Researcher request: verify CI; fix the conference-deck Beamer compile failure introduced by PR #19"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "corrective-intervention" ;
+    fair2r:contributionLeverage "high" ;
+    rdfs:comment "Researcher asked 'verify CI as well'. Inspection of PR #19's check_runs showed two build-slides.yml failures (one push, one pull_request) at the 'Compile conference deck' step (exit code 12). Logs are auth-protected; defensive fix targets four likely Beamer pitfalls in fair2r-beamer.sty: (1) removed \\renewcommand{\\familydefault}{\\sfdefault} so Beamer's own theme manages the family default; (2) simplified \\sectiondivider to a plain frame with centred text, removing the group-local \\setbeamercolor{background canvas} that Beamer is known to mishandle; (3) helvet now loaded with [scaled=0.95] (closer to slide-font expectations); (4) frametitle template wraps the title in a minipage so long frame titles don't break vertical-mode handling. Companion fix in conference-30min.tex: subtitle now a single line (no \\\\) so the title-page template's \\insertsubtitle expansion is unambiguous."@en ;
+    dcterms:created "2026-05-07"^^xsd:date ;
+    prov:influenced ent:slide-style ,
+                    ent:slidedeck-conference .
+
+hc:reconcile-default-branch-and-pages-source  a fair2r:HumanContribution ;
+    rdfs:label "Reconcile: main is the default branch; Pages source = GitHub Actions"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "rule-shape" ;
+    fair2r:contributionLeverage "high" ;
+    rdfs:comment "User performed two repo-settings changes: (a) switched the default branch to main; (b) set Pages source to GitHub Actions. Repository docs reconciled: CLAUDE.md branch-policy paragraph rewritten (main is default; development on feature branches off main; PRs target main; direct pushes to main require explicit instruction); CLAUDE.md gains a 'Pages source' subsection naming pages.yml as the canonical deploy mechanism. agents/orchestrator.md refusal-conditions updated. doc/methodology.md gains a 'Branch and deployment policy' subsection. pages.yml itself does not change; its configure-pages + upload-pages-artefact + deploy-pages chain is the canonical pattern for 'Source = GitHub Actions'."@en ;
+    dcterms:created "2026-05-07"^^xsd:date ;
+    prov:influenced ent:workflow-pages .
+
+hc:fix-beamer-conference-build-attempt-2  a fair2r:HumanContribution ;
+    rdfs:label "Second attempt at fixing the conference-deck Beamer compile: log-dump-on-failure + replace inline TikZ"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "corrective-intervention" ;
+    fair2r:contributionLeverage "medium" ;
+    rdfs:comment "Attempt 1 (PR #21 first commit) failed CI as well. Two changes: (1) build-slides.yml now runs latex-action with continue_on_error=true and adds an `if: failure()` step that tails the .log file into the workflow output; the next failure will show actual LaTeX error lines without auth. (2) The two inline TikZ figures in conference-30min.tex (ten-stage pipeline, verification ladder) are replaced with simpler tabular and framed-text layouts; TikZ is the most likely culprit and removing it restores a compilable deck while we wait for the log to confirm. Pitch deck unchanged."@en ;
+    dcterms:created "2026-05-07"^^xsd:date ;
+    prov:influenced ent:workflow-build-slides ,
+                    ent:slidedeck-conference .
+
 hc:pages-staleness-fix       a fair2r:HumanContribution ;
     rdfs:label "Researcher report: the deployed Pages site does not seem up to date"@en ;
     fair2r:contributedBy agent:human-author ;
