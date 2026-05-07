@@ -93,6 +93,15 @@ appear in `main-condensed.tex`.
 3. `fair-aligner` audit reports no `fail`s for the section.
 4. Logbook entry committed.
 
+## Branch and deployment policy
+
+`main` is the default branch. All routine work goes via pull request
+from feature branches into `main`; direct pushes to `main` require
+explicit human-author instruction. The repository's GitHub Pages site
+is configured with **Source = GitHub Actions**, deploying via
+`.github/workflows/pages.yml` on every push to `main`. No legacy
+`gh-pages` branch is used.
+
 ## Form factor and page budget
 
 F(AI)²R is published as a single short-form paper. The default budget

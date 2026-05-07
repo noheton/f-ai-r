@@ -1143,3 +1143,44 @@ CLI.
 *Next:* On the next CI run, read the dumped \texttt{.log} tail to
 identify the actual error, then restore the TikZ figures with the
 correct fix.
+
+## 2026-05-07 — Reconcile: main is the default branch; Pages source = GitHub Actions
+*Author:* claude-opus-4-7 (under direction of repo owner)
+*Touched:* `CLAUDE.md`, `agents/orchestrator.md`,
+`doc/methodology.md`, `doc/provenance.ttl`,
+`doc/user-contributions.md`, `doc/logbook.md`.
+*Decision / outcome:* User performed two repo-settings changes:
+(a) switched the GitHub default branch to `main`; (b) confirmed the
+Pages source is set to **GitHub Actions** rather than "Deploy from
+a branch". The repository docs are reconciled to match.
+\begin{itemize}
+  \item `CLAUDE.md`'s branch-policy paragraph rewritten: `main`
+        is the default; development happens on feature branches off
+        `main`; PRs target `main`; direct pushes to `main` require
+        explicit human-author instruction. The legacy long-lived
+        `claude/init-fair-paper-repo-2d64T` branch is documented
+        as the current de-facto feature branch but no longer
+        privileged. A new "Pages source" subsection states that
+        the Pages source is GitHub Actions and points at
+        `.github/workflows/pages.yml`.
+  \item `agents/orchestrator.md` refusal-conditions clause updated
+        to match: pushes to `main` are normally via PR, with
+        direct pushes requiring explicit instruction.
+  \item `doc/methodology.md` gains a "Branch and deployment policy"
+        subsection mirroring the same.
+\end{itemize}
+The `pages.yml` workflow itself does not need to change; its
+configure-pages + upload-pages-artefact + deploy-pages chain is
+exactly the canonical pattern for "Source = GitHub Actions". The
+prior staleness was either a misconfigured Pages source (now
+fixed) or a CDN cache that the next deploy will refresh.
+
+CI status note: PR \#21's second-attempt commit (TikZ removal +
+log-dump) **still fails** the conference-deck Beamer compile.
+TikZ was therefore not the cause. The log-dump step is in place
+but the workflow log page is auth-protected; WebFetch cannot read
+it. Asked the human author to paste the relevant
+\texttt{conference-30min.log} tail in the next message so the
+actual cause can be diagnosed instead of guessed at.
+*Next:* Read the user-pasted log tail; fix the actual error;
+restore the TikZ figures once the deck compiles cleanly.

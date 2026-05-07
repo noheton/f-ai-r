@@ -1585,6 +1585,15 @@ hc:fix-beamer-conference-build  a fair2r:HumanContribution ;
     prov:influenced ent:slide-style ,
                     ent:slidedeck-conference .
 
+hc:reconcile-default-branch-and-pages-source  a fair2r:HumanContribution ;
+    rdfs:label "Reconcile: main is the default branch; Pages source = GitHub Actions"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "rule-shape" ;
+    fair2r:contributionLeverage "high" ;
+    rdfs:comment "User performed two repo-settings changes: (a) switched the default branch to main; (b) set Pages source to GitHub Actions. Repository docs reconciled: CLAUDE.md branch-policy paragraph rewritten (main is default; development on feature branches off main; PRs target main; direct pushes to main require explicit instruction); CLAUDE.md gains a 'Pages source' subsection naming pages.yml as the canonical deploy mechanism. agents/orchestrator.md refusal-conditions updated. doc/methodology.md gains a 'Branch and deployment policy' subsection. pages.yml itself does not change; its configure-pages + upload-pages-artefact + deploy-pages chain is the canonical pattern for 'Source = GitHub Actions'."@en ;
+    dcterms:created "2026-05-07"^^xsd:date ;
+    prov:influenced ent:workflow-pages .
+
 hc:fix-beamer-conference-build-attempt-2  a fair2r:HumanContribution ;
     rdfs:label "Second attempt at fixing the conference-deck Beamer compile: log-dump-on-failure + replace inline TikZ"@en ;
     fair2r:contributedBy agent:human-author ;
