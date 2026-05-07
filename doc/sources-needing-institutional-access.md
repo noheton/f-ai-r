@@ -62,9 +62,47 @@ extracted snippets the manuscript relies on.
 
 ## Pending requests
 
-(none yet — agents add entries here as paywalls are encountered.
-Each entry should also be cross-referenced from `doc/sources.md` with
-the marker `lit-retrieved (paywalled; institutional access requested)`.)
+```
+date-requested:   2026-05-07
+bibkey:           vannoorden2023chatgpt
+title:            ChatGPT and science: the AI system was a force in 2023 — for good and bad
+authors:          Van Noorden, Richard; Webb, Richard
+identifier:       doi:10.1038/d41586-023-03930-6 (the bib currently records doi:10.1038/d41586-023-03907-5, which resolves to a different article on Indian economics; this DOI defect was already flagged in the second-pass log of doc/sources.md)
+journal/venue:    Nature 624 (7992), 509 (December 2023)
+why-needed:       Backdrop reference in §1 of intro.tex (alongside liang2024mapping) for the volume-problem claim that LLM-assisted prose has risen sharply in scholarly venues since 2023.
+abstract-ok?:     no — the Nature news page returns only the citation block; the body of the article is paywalled, and the bib's referenced figures (e.g., the Nature 10 ranking) are inside that body.
+specifically-need: the body of the news feature, in particular any quantitative claim Van Noorden and Webb make about LLM-assisted-prose volume in 2023.
+open-version?:    no — Nature news features are not preprinted; no open version was located by the source-analyzer.
+status:           pending
+```
+
+```
+date-requested:   2026-05-07
+bibkey:           neurips_llm_policy
+title:            NeurIPS policy on the use of Large Language Models
+authors:          NeurIPS Foundation (corporate author)
+identifier:       <https://neurips.cc/> (top-level homepage); the canonical year-specific policy URL is per-cycle (e.g., https://neurips.cc/Conferences/2025/LLM, https://neurips.cc/Conferences/2024/CallForPapers) and was not stable enough to capture at the search depth used.
+journal/venue:    NeurIPS conference policy page
+why-needed:       Backs the reviewer-side-ai-policies claim in §2 (background.tex) alongside iclr_llm_policy and aclrr_llm_policy.
+abstract-ok?:     no — the homepage returns navigational chrome and announcements about the upcoming conference rather than the policy text itself.
+specifically-need: the verbatim policy paragraph for the relevant submission cycle (the paper currently leaves the cycle implicit; the human author should pick a specific year and capture the canonical URL).
+open-version?:    yes — the NeurIPS policy is publicly posted, but the per-cycle URL must be captured manually.
+status:           pending
+```
+
+```
+date-requested:   2026-05-07
+bibkey:           iclr_llm_policy
+title:            ICLR author and reviewer guidelines on the use of AI tools
+authors:          ICLR / OpenReview (corporate author)
+identifier:       <https://iclr.cc/> (top-level homepage); the canonical year-specific policy URL is per-cycle and was not captured at the search depth used.
+journal/venue:    ICLR conference author and reviewer guide
+why-needed:       Sibling source to neurips_llm_policy, backing the same reviewer-side-ai-policies claim.
+abstract-ok?:     no — the homepage returns navigational chrome only.
+specifically-need: the verbatim policy paragraph from the ICLR Code of Ethics or LLM-policy page for the relevant cycle.
+open-version?:    yes — the ICLR policy is publicly posted, but the per-cycle URL must be captured manually.
+status:           pending
+```
 
 ## Supplied / vendored
 

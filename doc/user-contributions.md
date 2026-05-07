@@ -58,6 +58,28 @@ The `Provenance IRI` matches the corresponding
 The entries below were reconstructed in one batch on 2026-05-06 from
 the available evidence. Future sessions append in real time.
 
+
+### 2026-05-07 --- Verification pass: 16 sources advanced + 3 bib corrections applied
+*Type:* `rule-shape`
+*Leverage:* high
+*Triggered:* User requested "verification pass". A source-analyzer
+subagent walked the reading queue, advancing 16 fair2r:Source
+entities from `lit-retrieved` to `ai-confirmed` with verbatim
+quoted snippets in `doc/sources.md`. Three paywalled-but-load-
+bearing sources (`vannoorden2023chatgpt`, `neurips_llm_policy`,
+`iclr_llm_policy`) were escalated into the new
+`doc/sources-needing-institutional-access.md` for the human author
+to retrieve via DLR institutional access. Four bib corrections
+flagged; three applied in this commit (eisen year 2018→2020 and
+"Peer Review:" title prefix; kobak title revision; curdt full
+author list); the fourth (vannoorden DOI) was already fixed in
+PR #11.
+*Artefacts touched:* `doc/sources.md`, `doc/provenance.ttl`,
+`doc/sources-needing-institutional-access.md` (new),
+`paper/references.bib`, `doc/user-contributions.md`,
+`doc/logbook.md`.
+*Provenance IRI:* `fair2r:hc-verification-pass-and-bib-corrections`
+
 ### 2026-05-06 --- Bootstrap request: initialise repo for F(AI)²R
 *Type:* `content-prompt`
 *Leverage:* high

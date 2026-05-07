@@ -1354,3 +1354,83 @@ slide rebuild.
 Local smoke test: TTL parses to 1496 triples (up from 1486).
 *Next:* On merge, the latest-draft paper PDF picks up the new
 paragraph; verify the related-work section reads cleanly.
+
+## 2026-05-07 — Fourth-pass bibliography verification (lit-retrieved → ai-confirmed)
+*Author:* claude-opus-4-7 (source-analyzer pass, under direction of repo owner)
+*Touched:* `doc/sources.md` (new fourth-pass log section plus
+three updated `Verification:` lines), `doc/provenance.ttl` (16
+`fair2r:verificationState` triples switched from
+`verif:lit-retrieved` to `verif:ai-confirmed`; one
+`fair2r:verificationState` triple newly added to the previously
+rung-less `src:wilkinson2016fair` entry),
+`doc/sources-needing-institutional-access.md` (three new
+`pending` requests).
+*Decision / outcome:* Worked the
+`doc/reading-queue.md` highest-leverage list, prioritising
+sources that back two or more `fair2r:Claim` entries
+(`ashburner2000go`, `magesh2024legal`, `walters2023fabrication`)
+and the §1 / §2 / §11 single-claim entries. Promoted to
+`ai-confirmed` (16): `walters2023fabrication`, `magesh2024legal`,
+`ashburner2000go`, `liang2024mapping`, `kobak2024delving`,
+`ioannidis2005`, `pineau2021reproducibility`, `aclrr_llm_policy`,
+`eisen2018preprints`, `tennant2016open`, `conroy2023sleuths`,
+`curdt2025hmc`, `schmitt2020nfdi4ing`, `janowicz2019sosa`,
+`rijgersberg2013om`, `qudt`, plus a freshly-stamped
+`wilkinson2016fair`. Each entry now carries a verbatim quoted
+snippet (≤ 60 words) in the new fourth-pass log of
+`doc/sources.md`. Three sources were not advanced because the
+abstract is insufficient (`vannoorden2023chatgpt`,
+`neurips_llm_policy`, `iclr_llm_policy`); each has a `pending`
+request in `doc/sources-needing-institutional-access.md`. Two
+factual corrections to flag for the human author at the next
+`references.bib` edit: `eisen2018preprints` was published 2020
+(not 2018) and is titled "Peer Review: Implementing a 'publish,
+then review' model of publishing" rather than the bare
+"Implementing"; `kobak2024delving`'s arXiv title has shifted to
+"Delving into LLM-assisted writing in biomedical publications
+through excess vocabulary" and the lower-bound figure is 13.5%
+(not the ~10% of the second-pass log).
+After this pass the reading queue should report 19 sources at
+`lit-retrieved` (down from 36); 27 at `ai-confirmed` (up from 10);
+zero rung-less (down from 2; `wilkinson2016fair` now stamped, the
+remaining no-rung entry `w3c2013provo` is the W3C PROV-O
+recommendation which the second-pass log treats as
+`lit-read`/canonical and which the fourth pass left untouched as
+out of scope).
+*Next:* Human author to land the bib corrections noted above and
+to capture the per-cycle URLs for NeurIPS and ICLR LLM policies.
+Human author to retrieve the *Nature* news feature
+`vannoorden2023chatgpt` through DLR institutional access (TIB or
+similar) and either advance it to `ai-confirmed` from the body
+text or hedge the volume-problem sentence in `intro.tex`.
+
+## 2026-05-07 — Apply 3 of 4 flagged bib corrections from the verification pass
+*Author:* claude-opus-4-7 (under direction of repo owner)
+*Touched:* `paper/references.bib`, `doc/provenance.ttl`,
+`doc/user-contributions.md`, `doc/logbook.md`.
+*Decision / outcome:* The verification-pass subagent flagged four
+factual corrections to `paper/references.bib`. Three landed in this
+commit; the fourth was already fixed in an earlier PR.
+
+1. `eisen2018preprints`: year corrected 2018 → 2020; title prefixed
+   with "Peer Review:" to match the eLife canonical record. Bibkey
+   kept stable to avoid breaking \cite{} sites; the bib note now
+   explains why the bibkey diverges from the year.
+2. `kobak2024delving`: title updated to "Delving into LLM-assisted
+   writing in biomedical publications through excess vocabulary"
+   (the previous string was the earlier arXiv revision). The 13.5\%
+   figure noted by the subagent is recorded in `doc/sources.md` for
+   use when the prose is hedged at `lit-read`.
+3. `curdt2025hmc`: author list expanded to Curdt, Trösch, Lorenz,
+   Lemster, Heel, Köstner per the Zenodo record.
+4. `vannoorden2023chatgpt`: DOI was already corrected from
+   `d41586-023-03907-5` to `d41586-023-03930-6` in PR \#11
+   (third-pass research). The subagent re-flagged it from a stale
+   snapshot; no change needed here.
+
+The paper's prose is unchanged in this commit. The bib changes are
+pure citation-record maintenance and will produce identical
+`\cite{}` output in the rendered PDF.
+*Next:* Trigger the build-paper workflow on `main` so the
+bibliography refreshes; promote these sources to `lit-read` once the
+human author has read them in full.
