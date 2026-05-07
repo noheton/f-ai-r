@@ -275,7 +275,15 @@ def _delatex(text: str) -> str:
     text = text.replace(r"\,", " ")  # narrow no-break space
     text = text.replace(r"\%", "%")
     text = text.replace(r"\_", "_")
-    text = text.replace(r"---", "—").replace(r"--", "–")
+    # ``---`` / ``--`` -> em-dash / en-dash, but skip Markdown table-separator
+    # rows (``| ----- | ----- |``) so we don't break their syntax.
+    def _dashify(line: str) -> str:
+        stripped = line.strip()
+        if stripped and set(stripped) <= set("|-: "):
+            return line
+        return line.replace("---", "—").replace("--", "–")
+
+    text = "\n".join(_dashify(line) for line in text.split("\n"))
 
     # Inline math: drop the dollar-sign delimiters and convert a few common ops.
     def _math(match):
