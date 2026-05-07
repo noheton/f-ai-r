@@ -59,6 +59,33 @@ The entries below were reconstructed in one batch on 2026-05-06 from
 the available evidence. Future sessions append in real time.
 
 
+### 2026-05-07 --- Corrective: complete-loop fix pass (cross-refs, voice, missing graph entity, palette, slides)
+*Type:* `corrective-intervention`
+*Leverage:* medium
+*Triggered:* The complete-loop audit ensemble (five subagents)
+returned a punch list; this entry captures the small, safe fixes
+applied directly from the findings. Three broken cross-references
+repaired (`sec:discussion`, `sec:fm-residual`,
+`sec:practice-disclosure`). One voice-drift instance corrected
+(`source-analyser` → `Source Analyzer`). Missing
+`src:ravi2024fair4ml` graph entity added (FAIR4ML cited five
+times in prose but had no `fair2r:Source` triple). Palette
+comment in `paper/figures/src/provenance-topology.py:27`
+realigned with `paper/style/fair2r.sty` (authoritative source).
+AI² grid finally wired into both slide decks (PR #33's claim
+that it "lands on the position frame" was unmet; now true).
+Page-budget cuts and Xennial-paragraph split deferred — those
+are taste calls.
+*Artefacts touched:* `paper/sections/intro.tex`,
+`paper/sections/objections.tex`,
+`paper/sections/appendix-a-ladder.tex`,
+`paper/sections/failure-modes.tex`,
+`paper/figures/src/provenance-topology.py`,
+`slides/pitch-5min.tex`, `slides/conference-30min.tex`,
+`doc/provenance.ttl`, `doc/logbook.md`,
+`doc/user-contributions.md`.
+*Provenance IRI:* `fair2r:hc-complete-loop-fix-pass`
+
 ### 2026-05-07 --- Content prompt: summary table of process evolutions
 *Type:* `content-prompt`
 *Leverage:* high

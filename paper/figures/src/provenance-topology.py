@@ -24,7 +24,7 @@ same partition the methodology section describes; the figure shows
 that the graph really is that shape.
 
 Style. DLR Corporate Design only (Arial / Helvetica fallback,
-``dlrBlau1`` ``#00658B`` accent, ``dlrGrau1`` ``#4D5258`` neutral,
+``dlrBlau1`` ``#00658B`` accent, ``dlrGrau1`` ``#666666`` neutral,
 hairline 0.4 pt strokes, square corners, no shadows / gradients).
 Information channels are doubled: the column position carries the
 PROV-O role, the node fill carries the entity class (with hatch on

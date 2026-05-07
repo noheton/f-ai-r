@@ -379,6 +379,13 @@ src:chuehong2022fair4rs  a fair2r:Source ;
     dcterms:identifier "doi:10.15497/RDA00068" ;
     fair2r:verificationState verif:ai-confirmed .
 
+src:ravi2024fair4ml  a fair2r:Source ;
+    dcterms:title "FAIR4ML-schema, version 0.1.0"@en ;
+    dcterms:creator "Leyla Jael Castro" , "Daniel Garijo" , "RDA FAIR for Machine Learning Working Group" ;
+    dcterms:identifier "doi:10.5281/zenodo.14002310" ;
+    fair2r:verificationState verif:ai-confirmed ;
+    rdfs:comment "Schema.org extension for FAIR ML models, output of the RDA FAIR4ML Interest Group; cited five times in the prose as the canonical FAIR4ML reference. Source IRI minted during the 2026-05-07 complete-loop FAIR-aligner audit (first defect named: 'load-bearing FAIR4ML cite has bib entry but no fair2r:Source triple in the graph'). Bibkey kept stable; rung at ai-confirmed pending human read."@en .
+
 src:gebru2021datasheets  a fair2r:Source ;
     dcterms:title "Datasheets for Datasets"@en ;
     dcterms:identifier "doi:10.1145/3458723" ;
@@ -2562,3 +2569,23 @@ ai:verification-pass-3-2026-05-07  a fair2r:AIContribution ;
     rdfs:comment "Source-analyzer subagent (claude-opus-4-7[1m] under the source-analyzer prompt) executed the complete-the-loop prompt: walked the one outstanding lit-retrieved source introduced since the fifth pass (shafer2014xennials), fetched the GOOD Magazine article via the Exa web_fetch MCP tool, captured a verbatim quoted snippet in the new sixth-pass log of doc/sources.md, advanced the source from verif:lit-retrieved to verif:ai-confirmed in this graph, and flagged a bib correction (author Stankorb + Oelbaum, title 'Reasonable People Disagree about the Post-Gen X, Pre-Millennial Generation'). Bibkey kept stable for citation continuity (claim:senior-researcher-bridge already references src:shafer2014xennials). Re-parsed the graph via rdflib and regenerated doc/reading-queue.md (51 entries, 3 lit-retrieved on the institutional-access list, 47 ai-confirmed, 1 no-rung). Logged here as the AI mirror per the no-parentless-claim rule; parent activity act:meta-cooperation-2026-05-07-verification-pass-3."@en ;
     dcterms:created "2026-05-07"^^xsd:date ;
     prov:influenced act:meta-cooperation-2026-05-07-verification-pass-3 .
+
+#-------------------------------------------------------------------------
+# 2026-05-07 --- Complete-loop fix pass: small fixes from the audit ensemble.
+#-------------------------------------------------------------------------
+
+act:complete-loop-fix-pass  a prov:Activity ;
+    rdfs:label "Complete-loop fix pass: cross-refs, voice, missing graph entity, palette, slide wiring"@en ;
+    prov:startedAtTime "2026-05-07T00:00:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith agent:human-author , agent:claude-opus-4-7 ;
+    prov:wasInformedBy act:meta-cooperation-2026-05-07-verification-pass-3 ;
+    rdfs:comment "Applied the small, safe fixes from the complete-loop audit ensemble: three broken cross-references repaired (sec:discussion, sec:fm-residual, sec:practice-disclosure); one voice-drift instance corrected (source-analyser -> Source Analyzer); src:ravi2024fair4ml fair2r:Source entity added (5 prose cites had no graph mirror); palette comment in provenance-topology.py:27 aligned with paper/style/fair2r.sty; AI² grid wired into both slide decks (PR #33's claim was unmet). Page-budget cuts (~13-18 pp over) and Xennial-paragraph split deferred as taste calls."@en .
+
+hc:complete-loop-fix-pass  a fair2r:HumanContribution ;
+    rdfs:label "Researcher direction: apply small fixes from the complete-loop audit"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "corrective-intervention" ;
+    fair2r:contributionLeverage "medium" ;
+    rdfs:comment "User said 'time for a complete loop'; the audit ensemble returned findings; this contribution captures the user's implicit consent to land the small, low-risk fixes (broken cross-references, missing graph entity, palette typo, slide-deck wiring) without a separate prompt for each, while deferring the page-budget cuts and Xennial-paragraph split to a separate decision."@en ;
+    dcterms:created "2026-05-07"^^xsd:date ;
+    prov:influenced act:complete-loop-fix-pass .
