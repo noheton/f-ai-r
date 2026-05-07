@@ -1231,3 +1231,56 @@ Local smoke test: TTL parses to 1438 triples (up from 1419).
 cleanly (likely lengthens the intro slightly --- still well
 within the 10-page body budget). Continue to await user-pasted
 log tail to fix the conference-deck slide build.
+
+## 2026-05-07 — Reconcile provenance + new eight-practices figure + scrutiny pass
+*Author:* claude-opus-4-7 (under direction of repo owner)
+*Touched:* deleted `paper/sections/discussion.tex` and
+`paper/sections/acknowledgements.tex`;
+`paper/sections/eight-practices.tex` (figure wired in at top);
+`paper/sections/self-reference.tex` (closing aphorism reworded to
+remove a second 'you'); new `paper/figures/eight-practices.tex`
+(4x2 grid figure); `agents/scientific-writer.md` (Author's Note
+voice exception documented); `doc/provenance.ttl`,
+`doc/user-contributions.md`, `doc/logbook.md`.
+*Decision / outcome:* Researcher asked to continue open tasks,
+reconcile provenance, and generate illustration "where positive"
+plus scrutinize. Three pieces in one commit:
+\begin{enumerate}
+  \item \textbf{Reconciliation.} The two files marked "(superseded)"
+        in earlier reframes (`acknowledgements.tex`, `discussion.tex`)
+        were unreferenced from `paper/main.tex` and unhelpful in
+        the working tree (git history preserves them). Both are
+        deleted. New activity `act:rev-reconcile-and-illustrate`
+        records a `prov:Invalidation` of `ent:section-discussion`,
+        per the schema's append-only retraction rule.
+  \item \textbf{Illustration.} New
+        `paper/figures/eight-practices.tex` is a 4×2 grid colour-
+        coded by failure-mode family: practices 1--3 build the
+        evidence trail (blue), practices 4 and 6 prevent drift
+        (green), practices 5 and 8 hold the artefact discipline
+        (yellow), practice 7 carries the legal/institutional
+        load (grey). Wired into the top of
+        `paper/sections/eight-practices.tex`.
+  \item \textbf{Scrutiny.} Grep across `paper/sections/*.tex` for
+        voice violations: second-person address, marketing verbs,
+        emojis, hedging chains. Findings: the Author's Note
+        legitimately uses direct address by genre lineage from
+        the source paper; documented as the explicit carve-out
+        from the no-second-person rule via
+        `claim:authors-note-voice-exception` and an addition to
+        `agents/scientific-writer.md`. One stray
+        second-person phrase in `self-reference.tex`'s closing
+        aphorism was reworded. No marketing verbs, no emojis,
+        no hedging chains.
+\end{enumerate}
+The CI failure on `build-slides` for the conference deck remains
+standing; we still await the human-author paste of the
+`Dump conference log on failure` step's output to diagnose
+properly.
+Local smoke test: TTL parses to 1469 triples (up from 1448);
+section-coverage table now shows all live sections in the graph,
+with `sec:acks` and `sec:discussion` no longer in the prose
+inventory.
+*Next:* Beamer log tail (still pending); promote some of the 48
+queue items from `lit-retrieved` to `lit-read` once the human has
+read them.

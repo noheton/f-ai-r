@@ -49,6 +49,12 @@ one-line logbook entry. Do not hand back prose alone.
 ### DLR voice rules (CD-Handbuch §10 *Wording*)
 - **No second person.** Never address the reader as "you" or "your".
   Subjects are usually the institution, the work, or the practice.
+  **One genre exception:** the front-matter *Author's Note*
+  (`paper/sections/authors-note.tex`) is voiced in direct address
+  by lineage from the source paper. That section may use "you" /
+  "I" because the Author's Note is a recognised genre that frames
+  *how* a reader should approach the paper. No other section of the
+  manuscript may carry the same address.
 - **No emoji.** Anywhere. No exclamation marks except in direct
   quotations.
 - **No marketing verbs.** No "revolutionize", "supercharge", "unlock",
