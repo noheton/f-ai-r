@@ -1,0 +1,100 @@
+% F(AI)^2R: writers x readers --- the (AI)^2 factor unpacked into the
+% four cells of human-or-AI as writer x human-or-AI as reader.
+% This figure makes the central distinction of the paper visible at a
+% glance: the (AI)^2 factor is squared because both writer and reader
+% can be human or AI, and the disclosure surface --- what each cell
+% requires from the manuscript bundle --- differs across cells.
+% Loaded by paper/sections/pattern.tex via \input, immediately after
+% figures/axes which renders the four FAIR axes; this figure renders
+% the (AI)^2 factor itself.
+\begin{figure}[!t]
+\centering
+\begin{tikzpicture}[
+  every node/.style={font=\sffamily\footnotesize, align=center,
+                     inner sep=4pt},
+  cell/.style={draw, line width=0.5pt, minimum width=58mm,
+               minimum height=24mm, text width=54mm,
+               align=left, fill=white, anchor=center,
+               draw=dlrGrau1},
+  hh/.style={fill=dlrGruen5, draw=dlrGruen1, line width=0.6pt},
+  ha/.style={fill=dlrBlau5,  draw=dlrBlau1, line width=0.6pt},
+  ah/.style={fill=white,     draw=dlrBlau1, line width=0.6pt, dashed},
+  aa/.style={fill=dlrGrau5,  draw=dlrGrau1, line width=0.6pt, dotted},
+  axislbl/.style={font=\sffamily\bfseries\footnotesize, text=dlrGrau1,
+                  align=center},
+  axisrole/.style={font=\sffamily\footnotesize, text=dlrGrau1,
+                   align=center, inner sep=2pt},
+  cellhdr/.style={font=\sffamily\bfseries\footnotesize, text=black},
+  cellsub/.style={font=\sffamily\itshape\footnotesize, text=dlrGrau1},
+  cellnote/.style={font=\sffamily\footnotesize, text=black},
+  surface/.style={font=\sffamily\footnotesize, text=dlrAccent},
+]
+% --- Axis labels (writer = top row, reader = left column) ----------
+\node[axislbl] at (-3.6, 1.85) {writer};
+\node[axisrole, anchor=south] at (-1.55, 1.55) {human};
+\node[axisrole, anchor=south] at ( 1.55, 1.55) {AI};
+\node[axislbl, rotate=90] at (-5.85, -0.15) {reader};
+\node[axisrole, rotate=90, anchor=south] at (-5.55, 1.05)  {human};
+\node[axisrole, rotate=90, anchor=south] at (-5.55, -1.45) {AI};
+
+% Hairline rule between the two writer columns / reader rows
+\draw[draw=dlrGrau3, line width=0.3pt]
+  (-4.50, 1.30) -- (-4.50, -1.55);
+\draw[draw=dlrGrau3, line width=0.3pt]
+  (-4.95, 1.25) -- (4.65, 1.25);
+
+% --- Cells (2x2) ---------------------------------------------------
+% Top-left: human writer, human reader (the classical case)
+\node[cell, hh] (HH) at (-1.55, 0.40) {%
+  {\cellhdr classical scholarship}\\[1pt]
+  {\cellsub all four FAIR axes}\\[2pt]
+  {\cellnote prose, citations, manuscript-only;
+   transcripts and prompts are out of scope.}};
+% Top-right: AI writer, human reader (the paper's primary case)
+\node[cell, ha] (AH) at ( 1.55, 0.40) {%
+  {\cellhdr LLM-assisted writing}\\[1pt]
+  {\cellsub the F(AI)\textsuperscript{2}R primary case}\\[2pt]
+  {\cellnote prose + transcripts + prompts + ladder-status +
+   per-claim provenance map.}};
+% Bottom-left: human writer, AI reader (the audit case)
+\node[cell, ah] (HA) at (-1.55, -2.20) {%
+  {\cellhdr AI-assisted reading}\\[1pt]
+  {\cellsub auditor / scrutinizer / search agent}\\[2pt]
+  {\cellnote machine-readable claims, IRIs, SPARQL-able graph;
+   licence permits ingestion.}};
+% Bottom-right: AI writer, AI reader (the systemic case)
+\node[cell, aa] (AA) at ( 1.55, -2.20) {%
+  {\cellhdr AI-to-AI corpus}\\[1pt]
+  {\cellsub training data / ML retrieval / agent-mediated review}\\[2pt]
+  {\cellnote everything above, plus base-rate disclosure on the
+   training-set side; collapse risk.}};
+
+% --- Disclosure-surface labels (right edge) ------------------------
+\node[surface, anchor=west] at (4.85,  0.40)
+  {\textbf{disclosure surface:}\\\textit{paper bundle widens}\\\textit{top-left $\to$ bottom-right}};
+
+% --- Caption-ready footer band -------------------------------------
+\node[font=\sffamily\itshape\footnotesize, text=dlrGrau1,
+      anchor=west, align=left]
+  at (-4.95, -3.85)
+  {The (AI) factor squared: both writer and reader can be human or AI.
+   The paper's primary case is the top-right cell; its auditability
+   premise is that bottom-left and bottom-right are coming next.};
+\end{tikzpicture}
+\caption{The (AI)\textsuperscript{2} factor unpacked as a $2\times 2$
+grid of writer (columns) and reader (rows). The top-left cell
+(human writer, human reader) is the classical scholarly case and
+needs only the manuscript proper; the top-right cell (AI writer,
+human reader) is this paper's primary case and is what every
+practice in \S\ref{sec:eight} addresses; the bottom-left cell (human
+writer, AI reader) is the audit / scrutinizer / agent-mediated
+search case and requires machine-readable claims and a SPARQL-able
+provenance graph; the bottom-right cell (AI writer, AI reader) is
+the systemic case --- training-data ingestion, agent-to-agent
+review, autonomous literature search --- and additionally requires
+base-rate disclosure on the training-set side. The disclosure
+surface widens monotonically along the diagonal: top-left needs
+only prose and citations, bottom-right needs the full
+F(AI)\textsuperscript{2}R bundle.}
+\label{fig:ai-squared-grid}
+\end{figure}
