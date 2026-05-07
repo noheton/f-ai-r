@@ -36,3 +36,23 @@ load-bearing empirical input to the verification ladder. The source
 repository \texttt{noheton/Obscurity-Is-Dead}~\cite{krebs2026obscurity}
 is the immediate methodological ancestor of this paper; this paper
 is its abstraction.
+
+\paragraph{Formal methods: model checking and theorem proving.}
+Read structurally, F(AI)\textsuperscript{2}R borrows more from
+formal methods than the related-work neighbours above. Each
+\texttt{fair2r:Claim} IRI is a conjecture; the verification ladder
+is a proof-state machine; the audit pass is a proof-checker that
+verifies structural properties of the graph rather than
+re-discovering them; the SHACL shapes (\S\ref{sec:domain-ontologies})
+are invariants; the handback discipline is the prover / checker
+separation that model checking and certified-software efforts
+treat as load-bearing
+\cite{clarke2009modelchecking,klein2009sel4}\todo[inline]{verify}.
+The analogy is partial --- a manuscript is not a transition system,
+and \textsc{lit-read} is not soundness --- but it is closer than
+the analogy to data-management standards, and it suggests two
+useful imports we have not yet drawn on: (i) \emph{counter-example
+witnesses} attached to retracted claims, so a future reader sees
+\emph{why} a claim was invalidated, not only \emph{that} it was;
+(ii) \emph{lemma libraries} of vetted claims that successor papers
+can cite by IRI without re-verifying. We name these as future work.
