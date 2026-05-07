@@ -1,7 +1,249 @@
 # Sources
 
 Index of sources cited or vendored for the F(AI)²R paper. Maintained by
-`agents/source-analyzer.md`. Last updated 2026-05-06 (third pass).
+`agents/source-analyzer.md`. Last updated 2026-05-07 (fourth pass).
+
+## Fourth-pass log (2026-05-07)
+
+The fourth pass advanced 16 sources from `lit-retrieved` to
+`ai-confirmed` by fetching the publisher landing pages or arXiv abstract
+pages and extracting verbatim load-bearing snippets. The agent reading
+these sources is `claude-opus-4-7[1m]` operating under the
+source-analyzer prompt; full text was retrieved through the Exa
+`web_fetch` MCP tool because direct WebFetch was blocked at most
+publishers. The promoted sources are listed below with their quoted
+snippets and the section of the manuscript each one underwrites.
+
+### `walters2023fabrication` --- ai-confirmed
+
+- **Quoted snippet (verbatim from the *Scientific Reports* abstract).**
+  "Within this set of documents, 55% of the GPT-3.5 citations but
+  just 18% of the GPT-4 citations are fabricated. Likewise, 43% of
+  the real (non-fabricated) GPT-3.5 citations but just 24% of the
+  real GPT-4 citations include substantive citation errors."
+- **Used in.** `intro.tex` (line 23, base-rate anchor for the 18--55%
+  fabrication band) and `failure-modes.tex` (line 20, the
+  fabrication row of the failure-mode table).
+
+### `magesh2024legal` --- ai-confirmed
+
+- **Quoted snippet (verbatim from the arXiv 2405.20362 abstract).**
+  "We find that the AI research tools made by LexisNexis (Lexis+
+  AI) and Thomson Reuters (Westlaw AI-Assisted Research and Ask
+  Practical Law AI) each hallucinate between 17% and 33% of the
+  time."
+- **Used in.** `intro.tex` (the 17--34% RAG-backed range alongside
+  walters2023fabrication) and `failure-modes.tex` (RAG-related
+  failure-mode row).
+
+### `ashburner2000go` --- ai-confirmed
+
+- **Quoted snippet (verbatim from the *Nature Genetics* abstract via
+  PubMed PMID 10802651).**
+  "The goal of the Gene Ontology Consortium is to produce a
+  dynamic, controlled vocabulary that can be applied to all
+  eukaryotes even as knowledge of gene and protein roles in cells
+  is accumulating and changing."
+- **Used in.** `pattern.tex` §3.6 (bioinformatics-precedent claim)
+  and `conclusion.tex` (the longer-arc paragraph).
+
+### `liang2024mapping` --- ai-confirmed
+
+- **Quoted snippet (verbatim from the arXiv 2404.01268 abstract).**
+  "Our findings reveal a steady increase in LLM usage, with the
+  largest and fastest growth observed in Computer Science papers
+  (up to 17.5%). In comparison, Mathematics papers and the Nature
+  portfolio showed the least LLM modification (up to 6.3%)."
+- **Used in.** `intro.tex` (volume-problem anchor for the rising
+  LLM-modified-prose fraction).
+
+### `kobak2024delving` --- ai-confirmed
+
+- **Quoted snippet (verbatim from the arXiv 2406.07016 abstract).**
+  "We study vocabulary changes in over 15 million biomedical
+  abstracts from 2010--2024 indexed by PubMed, and show how the
+  appearance of LLMs led to an abrupt increase in the frequency of
+  certain style words. This excess word analysis suggests that at
+  least 13.5% of 2024 abstracts were processed with LLMs."
+- **Used in.** `intro.tex` (the cross-discipline detection-symptom
+  anchor).
+- **Note for `references.bib`.** The arXiv title has been revised
+  to "Delving into LLM-assisted writing in biomedical publications
+  through excess vocabulary"; the bib currently records the
+  earlier title "Delving into ChatGPT usage in academic writing
+  through excess vocabulary". The lower-bound figure is **13.5%**,
+  not the **~10%** reported in the second-pass log; flagged for
+  the human author.
+
+### `ioannidis2005` --- ai-confirmed
+
+- **Quoted snippet (verbatim from the *PLOS Medicine* abstract).**
+  "Simulations show that for most study designs and settings, it
+  is more likely for a research claim to be false than true.
+  Moreover, for many current scientific fields, claimed research
+  findings may often be simply accurate measures of the prevailing
+  bias."
+- **Used in.** `intro.tex` (reproducibility-baseline-poor claim).
+
+### `pineau2021reproducibility` --- ai-confirmed
+
+- **Quoted snippet (verbatim from the JMLR 22:164 abstract).**
+  "In 2019, the Neural Information Processing Systems (NeurIPS)
+  conference, the premier international conference for research in
+  machine learning, introduced a reproducibility program, designed
+  to improve the standards across the community for how we
+  conduct, communicate, and evaluate machine learning research."
+- **Used in.** `intro.tex` (ML-specific reproducibility anchor
+  alongside `ioannidis2005`).
+
+### `aclrr_llm_policy` --- ai-confirmed
+
+- **Quoted snippet (verbatim from the ACL Rolling Review CFP).**
+  "Generally, generative AI tools do not qualify for authorship.
+  Their use for writing or coding, as well as its scope, must be
+  disclosed in the Responsible NLP Checklist. Details should be
+  included in the Acknowledgements section."
+- **Used in.** `background.tex` (reviewer-side AI-policies claim).
+
+### `eisen2018preprints` --- ai-confirmed
+
+- **Citation correction (year and title).** The eLife editorial
+  was published 2020 (not 2018) and is titled "Peer Review:
+  Implementing a 'publish, then review' model of publishing"; DOI
+  10.7554/eLife.64910. The bib entry records year 2018; flagged for
+  the human author.
+- **Quoted snippet (verbatim from the editorial).**
+  "We welcome this moment, and the long-awaited opportunity it
+  provides to replace the traditional 'review, then publish' model
+  developed in the age of the printing press with a 'publish, then
+  review' model optimized for the age of the internet."
+- **Used in.** `intro.tex` (journal-as-distribution-in-decline
+  claim).
+
+### `tennant2016open` --- ai-confirmed
+
+- **Quoted snippet (verbatim from the *F1000Research* abstract).**
+  "Open Access supersedes all potential alternative modes of
+  access to the scholarly literature through enabling unrestricted
+  re-use, and long-term stability independent of financial
+  constraints of traditional publishers that impede knowledge
+  sharing."
+- **Used in.** `intro.tex` (background for the
+  journal-as-distribution-in-decline claim).
+
+### `conroy2023sleuths` --- ai-confirmed
+
+- **Quoted snippet (verbatim from the *Nature* news lead).**
+  "On 9 August, the journal Physica Scripta published a paper that
+  aimed to uncover new solutions to a complex mathematical
+  equation. It seemed genuine, but scientific sleuth Guillaume
+  Cabanac spotted an odd phrase on the manuscript's third page:
+  'Regenerate response'."
+- **Used in.** `intro.tex` (evidence for the
+  AI-fabricated-submissions volume problem). Full body of the
+  Nature news article is paywalled; the lead quoted here is the
+  detection example the manuscript leans on, so the abstract is
+  sufficient at the `ai-confirmed` rung.
+
+### `curdt2025hmc` --- ai-confirmed
+
+- **Quoted snippet (verbatim from the Zenodo 15113717 abstract).**
+  "The Helmholtz Metadata Collaboration (HMC), initiated in 2019
+  by the Helmholtz Association of German Research Centres, is
+  dedicated to advancing research data management by translating
+  global metadata standards into practical, interoperable formats."
+- **Used in.** `pattern.tex` §3.6 (the Helmholtz cross-centre
+  graph as the proximate example of a future-research-infrastructure)
+  and the imprint / acknowledgements.
+- **Citation note.** The Zenodo record's primary author is **Curdt,
+  Constanze** (project leader); contributors include
+  Trösch (project member), Lorenz, Lemster, Heel and Köstner.
+  The current bib lists Curdt and Köstner; the human author may
+  wish to widen the author list when next editing `references.bib`.
+
+### `schmitt2020nfdi4ing` --- ai-confirmed
+
+- **Quoted snippet (verbatim from the Zenodo 4015201 abstract).**
+  "NFDI4Ing brings together the engineering communities and
+  fosters the management of engineering research data. ... So far,
+  seven archetypes are harmonising the methodological needs:
+  Alex, Betty, Caden, Doris, Ellen, Frank, Golo."
+- **Used in.** `pattern.tex` §3.6 / imprint context (institutional
+  FAIR-context anchor alongside `curdt2025hmc`).
+
+### `janowicz2019sosa` --- ai-confirmed
+
+- **Quoted snippet (verbatim from the *Journal of Web Semantics*
+  abstract; published Vol 56, May 2019, pp. 1--10).**
+  "The Sensor, Observation, Sample, and Actuator (SOSA) ontology
+  provides a formal but lightweight general-purpose specification
+  for modelling the interaction between the entities involved in
+  the acts of observation, actuation, and sampling."
+- **Used in.** `pattern.tex` §3.5 (domain-ontologies-extension claim).
+- **Citation note.** Although Elsevier records the article in
+  Vol 56 (May 2019), the underlying DOI 10.1016/j.websem.2018.06.003
+  carries a 2018 in-press date; the bib year of 2019 is correct.
+
+### `rijgersberg2013om` --- ai-confirmed
+
+- **Quoted snippet (verbatim from the *Semantic Web* journal
+  abstract; Vol 4, no. 1, pp. 3--13, 2013).**
+  "This paper describes the Ontology of units of Measure and
+  related concepts (OM), an OWL ontology of the domain of
+  quantities and units of measure. OM supports making quantitative
+  research data more explicit, so that the data can be integrated,
+  verified and reproduced."
+- **Used in.** `pattern.tex` §3.5 (domain-ontologies-extension claim).
+
+### `qudt` --- ai-confirmed
+
+- **Quoted snippet (verbatim from <https://www.qudt.org/>, retrieved
+  2026-05-07).**
+  "QUDT.org is a 501(c)(3) public charity nonprofit organization
+  founded to provide semantic specifications for units of measure,
+  quantity kind, dimensions and data types. ... Our mission is to
+  improve interoperability of data and the specification of
+  information structures through industry standards for Units of
+  Measure, Quantity Kinds, Dimensions and Data Types."
+- **Used in.** `pattern.tex` §3.5 (domain-ontologies-extension claim).
+
+### `wilkinson2016fair` --- ai-confirmed (newly assigned a rung)
+
+- **Quoted snippet (verbatim from *Scientific Data* 3:160018,
+  2016).**
+  "This article describes four foundational principles ---
+  Findability, Accessibility, Interoperability, and Reusability
+  --- that serve to guide data producers and publishers as they
+  navigate around these obstacles, thereby helping to maximize
+  the added-value gained by contemporary, formal scholarly
+  digital publishing."
+- **Used in.** `intro.tex`, `background.tex`, `related.tex` (the
+  substrate F(AI)²R extends).
+- **Note.** This source previously carried no
+  `fair2r:verificationState` triple in `provenance.ttl`; the
+  fourth pass adds one at `ai-confirmed`.
+
+### Items the fourth pass did **not** advance
+
+- **`vannoorden2023chatgpt`** --- the *Nature* news page is
+  accessible only as a citation block ("Nature 624, 509 (2023)
+  doi:10.1038/d41586-023-03930-6") with the body paywalled. The
+  bib's existing identifier (`d41586-023-03907-5`) resolves to a
+  different article ("Where science meets Indian economics: in
+  five charts"). The DOI defect was already flagged in the
+  second-pass log; until the bib is corrected, the entry stays
+  at `lit-retrieved` and a `pending` paywall request is added to
+  `doc/sources-needing-institutional-access.md`.
+- **`neurips_llm_policy`** and **`iclr_llm_policy`** --- the
+  conference homepages return only navigational chrome at the
+  current year (NeurIPS 2026, ICLR 2026); the actual policy text
+  for the relevant submission cycle was not on the path the URL
+  resolves to and the abstract is therefore insufficient. Both
+  remain at `lit-retrieved` and a `pending` request is filed in
+  `doc/sources-needing-institutional-access.md` so the human
+  author can capture the canonical year-specific policy URL.
+
+
 
 ## Third-pass log (2026-05-06)
 
@@ -311,9 +553,10 @@ ceiling an LLM agent can deliver on its own.
   upper bound is also from this paper, *not* from `magesh2024legal`; the
   current `intro.tex` phrasing eliding the two is acceptable but should be
   flagged on revision.
-- **Verification.** `lit-retrieved` → must move to `lit-read` before
-  condensation. Identifier resolves; abstract and key figures confirmed
-  by web search. Human author has not yet read the full PDF.
+- **Verification.** `ai-confirmed` (advanced 2026-05-07; verbatim
+  abstract quote captured in the fourth-pass log above). Must still
+  move to `lit-read` before condensation. Human author has not yet
+  read the full PDF.
 
 ### `magesh2024legal`
 
@@ -339,9 +582,11 @@ ceiling an LLM agent can deliver on its own.
   preceding Stanford "Large Legal Fictions" work
   ([Dahl et al. 2024, arXiv:2401.01301](https://arxiv.org/abs/2401.01301)).
   **The intro currently leaves this ambiguous and should be tightened.**
-- **Verification.** `lit-retrieved`. arXiv ID and journal DOI both resolve;
-  the news framing is from the canonical Stanford HAI page. Human author
-  must read the preprint to commit to a specific upper-bound figure.
+- **Verification.** `ai-confirmed` (advanced 2026-05-07; the arXiv
+  abstract gives an explicit "between 17% and 33%" range, captured
+  in the fourth-pass log above). arXiv ID and journal DOI both
+  resolve. Human author must still read the preprint to commit to
+  a specific upper-bound figure for `intro.tex`.
 
 ### `bender2021stochastic`
 
@@ -411,8 +656,10 @@ ceiling an LLM agent can deliver on its own.
 - **How the paper uses it.** `intro.tex` line 30 — the volume-problem
   anchor; the rising LLM-assisted-prose fraction since 2023 is taken
   from this paper.
-- **Verification.** `lit-retrieved`. arXiv ID resolves; abstract, methods,
-  and headline figure confirmed. Author must read before condensation.
+- **Verification.** `ai-confirmed` (advanced 2026-05-07; verbatim
+  arXiv abstract quote captured in the fourth-pass log above).
+  arXiv ID resolves; abstract, methods, and headline figure
+  confirmed. Author must read before condensation.
 
 ### `kobak2024delving`
 
@@ -428,8 +675,11 @@ ceiling an LLM agent can deliver on its own.
   sub-corpora**.
 - **How the paper uses it.** `intro.tex` line 32 — the cross-discipline
   detection-symptom anchor.
-- **Verification.** `lit-retrieved`. arXiv ID resolves; abstract and
-  headline figures confirmed. Human author has not yet read the full
+- **Verification.** `ai-confirmed` (advanced 2026-05-07; verbatim
+  arXiv abstract quote captured in the fourth-pass log above; note
+  the title and headline figure have shifted from the bib entry
+  --- see the log). arXiv ID resolves; abstract and headline
+  figures confirmed. Human author has not yet read the full
   paper.
 
 ---
