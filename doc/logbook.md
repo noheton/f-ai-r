@@ -1686,3 +1686,30 @@ mirrored on the Pages site as a fenced `mermaid` code block
 (rather than as an `<img>` referencing the rendered PNG), wire
 that in `scripts/build_provenance_site.py`. The `.mmd` source is
 ready.
+
+
+## 2026-05-07 — Illustration agent prompt: explicit toolset + DLR-CD constraint pinned
+
+*Author:* claude-opus-4-7 (under direction of repo owner)
+*Touched:* `agents/illustration.md`.
+*Decision / outcome:* The "TikZ-only" rule was retired in the latest
+illustrator rerun (which produced a Mermaid FSM and a matplotlib
+stacked-bar). The agent prompt now records the full toolset
+explicitly — matplotlib, seaborn, plotly, scienceplots, cmocean,
+colorcet, proplot, TikZ, PGFPlots, svgwrite, drawsvg, schemdraw,
+matplotlib-scalebar, diagrams, graphviz, networkx, mermaid-py,
+gridspec, plotnine, patchworklib, bokeh, ipywidgets, plus the
+molecular and image-processing libraries for sub-domain
+instantiations. The DLR Corporate Design (Arial / Helvetica
+fallback, `dlrBlau1 #00658B` accent, mid-grey neutrals, square
+corners only, hairline rules at 0.4pt, no shadows / glows /
+gradients / 3D, no emoji, no clip-art) is now repeated as a
+binding section above the toolset list and explicitly says it
+applies to every tool. Each tool's defaults must be overridden in
+the figure source — a figure that ships with default theming has
+not been finished. Mermaid figures must be mirrored as fenced
+markdown blocks in `doc/*.md` for the Pages site's client-side
+renderer.
+*Next:* Track which figures still ship with tool-default theming
+on the next layout-scrutinizer pass; if any do, the prompt update
+has not landed in practice and we adjust.
