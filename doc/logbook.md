@@ -1742,3 +1742,81 @@ and confined to the topology page; no manuscript edits.
 `prov:wasGeneratedBy` edges in a separate provenance-curator pass.
 The defect is now visible on the public topology page — leaving it
 unrepaired turns the example into a stale claim.
+
+
+## 2026-05-07 — Illustration agent pass 3: provenance-topology figure added
+
+*Author:* claude-opus-4-7 (illustration subagent, under direction
+of repo owner)
+*Touched:* `paper/figures/src/provenance-topology.py` (new),
+`paper/figures/provenance-topology.pdf` (new),
+`paper/figures/provenance-topology.png` (new),
+`paper/figures/provenance-topology.figspec.md` (new),
+`paper/sections/provenance-analysis.tex` (figure wired in at the
+section opening), `doc/provenance.ttl`, `doc/logbook.md`,
+`doc/user-contributions.md`.
+
+**Audit verdict.** With the toolset in `agents/illustration.md`
+now broadened (matplotlib, graphviz, networkx, mermaid-py, etc.),
+the illustration agent reran a full audit on the eight committed
+figures: `hero`, `axes`, `pipeline`, `coupling-rule`,
+`eight-practices`, `failure-mode-coverage` (all TikZ, all
+argument-shape figures whose medium is correct);
+`ladder-fsm` (Mermaid, shared between paper and Pages site, PDF
+and PNG already rendered); `rung-distribution` (matplotlib +
+deterministic palette, already DLR-CD-clean). Verdict: keep all
+eight as-is; their renderings are already DLR-CD-compliant and no
+default theming has leaked through. The high-payoff slot is the
+"shape of the graph" preview the manuscript currently lacks.
+
+**New figure: provenance-topology.** The new figure
+(`paper/figures/provenance-topology.{pdf,png}`, source
+`paper/figures/src/provenance-topology.py`) is a node-link preview
+of the F(AI)\textsuperscript{2}R provenance graph rendered with
+matplotlib + `FancyArrowPatch`. Five PROV-O lanes (Agents, Plans,
+Activities, Entities, Claims) are hand-laid in columns to match
+the schema honestly; each node carries a `n = <count>` badge that
+`rdflib` reads from the live `doc/provenance.ttl` at render time.
+A satellite Contribution band underneath records the human/AI/meta
+contribution mirror with dotted edges. AI-only nodes carry a `//`
+hatch in addition to the soft-blue fill so the figure is
+greyscale-legible. The figure is wired into
+`paper/sections/provenance-analysis.tex` at the section opening,
+before the rung-distribution table, so the reader sees the shape
+of the graph before reading the audit numbers drawn from it
+(`Figure~\ref{fig:provenance-topology}`).
+
+**Why matplotlib rather than graphviz.** A graphviz auto-layout
+would let the data drive node placement, but the figure's job is
+the opposite --- to show that the schema has the shape the
+methodology claims. Hand-laid columns are honest about that
+intent; a Python script keeps the counts faithful because they
+are read at render time. TikZ would re-encode the counts by hand
+and drift on the next provenance audit.
+
+**Tools used (cumulative across the figure set).** TikZ
+(6 figures), Mermaid (1 figure), matplotlib (2 figures:
+`rung-distribution`, `provenance-topology`). Net figure count:
+**9** (was 8; cap is 10 per the prompt).
+
+**Provenance.** New activity `act:add-illustrations-pass-3`
+(informed by `act:add-illustrations-pass-2`) generates
+`ent:figure-provenance-topology`. AI mirror
+`ai:add-illustrations-pass-3`; human triggering prompt
+`hc:rerun-illustrations-pass-3-prompt`. `rdflib` parse:
+1703 → 1736 triples (+33), clean.
+
+**Build verification.** `latexmk` and `pdflatex` are not
+available in the current environment, so `make -C paper pdf`
+cannot be exercised here. Per the project ground rule, this is
+declared explicitly rather than feigned. Each figure render was
+verified independently:
+`python3 paper/figures/src/provenance-topology.py` produced
+`provenance-topology.pdf` and `provenance-topology.png` (300 dpi)
+with `rdflib` reading the live graph for the count badges.
+Existing figure renderings are unchanged.
+
+*Next:* When the eight defective claims surfaced by the
+provenance-curator pass are repaired, this figure's `Claim`
+badge updates automatically on the next compile; the prose
+around the figure stays put.

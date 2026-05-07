@@ -2120,3 +2120,51 @@ hc:illustration-toolset-and-dlr-cd  a fair2r:HumanContribution ;
     rdfs:comment "Two paired user instructions retired the implicit TikZ-only rule for the illustration agent: 'Mermaid, matplotlib, and other publication-ready tools can also be used by the illustrator' and 'but keep dlr design system in mind'. The agent prompt at agents/illustration.md now records the full toolset and elevates the DLR CD constraint (Arial fallback, dlrBlau1 #00658B accent, mid-grey neutrals, square corners, hairline rules, no shadows/3D, no emoji) to a binding section that applies to every tool, with default theming counted as an unfinished figure."@en ;
     dcterms:created "2026-05-07"^^xsd:date ;
     prov:influenced act:expand-illustration-toolset .
+
+#-------------------------------------------------------------------------
+# Illustrations pass 3 (2026-05-07): rerun the illustration agent
+# with the broader toolset (matplotlib + rdflib + graphviz +
+# networkx, etc.) now pinned in agents/illustration.md. The audit
+# verdict was: keep all eight prior figures (the six TikZ
+# argument-shape figures, the Mermaid ladder-fsm, and the
+# matplotlib rung-distribution); add one high-payoff figure --- a
+# provenance-topology preview generated programmatically from the
+# live graph at doc/provenance.ttl. Net figure count: 9 (was 8).
+#-------------------------------------------------------------------------
+
+ent:figure-provenance-topology  a fair2r:Figure ;
+    rdfs:label "Provenance-graph topology preview: five PROV-O lanes plus Contribution satellite, counts read from the live graph"@en ;
+    dcterms:source <paper/figures/src/provenance-topology.py> ;
+    prov:wasAttributedTo agent:illustration , agent:human-author .
+
+act:add-illustrations-pass-3  a prov:Activity ;
+    rdfs:label "Add-illustrations pass 3: add provenance-topology preview generated from the live graph"@en ;
+    prov:startedAtTime "2026-05-07T00:00:00Z"^^xsd:dateTime ;
+    prov:endedAtTime   "2026-05-07T00:00:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith agent:illustration ;
+    prov:wasAssociatedWith agent:claude-opus-4-7 ;
+    prov:wasAssociatedWith agent:human-author ;
+    prov:wasInformedBy act:add-illustrations-pass-2 ;
+    prov:used ent:section-provenance-analysis ;
+    prov:generated ent:figure-provenance-topology .
+
+ent:figure-provenance-topology  prov:wasGeneratedBy act:add-illustrations-pass-3 ;
+                                prov:used ent:section-provenance-analysis .
+
+ai:add-illustrations-pass-3  a fair2r:AIContribution ;
+    rdfs:label "Illustration agent pass 3: add provenance-topology figure programmatically read from doc/provenance.ttl"@en ;
+    fair2r:contributedBy agent:illustration ;
+    fair2r:contributionType "content-prompt" ;
+    fair2r:contributionLeverage "medium" ;
+    rdfs:comment "Illustration subagent re-ran with the broader toolset now pinned in agents/illustration.md. Audit verdict: keep all eight prior figures; add one new figure --- paper/figures/provenance-topology.{pdf,png}, source paper/figures/src/provenance-topology.py, a node-link preview of the F(AI)^2R provenance graph wherein the schema lanes (Agents / Plans / Activities / Entities / Claims) are hand-laid for honest schema-shape but each node's n=<count> badge is read at render time from doc/provenance.ttl via rdflib. The figure is wired into paper/sections/provenance-analysis.tex immediately at the section opening (before the audit-query queries) so the reader sees the shape of the graph before reading the numbers drawn from it. DLR CD palette and hairline strokes; AI-only nodes carry a // hatch in addition to the soft-blue fill so the figure is greyscale-legible. Net figure count: 9 (was 8). Tools used (cumulative): TikZ (6 figures), Mermaid (1 figure), matplotlib (2 figures: rung-distribution, provenance-topology)."@en ;
+    dcterms:created "2026-05-07"^^xsd:date ;
+    prov:influenced ent:figure-provenance-topology .
+
+hc:rerun-illustrations-pass-3-prompt  a fair2r:HumanContribution ;
+    rdfs:label "Researcher prompt: rerun illustrator with the new toolset now pinned"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "content-prompt" ;
+    fair2r:contributionLeverage "medium" ;
+    rdfs:comment "User asked the illustration agent to take advantage of the now-broader toolset (matplotlib, seaborn, plotly, scienceplots, graphviz, networkx, mermaid-py, etc.) recorded in agents/illustration.md. The prompt was scoped to either replacing one figure with a better-rendered version or adding 1-2 high-payoff new figures, capped at 10 total figures, with the DLR Corporate Design held binding for every tool. The agent's audit verdict was 'keep all eight; add one --- the provenance-topology preview', shipped as paper/figures/provenance-topology.{pdf,png} and source paper/figures/src/provenance-topology.py."@en ;
+    dcterms:created "2026-05-07"^^xsd:date ;
+    prov:influenced ai:add-illustrations-pass-3 .
