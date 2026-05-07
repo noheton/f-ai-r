@@ -2589,3 +2589,25 @@ hc:complete-loop-fix-pass  a fair2r:HumanContribution ;
     rdfs:comment "User said 'time for a complete loop'; the audit ensemble returned findings; this contribution captures the user's implicit consent to land the small, low-risk fixes (broken cross-references, missing graph entity, palette typo, slide-deck wiring) without a separate prompt for each, while deferring the page-budget cuts and Xennial-paragraph split to a separate decision."@en ;
     dcterms:created "2026-05-07"^^xsd:date ;
     prov:influenced act:complete-loop-fix-pass .
+
+#-------------------------------------------------------------------------
+# 2026-05-07 --- Researcher observation: associative-thinking capacity
+# as the cooperation multiplier. Logged at hypothesis stage in
+# user-observations-log.md; not yet graduated to paper text.
+#-------------------------------------------------------------------------
+
+act:meta-cooperation-2026-05-07-associative-thinking  a prov:Activity ;
+    rdfs:label "Meta-cooperation: log researcher observation on associative thinking as the cooperation multiplier"@en ;
+    prov:startedAtTime "2026-05-07T00:00:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith agent:human-author , agent:claude-opus-4-7 ;
+    rdfs:comment "Researcher prompted, at the end of the complete-loop audit pass: 'how far does associative thinking capability help in leveraging llm cooperation benefits. I mean in the convo you often provide suggestions which lead me to other angles or ideas'. Activity minted at observation-add time so the meta-contribution is born with a generating parent rather than retroactively repaired."@en .
+
+hc:obs-associative-thinking-as-multiplier  a fair2r:MetaContribution ;
+    rdfs:label "Researcher observation: the LLM's value lies less in being right than in producing associatively-near-but-not-quite-right candidates the researcher converts to usable angles; the cooperation benefit may scale with the researcher's own associative-thinking capacity rather than with model accuracy."@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "observation" ;
+    fair2r:contributionLeverage "high" ;
+    prov:wasGeneratedBy act:meta-cooperation-2026-05-07-associative-thinking ;
+    prov:wasAttributedTo agent:human-author ;
+    rdfs:comment "Stage: hypothesis. Promoted-to-paper: pending. Strong candidate paragraph for paper/sections/evolution.tex (process angle) or paper/sections/authors-note.tex (researcher-experience angle). Reframes the coupling-rule diagnostic from 'would the abstraction have been thinkable without the model?' to 'would the abstraction have been thinkable without the model AND without the human's associative latitude to convert a near-miss into a usable angle?'. Schema-growth hint flagged for the next case study: a fair2r:cooperativeOriginType property with values {solo-author, accelerated-by-near-miss, co-generated, prompt-driven} would make the cooperative-origin classification queryable."@en ;
+    dcterms:created "2026-05-07"^^xsd:date .

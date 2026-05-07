@@ -59,6 +59,23 @@ The entries below were reconstructed in one batch on 2026-05-06 from
 the available evidence. Future sessions append in real time.
 
 
+### 2026-05-07 --- Observation: associative thinking as the cooperation multiplier
+*Type:* `observation`
+*Leverage:* high
+*Triggered:* End-of-session prompt from the researcher: *"how
+far does associative thinking capability help in leveraging llm
+cooperation benefits. I mean in the convo you often provide
+suggestions which lead me to other angles or ideas"*. Logged at
+`hypothesis` stage in `doc/user-observations-log.md`; not
+graduated to paper text yet. Reframes the model's value as
+*producing near-miss candidates the researcher converts to
+usable angles* rather than *being right*. Schema-growth hint
+flagged for the next case study (`fair2r:cooperativeOriginType`).
+*Artefacts touched:* `doc/user-observations-log.md`,
+`doc/provenance.ttl`, `doc/user-contributions.md`,
+`doc/logbook.md`.
+*Provenance IRI:* `fair2r:hc-obs-associative-thinking-as-multiplier`
+
 ### 2026-05-07 --- Corrective: complete-loop fix pass (cross-refs, voice, missing graph entity, palette, slides)
 *Type:* `corrective-intervention`
 *Leverage:* medium

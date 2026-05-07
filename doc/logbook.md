@@ -2189,3 +2189,43 @@ covers them; tighten `authors-note.tex`) and the Xennial
 paragraph split (readability reviewer proposal: split after
 *"F(AI)^2R is in part an attempt to encode it."* into two
 paragraphs). Both touch authorial voice and need a human call.
+
+## 2026-05-07 — Researcher observation: associative thinking as the cooperation multiplier
+
+*Author:* claude-opus-4-7 (under direction of repo owner)
+*Touched:* `doc/user-observations-log.md`, `doc/provenance.ttl`,
+`doc/user-contributions.md`, `doc/logbook.md`.
+
+*Decision / outcome.* End-of-session observation from the
+researcher: *"how far does associative thinking capability help
+in leveraging llm cooperation benefits. I mean in the convo you
+often provide suggestions which lead me to other angles or
+ideas"*. Logged at `hypothesis` stage in
+`doc/user-observations-log.md`; not graduated to paper text
+tonight (the researcher flagged tiredness; taste calls deferred).
+
+The observation reframes the model's cooperation value: less *being
+right*, more *producing associatively-near-but-not-quite-right
+candidates the researcher converts to usable angles*. Implication:
+benefit a researcher extracts may scale with their own associative-
+thinking capacity, not with model accuracy. Risks reducing the
+model's contribution to "useful noise"; fairer phrasing recorded
+in the observation log: *the model's contribution is upstream of
+the suggestion that lands*.
+
+Schema-growth hint flagged for the next case study (not landed
+this paper): a `fair2r:cooperativeOriginType` property with
+values {`solo-author`, `accelerated-by-near-miss`, `co-generated`,
+`prompt-driven`} would make the cooperative-origin classification
+queryable.
+
+Provenance:
+`act:meta-cooperation-2026-05-07-associative-thinking` parent
+activity; `hc:obs-associative-thinking-as-multiplier` MetaContribution
+(observation, high leverage). Triple count 2065 → 2080 (+15).
+
+*Next:* When the researcher returns with fresh eyes, decide
+whether to graduate this observation into `evolution.tex`
+(process angle) or `authors-note.tex` (researcher-experience
+angle). Both are candidate homes; the choice depends on which
+cooperation rule the paper wants to commit to publishing.
