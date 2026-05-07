@@ -108,6 +108,9 @@ TEMPLATE = """<!doctype html>
   <div class="inner">
     <div class="eyebrow">{eyebrow}</div>
     <h1>{hero_title}</h1>
+    <div class="build-tag" title="Hash over content; if you're seeing an old version your browser or CDN cache is stale.">
+      build <code>{cache_bust}</code>
+    </div>
   </div>
 </section>
 <main>
@@ -413,6 +416,13 @@ def main(argv: Iterable[str]) -> int:
     static_src = SITE_SRC / "static"
     if static_src.is_dir():
         shutil.copytree(static_src, OUT / "static", dirs_exist_ok=True)
+
+    # GitHub Pages defaults to running Jekyll on the deployed artefact;
+    # the .nojekyll marker disables that pass so paths starting with
+    # underscores (and our static/ tree) are served verbatim. Also acts
+    # as a small heartbeat: if this file is missing on the deployed
+    # site, the build did not run.
+    (OUT / ".nojekyll").write_text("", encoding="utf-8")
 
     # Markdown pages
     for slug, title, src in PAGES:

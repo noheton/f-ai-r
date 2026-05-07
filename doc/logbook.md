@@ -1012,3 +1012,46 @@ workflow if any.
 clean (frame title with the blue rule, section dividers, tabular
 spacing); on the same push the Pages workflow runs because
 `site/index.md` is touched.
+
+## 2026-05-06 — Defensive site fixes: .nojekyll + visible build-tag + force-deploy
+*Author:* claude-opus-4-7 (under direction of repo owner)
+*Touched:* `scripts/build_provenance_site.py`,
+`site/static/style.css`, `doc/provenance.ttl`,
+`doc/user-contributions.md`, `doc/logbook.md`.
+*Decision / outcome:* Researcher reported the deployed Pages site
+"does not seem up to date". Sandbox cannot fetch the live URL to
+confirm directly. Three defensive fixes ship in one commit, all
+intended to make a stale-cache scenario \emph{visible} and to
+prompt a fresh deploy:
+\begin{enumerate}
+  \item Site builder now writes \texttt{\_site/.nojekyll}.
+        GitHub Pages defaults to running Jekyll on the deployed
+        artefact, which can mis-handle our \texttt{static/} tree;
+        the marker disables Jekyll. Side effect: if a future
+        deployed site is missing the \texttt{.nojekyll} file, the
+        Pages build was not the one we expect.
+  \item Site template gains a visible \texttt{build-tag} in the
+        hero section that prints the cache-bust hash. The hash is
+        already in the footer; promoting it to the hero gives the
+        researcher an at-a-glance confirmation of which bundle
+        their browser is rendering.
+  \item Touching \texttt{scripts/build\_provenance\_site.py} and
+        \texttt{site/static/style.css} matches the
+        \texttt{pages.yml} path filter, so the merge of this
+        commit triggers a fresh \texttt{pages.yml} run on
+        \texttt{main}, which forces a Pages deploy and busts the
+        CDN cache (\texttt{max-age=600}).
+\end{enumerate}
+The most likely root cause was a CDN cache miss after the slide-
+only PR \#19, whose path filter on \texttt{pages.yml} should have
+matched (the PR did touch \texttt{site/index.md} and
+\texttt{README.md}) but where the cache may not have refreshed
+before the researcher checked. If the build-tag still reads the
+prior hash after this commit's deploy, escalate: the
+\texttt{pages.yml} run logs need a human's eyes.
+Local smoke test: TTL parses to 1395 triples (up from 1386); site
+rebuild is clean; the \texttt{build-tag} is visible in
+\texttt{\_site/index.html} (and on every other page).
+*Next:* On merge, watch the Pages deploy; if the build-tag in the
+rendered hero matches the new commit's cache-bust hash (10-char
+hex), the cache has refreshed.

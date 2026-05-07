@@ -133,6 +133,23 @@ a:hover { color: var(--accent); }
   line-height: 1.5;
 }
 
+.hero .build-tag {
+  margin-top: 8px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--fg-mute);
+  text-transform: uppercase;
+}
+.hero .build-tag code {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  color: var(--accent);
+}
+
 /* ------- Main content area ----------------------------------- */
 main {
   max-width: 1280px;
