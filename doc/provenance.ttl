@@ -1607,6 +1607,44 @@ claim:journal-as-distribution-in-decline  a fair2r:Claim ;
     fair2r:verificationState verif:human-confirmed ;
     dcterms:created "2026-05-07"^^xsd:date .
 
+#-------------------------------------------------------------------------
+# Reconciliation: delete superseded section files, add eight-practices figure,
+# document the Author's Note voice exception
+#-------------------------------------------------------------------------
+
+ent:figure-eight-practices   a fair2r:Figure ;
+    rdfs:label "Eight integrated practices, grouped by failure-mode family"@en ;
+    dcterms:source <paper/figures/eight-practices.tex> ;
+    prov:wasAttributedTo agent:illustration , agent:human-author .
+
+act:rev-reconcile-and-illustrate  a prov:Activity ;
+    rdfs:label "Reconcile provenance: delete superseded files, add eight-practices figure, document Author's Note voice exception"@en ;
+    prov:startedAtTime "2026-05-07T00:00:00Z"^^xsd:dateTime ;
+    prov:endedAtTime   "2026-05-07T00:00:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith agent:claude-opus-4-7 ;
+    prov:wasAssociatedWith agent:human-author ;
+    prov:generated ent:figure-eight-practices ;
+    prov:invalidated ent:section-discussion .
+
+ent:figure-eight-practices   prov:wasGeneratedBy act:rev-reconcile-and-illustrate .
+
+claim:authors-note-voice-exception  a fair2r:Claim ;
+    rdfs:label "The front-matter Author's Note is the one section that carries direct second-person address (you / I), by lineage from the source paper. The DLR voice rule prohibiting second person applies to every other section."@en ;
+    prov:wasAttributedTo agent:human-author ;
+    fair2r:verificationState verif:human-confirmed ;
+    dcterms:created "2026-05-07"^^xsd:date .
+
+hc:reconcile-illustrate-scrutinize  a fair2r:HumanContribution ;
+    rdfs:label "Researcher request: continue with open tasks; reconcile provenance; generate illustration where positive and scrutinize"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "rule-shape" ;
+    fair2r:contributionLeverage "medium" ;
+    rdfs:comment "Three things in one PR: (1) provenance reconciliation: paper/sections/discussion.tex and paper/sections/acknowledgements.tex deleted (they were marked superseded after the position-paper reframe and unreferenced); the act:rev-reconcile-and-illustrate activity records a prov:Invalidation of ent:section-discussion. (2) New illustration: paper/figures/eight-practices.tex, a 4x2 grid of the eight practices colour-coded by the failure-mode family each addresses (evidence-trail / drift-prevention / artefact-discipline / legal-institutional). Loaded from sections/eight-practices.tex. (3) Scrutiny: scanned all section files for voice issues. The Author's Note's direct address is preserved as a documented genre exception (claim:authors-note-voice-exception); agents/scientific-writer.md updated to make the carve-out explicit. self-reference.tex's closing aphorism reworded once to remove a second 'you'."@en ;
+    dcterms:created "2026-05-07"^^xsd:date ;
+    prov:influenced ent:figure-eight-practices ,
+                    claim:authors-note-voice-exception ,
+                    ent:prompt-scientific-writer .
+
 hc:journal-decline           a fair2r:HumanContribution ;
     rdfs:label "Researcher claim: traditional publishing under stress; journal-as-distribution may be in decline; new forms of scientific communication"@en ;
     fair2r:contributedBy agent:human-author ;

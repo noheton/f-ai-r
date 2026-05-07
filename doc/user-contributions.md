@@ -279,6 +279,32 @@ primary-artefact consistency invariant.
 `agents/orchestrator.md`.
 *Provenance IRI:* `fair2r:hc-contribution-rule`
 
+### 2026-05-07 --- Reconcile provenance + new eight-practices figure + scrutiny pass
+*Type:* `rule-shape`
+*Leverage:* medium
+*Triggered:* (a) Deleted `paper/sections/discussion.tex` and
+`paper/sections/acknowledgements.tex` (both marked superseded after
+the position-paper reframe; unreferenced); the `provenance.ttl`
+activity `act:rev-reconcile-and-illustrate` records a
+`prov:Invalidation` of `ent:section-discussion`. (b) New
+`paper/figures/eight-practices.tex` (4x2 grid colour-coded by
+failure-mode family) wired into
+`paper/sections/eight-practices.tex`. (c) Scrutiny of all section
+files for voice issues; the Author's Note's direct address is
+preserved as a documented genre exception
+(`claim:authors-note-voice-exception`);
+`agents/scientific-writer.md` updated to make the carve-out
+explicit; `self-reference.tex`'s closing aphorism reworded to
+remove a second-person "you".
+*Artefacts touched:* `paper/sections/eight-practices.tex`,
+`paper/sections/self-reference.tex`,
+`paper/figures/eight-practices.tex` (new),
+`paper/sections/discussion.tex` (deleted),
+`paper/sections/acknowledgements.tex` (deleted),
+`agents/scientific-writer.md`, `doc/provenance.ttl`,
+`doc/user-contributions.md`, `doc/logbook.md`.
+*Provenance IRI:* `fair2r:hc-reconcile-illustrate-scrutinize`
+
 ### 2026-05-07 --- Claim: traditional publishing under stress; journal-as-distribution in decline
 *Type:* `content-prompt`
 *Leverage:* high

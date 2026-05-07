@@ -10,8 +10,8 @@ Once a source has been read, advance its rung in `doc/provenance.ttl` and (optio
 
 ## State at the time of this build
 
-- Sources in queue: **45**
-- Sources at `lit-retrieved`: 33
+- Sources in queue: **48**
+- Sources at `lit-retrieved`: 36
 - Sources at `ai-confirmed`: 10
 - Sources without a rung (graph cleanliness defect): 2
 
@@ -75,7 +75,21 @@ Once a source has been read, advance its rung in `doc/provenance.ttl` and (optio
 
 ---
 
-### 5. `curdt2025hmc` --- rung: `lit-retrieved`, dependent claims: **1**
+### 5. `conroy2023sleuths` --- rung: `lit-retrieved`, dependent claims: **1**
+
+**Citation.** Conroy, Gemma. (2023). "Scientific sleuths spot dishonest {ChatGPT} use in papers". *Nature*. DOI: [10.1038/d41586-023-02477-w](https://doi.org/10.1038/d41586-023-02477-w)
+
+**Dependent claims** (advancing this source to `lit-read` would unblock):
+
+- `journal-as-distribution-in-decline` --- Traditional publishing is under stress; the journal-as-distribution concept (which pre-dates the internet by three centuries) is being weakened by preprint servers, overlay journals, registered reports, and artefact-versioned repositories; LLM-generated submissions tip a slow drift into a visible crisis. F(AI)^2R is designed to fit both the legacy and the emerging scholarly-communication ecosystem.
+
+**Open via DOI:** <https://doi.org/10.1038/d41586-023-02477-w>
+
+**Note from the bib.** Reports on the rising volume of LLM-generated content in submitted manuscripts and on detection efforts. Cited in §1 as evidence for the AI-fabricated-submissions volume problem (TODO-VERIFY DOI and exact title at lit-read).
+
+---
+
+### 6. `curdt2025hmc` --- rung: `lit-retrieved`, dependent claims: **1**
 
 **Citation.** Curdt, Constanze and K{\"o}stner, Nicole and {HMC Office Team}. (2025). "Helmholtz Metadata Collaboration (HMC) --- Building a Sustainable {FAIR} Data Ecosystem in a Changing Research Landscape". DOI: [10.5281/zenodo.15113717](https://doi.org/10.5281/zenodo.15113717)
 
@@ -89,7 +103,21 @@ Once a source has been read, advance its rung in `doc/provenance.ttl` and (optio
 
 ---
 
-### 6. `else2023chatgpt` --- rung: `ai-confirmed`, dependent claims: **1**
+### 7. `eisen2018preprints` --- rung: `lit-retrieved`, dependent claims: **1**
+
+**Citation.** Eisen, Michael B. and Akhmanova, Anna and Behrens, Timothy E. and Diedrichsen, Jorn and Harper, Diane M. and Iordanova, Mihaela D. and Weigel, Detlef and Zaidi, Mone. (2018). "Implementing a ``publish, then review'' model of publishing". *eLife*. DOI: [10.7554/eLife.64910](https://doi.org/10.7554/eLife.64910)
+
+**Dependent claims** (advancing this source to `lit-read` would unblock):
+
+- `journal-as-distribution-in-decline` --- Traditional publishing is under stress; the journal-as-distribution concept (which pre-dates the internet by three centuries) is being weakened by preprint servers, overlay journals, registered reports, and artefact-versioned repositories; LLM-generated submissions tip a slow drift into a visible crisis. F(AI)^2R is designed to fit both the legacy and the emerging scholarly-communication ecosystem.
+
+**Open via DOI:** <https://doi.org/10.7554/eLife.64910>
+
+**Note from the bib.** Position editorial proposing a publish-then-review model on top of preprint servers; cited in §1 as an artefact-driven alternative to traditional journal distribution (TODO-VERIFY year, venue, and DOI at lit-read --- this combination of identifiers may not be exact).
+
+---
+
+### 8. `else2023chatgpt` --- rung: `ai-confirmed`, dependent claims: **1**
 
 **Citation.** Else, Holly. (2023). "Tools such as {ChatGPT} threaten transparent science; here are our ground rules for their use". *Nature*. DOI: [10.1038/d41586-023-00191-1](https://doi.org/10.1038/d41586-023-00191-1)
 
@@ -101,7 +129,7 @@ Once a source has been read, advance its rung in `doc/provenance.ttl` and (optio
 
 ---
 
-### 7. `iclr_llm_policy` --- rung: `lit-retrieved`, dependent claims: **1**
+### 9. `iclr_llm_policy` --- rung: `lit-retrieved`, dependent claims: **1**
 
 **Citation.** {ICLR}. (2024). "{ICLR} author and reviewer guidelines on the use of {AI} tools". *Conference author and reviewer guide*. <https://iclr.cc/>
 
@@ -115,7 +143,7 @@ Once a source has been read, advance its rung in `doc/provenance.ttl` and (optio
 
 ---
 
-### 8. `icmje2023` --- rung: `ai-confirmed`, dependent claims: **1**
+### 10. `icmje2023` --- rung: `ai-confirmed`, dependent claims: **1**
 
 **Citation.** {International Committee of Medical Journal Editors}. (2023). "Recommendations for the Conduct, Reporting, Editing, and Publication of Scholarly Work in Medical Journals". *ICMJE Recommendations*. <https://www.icmje.org/recommendations/>
 
@@ -127,7 +155,7 @@ Once a source has been read, advance its rung in `doc/provenance.ttl` and (optio
 
 ---
 
-### 9. `ioannidis2005` --- rung: `lit-retrieved`, dependent claims: **1**
+### 11. `ioannidis2005` --- rung: `lit-retrieved`, dependent claims: **1**
 
 **Citation.** Ioannidis, John P. A.. (2005). "Why Most Published Research Findings Are False". *PLOS Medicine*. DOI: [10.1371/journal.pmed.0020124](https://doi.org/10.1371/journal.pmed.0020124)
 
@@ -141,7 +169,7 @@ Once a source has been read, advance its rung in `doc/provenance.ttl` and (optio
 
 ---
 
-### 10. `janowicz2019sosa` --- rung: `lit-retrieved`, dependent claims: **1**
+### 12. `janowicz2019sosa` --- rung: `lit-retrieved`, dependent claims: **1**
 
 **Citation.** Janowicz, Krzysztof and Haller, Armin and Cox, Simon J. D. and {Le Phuoc}, Danh and Lefran\c{c}ois, Maxime. (2019). "{SOSA}: A lightweight ontology for sensors, observations, samples, and actuators". *Journal of Web Semantics*. DOI: [10.1016/j.websem.2018.06.003](https://doi.org/10.1016/j.websem.2018.06.003)
 
@@ -155,7 +183,7 @@ Once a source has been read, advance its rung in `doc/provenance.ttl` and (optio
 
 ---
 
-### 11. `kobak2024delving` --- rung: `lit-retrieved`, dependent claims: **1**
+### 13. `kobak2024delving` --- rung: `lit-retrieved`, dependent claims: **1**
 
 **Citation.** Kobak, Dmitry and {Gonz\'alez-M\'arquez}, Rita and Horv\'at, Em\H{o}ke-\'Agnes and Lause, Jan. (2024). "Delving into {ChatGPT} usage in academic writing through excess vocabulary". *arXiv preprint*. arXiv: [2406.07016](https://arxiv.org/abs/2406.07016)
 
@@ -169,7 +197,7 @@ Once a source has been read, advance its rung in `doc/provenance.ttl` and (optio
 
 ---
 
-### 12. `liang2024mapping` --- rung: `lit-retrieved`, dependent claims: **1**
+### 14. `liang2024mapping` --- rung: `lit-retrieved`, dependent claims: **1**
 
 **Citation.** Liang, Weixin and Zhang, Yaohui and Wu, Zhengxuan and Lepp, Haley and Ji, Wenlong and Zhao, Xuandong and Cao, Hancheng and Liu, Sheng and He, Siyu and Huang, Zhi and Yang, Diyi and Potts, Christopher and Manning, Christopher D. and Zou, James Y.. (2024). "Mapping the increasing use of {LLMs} in scientific papers". *arXiv preprint*. arXiv: [2404.01268](https://arxiv.org/abs/2404.01268)
 
@@ -183,7 +211,7 @@ Once a source has been read, advance its rung in `doc/provenance.ttl` and (optio
 
 ---
 
-### 13. `neurips_llm_policy` --- rung: `lit-retrieved`, dependent claims: **1**
+### 15. `neurips_llm_policy` --- rung: `lit-retrieved`, dependent claims: **1**
 
 **Citation.** {NeurIPS}. (2024). "{NeurIPS} policy on the use of {Large Language Models}". *Conference policy page*. <https://neurips.cc/>
 
@@ -197,7 +225,7 @@ Once a source has been read, advance its rung in `doc/provenance.ttl` and (optio
 
 ---
 
-### 14. `pineau2021reproducibility` --- rung: `lit-retrieved`, dependent claims: **1**
+### 16. `pineau2021reproducibility` --- rung: `lit-retrieved`, dependent claims: **1**
 
 **Citation.** Pineau, Joelle and Vincent-Lamarre, Philippe and Sinha, Koustuv and Larivi\`{e}re, Vincent and Beygelzimer, Alina and d'Alch\'{e}-Buc, Florence and Fox, Emily and Larochelle, Hugo. (2021). "Improving Reproducibility in Machine Learning Research (a Report from the {NeurIPS} 2019 Reproducibility Program)". *Journal of Machine Learning Research*. <https://jmlr.org/papers/v22/20-303.html>
 
@@ -211,7 +239,7 @@ Once a source has been read, advance its rung in `doc/provenance.ttl` and (optio
 
 ---
 
-### 15. `qudt` --- rung: `lit-retrieved`, dependent claims: **1**
+### 17. `qudt` --- rung: `lit-retrieved`, dependent claims: **1**
 
 **Citation.** {QUDT.org}. (2024). "{QUDT}: Quantities, Units, Dimensions and Types ontology". *Linked-data vocabulary*. <https://www.qudt.org/>
 
@@ -225,7 +253,7 @@ Once a source has been read, advance its rung in `doc/provenance.ttl` and (optio
 
 ---
 
-### 16. `rijgersberg2013om` --- rung: `lit-retrieved`, dependent claims: **1**
+### 18. `rijgersberg2013om` --- rung: `lit-retrieved`, dependent claims: **1**
 
 **Citation.** Rijgersberg, Hajo and {van Assem}, Mark and Top, Jan. (2013). "Ontology of units of {Measure} and related concepts". *Semantic Web*. DOI: [10.3233/SW-2012-0069](https://doi.org/10.3233/SW-2012-0069)
 
@@ -239,7 +267,21 @@ Once a source has been read, advance its rung in `doc/provenance.ttl` and (optio
 
 ---
 
-### 17. `vannoorden2023chatgpt` --- rung: `lit-retrieved`, dependent claims: **1**
+### 19. `tennant2016open` --- rung: `lit-retrieved`, dependent claims: **1**
+
+**Citation.** Tennant, Jonathan P. and Waldner, Fran\c{c}ois and Jacques, Damien C. and Masuzzo, Paola and Collister, Lauren B. and Hartgerink, Chris H. J.. (2016). "The academic, economic and societal impacts of {Open Access}: an evidence-based review". *F1000Research*. DOI: [10.12688/f1000research.8460.3](https://doi.org/10.12688/f1000research.8460.3)
+
+**Dependent claims** (advancing this source to `lit-read` would unblock):
+
+- `journal-as-distribution-in-decline` --- Traditional publishing is under stress; the journal-as-distribution concept (which pre-dates the internet by three centuries) is being weakened by preprint servers, overlay journals, registered reports, and artefact-versioned repositories; LLM-generated submissions tip a slow drift into a visible crisis. F(AI)^2R is designed to fit both the legacy and the emerging scholarly-communication ecosystem.
+
+**Open via DOI:** <https://doi.org/10.12688/f1000research.8460.3>
+
+**Note from the bib.** Evidence-based review of Open-Access impacts on academic and societal outcomes. Cited in §1 as background for the journal-as-distribution-in-decline argument (TODO-VERIFY at lit-read).
+
+---
+
+### 20. `vannoorden2023chatgpt` --- rung: `lit-retrieved`, dependent claims: **1**
 
 **Citation.** {Van Noorden}, Richard and Webb, Richard. (2023). "{ChatGPT} and science: the 2023 {AI} system was a force in research that can no longer be ignored". *Nature*. DOI: [10.1038/d41586-023-03930-6](https://doi.org/10.1038/d41586-023-03930-6)
 
@@ -253,7 +295,7 @@ Once a source has been read, advance its rung in `doc/provenance.ttl` and (optio
 
 ---
 
-### 18. `wilkinson2016fair` --- rung: `no-rung`, dependent claims: **1**
+### 21. `wilkinson2016fair` --- rung: `no-rung`, dependent claims: **1**
 
 **Citation.** Wilkinson, Mark D. and Dumontier, Michel and Aalbersberg, IJsbrand Jan and others. (2016). "The {FAIR} Guiding Principles for scientific data management and stewardship". *Scientific Data*. DOI: [10.1038/sdata.2016.18](https://doi.org/10.1038/sdata.2016.18)
 
@@ -265,7 +307,7 @@ Once a source has been read, advance its rung in `doc/provenance.ttl` and (optio
 
 ---
 
-### 19. `alemohammad2023mad` --- rung: `lit-retrieved`, dependent claims: **0**
+### 22. `alemohammad2023mad` --- rung: `lit-retrieved`, dependent claims: **0**
 
 **Citation.** Alemohammad, Sina and Casco-Rodriguez, Josue and Luzi, Lorenzo and Humayun, Ahmed Imtiaz and Babaei, Hossein and LeJeune, Daniel and Siahkoohi, Ali and Baraniuk, Richard G.. (2023). "Self-Consuming Generative Models Go {MAD}". *arXiv preprint*. arXiv: [2307.01850](https://arxiv.org/abs/2307.01850)
 
@@ -277,7 +319,7 @@ Once a source has been read, advance its rung in `doc/provenance.ttl` and (optio
 
 ---
 
-### 20. `anderson2024homogenization` --- rung: `lit-retrieved`, dependent claims: **0**
+### 23. `anderson2024homogenization` --- rung: `lit-retrieved`, dependent claims: **0**
 
 **Citation.** Anderson, Barrett R. and Shah, Jash Hemant and Kreminski, Max. (2024). "Homogenization Effects of Large Language Models on Human Creative Ideation". *Proceedings of the 16th Conference on Creativity \& Cognition*. DOI: [10.1145/3635636.3656204](https://doi.org/10.1145/3635636.3656204)
 
@@ -289,7 +331,7 @@ Once a source has been read, advance its rung in `doc/provenance.ttl` and (optio
 
 ---
 
-### 21. `bender2021stochastic` --- rung: `ai-confirmed`, dependent claims: **0**
+### 24. `bender2021stochastic` --- rung: `ai-confirmed`, dependent claims: **0**
 
 **Citation.** Bender, Emily M. and Gebru, Timnit and McMillan-Major, Angelina and Shmitchell, Shmargaret. (2021). "On the Dangers of Stochastic Parrots: Can Language Models Be Too Big?". *Proceedings of the Conference on Fairness, Accountability, and Transparency (FAccT)*. DOI: [10.1145/3442188.3445922](https://doi.org/10.1145/3442188.3445922)
 
@@ -299,7 +341,7 @@ Once a source has been read, advance its rung in `doc/provenance.ttl` and (optio
 
 ---
 
-### 22. `birhane2022values` --- rung: `lit-retrieved`, dependent claims: **0**
+### 25. `birhane2022values` --- rung: `lit-retrieved`, dependent claims: **0**
 
 **Citation.** Birhane, Abeba and Kalluri, Pratyusha and Card, Dallas and Agnew, William and Dotan, Ravit and Bao, Michelle. (2022). "The Values Encoded in Machine Learning Research". *Proceedings of the 2022 ACM Conference on Fairness, Accountability, and Transparency (FAccT)*. DOI: [10.1145/3531146.3533083](https://doi.org/10.1145/3531146.3533083)
 
@@ -311,7 +353,7 @@ Once a source has been read, advance its rung in `doc/provenance.ttl` and (optio
 
 ---
 
-### 23. `chen2023drift` --- rung: `lit-retrieved`, dependent claims: **0**
+### 26. `chen2023drift` --- rung: `lit-retrieved`, dependent claims: **0**
 
 **Citation.** Chen, Lingjiao and Zaharia, Matei and Zou, James. (2023). "How Is {ChatGPT}'s Behavior Changing over Time?". *arXiv preprint*. arXiv: [2307.09009](https://arxiv.org/abs/2307.09009)
 
@@ -323,7 +365,7 @@ Once a source has been read, advance its rung in `doc/provenance.ttl` and (optio
 
 ---
 
-### 24. `chuehong2022fair4rs` --- rung: `ai-confirmed`, dependent claims: **0**
+### 27. `chuehong2022fair4rs` --- rung: `ai-confirmed`, dependent claims: **0**
 
 **Citation.** {Chue Hong}, Neil P. and Katz, Daniel S. and Barker, Michelle and Lamprecht, Anna-Lena and Martinez, Carlos and others. (2022). "{FAIR} Principles for Research Software (FAIR4RS Principles)". *Research Data Alliance*. DOI: [10.15497/RDA00068](https://doi.org/10.15497/RDA00068)
 
@@ -335,7 +377,7 @@ Once a source has been read, advance its rung in `doc/provenance.ttl` and (optio
 
 ---
 
-### 25. `clark1998extended` --- rung: `lit-retrieved`, dependent claims: **0**
+### 28. `clark1998extended` --- rung: `lit-retrieved`, dependent claims: **0**
 
 **Citation.** Clark, Andy and Chalmers, David. (1998). "The Extended Mind". *Analysis*. DOI: [10.1093/analys/58.1.7](https://doi.org/10.1093/analys/58.1.7)
 
@@ -347,7 +389,7 @@ Once a source has been read, advance its rung in `doc/provenance.ttl` and (optio
 
 ---
 
-### 26. `clark2025extending` --- rung: `lit-retrieved`, dependent claims: **0**
+### 29. `clark2025extending` --- rung: `lit-retrieved`, dependent claims: **0**
 
 **Citation.** Clark, Andy. (2025). "Extending Minds with Generative {AI}". *Nature Communications*
 
@@ -358,7 +400,7 @@ Once a source has been read, advance its rung in `doc/provenance.ttl` and (optio
 
 ---
 
-### 27. `gebru2021datasheets` --- rung: `ai-confirmed`, dependent claims: **0**
+### 30. `gebru2021datasheets` --- rung: `ai-confirmed`, dependent claims: **0**
 
 **Citation.** Gebru, Timnit and Morgenstern, Jamie and Vecchione, Briana and Vaughan, Jennifer Wortman and Wallach, Hanna and {Daum\'e III}, Hal and Crawford, Kate. (2021). "Datasheets for Datasets". *Communications of the ACM*. DOI: [10.1145/3458723](https://doi.org/10.1145/3458723)
 
@@ -368,7 +410,7 @@ Once a source has been read, advance its rung in `doc/provenance.ttl` and (optio
 
 ---
 
-### 28. `guyatt2008grade` --- rung: `ai-confirmed`, dependent claims: **0**
+### 31. `guyatt2008grade` --- rung: `ai-confirmed`, dependent claims: **0**
 
 **Citation.** Guyatt, Gordon H. and Oxman, Andrew D. and Vist, Gunn E. and Kunz, Regina and Falck-Ytter, Yngve and Alonso-Coello, Pablo and Sch\"unemann, Holger J.. (2008). "{GRADE}: an emerging consensus on rating quality of evidence and strength of recommendations". *BMJ*. DOI: [10.1136/bmj.39489.470347.AD](https://doi.org/10.1136/bmj.39489.470347.AD)
 
@@ -378,7 +420,7 @@ Once a source has been read, advance its rung in `doc/provenance.ttl` and (optio
 
 ---
 
-### 29. `hutchins1995cognition` --- rung: `lit-retrieved`, dependent claims: **0**
+### 32. `hutchins1995cognition` --- rung: `lit-retrieved`, dependent claims: **0**
 
 **Citation.** Hutchins, Edwin. (1995). "Cognition in the Wild"
 
@@ -389,7 +431,7 @@ Once a source has been read, advance its rung in `doc/provenance.ttl` and (optio
 
 ---
 
-### 30. `kuteeva2024diversity` --- rung: `lit-retrieved`, dependent claims: **0**
+### 33. `kuteeva2024diversity` --- rung: `lit-retrieved`, dependent claims: **0**
 
 **Citation.** Kuteeva, Maria and Andersson, Marta. (2024). "Diversity and Standards in Writing for Publication in the Age of {AI}---Between a Rock and a Hard Place". *Applied Linguistics*. DOI: [10.1093/applin/amae025](https://doi.org/10.1093/applin/amae025)
 
@@ -401,7 +443,7 @@ Once a source has been read, advance its rung in `doc/provenance.ttl` and (optio
 
 ---
 
-### 31. `li2023thirsty` --- rung: `lit-retrieved`, dependent claims: **0**
+### 34. `li2023thirsty` --- rung: `lit-retrieved`, dependent claims: **0**
 
 **Citation.** Li, Pengfei and Yang, Jianyi and Islam, Mohammad A. and Ren, Shaolei. (2023). "Making {AI} Less ``Thirsty'': Uncovering and Addressing the Secret Water Footprint of {AI} Models". *arXiv preprint*. DOI: [10.1145/3724499](https://doi.org/10.1145/3724499)
 
@@ -413,7 +455,7 @@ Once a source has been read, advance its rung in `doc/provenance.ttl` and (optio
 
 ---
 
-### 32. `liu2023prompt` --- rung: `lit-retrieved`, dependent claims: **0**
+### 35. `liu2023prompt` --- rung: `lit-retrieved`, dependent claims: **0**
 
 **Citation.** Liu, Pengfei and Yuan, Weizhe and Fu, Jinlan and Jiang, Zhengbao and Hayashi, Hiroaki and Neubig, Graham. (2023). "Pre-train, Prompt, and Predict: A Systematic Survey of Prompting Methods in Natural Language Processing". *ACM Computing Surveys*. DOI: [10.1145/3560815](https://doi.org/10.1145/3560815)
 
@@ -425,7 +467,7 @@ Once a source has been read, advance its rung in `doc/provenance.ttl` and (optio
 
 ---
 
-### 33. `luccioni2024power` --- rung: `lit-retrieved`, dependent claims: **0**
+### 36. `luccioni2024power` --- rung: `lit-retrieved`, dependent claims: **0**
 
 **Citation.** Luccioni, Alexandra Sasha and Jernite, Yacine and Strubell, Emma. (2024). "Power Hungry Processing: Watts Driving the Cost of {AI} Deployment?". *Proceedings of the 2024 ACM Conference on Fairness, Accountability, and Transparency (FAccT)*. DOI: [10.1145/3630106.3658542](https://doi.org/10.1145/3630106.3658542)
 
@@ -437,7 +479,7 @@ Once a source has been read, advance its rung in `doc/provenance.ttl` and (optio
 
 ---
 
-### 34. `mitchell2019modelcards` --- rung: `ai-confirmed`, dependent claims: **0**
+### 37. `mitchell2019modelcards` --- rung: `ai-confirmed`, dependent claims: **0**
 
 **Citation.** Mitchell, Margaret and Wu, Simone and Zaldivar, Andrew and Barnes, Parker and Vasserman, Lucy and Hutchinson, Ben and Spitzer, Elena and Raji, Inioluwa Deborah and Gebru, Timnit. (2019). "Model Cards for Model Reporting". *Proceedings of the Conference on Fairness, Accountability, and Transparency (FAccT)*. DOI: [10.1145/3287560.3287596](https://doi.org/10.1145/3287560.3287596)
 
@@ -447,7 +489,7 @@ Once a source has been read, advance its rung in `doc/provenance.ttl` and (optio
 
 ---
 
-### 35. `page2021prisma` --- rung: `ai-confirmed`, dependent claims: **0**
+### 38. `page2021prisma` --- rung: `ai-confirmed`, dependent claims: **0**
 
 **Citation.** Page, Matthew J. and McKenzie, Joanne E. and Bossuyt, Patrick M. and Boutron, Isabelle and Hoffmann, Tammy C. and others. (2021). "The {PRISMA 2020} statement: an updated guideline for reporting systematic reviews". *BMJ*. DOI: [10.1136/bmj.n71](https://doi.org/10.1136/bmj.n71)
 
@@ -457,7 +499,7 @@ Once a source has been read, advance its rung in `doc/provenance.ttl` and (optio
 
 ---
 
-### 36. `patterson2021carbon` --- rung: `lit-retrieved`, dependent claims: **0**
+### 39. `patterson2021carbon` --- rung: `lit-retrieved`, dependent claims: **0**
 
 **Citation.** Patterson, David and Gonzalez, Joseph and Le, Quoc and Liang, Chen and Munguia, Lluis-Miquel and Rothchild, Daniel and So, David and Texier, Maud and Dean, Jeff. (2021). "Carbon Emissions and Large Neural Network Training". *arXiv preprint*. arXiv: [2104.10350](https://arxiv.org/abs/2104.10350)
 
@@ -469,7 +511,7 @@ Once a source has been read, advance its rung in `doc/provenance.ttl` and (optio
 
 ---
 
-### 37. `reynolds2021prompt` --- rung: `lit-retrieved`, dependent claims: **0**
+### 40. `reynolds2021prompt` --- rung: `lit-retrieved`, dependent claims: **0**
 
 **Citation.** Reynolds, Laria and McDonell, Kyle. (2021). "Prompt Programming for Large Language Models: Beyond the Few-Shot Paradigm". *Extended Abstracts of the 2021 CHI Conference on Human Factors in Computing Systems*. DOI: [10.1145/3411763.3451760](https://doi.org/10.1145/3411763.3451760)
 
@@ -481,7 +523,7 @@ Once a source has been read, advance its rung in `doc/provenance.ttl` and (optio
 
 ---
 
-### 38. `sadasivan2023reliably` --- rung: `lit-retrieved`, dependent claims: **0**
+### 41. `sadasivan2023reliably` --- rung: `lit-retrieved`, dependent claims: **0**
 
 **Citation.** Sadasivan, Vinu Sankar and Kumar, Aounon and Balasubramanian, Sriram and Wang, Wenxiao and Feizi, Soheil. (2023). "Can {AI}-Generated Text be Reliably Detected?". *arXiv preprint*. arXiv: [2303.11156](https://arxiv.org/abs/2303.11156)
 
@@ -493,7 +535,7 @@ Once a source has been read, advance its rung in `doc/provenance.ttl` and (optio
 
 ---
 
-### 39. `schmitt2020nfdi4ing` --- rung: `lit-retrieved`, dependent claims: **0**
+### 42. `schmitt2020nfdi4ing` --- rung: `lit-retrieved`, dependent claims: **0**
 
 **Citation.** Schmitt, Robert H. and Anthofer, Volker and Auer, S{\"o}ren and others. (2020). "{NFDI4Ing} --- the National Research Data Infrastructure for Engineering Sciences". DOI: [10.5281/zenodo.4015201](https://doi.org/10.5281/zenodo.4015201)
 
@@ -505,7 +547,7 @@ Once a source has been read, advance its rung in `doc/provenance.ttl` and (optio
 
 ---
 
-### 40. `shumailov2024collapse` --- rung: `lit-retrieved`, dependent claims: **0**
+### 43. `shumailov2024collapse` --- rung: `lit-retrieved`, dependent claims: **0**
 
 **Citation.** Shumailov, Ilia and Shumaylov, Zakhar and Zhao, Yiren and Papernot, Nicolas and Anderson, Ross and Gal, Yarin. (2024). "{AI} models collapse when trained on recursively generated data". *Nature*. DOI: [10.1038/s41586-024-07566-y](https://doi.org/10.1038/s41586-024-07566-y)
 
@@ -517,7 +559,7 @@ Once a source has been read, advance its rung in `doc/provenance.ttl` and (optio
 
 ---
 
-### 41. `strubell2019energy` --- rung: `lit-retrieved`, dependent claims: **0**
+### 44. `strubell2019energy` --- rung: `lit-retrieved`, dependent claims: **0**
 
 **Citation.** Strubell, Emma and Ganesh, Ananya and McCallum, Andrew. (2019). "Energy and Policy Considerations for Deep Learning in {NLP}". *Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics (ACL)*. DOI: [10.18653/v1/P19-1355](https://doi.org/10.18653/v1/P19-1355)
 
@@ -529,7 +571,7 @@ Once a source has been read, advance its rung in `doc/provenance.ttl` and (optio
 
 ---
 
-### 42. `thorp2023chatgpt` --- rung: `lit-retrieved`, dependent claims: **0**
+### 45. `thorp2023chatgpt` --- rung: `lit-retrieved`, dependent claims: **0**
 
 **Citation.** Thorp, H. Holden. (2023). "{ChatGPT} is fun, but not an author". *Science*. DOI: [10.1126/science.adg7879](https://doi.org/10.1126/science.adg7879)
 
@@ -541,7 +583,7 @@ Once a source has been read, advance its rung in `doc/provenance.ttl` and (optio
 
 ---
 
-### 43. `urhg2` --- rung: `ai-confirmed`, dependent claims: **0**
+### 46. `urhg2` --- rung: `ai-confirmed`, dependent claims: **0**
 
 **Citation.** {Bundesministerium der Justiz}. (1965). "Gesetz \"uber Urheberrecht und verwandte Schutzrechte (Urheberrechtsgesetz, UrhG), \S\,2 Gesch\"utzte Werke". *Bundesgesetzblatt (last amended 2021)*. <https://www.gesetze-im-internet.de/urhg/__2.html>
 
@@ -553,7 +595,7 @@ Once a source has been read, advance its rung in `doc/provenance.ttl` and (optio
 
 ---
 
-### 44. `usco2023ai` --- rung: `ai-confirmed`, dependent claims: **0**
+### 47. `usco2023ai` --- rung: `ai-confirmed`, dependent claims: **0**
 
 **Citation.** {U.S. Copyright Office}. (2023). "Copyright Registration Guidance: Works Containing Material Generated by Artificial Intelligence". *88 Fed. Reg. 16190 (16 March 2023)*. <https://www.federalregister.gov/documents/2023/03/16/2023-05321/copyright-registration-guidance-works-containing-material-generated-by-artificial-intelligence>
 
@@ -565,7 +607,7 @@ Once a source has been read, advance its rung in `doc/provenance.ttl` and (optio
 
 ---
 
-### 45. `w3c2013provo` --- rung: `no-rung`, dependent claims: **0**
+### 48. `w3c2013provo` --- rung: `no-rung`, dependent claims: **0**
 
 **Citation.** {W3C}. (2013). "{PROV-O}: The {PROV} Ontology". *W3C Recommendation*. <https://www.w3.org/TR/prov-o/>
 
