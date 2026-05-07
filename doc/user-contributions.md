@@ -9,7 +9,7 @@ extension to the schema; this file is the human-readable shadow.
 ## Why this file exists
 
 The verification ladder grades \emph{claims}; the logbook records
-\emph{sessions}; the provenance graph records \emph{activities*. None
+\emph{sessions}; the provenance graph records \emph{activities}. None
 of those, on its own, makes the human author's contribution legible at
 inspection time. Reviewers, panel discussants, and (especially)
 funding bodies asking "what did the human actually do here?" deserve

@@ -127,7 +127,7 @@ Once a source has been read, advance its rung in `doc/provenance.ttl` and (optio
 
 **Open via DOI:** <https://doi.org/10.7554/eLife.64910>
 
-**Note from the bib.** eLife editorial proposing a publish-then-review model on top of preprint servers. Cited in §1 as an artefact-driven alternative to traditional journal distribution. Bibkey kept as `eisen2018preprints` for stable \cite-references; year corrected from 2018 to 2020 (verification-pass finding).
+**Note from the bib.** eLife editorial proposing a publish-then-review model on top of preprint servers. Cited in §1 as an artefact-driven alternative to traditional journal distribution. Bibkey kept as `eisen2018preprints` for citation-key stability; year corrected from 2018 to 2020 (verification-pass finding).
 
 ---
 

@@ -165,9 +165,143 @@ _MERMAID_FENCE = __import__("re").compile(
     r"^```mermaid\s*\n(.*?)^```\s*$", __import__("re").MULTILINE | __import__("re").DOTALL
 )
 
+_re = __import__("re")
+
+
+def _delatex(text: str) -> str:
+    """Convert the LaTeX fragments that leak from ``doc/*.md`` source files
+    into HTML / Unicode equivalents so the rendered site is plain prose.
+    Code fences and inline ``code`` spans are protected so Markdown's
+    own rules still apply there."""
+
+    # Stash code blocks and inline code so we don't touch their contents.
+    fences: list[str] = []
+    inline: list[str] = []
+
+    def _fence_stash(match):
+        fences.append(match.group(0))
+        return f"\x00FENCE{len(fences) - 1}\x00"
+
+    def _inline_stash(match):
+        inline.append(match.group(0))
+        return f"\x00INLINE{len(inline) - 1}\x00"
+
+    text = _re.sub(r"```.*?```", _fence_stash, text, flags=_re.DOTALL)
+    text = _re.sub(r"<script\b[^>]*>.*?</script>", _fence_stash, text, flags=_re.DOTALL)
+    text = _re.sub(r"`[^`\n]+`", _inline_stash, text)
+
+    # Escaped braces and backslash-as-character. Replace with placeholders so
+    # subsequent ``\cmd{...}`` regexes can use a simple ``[^}]*`` body without
+    # tripping over nested escaped braces.
+    text = text.replace(r"\textbackslash{}", "\x01BS\x01")
+    text = text.replace(r"\textbackslash", "\x01BS\x01")
+    text = text.replace(r"\{", "\x01LB\x01")
+    text = text.replace(r"\}", "\x01RB\x01")
+
+    # Idiomatic compound first.
+    text = text.replace(r"F(AI)\textsuperscript{2}R", "F(AI)²R")
+    text = text.replace(r"(AI)\textsuperscript{2}", "(AI)²")
+
+    # \textsuperscript{x} -> <sup>x</sup>
+    text = _re.sub(r"\\textsuperscript\{([^}]*)\}", r"<sup>\1</sup>", text)
+
+    # Drop \cite, \ref, \label, \todo, \footnote shells first so the
+    # surrounding emphasis fixpoint sees a body with no inner braces.
+    text = _re.sub(r"\\cite\{[^}]*\}", "", text)
+    text = _re.sub(r"\\ref\{[^}]*\}", "", text)
+    text = _re.sub(r"\\label\{[^}]*\}", "", text)
+    text = _re.sub(r"\\todo(?:\[[^\]]*\])?\{([^}]*)\}", r"[\1]", text)
+    text = _re.sub(r"\\footnote\{([^}]*)\}", r" (\1)", text)
+
+    # Emphasis and weights. Emit raw HTML so nested emphasis doesn't
+    # confuse the markdown parser (``*outer **inner** outer*`` would
+    # otherwise be re-parsed as three separate ``<em>`` runs). Iterate
+    # to a fixpoint so nested ``\emph{... \emph{x} ...}`` resolves
+    # innermost-first (the regex would otherwise greedily eat the outer
+    # opening brace and stop at the inner closing brace).
+    for _ in range(8):
+        before = text
+        text = _re.sub(r"\\textsc\{([^{}]*)\}", lambda m: m.group(1).upper(), text)
+        text = _re.sub(r"\\texttt\{([^{}]*)\}", r"<code>\1</code>", text)
+        text = _re.sub(r"\\textbf\{([^{}]*)\}", r"<strong>\1</strong>", text)
+        text = _re.sub(r"\\textit\{([^{}]*)\}", r"<em>\1</em>", text)
+        text = _re.sub(r"\\emph\{([^{}]*)\}", r"<em>\1</em>", text)
+        if text == before:
+            break
+
+    # Lists: ``\begin{enumerate}`` ... ``\end{enumerate}`` -> ``<ol>...</ol>``
+    # (same for itemize -> ``<ul>``), with ``\item`` becoming ``<li>``.
+    def _list_block(match):
+        kind = match.group(1)
+        body = match.group(2)
+        body = _re.sub(r"\\item\s*", "<li>", body)
+        tag = "ol" if kind == "enumerate" else "ul"
+        return f"<{tag}>\n{body}</{tag}>\n"
+
+    text = _re.sub(
+        r"\\begin\{(enumerate|itemize)\}(.*?)\\end\{\1\}",
+        _list_block,
+        text,
+        flags=_re.DOTALL,
+    )
+    # Generic ``\begin{quote}``/``\end{quote}`` -> blockquote-ish HTML.
+    text = _re.sub(r"\\begin\{quote\}", "<blockquote>", text)
+    text = _re.sub(r"\\end\{quote\}", "</blockquote>", text)
+
+    # LaTeX accents in author lists copied from BibTeX. Cover the common
+    # ones; unknown sequences fall through unchanged.
+    accents = {
+        r"\'a": "á", r"\'e": "é", r"\'i": "í", r"\'o": "ó", r"\'u": "ú",
+        r"\'A": "Á", r"\'E": "É", r"\'I": "Í", r"\'O": "Ó", r"\'U": "Ú",
+        r"\`a": "à", r"\`e": "è", r"\`i": "ì", r"\`o": "ò", r"\`u": "ù",
+        r"\^a": "â", r"\^e": "ê", r"\^i": "î", r"\^o": "ô", r"\^u": "û",
+        r'\"a': "ä", r'\"e': "ë", r'\"i': "ï", r'\"o': "ö", r'\"u': "ü",
+        r'\"A': "Ä", r'\"O': "Ö", r'\"U': "Ü", r'\"s': "ß", r"\ss{}": "ß",
+        r"\c{c}": "ç", r"\c{C}": "Ç",
+        r"\H{o}": "ő", r"\H{u}": "ű",
+        r"\~n": "ñ", r"\~N": "Ñ",
+        r"\~a": "ã", r"\~o": "õ",
+    }
+    for src, dst in accents.items():
+        text = text.replace(src, dst)
+
+    # Section symbol and small typographic shorthands.
+    text = text.replace(r"\S", "§")
+    text = text.replace(r"\&", "&")
+    text = text.replace(r"\textbackslash{}", "\\")
+    text = text.replace(r"\dots", "…").replace(r"\ldots", "…")
+    text = text.replace(r"\,", " ")  # narrow no-break space
+    text = text.replace(r"\%", "%")
+    text = text.replace(r"\_", "_")
+    text = text.replace(r"---", "—").replace(r"--", "–")
+
+    # Inline math: drop the dollar-sign delimiters and convert a few common ops.
+    def _math(match):
+        body = match.group(1)
+        body = body.replace(r"\times", "×")
+        body = body.replace(r"\to", "→")
+        body = body.replace(r"\le", "≤").replace(r"\ge", "≥")
+        body = _re.sub(r"\\[a-zA-Z]+", "", body)
+        return body
+
+    text = _re.sub(r"\$([^$\n]+)\$", _math, text)
+
+    # Restore brace and backslash placeholders.
+    text = text.replace("\x01BS\x01", "\\")
+    text = text.replace("\x01LB\x01", "{")
+    text = text.replace("\x01RB\x01", "}")
+
+    # Restore stashed blocks.
+    for i, src in enumerate(inline):
+        text = text.replace(f"\x00INLINE{i}\x00", src)
+    for i, src in enumerate(fences):
+        text = text.replace(f"\x00FENCE{i}\x00", src)
+    return text
+
 
 def render_md(path: Path) -> str:
     text = path.read_text(encoding="utf-8")
+    text = _delatex(text)
     # Pull Mermaid fenced blocks out before markdown runs so that the
     # markdown library does not HTML-escape their contents (which would
     # break client-side rendering: Mermaid needs raw " and <br/>).
