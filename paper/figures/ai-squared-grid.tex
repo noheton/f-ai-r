@@ -9,6 +9,14 @@
 % the (AI)^2 factor itself.
 \begin{figure}[!t]
 \centering
+% Text-format macros for the cell bodies. These are NOT TikZ styles
+% (TikZ styles only colour the node, not the text inside the node);
+% they are plain LaTeX font-and-colour switches that work inside the
+% scope braces of each ``{\cellhdr ...}'' run.
+\providecommand{\cellhdr}{\sffamily\bfseries\footnotesize\color{black}}
+\providecommand{\cellsub}{\sffamily\itshape\footnotesize\color{dlrGrau1}}
+\providecommand{\cellnote}{\sffamily\footnotesize\color{black}}
+\providecommand{\surface}{\sffamily\footnotesize\color{dlrBlau1}}
 \begin{tikzpicture}[
   every node/.style={font=\sffamily\footnotesize, align=center,
                      inner sep=4pt},

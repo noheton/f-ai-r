@@ -72,6 +72,8 @@ scientific-    source-       illustration       condenser
 
 ## Verification ladder
 
+![Verification ladder rendered as a finite-state machine, with each rung sized in proportion to the number of fair2r:Claim entities currently at that rung in the live graph.](static/figures/ladder-populations.png)
+
 A `fair2r:Claim` carries one of:
 
 | state | meaning |

@@ -3,6 +3,8 @@
 Authoritative source: [`provenance.ttl`](provenance.ttl). This file is a
 diagrammatic mirror only.
 
+![Topology of the F(AI)²R provenance graph. Five PROV-O lanes (Agents, Plans, Activities, Entities, Claims) plus a Contribution satellite band, with each node decorated by its current instance count read from the live doc/provenance.ttl.](static/figures/provenance-topology.png)
+
 ## Diagram (Mermaid)
 
 ```mermaid

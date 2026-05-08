@@ -23,6 +23,10 @@ that the partition the Author's Note describes
 (`paper/sections/authors-note.tex`, *What surprised me about the
 cooperation*) is empirically auditable rather than asserted.
 
+## Distribution by type
+
+![Histogram of human-author contributions to the manuscript by type, read from this file at render time and grouped by family (structural / directive / corrective / meta / uptake).](static/figures/contribution-histogram.png)
+
 ## Contribution types
 
 Each entry carries one of:
