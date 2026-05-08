@@ -123,6 +123,27 @@ change, no JS.
 `doc/user-contributions.md`.
 *Provenance IRI:* `fair2r:hc-make-pages-mobile-friendly`
 
+### 2026-05-08 --- Rule shape: portrait poster density fix + scrutinizer rule
+*Type:* `rule-shape`
+*Leverage:* high
+*Triggered:* User screenshot showed the portrait poster filled
+only ~50 % of the page; user said *"also update the scrutinizer
+to account for that"*. Two-step contribution: (a) fix the poster
+(font 25pt → 30pt, figures to full linewidth, +2 blocks in
+centre column; rendered fill verified at 98 %); (b) promote the
+catch into permanent rules in `agents/layout-scrutinizer.md`
+under *You do (conference poster)*: vertical fill ≥ 80 %,
+column balance ≤ 15 %. The rule-shape leverage is high because
+the same density-defect class will recur whenever content sized
+for one orientation lands in another; the scrutinizer now
+catches it without rediscovery.
+*Artefacts touched:* `slides/poster-A0.tex`,
+`site/static/figures/poster-A0.png`,
+`.github/workflows/build-slides.yml`,
+`agents/layout-scrutinizer.md`, `doc/provenance.ttl`,
+`doc/logbook.md`, `doc/user-contributions.md`.
+*Provenance IRI:* `fair2r:hc-fix-poster-density-and-scrutinizer-rule`
+
 ### 2026-05-08 --- Corrective: provenance graph hygiene pass
 *Type:* `corrective-intervention`
 *Leverage:* medium

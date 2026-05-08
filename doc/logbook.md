@@ -3115,3 +3115,54 @@ paper text).
 Provenance: `act:provenance-graph-hygiene-pass`;
 `hc:provenance-graph-hygiene-pass` (corrective-intervention,
 medium leverage).
+
+## 2026-05-08 — Portrait poster density fix + scrutinizer rule update
+
+*Author:* claude-opus-4-7 (under direction of repo owner)
+*Touched:* `slides/poster-A0.tex` (font 25pt → 30pt; figures
+sized to full `\linewidth`; added *Contribution shape* and
+*Failure modes the practices cover* blocks to the centre column),
+`site/static/figures/poster-A0.png` (re-rendered, now 918 KB),
+`.github/workflows/build-slides.yml` (staging step copies
+`contribution-histogram.png` as well),
+`agents/layout-scrutinizer.md` (two new poster checks: vertical
+fill ≥ 80 %, column balance ≤ 15 % delta), `doc/provenance.ttl`,
+`doc/logbook.md`, `doc/user-contributions.md`.
+
+*Decision / outcome.* User screenshot exposed that the portrait
+poster fill was only ~50 % of the page — the content sized for
+landscape didn't scale up when the orientation flipped. The
+scrutinizer rules I had just landed in PR #52 did not catch
+this density defect.
+
+(1) **Density fix**: documentclass bumped 25pt → 30pt;
+figures widened from 0.95–0.96 linewidth to full
+`\linewidth`; centre column gained a *Contribution shape*
+block (with the existing `contribution-histogram.png`) and a
+*Failure modes the practices cover* block. Rendered fill
+measured at **98 %** of page height (verified with
+`pdftoppm + Pillow.find-lowest-non-white-row`).
+
+(2) **Scrutinizer rule update**: `agents/layout-scrutinizer.md`
+gained two new poster checks under the *You do (conference
+poster)* section:
+- **Vertical fill must be ≥ 80 %** — render the PDF to a PNG,
+  find the lowest non-white scan row, divide by total height;
+  that's the fill ratio.
+- **Column balance ≤ 15 %** — run `pdftotext -layout` and
+  check the per-column trailing whitespace; tallest column
+  shouldn't outrun the shortest by more than 15 %.
+
+Both are now catchable invariants rather than eyeballing
+defects, with the same render-and-measure script I used to
+verify this commit.
+
+Build-slides workflow's staging step extended to copy
+`contribution-histogram.png` (the new poster asset) into
+`slides/` before the compile.
+
+Provenance: `act:fix-poster-density-and-scrutinizer-rule`
+(`prov:wasInformedBy act:expand-layout-scrutinizer-and-flip-poster`);
+`hc:fix-poster-density-and-scrutinizer-rule` (rule-shape, high
+leverage --- catches a recurring defect class).
+Triple count 2363 → 2379 (+16).

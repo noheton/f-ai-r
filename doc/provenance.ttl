@@ -2996,3 +2996,23 @@ ent:section-discussion  a fair2r:Section ;
 act:invalidate-discussion-section  prov:invalidated ent:section-discussion ;
     prov:wasAssociatedWith agent:claude-opus-4-7 ;
     prov:wasGeneratedBy act:rev-reconcile-and-illustrate .
+
+#-------------------------------------------------------------------------
+# 2026-05-08 --- Portrait poster density fix + scrutinizer rule update.
+#-------------------------------------------------------------------------
+
+act:fix-poster-density-and-scrutinizer-rule  a prov:Activity ;
+    rdfs:label "Fix portrait-poster vertical density; add density rule to layout-scrutinizer"@en ;
+    prov:startedAtTime "2026-05-08T00:00:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith agent:human-author , agent:claude-opus-4-7 , agent:layout-scrutinizer ;
+    prov:wasInformedBy act:expand-layout-scrutinizer-and-flip-poster ;
+    rdfs:comment "Researcher screenshot of the rendered portrait poster showed massive empty space below the content (~50% of the page blank). The portrait flip turned the columns from ~38 cm to ~110 cm tall but the content density remained sized for landscape. Fixes: bumped documentclass from 25pt to 30pt; widened figures from 0.95-0.96 linewidth to full linewidth; added a 'Contribution shape' block (with contribution-histogram.png) and a 'Failure modes the practices cover' block to the centre column. New PNG rendered (now 918 KB); build-slides.yml staging step extended to copy contribution-histogram.png as well. Rendered fill measured by pdftoppm + Pillow: 98 % of page height (was ~50 %). Researcher then said 'also update the scrutinizer to account for that'; agents/layout-scrutinizer.md gained two new poster checks: (i) vertical fill must be >= 80 % (measured via the same render-and-find-lowest-non-white-row method I used to verify the fix); (ii) column balance must be within ~15 % of tallest column. Both are catchable invariants now, not just eyeballed."@en .
+
+hc:fix-poster-density-and-scrutinizer-rule  a fair2r:HumanContribution ;
+    rdfs:label "Researcher direction: poster has empty bottom half; update scrutinizer to catch this"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "rule-shape" ;
+    fair2r:contributionLeverage "high" ;
+    rdfs:comment "Two-step contribution: (a) the screenshot exposed the density defect that the scrutinizer rules I had just landed didn't catch; (b) the user direction promoted that catch into a permanent scrutinizer rule. The rule-shape leverage is high because the same defect class will recur whenever a poster's content is sized for one orientation and rendered into another --- the scrutinizer now catches it without a re-discovery."@en ;
+    dcterms:created "2026-05-08"^^xsd:date ;
+    prov:influenced act:fix-poster-density-and-scrutinizer-rule .

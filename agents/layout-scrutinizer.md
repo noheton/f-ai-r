@@ -68,9 +68,23 @@ The poster `slides/poster-A0.tex` is a tikzposter A0 portrait
 
 - **Page count must equal exactly 1.** A second page indicates
   block overflow; report which column / block overflowed.
-- Check column balance --- the three columns should reach
-  similar heights; a column that ends 30 cm above the others is
-  a layout defect.
+- **Vertical fill must be at least 80 %.** Render the PDF to a
+  PNG and find the lowest non-white scan row; that row's `y`
+  position divided by the total height is the fill ratio. A
+  poster that fills only the top half of A0 portrait is a
+  density defect, not a content defect: the eye reads it as
+  unfinished. Fixes: enlarge embedded figures to fill column
+  width (`\linewidth` rather than `0.95\linewidth`), bump the
+  document `25pt` size class to `30pt` or `36pt`, or add
+  blocks until the columns reach a coherent bottom edge. The
+  empty-bottom-half failure mode was discovered on the first
+  portrait flip and is a recurring trap when content sized for
+  landscape is dropped into portrait.
+- **Column balance must be within ~15 % of the tallest
+  column.** A column that ends 30 cm above the others is a
+  layout defect; redistribute blocks or add a balancing block.
+  Run `pdftotext -layout` on the rendered PDF and inspect the
+  per-column trailing whitespace.
 - Check that every embedded figure (`\includegraphics`) is
   legible at 1 m viewing distance: minimum text size in the
   figure is roughly 14 pt at A0 scale.
