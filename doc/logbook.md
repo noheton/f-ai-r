@@ -2766,3 +2766,34 @@ no undefined references. Triple count 2227 → 2243 (+16).
 Provenance: `act:scrutinizer-pass-fix-up`
 (`prov:wasInformedBy act:trim-pass-focused-narrative`);
 `hc:scrutinizer-pass-fix-up` (corrective-intervention, medium).
+
+## 2026-05-07 — Hero figure rendered to PNG; embedded on the Pages Home page
+
+*Author:* claude-opus-4-7 (under direction of repo owner)
+*Touched:* `paper/figures/hero.standalone.tex` (added `amsmath`),
+`paper/figures/hero.png` (new — 200 dpi PNG export),
+`site/static/figures/hero.png` (copy for the Pages site),
+`site/index.md` (embedded), `doc/provenance.ttl`,
+`doc/logbook.md`, `doc/user-contributions.md`.
+
+*Decision / outcome.* Researcher question: *"do we have an
+eyecatcher graphic is it also in the pages?"*. The PDF carries
+hero on its front matter (loaded by `paper/main.tex` via
+`\input{figures/hero}`); the Pages site did not surface any of
+the paper's signature visuals. Closes the gap by rendering the
+TikZ source via the existing standalone wrapper to a 200 dpi PNG
+and embedding it on `site/index.md` between the lede and the
+CTA row. Same drift-proof pattern as the methodology-page
+evolutions table: source of truth in `paper/figures/`, render
+committed to `site/static/figures/`, embedding declared in the
+page Markdown.
+
+`paper/figures/hero.standalone.tex` gained a `\usepackage{amsmath}`
+declaration; without it the standalone build broke on the
+math-mode title `$\text{F}\,(\text{AI})^{2}\,\text{R}$`. This
+mirrors the same fix applied to `paper/style/fair2r.sty` in the
+PDF-build fix pass earlier today.
+
+Provenance: `act:render-hero-png-for-site`;
+`hc:eyecatcher-on-pages` (corrective-intervention, low). Graph
+triples 2243 → 2257 (+14).

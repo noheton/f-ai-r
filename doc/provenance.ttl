@@ -2820,3 +2820,24 @@ hc:scrutinizer-pass-fix-up  a fair2r:HumanContribution ;
     rdfs:comment "User said 'run a scrutinizer pass'. Three audit subagents returned punch lists; small / safe items applied directly here, taste calls (further prose-density tightening, the bib Missing-$ defect) deferred. Re-citing 8 orphaned bib entries in their natural prose locations is the load-bearing repair: the trim removed the dedicated sections that carried these references but the underlying claims still depend on them. The provenance-analysis.py slug-match heuristic warning (sec:appendix-evolution -> ent:section-appendix-evolution-chronology) is acknowledged but not fixed in this commit; that is a script-level fix for a follow-up."@en ;
     dcterms:created "2026-05-07"^^xsd:date ;
     prov:influenced act:scrutinizer-pass-fix-up .
+
+#-------------------------------------------------------------------------
+# 2026-05-07 --- Hero figure rendered to PNG and embedded on the Pages
+# Home page. The PDF already carried hero in front matter; the site did
+# not have an eye-catcher.
+#-------------------------------------------------------------------------
+
+act:render-hero-png-for-site  a prov:Activity ;
+    rdfs:label "Render hero.tex to PNG via hero.standalone.tex; embed on site/index.md"@en ;
+    prov:startedAtTime "2026-05-07T00:00:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith agent:human-author , agent:claude-opus-4-7 ;
+    rdfs:comment "Researcher question: 'do we have an eyecatcher graphic is it also in the pages?'. The PDF carries hero on its front matter; the Pages site did not. paper/figures/hero.standalone.tex (already present, with amsmath added so the math-mode title renders) compiled with pdflatex to hero.standalone.pdf, then converted to hero.png at 200 dpi via pdftoppm. Copied to site/static/figures/hero.png and embedded near the top of site/index.md, between the lede and the CTA row."@en .
+
+hc:eyecatcher-on-pages  a fair2r:HumanContribution ;
+    rdfs:label "Researcher question that surfaced a missing eye-catcher on the Pages site"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "corrective-intervention" ;
+    fair2r:contributionLeverage "low" ;
+    rdfs:comment "Question implied a defect: the paper had a front-matter hero figure but the Pages Home page surfaced none of the paper's signature visuals. The TikZ-only hero had no PNG export until now; rendering it via the standalone wrapper closes the gap. Same drift-proof pattern as the methodology-page evolutions table: source of truth in paper/figures/, render committed to site/static/figures/, embedding declared in the page Markdown."@en ;
+    dcterms:created "2026-05-07"^^xsd:date ;
+    prov:influenced act:render-hero-png-for-site .
