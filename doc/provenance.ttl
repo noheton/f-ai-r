@@ -36,6 +36,8 @@ fair2r:Manuscript       a owl:Class ; rdfs:subClassOf prov:Entity ;
     rdfs:label "Manuscript"@en .
 
 fair2r:Section          a owl:Class ; rdfs:subClassOf prov:Entity .
+fair2r:Transcript       a owl:Class ; rdfs:subClassOf prov:Entity ;
+    rdfs:label "Conversation transcript binding a working session to the manuscript via prov:used; carrier of the first integrated practice (transcript preservation)."@en .
 fair2r:Figure           a owl:Class ; rdfs:subClassOf prov:Entity .
 fair2r:Prompt           a owl:Class ; rdfs:subClassOf prov:Plan .
 fair2r:Build            a owl:Class ; rdfs:subClassOf prov:Activity .
@@ -2715,3 +2717,32 @@ ent:section-appendix-implementation  a fair2r:Section ;
     prov:wasGeneratedBy act:trim-pass-2-appendix-routing ;
     prov:wasAttributedTo agent:human-author , agent:claude-opus-4-7 ;
     prov:wasDerivedFrom ent:section-implementation .
+
+#-------------------------------------------------------------------------
+# 2026-05-07 --- Transcript preservation: doc/transcripts/ populated for
+# the first time. Closes a long-standing gap between the prescription
+# (eight-practices.tex item 1) and the practice ("Pipeline as target,
+# not yet as practice." --- appendix-d-evolution-chronology.tex).
+#-------------------------------------------------------------------------
+
+act:meta-cooperation-2026-05-07-transcript-preservation  a prov:Activity ;
+    rdfs:label "Meta-cooperation: populate doc/transcripts/ for the first time, exporting today's session"@en ;
+    prov:startedAtTime "2026-05-07T00:00:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith agent:human-author , agent:claude-opus-4-7 ;
+    rdfs:comment "Researcher prompt: 'can you keep a full transcript of our chat in a separate document?'. Created doc/transcripts/ (new directory), doc/transcripts/README.md (format + export workflow + practice-1 binding), and doc/transcripts/2026-05-07-session.md (the session record). Schema growth: fair2r:Transcript class added so transcripts bind as typed entities, not as generic prov:Entity. The transcript is partial by construction (the pre-compaction half of the session is reachable only via the harness JSONL), and that limit is named explicitly in the file."@en .
+
+ent:transcript-2026-05-07  a fair2r:Transcript ;
+    rdfs:label "Session transcript 2026-05-07: trim, getting-started, full-loop audit, observations"@en ;
+    dcterms:source "doc/transcripts/2026-05-07-session.md" ;
+    dcterms:created "2026-05-07"^^xsd:date ;
+    prov:wasGeneratedBy act:meta-cooperation-2026-05-07-transcript-preservation ;
+    prov:wasAttributedTo agent:human-author , agent:claude-opus-4-7 .
+
+hc:transcript-preservation  a fair2r:HumanContribution ;
+    rdfs:label "Researcher prompt: keep a full transcript of our chat in a separate document"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "rule-shape" ;
+    fair2r:contributionLeverage "high" ;
+    rdfs:comment "User asked for a transcript of the cooperation, in line with practice 1 of the eight integrated practices. Until 2026-05-07 the practice was prescribed but not honoured --- the evolution chronology calls this 'Pipeline as target, not yet as practice.' This contribution closes that gap by populating doc/transcripts/ for the first time. Treated as rule-shape rather than content-prompt: the contribution is the discipline (per-session transcripts committed to doc/transcripts/), not the document itself."@en ;
+    dcterms:created "2026-05-07"^^xsd:date ;
+    prov:influenced act:meta-cooperation-2026-05-07-transcript-preservation , ent:transcript-2026-05-07 .
