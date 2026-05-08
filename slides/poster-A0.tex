@@ -14,9 +14,9 @@
 % poster renders the same as the paper's figures when held side
 % by side.
 
-\documentclass[25pt, a0paper, portrait, margin=20mm,
-               innermargin=12mm, colspace=10mm,
-               subcolspace=4mm, blockverticalspace=10mm]{tikzposter}
+\documentclass[30pt, a0paper, portrait, margin=20mm,
+               innermargin=12mm, colspace=14mm,
+               subcolspace=4mm, blockverticalspace=14mm]{tikzposter}
 
 \tikzposterlatexaffectionproofoff
 
@@ -143,7 +143,7 @@ through them, \textbf{squared}: each axis demands two passes
 2$\times$2 of writer $\times$ reader.\\[2mm]
 \normalsize\color{black}\mdseries
 \begin{center}
-\includegraphics[width=0.95\linewidth]{hero.png}
+\includegraphics[width=\linewidth]{hero.png}
 \end{center}
 \itshape Multiplicative, not appended. \emph{4AI hei{\ss}t alles}.
 }
@@ -165,6 +165,30 @@ The pipeline is the team; the team is the methodology.\\
 Specialisation reduces hallucination at the seam.
 }
 
+\block{Contribution shape}{
+\begin{center}
+\includegraphics[width=\linewidth]{contribution-histogram.png}
+\end{center}
+Human-author contributions to this manuscript by type, read live
+from \texttt{doc/user-contributions.md}. Structural decisions and
+rule-shape interventions are rare but high-leverage; corrective
+interventions are the catch-and-fix work; \textbf{responsibility-
+uptake} is the leg of the contribution the AI structurally
+cannot share.
+}
+
+\block{The eight failure modes the practices cover}{
+\textbf{Fabricated citations} (Practice 2 + 6).
+\textbf{Drift between claim and evidence} (3).
+\textbf{Sloppification} (5).
+\textbf{Hedge accretion} (5 + readability scrutinizer).
+\textbf{Boilerplate disclosure} (6).
+\textbf{Authorship laundering} (7).
+\textbf{Pre-publication leakage}, \textbf{audience fatigue},
+and \textbf{adversarial review} are named as residual; the
+discipline does not claim to catch them.
+}
+
 % =============================================================
 % RIGHT COLUMN  --  the machinery and the live state
 % =============================================================
@@ -172,7 +196,7 @@ Specialisation reduces hallucination at the seam.
 
 \block{Verification ladder, live populations}{
 \begin{center}
-\includegraphics[width=0.96\linewidth]{ladder-populations.png}
+\includegraphics[width=\linewidth]{ladder-populations.png}
 \end{center}
 A finite-state machine; node area $\propto$ count of
 \texttt{fair2r:Claim} entities at that rung in
@@ -183,7 +207,7 @@ human-only rungs to the right.
 
 \block{Provenance graph as audit substrate}{
 \begin{center}
-\includegraphics[width=0.96\linewidth]{provenance-topology.png}
+\includegraphics[width=\linewidth]{provenance-topology.png}
 \end{center}
 Five PROV-O lanes plus a Contribution satellite band. Every
 node carries its current instance count. \textbf{An audit run

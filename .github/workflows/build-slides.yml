@@ -33,6 +33,7 @@ jobs:
           cp -v paper/figures/hero.png slides/ 2>&1 || true
           cp -v paper/figures/ladder-populations.png slides/ 2>&1 || true
           cp -v paper/figures/provenance-topology.png slides/ 2>&1 || true
+          cp -v paper/figures/contribution-histogram.png slides/ 2>&1 || true
           ls -la slides/*.png || true
 
       - name: Compile pitch deck
