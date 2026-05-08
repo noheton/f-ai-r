@@ -2292,6 +2292,7 @@ in their fork's `site/getting-started.md` — that is the only
 hand-edit step the sync does not cover.
 =======
 >>>>>>> origin/main
+<<<<<<< HEAD
 
 ## 2026-05-07 — Trim pass: evolution chronology -> appendix; pattern §handback de-duplicated
 
@@ -2341,3 +2342,5 @@ Triple count 2107 → 2129 (+22).
 *Next:* User to pick from the A–F further-candidates list
 posted in chat; no-parentless-claim invariant remains 0;
 site rebuilds 27 pages clean.
+=======
+>>>>>>> origin/main
