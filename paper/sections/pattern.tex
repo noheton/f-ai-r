@@ -132,7 +132,7 @@ claim invoked at \textsc{lit-read} carries a GRADE certainty floor of
 \textsc{moderate}; a claim at \textsc{ai-confirmed} can carry at most
 \textsc{low}. The mapping is a floor, not a ceiling.
 
-\subsection{Handback and mirror disciplines}
+\subsection{Handback discipline}
 \label{sec:handback}
 
 The four scrutinizing stages --- Source Analyzer, Layout Scrutinizer,
@@ -141,18 +141,10 @@ They write \emph{Defect Registries} under
 \texttt{doc/handbacks/}; the repair lands in a subsequent commit by
 a prose-owning agent. The cost is one extra commit boundary per
 cycle. The payoff is that ``what did the scrutinizer actually flag?''
-has a single canonical answer in the git history.
-
-Every primary artefact has two mirrored representations: the source
-under version control, and the rendered output. The pair is enforced
-for the manuscript, the provenance graph, the prompts, and the
-logbook. Drift between source and render is detectable; the build
-either succeeds or fails.
-
-The pattern, in one sentence: \emph{the manuscript, the provenance
-graph, and the logbook are primary artefacts and must remain
-consistent and up to date at all times}. A commit that updates one
-and leaves the others lagging is a defect, even if the build passes.
+has a single canonical answer in the git history. The mirror
+discipline that backs the handback --- every primary artefact has
+a (source, render) pair under version control, the build either
+agrees or fails --- is enumerated as practice~4 of \S\ref{sec:eight}.
 
 \subsection{Extensibility through domain ontologies}
 \label{sec:domain-ontologies}

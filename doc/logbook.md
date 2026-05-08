@@ -2292,3 +2292,55 @@ in their fork's `site/getting-started.md` — that is the only
 hand-edit step the sync does not cover.
 =======
 >>>>>>> origin/main
+<<<<<<< HEAD
+
+## 2026-05-07 — Trim pass: evolution chronology -> appendix; pattern §handback de-duplicated
+
+*Author:* claude-opus-4-7 (under direction of repo owner)
+*Touched:* `paper/sections/evolution.tex`,
+`paper/sections/appendix-d-evolution-chronology.tex` (new),
+`paper/sections/pattern.tex`, `paper/main.tex`,
+`doc/provenance.ttl`, `doc/logbook.md`,
+`doc/user-contributions.md`.
+
+*Decision / outcome.* User picked items 1 and 2 from the
+seven-item complete-loop trim list and routed item 2 to the
+appendix:
+
+1. **`evolution.tex` chronology → appendix.** The 14
+   `\paragraph` blocks that re-narrate rows already in
+   `Table~\ref{tab:evolutions}` move to a new
+   `appendix-d-evolution-chronology.tex`. Body retains the
+   table plus three load-bearing paragraphs that carry
+   *insight not in the table* — *Researcher-as-corrector*,
+   *Pipeline as target not yet as practice*, *Logbook as
+   conscience*. evolution.tex shrinks from 1691 → 1029 words
+   (~3.7 → ~2.3 pp); the appendix carries the full chronology
+   for auditability.
+
+2. **`pattern.tex` §handback trim.** The three-paragraph
+   mirror-discipline restatement (already canonical in
+   `eight-practices.tex` item 4) collapses to a one-paragraph
+   handback statement plus a forward reference. pattern.tex
+   shrinks from 1576 → 1517 words.
+
+Net body reclaim: **~1.6 pp** toward the 10-pp budget. After
+this cut the body sits at roughly 25–26 pp (was 27–28). The
+condenser pass's other cuts (provenance-analysis mechanics
+to appendix; implementation to appendix; statement-of-
+authorship to back-matter; self-reference cut; background
+fold; pattern §domain-ontologies + §research-infrastructure
+to appendix) remain candidates for the next round.
+
+Provenance: `act:trim-pass-evolution-and-pattern`
+(`prov:wasInformedBy act:complete-loop-fix-pass`);
+`hc:trim-evolution-and-pattern` (structural-decision, high
+leverage); new `ent:section-appendix-evolution-chronology`
+`fair2r:Section` (`prov:wasDerivedFrom ent:section-evolution`).
+Triple count 2107 → 2129 (+22).
+
+*Next:* User to pick from the A–F further-candidates list
+posted in chat; no-parentless-claim invariant remains 0;
+site rebuilds 27 pages clean.
+=======
+>>>>>>> origin/main

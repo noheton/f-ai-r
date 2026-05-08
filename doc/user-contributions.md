@@ -59,6 +59,28 @@ The entries below were reconstructed in one batch on 2026-05-06 from
 the available evidence. Future sessions append in real time.
 
 
+### 2026-05-07 --- Structural: trim pass — evolution chronology -> appendix; pattern §handback de-duplicated
+*Type:* `structural-decision`
+*Leverage:* high
+*Triggered:* User picked items 1 and 2 from the seven-item
+complete-loop trim list (`"2 should be an appendix, fix 1"`):
+(1) `pattern.tex` §handback trimmed from a three-paragraph
+mirror-discipline restatement to a one-paragraph handback
+statement plus a forward reference to practice 4 of
+`\S\ref{sec:eight}`; (2) `evolution.tex`'s 14 `\paragraph`
+chronology blocks moved to a new
+`paper/sections/appendix-d-evolution-chronology.tex`. Body
+keeps the digest table plus three load-bearing summary
+paragraphs (Researcher-as-corrector, Pipeline as target not
+yet as practice, Logbook as conscience). Net body reclaim
+~1.6 pp toward the 10-pp budget.
+*Artefacts touched:* `paper/sections/evolution.tex`,
+`paper/sections/appendix-d-evolution-chronology.tex` (new),
+`paper/sections/pattern.tex`, `paper/main.tex`,
+`doc/provenance.ttl`, `doc/logbook.md`,
+`doc/user-contributions.md`.
+*Provenance IRI:* `fair2r:hc-trim-evolution-and-pattern`
+
 ### 2026-05-07 --- Content prompt: getting-started guide + auto-sync from CLAUDE.md
 *Type:* `content-prompt`
 *Leverage:* high
