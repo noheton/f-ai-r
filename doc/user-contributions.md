@@ -84,6 +84,39 @@ is a defect the FAIR aligner can check for.
 `doc/logbook.md`, `doc/user-contributions.md`.
 *Provenance IRI:* `fair2r:hc-transcript-preservation`
 
+### 2026-05-07 --- Structural: focused-narrative trim pass + update pass
+*Type:* `structural-decision`
+*Leverage:* high
+*Triggered:* Researcher direction `"generate the focused version.
+afterwards complete update pass."` against the seven-item triage
+filtered by narrative load. Five-beat spine (gap → position →
+eight integrated practices + pipeline → recursive case study +
+honest-about-limits → why now) was the filter. Cuts:
+`background.tex` and `related.tex` removed entirely (substrate
+already inline-cited; *Cousins.* paragraph folded into
+`pattern.tex`); `sustainability.tex` + `objections.tex` merged
+into `limits-and-objections.tex` (~683 w from a combined
+~1170 w); `pattern.tex` §domain-ontologies +
+§research-infrastructure moved to
+`appendix-g-pattern-extensions.tex`; `authors-note.tex` rewritten
+~1010 → 561 w; `evolution.tex` three insight paragraphs collapsed
+into one; `provenance-analysis.tex` trimmed 436 → 276 w. Net
+body 10466 → 6496 words (~38%); PDF 38 → 33 pages.
+*Artefacts touched:* `paper/main.tex`,
+`paper/sections/authors-note.tex` (rewritten),
+`paper/sections/intro.tex` (roadmap),
+`paper/sections/position.tex` (cross-refs),
+`paper/sections/pattern.tex`,
+`paper/sections/eight-practices.tex`,
+`paper/sections/provenance-analysis.tex`,
+`paper/sections/evolution.tex`,
+`paper/sections/limits-and-objections.tex` (new),
+`paper/sections/appendix-g-pattern-extensions.tex` (new),
+`paper/sections/{background,related,sustainability,objections}.tex`
+(removed), `doc/provenance.ttl`, `doc/logbook.md`,
+`doc/user-contributions.md`.
+*Provenance IRI:* `fair2r:hc-trim-pass-focused-narrative`
+
 ### 2026-05-07 --- Structural: trim pass 2 — A–D from further-candidates list
 *Type:* `structural-decision`
 *Leverage:* high

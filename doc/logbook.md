@@ -2588,3 +2588,93 @@ depend on it.
 
 Local compile verified: 38 pages, 397 KB main.pdf, all figures
 rendered.
+
+## 2026-05-07 — Focused-narrative trim pass + update pass
+
+*Author:* claude-opus-4-7 (under direction of repo owner)
+*Touched:* `paper/main.tex`,
+`paper/sections/authors-note.tex` (rewritten to ~561 w),
+`paper/sections/intro.tex` (roadmap rewired),
+`paper/sections/position.tex` (cross-refs),
+`paper/sections/pattern.tex` (§domain-ontologies +
+§research-infrastructure split out; "Cousins." paragraph
+folded in),
+`paper/sections/eight-practices.tex` (orphan cross-refs
+cleaned),
+`paper/sections/provenance-analysis.tex` (trimmed
+436 → 276 w),
+`paper/sections/evolution.tex` (three insight paragraphs
+collapsed into one),
+`paper/sections/limits-and-objections.tex` (new; merged
+sustainability + objections),
+`paper/sections/appendix-g-pattern-extensions.tex` (new; holds
+the moved subsections),
+`paper/sections/background.tex` (removed),
+`paper/sections/related.tex` (removed),
+`paper/sections/sustainability.tex` (removed),
+`paper/sections/objections.tex` (removed),
+`doc/provenance.ttl`, `doc/logbook.md`,
+`doc/user-contributions.md`.
+
+*Decision / outcome.* Researcher direction: *"generate the
+focused version. afterwards complete update pass."* against the
+seven-item triage filtered by narrative load. Five-beat spine
+(gap → position → eight integrated practices + pipeline →
+recursive case study + honest-about-limits → why now) was the
+filter; sections that did not earn a beat were trimmed, folded,
+or appendixed.
+
+Cuts:
+
+- `background.tex` cut entirely. Substrate already cited inline
+  by `intro.tex` and named again in `pattern.tex` where load-
+  bearing.
+- `related.tex` cut entirely. Datasheets / Model Cards / FAIR4*
+  already cited; the load-bearing formal-methods-cousin paragraph
+  folded into `pattern.tex` as *Cousins.*.
+- `sustainability.tex` + `objections.tex` merged into a single
+  `limits-and-objections.tex` (~683 w from a combined ~1170 w);
+  resource cost + frontier-model dependence + equity + the five
+  standing objections + long-term archivability all under one
+  heading.
+- `pattern.tex` §domain-ontologies + §research-infrastructure
+  (~570 w) moved to `appendix-g-pattern-extensions.tex`; body
+  retains a one-paragraph forward pointer.
+- `authors-note.tex` rewritten ~1010 → 561 w; partition + coupling
+  rule + tokens-out-tokens-in kept; chronicle of cooperation
+  events dropped (those live in `evolution.tex` and
+  `user-observations-log.md`).
+- `evolution.tex` three "load-bearing insight" paragraphs
+  (Researcher-as-corrector / Pipeline as target / Logbook as
+  conscience) collapsed into one combined paragraph; the
+  chronology was already in `appendix-d`.
+- `provenance-analysis.tex` trimmed to two figures + a
+  diagnostic-vs-not framing paragraph; the four SPARQL queries
+  remain in `appendix-e`.
+
+Numbers: body 10466 → 6496 words (~38% trim); PDF 38 → 33 pages.
+At a 530 wpp position-paper density, body now lands near 12 pp
+prose + 4 pp floats; with appendices and bibliography, total
+trends toward the 10-pp body target without yet hitting it.
+
+Provenance: `act:trim-pass-focused-narrative` (`prov:wasInformedBy
+act:trim-pass-2-appendix-routing`); `hc:trim-pass-focused-narrative`
+(structural-decision, high). Four `prov:Invalidation` records
+(background, related, sustainability, objections in their body
+roles); two new `fair2r:Section` IRIs (`limits-and-objections`,
+`appendix-pattern-extensions`), each `prov:wasDerivedFrom` its
+predecessor. Triple count 2189 → 2227 (+38).
+
+Cross-references repaired: every `\S\ref{sec:background}`,
+`\S\ref{sec:related}`, `\S\ref{sec:sustainability}`,
+`\S\ref{sec:objections}` redirected (most → `sec:pattern` or
+`sec:limits-and-objections`; a few orphan parentheticals deleted).
+The intro roadmap is rewritten to walk the five-beat spine; the
+Author's Note's closing roadmap shrinks accordingly.
+
+*Next:* Hit the 10-pp budget with one more pass over prose
+density (the eight-practices description blocks, the conclusion's
+Xennial paragraph, and the intro's volume-problem paragraph are
+the remaining-prolix candidates). The bibliography `Missing $`
+warning that keeps `pdflatex` returning non-zero is still a real
+defect to chase.

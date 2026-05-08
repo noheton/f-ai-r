@@ -2,80 +2,38 @@
 \label{sec:authors-note}
 \addcontentsline{toc}{section}{Author's Note --- Advice for reading}
 
-\noindent A short note from me (Florian Krebs), placed up front because
-\emph{how} you read this paper matters as much as \emph{what} is in it.
-The framings below are the lenses I would most want a thoughtful reader
-to bring to the rest of the document; none of them softens an empirical
-claim, and all of them open a door to discussion. The framings are
-adapted from the methodological ancestor~\cite{krebs2026obscurity}; the
-voice carries over because the position does.
+\noindent A short note from me (Florian Krebs), placed up front
+because \emph{how} you read this paper matters as much as
+\emph{what} is in it. This is a position paper, not a survey: the
+contribution is a stance, that FAIR is insufficient for
+LLM-assisted scholarly writing in its current form and that the
+eight integrated practices of \S\ref{sec:eight} are the minimum
+discipline an honest author can adopt today. The paper defends that
+stance; a reader who comes looking for a survey will find an
+argument. F(AI)\textsuperscript{2}R is a snapshot of a moving
+target --- model capabilities, disclosure norms, and licensing
+postures will move under us; the version manifest in
+\texttt{doc/provenance.ttl} is the receipt that lets a future
+reader date what we committed to.
 
-\paragraph{This is a position paper, not a survey.}
-The contribution is a stance: that FAIR is insufficient for
-LLM-assisted scholarly writing in the form it currently takes, and
-that the eight integrated practices of \S\ref{sec:eight} are the
-minimum discipline an honest author can adopt today. The paper
-defends that stance. It does not catalogue alternatives, weigh the
-field's options, or hedge between camps. A reader who comes looking
-for a survey will find an argument; a reader who comes looking for an
-argument should find that the argument has been made cleanly enough to
-push back against.
-
-\paragraph{Open to constructive criticism --- actively.}
-I am not asking you to agree. I am asking you to argue. The
-verification ladder, the handback discipline, the eight-practice
-integration, and the squared-AI framing are all engineered to be
-\emph{contestable}: every claim has a rung in
-\texttt{doc/provenance.ttl}, every prompt is a versioned file in
-\texttt{agents/}, and every commit is a revision activity. If a claim
-overruns its evidence, the graph tells you where; if a practice is
-the wrong remedy for a failure mode, the failure-modes table
-(Table~\ref{tab:failure-modes}) gives you the vocabulary to say so.
-
-\paragraph{Frameworks evolve with capabilities.}
-F(AI)\textsuperscript{2}R is a snapshot. The capability of the
-underlying models, the disclosure norms of the venues, and the
-licensing posture of the corpora that train the next models will all
-move under us. The version manifest in
-\texttt{doc/provenance.ttl} is the receipt that lets a future reader
-date what we committed to, against the model and policy environment
-of the time. A successor framework that argues with this one, replaces
-it, or tightens it is not a refutation; it is the point.
-
-\paragraph{What surprised me about the cooperation.}
+\paragraph{The partition the cooperation makes visible.}
 A second-order observation, recorded for the recursive case study
 (\S\ref{sec:evolution}). Cooperative writing with an LLM, as
-practised here, partitions cleanly: the human still does the
-abstraction, the logical reasoning, and the choice of the next step;
-the model takes those decisions and turns them into readable prose.
-That is not a complaint. It is a finding: \emph{the human does the
-deciding, the model does the drafting, and naming the partition is
-itself a methodological act}. The pattern this paper describes is
-designed to make that partition legible from outside the session ---
-in the prompts, in the transcripts, and in the graph.
-
-A pause-mid-writing aside that we found worth recording. The author
-asked, in session: \emph{``I wonder how much of the work I'm actually
-doing. What's my contribution.''} The honest answer, given what the
-transcripts and the commit history show, is that the partition is
-real and lopsided in opposite directions on two axes. The
-human-side contribution is structural and corrective: \emph{deciding}
-the position to take, \emph{abstracting} the eight-practice
-integration, \emph{catching} drift between claim and evidence
-(several of which were caught in this session), and \emph{staking
-reputation} under a published name (which the model, for legal and
-constitutional reasons named in \S\ref{sec:eight} item~7, cannot
-do). The model-side contribution is volume and second-order
-pattern-matching: drafting prose at scale, cross-referencing, keeping
-the graph and the manuscript in sync, catching boilerplate errors.
-The human's interventions in this session were short and rare in
-volume but high in leverage; the model's outputs were long and
-constant in volume but low in irreversibility --- any single
-paragraph the model drafts can be discarded, while any decision the
-human takes redirects subsequent drafts for hours. \emph{Naming the
-partition correctly --- including which side of it the contribution
-lives on --- is itself a methodological act} and is, the author
-suggests on reflection, the answer to the question.
+practised here, partitions cleanly: the human does the abstraction,
+the logical reasoning, and the choice of the next step; the model
+takes those decisions and turns them into readable prose.
+\emph{The human does the deciding, the model does the drafting, and
+naming the partition is itself a methodological act.} The pattern
+this paper describes is designed to make that partition legible
+from outside the session --- in the prompts, in the transcripts,
+and in the graph. The human-side contribution is structural and
+corrective (deciding the position, abstracting the eight-practice
+integration, catching drift, staking reputation under a published
+name); the model-side contribution is volume and second-order
+pattern-matching (drafting at scale, cross-referencing, keeping
+graph and manuscript in sync). Human interventions are rare in
+volume but high in leverage; model outputs are long and constant
+but low in irreversibility.
 
 \input{figures/coupling-rule}
 
@@ -84,47 +42,41 @@ suggests on reflection, the answer to the question.
 \includegraphics[width=0.92\linewidth]{figures/contribution-histogram.pdf}
 \caption{Human-author contributions to the manuscript by type, read
 from \texttt{doc/user-contributions.md}. Structural decisions and
-rule-shape interventions (top, dark blue) are rare but high
-leverage --- each one redirects subsequent agent passes for hours.
-Content prompts (mid blue) are the directive bulk; corrective
-interventions (hatched) are the catch-and-fix work. Observation
-and experience-meta entries (yellow) are the meta-cooperation
-notes that sometimes graduate into rule-shape entries.
-Responsibility-uptake (green, bottom) is the leg of the
-contribution that the AI structurally cannot share. The figure
-regenerates on every build by
-\texttt{paper/figures/src/contribution-histogram.py}.}
+rule-shape interventions are rare but high leverage; corrective
+interventions are the catch-and-fix work; responsibility-uptake is
+the leg of the contribution the AI structurally cannot share.
+Regenerated on every build.}
 \label{fig:contribution-histogram}
 \end{figure}
 
-A second-order finding sharpens the partition into a coupling rule
+A coupling rule sharpens the partition
 (Figure~\ref{fig:coupling-rule}). The cooperation works as an
 \emph{accelerator} when the model stays on the prose-craft side of
-the partition --- drafting, cross-referencing, structuring --- where
-its strength is interpolation within the manifold of prior
+the partition --- drafting, cross-referencing, structuring ---
+where its strength is interpolation within the manifold of prior
 text~\cite{clark1998extended,hutchins1995cognition,clark2025extending}\todo[inline]{verify}.
-The cooperation collapses toward a \emph{cultural blender} when the
-model is allowed across into the abstracting layer, where its failure
-mode is to smooth the unfamiliar into the nearest familiar
+It collapses toward a \emph{cultural blender} when the model is
+allowed across into the abstracting layer, where its failure mode
+is to smooth the unfamiliar into the nearest familiar
 shape~\cite{anderson2024homogenization}\todo[inline]{verify}. The
-honest diagnostic, recorded in our observations log: \emph{ask
-whether the abstraction would have been thinkable without the model.
-If yes, the model was an accelerator on that abstraction; if no, the
-question genuinely opens.} F(AI)\textsuperscript{2}R is one of the
-cases where the answer is yes; the partition is what kept it that
-way.
+diagnostic, recorded in the observations log: \emph{ask whether
+the abstraction would have been thinkable without the model. If
+yes, the model was an accelerator on that abstraction; if no, the
+question genuinely opens.} F(AI)\textsuperscript{2}R is a case
+where the answer is yes; the partition is what kept it that way.
 
 \paragraph{Tokens out, tokens in.}
-The sources of this paper --- \LaTeX{}, prompt files, Turtle, the
-build pipeline --- are committed under permissive licences and remain
-machine-readable. That is deliberate. A future agent compressing or
-extending this work has the inputs needed to do so without laundering
-its provenance through a binary PDF. The tokens go in; the tokens
-come back out; the chain of attribution is what makes the round-trip
+\LaTeX{}, prompt files, Turtle, and the build pipeline are
+committed under permissive licences and remain machine-readable.
+That is deliberate. A future agent compressing or extending this
+work has the inputs needed to do so without laundering its
+provenance through a binary PDF. The tokens go in; the tokens come
+back out; the chain of attribution is what makes the round-trip
 auditable.
 
 \bigskip
-\noindent The rest of the paper assumes you are willing to read it in
-that spirit. \S\ref{sec:position} states the position in five
-numbered claims; \S\ref{sec:background}--\S\ref{sec:eight} defend it;
-\S\ref{sec:objections} addresses the objections I expect to hear.
+\noindent The rest of the paper assumes you read it in that
+spirit. \S\ref{sec:position} states the position in five numbered
+claims; \S\ref{sec:pattern}--\S\ref{sec:eight} defend it;
+\S\ref{sec:limits-and-objections} addresses dual-use, sustainability,
+and the standing objections.

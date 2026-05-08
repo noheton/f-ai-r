@@ -1,9 +1,19 @@
 \section{Provenance Analysis}
 \label{sec:provenance-analysis}
 
-The graph at \texttt{doc/provenance.ttl} is not a passive record. It
-is a queryable structure whose health, taken section by section,
-\emph{is} the audit pass on \textbf{Reusable} (\S\ref{sec:axes}).
+The graph at \texttt{doc/provenance.ttl} is not a passive record;
+it is a queryable structure whose health \emph{is} the audit pass
+on \textbf{Reusable} (\S\ref{sec:axes}). Two figures carry the
+state of the present manuscript:
+Figure~\ref{fig:provenance-topology} renders the schema with the
+current instance counts read at compile time, and
+Figure~\ref{fig:ladder-populations} renders the verification
+ladder with each rung sized in proportion to the number of claims
+currently at that rung. The four diagnostic SPARQL queries the
+audit reads --- rung distribution, section-to-claim coverage,
+source invocation strength, activity timeline --- and the
+auto-generated tables they produce are walked in
+Appendix~\ref{sec:appendix-provenance-analysis}.
 
 \begin{figure}[!h]
 \centering
@@ -11,58 +21,31 @@ is a queryable structure whose health, taken section by section,
 \caption{Shape of the F(AI)\textsuperscript{2}R provenance graph,
 read from the live \texttt{doc/provenance.ttl} at compile time.
 Five PROV-O lanes (Agents, Plans, Activities, Entities, Claims)
-carry the backbone of the schema; the satellite band underneath
-carries the Contribution mirror that records who --- human or AI
---- did what (\S\ref{sec:authors-note}). Each node is decorated
-with its instance count; the figure regenerates from the same
-graph the queries below run against, so a future audit pass that
-shifts the cardinalities shifts this figure too.}
+plus a Contribution satellite band; each node is decorated with
+its current instance count.}
 \label{fig:provenance-topology}
 \end{figure}
-
-The audit reads four diagnostic SPARQL queries against the live
-graph: rung distribution (per-claim verification state),
-section-to-claim coverage (sections present in prose vs.\ in the
-graph), source invocation strength (citations actually invoked by a
-claim, surfacing ``ghost'' citations), and the activity timeline
-(the dated record of substantive change). The queries, their results
-on the present manuscript, and the auto-generated tables they emit
-into the prose at compile time are walked in
-Appendix~\ref{sec:appendix-provenance-analysis}.
 
 \begin{figure}[!h]
 \centering
 \includegraphics[width=0.96\linewidth]{figures/ladder-populations.pdf}
-\caption{Verification ladder with live rung populations. Each node's
-area is proportional to the count of \texttt{fair2r:Claim} entities
-currently at that rung in \texttt{doc/provenance.ttl}; the topology
-is the same FSM as Figure~\ref{fig:ladder-fsm} but the figure now
-also tells the reader where the manuscript stands. The dotted
-vertical rule marks the model ceiling: rungs left of it are
-deliverable by an LLM agent alone, rungs right of it require a
-human reading the cited literature. The dotted yellow back-edge is
-the only legal back-edge --- a retraction recorded as a
-\texttt{prov:Invalidation}, never as a deletion. Regenerated on
-every build by \texttt{paper/figures/src/ladder-populations.py}.}
+\caption{Verification ladder with live rung populations. Each
+node's area is proportional to the count of
+\texttt{fair2r:Claim} entities currently at that rung. The dotted
+vertical rule marks the model ceiling between agent-deliverable
+and human-only rungs; the dotted yellow back-edge is the only
+legal back-edge --- a retraction recorded as a
+\texttt{prov:Invalidation}, never as a deletion.}
 \label{fig:ladder-populations}
 \end{figure}
 
-A submission whose load-bearing claims sit below
-\textsc{lit-read} fails the FAIR audit unless the manuscript hedges
-explicitly --- the rung distribution
-(Figure~\ref{fig:ladder-populations}) tells the reviewer where
-hedging is mandatory and where it would be over-cautious.
-
-\paragraph{What the analysis is and is not.}
 The four queries are diagnostic, not exhaustive. They surface the
 failure modes of \S\ref{sec:failure-modes} that have a graph
-signature: ghost citations, drift between prose and graph, sections
-that have not yet been curated. They do not surface
-\textbf{semantic} drift --- a claim that has been correctly recorded
-in the graph but whose phrasing in the prose has shifted away from
-its evidence. That is the readability scrutinizer's job
-(\S\ref{sec:pipeline}), not the graph's. A live, more interactive
-view of the same graph is published at
+signature --- ghost citations, drift between prose and graph,
+sections without curated claims --- and explicitly do not surface
+\textbf{semantic} drift (a claim correctly recorded in the graph
+whose prose has shifted away from its evidence). That is the
+readability scrutinizer's job (\S\ref{sec:pipeline}). A live
+interactive view of the graph is published at
 \href{https://noheton.github.io/f-ai-r/provenance.html}{the
-\textbf{Provenance} tab of the public site}, with a click-to-inspect
-node browser and the same SPARQL queries available client-side.
+\textbf{Provenance} tab of the public site}.
