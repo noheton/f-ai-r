@@ -5,10 +5,7 @@ on:
     branches: ["**"]
     paths:
       - "slides/**"
-      - ".github/workflows/build-slides.yml"
-  pull_request:
-    paths:
-      - "slides/**"
+      - "paper/figures/**"
       - ".github/workflows/build-slides.yml"
   workflow_dispatch:
 
