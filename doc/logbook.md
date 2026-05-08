@@ -2189,7 +2189,6 @@ covers them; tighten `authors-note.tex`) and the Xennial
 paragraph split (readability reviewer proposal: split after
 *"F(AI)^2R is in part an attempt to encode it."* into two
 paragraphs). Both touch authorial voice and need a human call.
-<<<<<<< HEAD
 
 ## 2026-05-07 — Researcher observation: associative thinking as the cooperation multiplier
 
@@ -2230,9 +2229,6 @@ whether to graduate this observation into `evolution.tex`
 (process angle) or `authors-note.tex` (researcher-experience
 angle). Both are candidate homes; the choice depends on which
 cooperation rule the paper wants to commit to publishing.
-=======
->>>>>>> origin/main
-<<<<<<< HEAD
 
 ## 2026-05-07 — Getting-started guide for new adopters + auto-sync from CLAUDE.md
 
@@ -2290,9 +2286,6 @@ is required. If a future adopter forks the repo, they update
 the canonical-reference URL inside the initialization prompt
 in their fork's `site/getting-started.md` — that is the only
 hand-edit step the sync does not cover.
-=======
->>>>>>> origin/main
-<<<<<<< HEAD
 
 ## 2026-05-07 — Trim pass: evolution chronology -> appendix; pattern §handback de-duplicated
 
@@ -2342,8 +2335,6 @@ Triple count 2107 → 2129 (+22).
 *Next:* User to pick from the A–F further-candidates list
 posted in chat; no-parentless-claim invariant remains 0;
 site rebuilds 27 pages clean.
-=======
->>>>>>> origin/main
 
 ## 2026-05-07 — Trim pass 2: A–D from the further-candidates list
 
