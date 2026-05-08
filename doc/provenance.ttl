@@ -2739,8 +2739,6 @@ ent:transcript-2026-05-07  a fair2r:Transcript ;
     prov:wasGeneratedBy act:meta-cooperation-2026-05-07-transcript-preservation ;
     prov:wasAttributedTo agent:human-author , agent:claude-opus-4-7 ;
     rdfs:comment "The canonical interactive record is the Claude Code session URL in prov:atLocation; this repository file (dcterms:source) is the human-readable shadow audited against the merged commits. The session URL is gated to session participants and is the authoritative source for verbatim prompt and AI-output text; the shadow file paraphrases AI output and quotes user prompts verbatim within the limits the AI can see post-compaction."@en .
-    prov:wasGeneratedBy act:meta-cooperation-2026-05-07-transcript-preservation ;
-    prov:wasAttributedTo agent:human-author , agent:claude-opus-4-7 .
 
 hc:transcript-preservation  a fair2r:HumanContribution ;
     rdfs:label "Researcher prompt: keep a full transcript of our chat in a separate document"@en ;

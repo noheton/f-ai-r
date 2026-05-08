@@ -15,7 +15,6 @@ it to the corresponding `prov:Activity` via `prov:used`.
   summary of the AI-side actions, with cross-references to commits
   and PRs in `git log` so the transcript is auditable against the
   repository state.
-<<<<<<< HEAD
 - The **canonical interactive transcript** is the Claude Code (or
   equivalent client) session URL — for example
   [`https://claude.ai/code/session_<id>`](https://claude.ai/code/).
@@ -31,12 +30,6 @@ it to the corresponding `prov:Activity` via `prov:used`.
 - This directory is the human-readable shadow of those two records,
   living inside the repository and auditable against the merged
   commits.
-=======
-- The raw harness JSONL transcript is the canonical source. When
-  available, the user exports it via the LLM client's session-export
-  tool and pastes the relevant excerpts here, or commits the JSONL
-  directly. This index is the human-readable shadow.
->>>>>>> origin/main
 
 ## Format
 
