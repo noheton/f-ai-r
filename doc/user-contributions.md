@@ -59,6 +59,35 @@ The entries below were reconstructed in one batch on 2026-05-06 from
 the available evidence. Future sessions append in real time.
 
 
+### 2026-05-07 --- Structural: trim pass 2 — A–D from further-candidates list
+*Type:* `structural-decision`
+*Leverage:* high
+*Triggered:* Researcher direction `"do a to d"` against the
+further-candidates list. (A) `provenance-analysis.tex` mechanics
+→ new `appendix-e-provenance-analysis.tex` (body keeps the two
+figures + a summary paragraph + the "what the analysis is and is
+not" framing). (B) `implementation.tex` →
+`appendix-f-implementation.tex` (label retitled
+`sec:appendix-implementation`; cross-refs in `intro.tex` and
+`position.tex` updated). (C) `statement-of-authorship.tex`
+converted to `\section*` with `\addcontentsline` (back-matter).
+(D) `self-reference.tex` cut from body `\input` (preserved on
+disk; load-bearing claim survives in Author's Note + practice
+5). Net body reclaim ~2.0 pp. Two `prov:Invalidation` records;
+two new appendix sections.
+*Artefacts touched:* `paper/sections/provenance-analysis.tex`,
+`paper/sections/appendix-e-provenance-analysis.tex` (new),
+`paper/sections/appendix-f-implementation.tex` (renamed from
+`implementation.tex`),
+`paper/sections/statement-of-authorship.tex`,
+`paper/sections/eight-practices.tex`,
+`paper/sections/evolution.tex`,
+`paper/sections/appendix-d-evolution-chronology.tex`,
+`paper/sections/intro.tex`, `paper/sections/position.tex`,
+`paper/main.tex`, `doc/provenance.ttl`, `doc/logbook.md`,
+`doc/user-contributions.md`.
+*Provenance IRI:* `fair2r:hc-trim-pass-2-appendix-routing`
+
 ### 2026-05-07 --- Structural: trim pass — evolution chronology -> appendix; pattern §handback de-duplicated
 *Type:* `structural-decision`
 *Leverage:* high
