@@ -11,8 +11,11 @@
 Each practice below is individually unoriginal. The argument is that
 adopting any one in isolation is insufficient against the failure
 modes catalogued in \S\ref{sec:failure-modes}, while adopting all
-eight, with the pipeline of \S\ref{sec:pipeline} enforcing the seams,
-is sufficient against most and honest about the rest.
+eight, with the pipeline of \S\ref{sec:pipeline} enforcing the
+seams, is sufficient against most and honest about the rest.
+Figure~\ref{fig:failure-mode-coverage} reads the eight as columns
+against the failure modes as rows, showing which practice carries
+the load for each.
 
 \begin{description}[leftmargin=1.2em,itemsep=2pt]
     \item[1. Transcript preservation.]
@@ -34,7 +37,12 @@ is sufficient against most and honest about the rest.
         \texttt{prov:wasGeneratedBy}, \texttt{prov:wasAttributedTo},
         \texttt{prov:wasDerivedFrom}, and
         \texttt{fair2r:verificationState}. A retraction is a
-        \texttt{prov:Invalidation} activity, never a deletion.
+        \texttt{prov:Invalidation} activity, never a deletion. The
+        per-claim discipline is the structured-documentation
+        descendant of Datasheets for
+        Datasets~\cite{gebru2021datasheets} and Model
+        Cards~\cite{mitchell2019modelcards}, applied at
+        claim granularity rather than at artefact level.
     \item[4. Mirror discipline (\S\ref{sec:handback}).]
         Every primary artefact has a (source, render) pair under
         version control. The build either agrees or fails.

@@ -2678,3 +2678,91 @@ Xennial paragraph, and the intro's volume-problem paragraph are
 the remaining-prolix candidates). The bibliography `Missing $`
 warning that keeps `pdflatex` returning non-zero is still a real
 defect to chase.
+
+## 2026-05-07 — Scrutinizer-pass fix-up after PR #43
+
+*Author:* claude-opus-4-7 (under direction of repo owner)
+*Touched:* `paper/sections/conclusion.tex`,
+`paper/sections/authors-note.tex`,
+`paper/sections/intro.tex`,
+`paper/sections/pattern.tex`,
+`paper/sections/eight-practices.tex`,
+`paper/sections/limits-and-objections.tex`,
+`paper/sections/self-reference.tex` (deleted),
+`paper/figures/eight-practices.tex` (deleted),
+`doc/provenance.ttl`, `doc/logbook.md`,
+`doc/user-contributions.md`.
+
+*Decision / outcome.* Researcher direction *"run a scrutinizer
+pass"*. Dispatched three audit subagents (layout-scrutinizer,
+readability-reviewer, fair-aligner) against the post-trim state.
+Small / safe findings applied directly; taste calls deferred.
+
+Layout fixes:
+- `paper/sections/self-reference.tex` and
+  `paper/figures/eight-practices.tex` (orphan files retired in
+  earlier passes but kept on disk) **deleted**. Their
+  `prov:Invalidation` records remain in the graph; the on-disk
+  artefacts are gone.
+- Three figure cross-refs added so the captions are no longer
+  prose-orphan: `Figure~\ref{fig:hero}` cited in `intro.tex`
+  (the propose-F(AI)²R sentence);
+  `Figure~\ref{fig:contribution-histogram}` cited in
+  `authors-note.tex` (after "high in leverage");
+  `Figure~\ref{fig:failure-mode-coverage}` cited in
+  `eight-practices.tex` opening paragraph.
+
+Readability fixes:
+- `conclusion.tex` `\S\ref{sec:research-infrastructure}` →
+  `Appendix~\ref{sec:appendix-pattern-extensions}` (the
+  subsection moved to the appendix in PR #43; the prose still
+  pointed at the old body location).
+- The 274-word Xennials paragraph in `conclusion.tex` split at
+  *"F(AI)²R is in part an attempt to encode it."* — a natural
+  seam between the "what was lost" framing and the
+  "responsibility-uptake" framing.
+- Duplicate *"None of the eight is novel"* line dropped from
+  `conclusion.tex` summary (still appears in `intro.tex` +
+  `position.tex` + `eight-practices.tex` — three sites is a
+  position-paper convention, four was incantation).
+- Redundant closing roadmap dropped from `authors-note.tex`
+  (the intro carries the same roadmap, more completely).
+- The trim-artefact paragraph in `pattern.tex` folded into the
+  new *Extensions and cousins.* paragraph (one heading replaces
+  two).
+- *Long-term archivability.* paragraph dropped from
+  `limits-and-objections.tex` — it retreaded the frontier-model
+  dependence material in the same section.
+
+FAIR-aligner fix:
+- 8 newly orphaned bib entries re-cited in their natural prose
+  locations (the trim removed the dedicated sections that
+  carried these `\cite` calls but the underlying claims still
+  depend on them):
+  * `page2021prisma`, `guyatt2008grade` →
+    `pattern.tex` *Crosswalk* paragraph (PRISMA + GRADE
+    crosswalk for the verification ladder).
+  * `w3c2013provo` → `pattern.tex` §axes I (PROV-O over Turtle).
+  * `gebru2021datasheets`, `mitchell2019modelcards` →
+    `eight-practices.tex` item 3 (per-claim provenance maps as
+    structured-documentation descendants of Datasheets / Model
+    Cards).
+  * `aclrr_llm_policy`, `iclr_llm_policy`,
+    `neurips_llm_policy` → `intro.tex` venue-policy-churn
+    sentence.
+
+Acknowledged but deferred:
+- The `provenance_analysis.py` slug-match heuristic flags
+  `sec:appendix-evolution` as *not in graph* even though the
+  graph IRI is `ent:section-appendix-evolution-chronology`.
+  Cosmetic; script-level fix for a follow-up.
+- The bibliography `Missing $` warning that keeps `pdflatex`
+  returning non-zero (build-paper.yml currently treats a
+  non-empty PDF as success); separate follow-up.
+
+Local compile: `latexmk -pdf` produces `main.pdf` at 34 pages,
+no undefined references. Triple count 2227 → 2243 (+16).
+
+Provenance: `act:scrutinizer-pass-fix-up`
+(`prov:wasInformedBy act:trim-pass-focused-narrative`);
+`hc:scrutinizer-pass-fix-up` (corrective-intervention, medium).
