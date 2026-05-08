@@ -59,6 +59,27 @@ The entries below were reconstructed in one batch on 2026-05-06 from
 the available evidence. Future sessions append in real time.
 
 
+### 2026-05-07 --- Content prompt: getting-started guide + auto-sync from CLAUDE.md
+*Type:* `content-prompt`
+*Leverage:* high
+*Triggered:* User asked: *"to make process usable to other
+users can you write a getting started guide (especially for
+the page)? basically I want ppl to run a specific
+initialization prompt to set the process up. (keep this
+instructions always synced to process)"*. New page
+`site/getting-started.md` hands an adopter a single
+initialization prompt that points the LLM at this repository
+as the canonical reference; the *Ground rules* block on the
+page is auto-synced from `CLAUDE.md` by
+`scripts/sync_getting_started.py`, which the site builder
+invokes on every build. Wired into `PAGES` + `NAV`. Site
+now publishes 27 pages.
+*Artefacts touched:* `site/getting-started.md` (new),
+`scripts/sync_getting_started.py` (new),
+`scripts/build_provenance_site.py`, `doc/provenance.ttl`,
+`doc/logbook.md`, `doc/user-contributions.md`.
+*Provenance IRI:* `fair2r:hc-getting-started-page-and-sync`
+
 ### 2026-05-07 --- Observation: associative thinking as the cooperation multiplier
 *Type:* `observation`
 *Leverage:* high
