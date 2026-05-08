@@ -2643,3 +2643,31 @@ hc:getting-started-page-and-sync  a fair2r:HumanContribution ;
     rdfs:comment "Researcher asked for a Pages-side guide aimed at adopters, anchored on a single initialization prompt that bootstraps an F(AI)^2R scaffold from this repository as the canonical reference. The auto-sync requirement was named explicitly: 'keep this instructions always synced to process'. Implemented as: site/getting-started.md (hand-authored prose + a marker-bracketed block); scripts/sync_getting_started.py (extracts the Ground rules section from CLAUDE.md and rewrites the block); invoked at the start of scripts/build_provenance_site.py so the page is regenerated on every site build. Wired into PAGES + NAV so the page is reachable from the Home and Methodology nav. Net new pages: 1 (now 27). The sync discipline is the same as the methodology page's evolutions table: source of truth lives once, mirrors are regenerated, drift is impossible."@en ;
     dcterms:created "2026-05-07"^^xsd:date ;
     prov:influenced claim:getting-started-init-prompt , ent:page-getting-started .
+
+#-------------------------------------------------------------------------
+# 2026-05-07 --- Trim pass: evolution chronology -> appendix; pattern.tex
+# §handback de-duplicated against eight-practices.tex item 4.
+#-------------------------------------------------------------------------
+
+act:trim-pass-evolution-and-pattern  a prov:Activity ;
+    rdfs:label "Trim pass: move evolution chronology to appendix; tighten pattern.tex handback"@en ;
+    prov:startedAtTime "2026-05-07T00:00:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith agent:human-author , agent:claude-opus-4-7 ;
+    prov:wasInformedBy act:complete-loop-fix-pass ;
+    rdfs:comment "Researcher direction in response to the complete-loop trim list: '2 should be an appendix, fix 1'. (1) pattern.tex §sec:handback trimmed: the three-paragraph mirror-discipline restatement (already canonical in eight-practices.tex item 4) collapses to a one-paragraph handback statement plus a forward reference. (2) evolution.tex per-paragraph chronology (14 \\paragraph blocks, ~1100w) extracted to a new appendix-d-evolution-chronology.tex; evolution.tex now ships the table plus three load-bearing summary paragraphs (Researcher-as-corrector, Pipeline as target not yet as practice, Logbook as conscience). Body reclaim: ~1.6 pp toward the 10-pp budget."@en .
+
+hc:trim-evolution-and-pattern  a fair2r:HumanContribution ;
+    rdfs:label "Researcher direction: move evolution chronology to appendix; fix pattern/eight-practices overlap"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "structural-decision" ;
+    fair2r:contributionLeverage "high" ;
+    rdfs:comment "Two cuts from the complete-loop trim list (the audit ensemble's condenser pass plus the readability reviewer's overlap finding). The user picked items 1 and 2 from the seven-item list and routed item 2 to the appendix rather than to the cutting-room floor. Body reclaim: ~1.6 pp. Further candidates (A: provenance-analysis mechanics; B: implementation; C: statement-of-authorship as back-matter; D: self-reference cut; E: background fold; F: pattern §domain-ontologies + §research-infrastructure) named for the next round."@en ;
+    dcterms:created "2026-05-07"^^xsd:date ;
+    prov:influenced act:trim-pass-evolution-and-pattern .
+
+ent:section-appendix-evolution-chronology  a fair2r:Section ;
+    rdfs:label "Appendix D: process evolution chronology"@en ;
+    dcterms:source "paper/sections/appendix-d-evolution-chronology.tex" ;
+    prov:wasGeneratedBy act:trim-pass-evolution-and-pattern ;
+    prov:wasAttributedTo agent:human-author , agent:claude-opus-4-7 ;
+    prov:wasDerivedFrom ent:section-evolution .

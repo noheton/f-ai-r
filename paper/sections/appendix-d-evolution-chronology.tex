@@ -1,0 +1,153 @@
+\section{Process evolution: the chronology}
+\label{sec:appendix-evolution}
+
+This appendix expands the digest in
+Table~\ref{tab:evolutions} (\S\ref{sec:evolution}) into a per-step
+chronology. The body of the paper carries the table because the
+table is what a reader needs at submission time; the chronology
+below is the longer record, kept here so the table is auditable
+against narrative without expanding the body.
+
+
+\paragraph{Bootstrap.}
+Researcher request: initialise a paper-plus-pipeline repository with
+prompts under \texttt{agents/}, a logbook under \texttt{doc/}, and a
+single PROV-O graph that follows the creation of the paper, distilled
+from a prior repository (\texttt{noheton/Obscurity-Is-Dead}) with all
+domain content abstracted away. The first AI draft read
+F(AI)\textsuperscript{2}R as ``AI participates twice in the loop''.
+Reading the prior repository carefully revealed the researcher's
+original framing: \emph{(AI)} as a factor multiplied through every
+FAIR axis, squared because of the two passes per axis. The paper
+draft adopts the latter. Lesson: when the AI's first-pass
+interpretation differs from the researcher's prior writing, the prior
+writing wins.
+
+\paragraph{Primary-artefact consistency invariant.}
+After the bootstrap, the researcher asserted that the manuscript,
+the PROV-O graph, and the logbook are primary artefacts and must
+remain consistent and up to date at all times. The AI added a
+binding ``Primary-artefact consistency'' block to every prompt;
+named the Orchestrator the ultimate custodian and the Provenance
+Curator the keystone; specified that the FAIR Aligner surfaces a
+desync as an audit \emph{fail}. The rule was recorded as a
+\texttt{fair2r:Claim}, attributed to the researcher, and as a
+\texttt{prov:Activity} revising every affected prompt entity.
+
+\paragraph{Static site, Pages workflow, paper-build CI.}
+Researcher request: a public site in the spirit of the prior
+repository, plus continuous integration. The AI added a static-site
+generator (parsing \texttt{doc/provenance.ttl} via \texttt{rdflib}),
+the corresponding GitHub Pages workflow with a Turtle-validation
+gate, and a paper-build workflow.
+
+\paragraph{Chapter granularity for the writer.}
+Researcher request: \emph{each \texttt{.tex} file should represent
+one chapter}. The Scientific Writer prompt gained a binding
+``File granularity'' block: one \texttt{\textbackslash section\{\}}
+per file, soft target 100--400 lines, filename slug matches the
+\texttt{\textbackslash label\{sec:\dots\}}. \texttt{paper/main.tex}
+became a thin assembler.
+
+\paragraph{Recursive attestation, by request.}
+Researcher request: \emph{add a section that this paper is generated
+using exactly this process}. \S\ref{sec:self} was added.
+
+\paragraph{This section, by request.}
+Researcher request: \emph{document the evolution of the process
+during cooperative writing}. This section. The \texttt{fair2r:Claim}
+entries for it sit at \textsc{ai-confirmed} until reviewed.
+
+\paragraph{Short-form pivot.}
+Researcher request: write only the short form (10 pages of body plus
+references and appendices) rather than maintaining a long/condensed
+split. The \texttt{main-condensed.tex} target was retired; the
+Condenser agent was repurposed as a \emph{page-budget enforcer} that
+fires when the compiled PDF exceeds the configured budget; the
+Scientific Writer prompt gained a page-budget rule.
+
+\paragraph{Institutional design system.}
+Researcher request: integrate the DLR design system (Frutiger /
+Arial, blue/green/yellow chapter accents, square corners, hairline
+borders, photography-led, no marketing register). The site CSS was
+rewritten on top of the DLR \texttt{colors\_and\_type.css} tokens; a
+small \LaTeX{} style file (\texttt{paper/style/fair2r.sty}) carries
+the equivalent typography and rule colours into the PDF; the
+imprint was updated with the author's institutional identity (DLR
+ZLP Augsburg, Helmholtz, NFDI4Ing, HMC).
+
+\subsection*{Patterns observed}
+
+Three patterns recur and are worth naming.
+
+\paragraph{Researcher-as-corrector.}
+The researcher's interventions are short, specific, and rule-shaped.
+None is a rewrite of AI-produced prose. The cooperation lives in the
+gap between a model that produces a plausible default and a
+researcher who can recognise when the default is wrong.
+
+\paragraph{Pipeline as target, not yet as practice.}
+The ten-stage pipeline is the architecture the prompts encode. The
+present draft was produced by a single AI agent in conversation with
+the researcher, with role separation documented in the prompts but
+not yet actively switched per turn. We name this gap rather than
+paper over it.
+
+\paragraph{Logbook as conscience.}
+Every event above corresponds to an entry in
+\texttt{doc/logbook.md}. The append-only discipline made the
+reconstruction cheap. \emph{The logbook is the conscience of the
+cooperation; the provenance graph is its record.}
+
+\subsection*{Field notes from the second cooperative writing project}
+
+The methodological ancestor~\cite{krebs2026obscurity} was the
+author's first cooperative-writing project. The present paper is the
+second. Three observations from the second-time experience are worth
+recording; the full set lives in
+\texttt{doc/user-observations-log.md}.
+
+\paragraph{The researcher's role is shifting toward experimentation.}
+Cooperative writing with an LLM, as practised here, lifts the
+prose-production load off the researcher and leaves more cycles for
+abstraction, decision-making, and design of the next experiment. For
+empirical disciplines this is a net good: writing-as-administrative-
+overhead shrinks; experimentation-as-the-actual-contribution grows.
+For paper-driven disciplines --- philosophy, parts of the humanities
+--- the picture is more uncomfortable: the prose \emph{is} the
+experiment, and removing the slow, deliberate craft of writing risks
+removing the thinking that the writing was
+doing~\cite{kuteeva2024diversity}\todo[inline]{verify}. We name the
+asymmetry rather than pretend F(AI)\textsuperscript{2}R is
+discipline-neutral.
+
+\paragraph{Prompt-craft is closer to programming than to drafting.}
+A second-time observation: writing a prompt feels easier than writing
+the corresponding paragraph oneself. The short conversational cycle
+maps, for a researcher trained in computer science, to the familiar
+loop of writing a program and watching its output --- closer to
+experimentation than to formal academic
+writing~\cite{reynolds2021prompt,liu2023prompt}\todo[inline]{verify}.
+This is a feature (it lowers the activation energy of getting
+started, which is itself a contribution to throughput) and a risk
+(prompt-craft can become a comfortable substitute for the harder
+parts of writing). The risk is managed, in
+F(AI)\textsuperscript{2}R, by keeping the human in the deciding seat
+(\S\ref{sec:authors-note}, \emph{What surprised me about the
+cooperation}) and by the per-claim provenance map that makes drift
+detectable.
+
+\paragraph{Responsibility includes the rooms after publication.}
+The model-side contribution ends at the commit. The human-side
+contribution continues into the rooms where the work has to be
+defended in person --- conferences, panels, discussions, reviewer
+correspondence. AI cannot share that load: the model cannot consent,
+cannot carry a reputation, and cannot be cross-examined at the next
+RDA plenary or HMC symposium. The seventh integrated practice
+(\S\ref{sec:eight}, item~7) names the legal version of this point;
+the field-notes version is more ordinary. \emph{Whoever puts their
+name on the paper signs up for every conversation the paper produces
+afterwards}, and the AI's contribution is, by construction, absent
+from those conversations. The interpersonal-sharing leg of authorship
+is the leg the methodology section cannot eliminate even in
+principle.
