@@ -25,6 +25,19 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
+      # Stage the paper PNG figures into slides/ so the poster's
+      # \includegraphics calls resolve regardless of the
+      # latex-action container's path-traversal policy. The
+      # poster's \graphicspath also tries ../paper/figures/ as a
+      # fallback for local builds.
+      - name: Stage figures for the poster
+        run: |
+          set -e
+          cp -v paper/figures/hero.png slides/ 2>&1 || true
+          cp -v paper/figures/ladder-populations.png slides/ 2>&1 || true
+          cp -v paper/figures/provenance-topology.png slides/ 2>&1 || true
+          ls -la slides/*.png || true
+
       - name: Compile pitch deck
         id: pitch
         uses: xu-cheng/latex-action@v3

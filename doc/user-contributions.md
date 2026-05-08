@@ -84,6 +84,28 @@ is a defect the FAIR aligner can check for.
 `doc/logbook.md`, `doc/user-contributions.md`.
 *Provenance IRI:* `fair2r:hc-transcript-preservation`
 
+### 2026-05-07 --- Corrective: poster CI compile fix + README consistency pass
+*Type:* `corrective-intervention`
+*Leverage:* medium
+*Triggered:* User flagged *"poster link not working"* and
+*"update readme as well and keep consistent"*. (1) Poster CI:
+`slides/poster-A0.tex` `\includegraphics` calls switched to
+plain filenames + `\graphicspath` fallback chain;
+`.github/workflows/build-slides.yml` gains a *Stage figures
+for the poster* step that copies the three needed PNGs into
+`slides/` before latex-action runs; `.gitignore` extended for
+the staged copies. (2) README updated to mention the poster
+as the fifth primary artefact, the mobile-friendly site, the
+Get-started page, the transcripts directory, the schema-growth
+class list, and the no-parentless-claim invariant; layout tree
+brought forward.
+*Artefacts touched:* `README.md`, `.gitignore`,
+`slides/poster-A0.tex`,
+`.github/workflows/build-slides.yml`,
+`doc/provenance.ttl`, `doc/logbook.md`,
+`doc/user-contributions.md`.
+*Provenance IRI:* `fair2r:hc-readme-consistency-pass`
+
 ### 2026-05-07 --- Corrective: mobile-friendly Pages site
 *Type:* `corrective-intervention`
 *Leverage:* medium
