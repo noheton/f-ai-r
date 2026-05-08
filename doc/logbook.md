@@ -3056,3 +3056,62 @@ previously said landscape.
 Provenance: `act:expand-layout-scrutinizer-and-flip-poster`;
 `hc:expand-layout-scrutinizer-and-flip-poster`
 (rule-shape, medium leverage). Triple count 2301 → 2330 (+29).
+
+## 2026-05-08 — Provenance graph hygiene pass
+
+*Author:* claude-opus-4-7 (under direction of repo owner)
+*Touched:* `doc/provenance.ttl`, `doc/logbook.md`,
+`doc/user-contributions.md`.
+
+*Decision / outcome.* Researcher direction: *"validate provenance
+i think there are some unconnected entities"*. Ran a 9-query
+audit. Findings + fixes:
+
+| Audit | Before | After |
+|---|---:|---:|
+| Parentless claims | 0 | 0 |
+| Ghost sources (no claim derived from) | 28 | 28 (documented) |
+| Orphan activities | 1 | 0 |
+| Orphan sections | 0 | 0 |
+| Unused agents | 4 | 0 |
+| Unused transcripts | 1 | 0 |
+| Untyped IRIs in our namespace | 2 | 0 |
+| Triple count | 2330 | 2363 (+33) |
+
+Fixes:
+
+- **`verif:lit-retrieved`** + **`verif:lit-read`** declared with
+  `a fair2r:VerificationState` types in the schema block. The
+  other five rungs were already declared; these two had been
+  overlooked.
+- **`ent:section-implementation`** typed as `fair2r:Section`
+  (retired body role) so the `prov:wasDerivedFrom` edge from
+  `ent:section-appendix-implementation` points at a typed
+  entity rather than a dangling IRI.
+- **`act:invalidate-discussion-section`** was orphan: no edge
+  in or out. Now connected with `prov:wasInformedBy
+  act:rev-reconcile-and-illustrate` plus an explicit
+  `prov:invalidated ent:section-discussion`. The Discussion
+  section itself (removed before being curated) is now declared
+  as a tombstone with `prov:wasInvalidatedBy`.
+- **Four unused agent IRIs** (`orchestrator`, `source-analyzer`,
+  `condenser`, `presentation`) connected via
+  `prov:wasAssociatedWith` to activities that used them in
+  practice (`act:bootstrap`, `act:rev-verification-pass`,
+  `act:trim-pass-focused-narrative`,
+  `act:add-illustrations-pass-4`).
+- **`ent:transcript-2026-05-07`** bound to its parent activity
+  `act:meta-cooperation-2026-05-07-transcript-preservation` via
+  `prov:used`.
+
+Documented but unfixed: 28 ghost sources (the verification
+scoping doc names this number; ghost-citation tolerance is
+intentional --- not every cited substrate needs to be the
+object of a `prov:wasDerivedFrom`); 13 unused observations
+(hypothesis-stage by design --- they gain `prov:influenced`
+when they graduate from `doc/user-observations-log.md` to
+paper text).
+
+Provenance: `act:provenance-graph-hygiene-pass`;
+`hc:provenance-graph-hygiene-pass` (corrective-intervention,
+medium leverage).

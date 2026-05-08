@@ -123,6 +123,26 @@ change, no JS.
 `doc/user-contributions.md`.
 *Provenance IRI:* `fair2r:hc-make-pages-mobile-friendly`
 
+### 2026-05-08 --- Corrective: provenance graph hygiene pass
+*Type:* `corrective-intervention`
+*Leverage:* medium
+*Triggered:* User direction *"validate provenance i think there
+are some unconnected entites"*. 9-query audit found: 1 orphan
+activity, 4 unused agent IRIs, 1 unused transcript, 2 untyped
+IRIs in our namespace, 28 ghost sources. Fixes: declared
+`verif:lit-retrieved` + `verif:lit-read` (overlooked rungs);
+typed `ent:section-implementation` (retired body role) +
+`ent:section-discussion` (removed-before-curation tombstone);
+connected `act:invalidate-discussion-section` via
+`prov:wasInformedBy` + `prov:invalidated`; bound 4 agent IRIs
+to their activities; bound the session transcript to its
+parent activity. The 28 ghost sources are documented expected
+behaviour; the 13 unused observations are hypothesis-stage by
+design.
+*Artefacts touched:* `doc/provenance.ttl`, `doc/logbook.md`,
+`doc/user-contributions.md`.
+*Provenance IRI:* `fair2r:hc-provenance-graph-hygiene-pass`
+
 ### 2026-05-08 --- Rule shape: scrutinizer scope expanded; poster flipped to A0 portrait
 *Type:* `rule-shape`
 *Leverage:* medium
