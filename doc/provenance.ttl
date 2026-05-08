@@ -2611,3 +2611,35 @@ hc:obs-associative-thinking-as-multiplier  a fair2r:MetaContribution ;
     prov:wasAttributedTo agent:human-author ;
     rdfs:comment "Stage: hypothesis. Promoted-to-paper: pending. Strong candidate paragraph for paper/sections/evolution.tex (process angle) or paper/sections/authors-note.tex (researcher-experience angle). Reframes the coupling-rule diagnostic from 'would the abstraction have been thinkable without the model?' to 'would the abstraction have been thinkable without the model AND without the human's associative latitude to convert a near-miss into a usable angle?'. Schema-growth hint flagged for the next case study: a fair2r:cooperativeOriginType property with values {solo-author, accelerated-by-near-miss, co-generated, prompt-driven} would make the cooperative-origin classification queryable."@en ;
     dcterms:created "2026-05-07"^^xsd:date .
+
+#-------------------------------------------------------------------------
+# 2026-05-07 --- Getting-started page added with auto-sync to CLAUDE.md.
+#-------------------------------------------------------------------------
+
+act:meta-cooperation-2026-05-07-getting-started  a prov:Activity ;
+    rdfs:label "Meta-cooperation: author getting-started page + sync script for new adopters"@en ;
+    prov:startedAtTime "2026-05-07T00:00:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith agent:human-author , agent:claude-opus-4-7 ;
+    rdfs:comment "Researcher prompt: 'to make process usable to other users can you write a getting started guide (especially for the page)? basically I want ppl to run a specific initialization prompt to set the process up. (keep this instructions always synced to process)'. New site/getting-started.md hand-authored at the prose layer, with a marker-bracketed block auto-synced from CLAUDE.md by scripts/sync_getting_started.py. Wired into PAGES + NAV in scripts/build_provenance_site.py. Sync script invoked at the start of every site build so the binding rules a new adopter reads always match the live state."@en .
+
+ent:page-getting-started  a fair2r:Section ;
+    rdfs:label "Getting started — adopting F(AI)^2R for a new paper"@en ;
+    dcterms:source "site/getting-started.md" ;
+    prov:wasGeneratedBy act:meta-cooperation-2026-05-07-getting-started ;
+    prov:wasAttributedTo agent:human-author , agent:claude-opus-4-7 .
+
+claim:getting-started-init-prompt  a fair2r:Claim ;
+    rdfs:label "F(AI)^2R is adoptable by other researchers via a single initialization prompt that points the LLM at this repository as the canonical reference; the prompt's binding rules block is auto-synced from CLAUDE.md so an adopter is given the live rules rather than a snapshot."@en ;
+    prov:wasGeneratedBy act:meta-cooperation-2026-05-07-getting-started ;
+    prov:wasAttributedTo agent:human-author ;
+    fair2r:verificationState verif:human-confirmed ;
+    dcterms:created "2026-05-07"^^xsd:date .
+
+hc:getting-started-page-and-sync  a fair2r:HumanContribution ;
+    rdfs:label "Researcher prompt: write a getting-started guide with an initialization prompt; keep instructions always synced to process"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "content-prompt" ;
+    fair2r:contributionLeverage "high" ;
+    rdfs:comment "Researcher asked for a Pages-side guide aimed at adopters, anchored on a single initialization prompt that bootstraps an F(AI)^2R scaffold from this repository as the canonical reference. The auto-sync requirement was named explicitly: 'keep this instructions always synced to process'. Implemented as: site/getting-started.md (hand-authored prose + a marker-bracketed block); scripts/sync_getting_started.py (extracts the Ground rules section from CLAUDE.md and rewrites the block); invoked at the start of scripts/build_provenance_site.py so the page is regenerated on every site build. Wired into PAGES + NAV so the page is reachable from the Home and Methodology nav. Net new pages: 1 (now 27). The sync discipline is the same as the methodology page's evolutions table: source of truth lives once, mirrors are regenerated, drift is impossible."@en ;
+    dcterms:created "2026-05-07"^^xsd:date ;
+    prov:influenced claim:getting-started-init-prompt , ent:page-getting-started .

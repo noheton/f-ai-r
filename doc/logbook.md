@@ -2232,3 +2232,60 @@ angle). Both are candidate homes; the choice depends on which
 cooperation rule the paper wants to commit to publishing.
 =======
 >>>>>>> origin/main
+
+## 2026-05-07 — Getting-started guide for new adopters + auto-sync from CLAUDE.md
+
+*Author:* claude-opus-4-7 (under direction of repo owner)
+*Touched:* `site/getting-started.md` (new),
+`scripts/sync_getting_started.py` (new),
+`scripts/build_provenance_site.py` (PAGES + NAV + sync invocation),
+`doc/provenance.ttl`, `doc/logbook.md`,
+`doc/user-contributions.md`.
+
+*Decision / outcome.* User asked for a Pages-side guide
+aimed at adopters: *"to make process usable to other users
+can you write a getting started guide (especially for the
+page)? basically I want ppl to run a specific initialization
+prompt to set the process up. (keep this instructions always
+synced to process)"*.
+
+The new page hands an adopter a single initialization prompt
+that, pasted into a fresh Claude Code session inside an empty
+git repository, instructs the LLM to clone agent prompts,
+schema, and binding rules from this repository (used as the
+canonical reference) and adapt them to the adopter's title
+and domain. The prompt is bounded by the same rules the
+canonical repository runs under — primary-artefact
+consistency, no-parentless-claim, chapter-per-file,
+source-research mandate, verification ladder, voice rules.
+
+The auto-sync requirement is honoured by a small script
+(`scripts/sync_getting_started.py`) that extracts the
+*Ground rules* section from `CLAUDE.md` and rewrites the
+block between `<!-- BEGIN AUTO-SYNCED: ground-rules -->` and
+`<!-- END AUTO-SYNCED: ground-rules -->` markers in
+`site/getting-started.md`. Invoked at the start of every
+site build so the page a new adopter reads always reflects
+the live binding rules — the same deduplication discipline
+that keeps the evolutions table in `doc/methodology.md`
+synced with the paper.
+
+Page wired into `PAGES` and `NAV` in
+`scripts/build_provenance_site.py`. Site build now produces
+27 pages (was 26). Sync script tested: idempotent on a
+second run.
+
+Provenance:
+`act:meta-cooperation-2026-05-07-getting-started` parent
+activity; new `ent:page-getting-started` `fair2r:Section`;
+new `claim:getting-started-init-prompt` (`human-confirmed`);
+new `hc:getting-started-page-and-sync` HumanContribution
+(content-prompt, high leverage). Triple count 2080 → 2107
+(+27).
+
+*Next:* When `CLAUDE.md` evolves, the sync runs
+automatically on the next site build; no separate maintenance
+is required. If a future adopter forks the repo, they update
+the canonical-reference URL inside the initialization prompt
+in their fork's `site/getting-started.md` — that is the only
+hand-edit step the sync does not cover.

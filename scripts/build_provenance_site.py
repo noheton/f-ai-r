@@ -37,6 +37,7 @@ FOAF = Namespace("http://xmlns.com/foaf/0.1/")
 # (slug, title, source markdown path)
 PAGES: list[tuple[str, str, Path]] = [
     ("index",                "Home",                   SITE_SRC / "index.md"),
+    ("getting-started",      "Getting started",        SITE_SRC / "getting-started.md"),
     ("methodology",          "Methodology",            ROOT / "doc" / "methodology.md"),
     ("fair",                 "FAIR",                   ROOT / "doc" / "fair.md"),
     ("collab",               "Human-AI collaboration", ROOT / "doc" / "human-ai-collaboration-process.md"),
@@ -54,6 +55,7 @@ PAGES: list[tuple[str, str, Path]] = [
 # Order in which nav items appear, with their final slugs.
 NAV: list[tuple[str, str]] = [
     ("index",                "Home"),
+    ("getting-started",      "Get started"),
     ("methodology",          "Methodology"),
     ("fair",                 "FAIR"),
     ("collab",               "Collab"),
@@ -551,6 +553,18 @@ def main(argv: Iterable[str]) -> int:
     global _CACHE_BUST
     _CACHE_BUST = _compute_cache_bust()
     print(f"Build cache-bust version: {_CACHE_BUST}")
+
+    # Sync the auto-generated block in site/getting-started.md from the
+    # canonical CLAUDE.md before rendering, so the page a new adopter
+    # reads always reflects the live binding rules.
+    try:
+        import subprocess
+        subprocess.run(
+            [sys.executable, str(ROOT / "scripts" / "sync_getting_started.py")],
+            check=True,
+        )
+    except Exception as exc:  # pragma: no cover -- defensive
+        print(f"WARN: sync_getting_started failed: {exc}")
 
     if OUT.exists():
         shutil.rmtree(OUT)
