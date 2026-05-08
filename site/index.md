@@ -4,8 +4,11 @@
 working paper and a reproducible writing pipeline, versioned together
 and built under the DLR Corporate Design.</p>
 
+![Hero figure: the F(AI)²R writing pipeline. A manuscript bundle (claims, sources, prompts, transcripts, provenance graph) is the shared substrate between an authoring pass that writes into it from above and an audit pass that reads it back from below. Squared notation: every artefact is touched twice, never in the same role and never in the same commit.](static/figures/hero.png)
+
 <div class="cta-row">
   <a class="cta primary" href="https://github.com/noheton/f-ai-r/releases/download/latest-draft/main.pdf">Read the latest draft (PDF)</a>
+  <a class="cta secondary" href="https://github.com/noheton/f-ai-r/releases/download/latest-draft-slides/poster-A0.pdf">Conference poster (A0 PDF)</a>
   <a class="cta secondary" href="https://github.com/noheton/f-ai-r">View the repository</a>
   <a class="cta tertiary" href="provenance-explorer.html">Open the provenance explorer</a>
 </div>

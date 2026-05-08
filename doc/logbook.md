@@ -2766,3 +2766,108 @@ no undefined references. Triple count 2227 → 2243 (+16).
 Provenance: `act:scrutinizer-pass-fix-up`
 (`prov:wasInformedBy act:trim-pass-focused-narrative`);
 `hc:scrutinizer-pass-fix-up` (corrective-intervention, medium).
+
+## 2026-05-07 — Hero figure rendered to PNG; embedded on the Pages Home page
+
+*Author:* claude-opus-4-7 (under direction of repo owner)
+*Touched:* `paper/figures/hero.standalone.tex` (added `amsmath`),
+`paper/figures/hero.png` (new — 200 dpi PNG export),
+`site/static/figures/hero.png` (copy for the Pages site),
+`site/index.md` (embedded), `doc/provenance.ttl`,
+`doc/logbook.md`, `doc/user-contributions.md`.
+
+*Decision / outcome.* Researcher question: *"do we have an
+eyecatcher graphic is it also in the pages?"*. The PDF carries
+hero on its front matter (loaded by `paper/main.tex` via
+`\input{figures/hero}`); the Pages site did not surface any of
+the paper's signature visuals. Closes the gap by rendering the
+TikZ source via the existing standalone wrapper to a 200 dpi PNG
+and embedding it on `site/index.md` between the lede and the
+CTA row. Same drift-proof pattern as the methodology-page
+evolutions table: source of truth in `paper/figures/`, render
+committed to `site/static/figures/`, embedding declared in the
+page Markdown.
+
+`paper/figures/hero.standalone.tex` gained a `\usepackage{amsmath}`
+declaration; without it the standalone build broke on the
+math-mode title `$\text{F}\,(\text{AI})^{2}\,\text{R}$`. This
+mirrors the same fix applied to `paper/style/fair2r.sty` in the
+PDF-build fix pass earlier today.
+
+Provenance: `act:render-hero-png-for-site`;
+`hc:eyecatcher-on-pages` (corrective-intervention, low). Graph
+triples 2243 → 2257 (+14).
+
+## 2026-05-07 — Conference poster scaffolded as the fifth primary artefact
+
+*Author:* claude-opus-4-7 (under direction of repo owner)
+*Touched:* `slides/poster-A0.tex` (new), `slides/Makefile`
+(adds `poster` target), `slides/poster-A0.png` (new render),
+`site/static/figures/poster-A0.png` (copy for Pages),
+`site/index.md` (CTA link), `paper/figures/hero.png` (rendered
+earlier today),
+`.github/workflows/build-slides.yml` (poster compile step + log
+dump + artefact upload + release publish), `CLAUDE.md`
+(primary-artefact list 4 → 5; `slides/poster-A0.tex` is now
+binding alongside the manuscript / graph / logbook / slide
+decks), `doc/provenance.ttl` (`fair2r:Poster` schema growth +
+`ent:poster-A0` entity + `act:scaffold-conference-poster` +
+`hc:scaffold-conference-poster`), `doc/logbook.md`,
+`doc/user-contributions.md`.
+
+*Decision / outcome.* Researcher direction *"add another
+artifact to the build chain a conference poster/Infographic.
+consider distilling the process to its essentials. how would
+that change page count for paper"*, followed by *"go"* against
+a two-step plan.
+
+Step (a) — landed in this commit. The poster is a tikzposter
+A0 landscape, three-column. Custom theme attempts produced a
+debug stamp on page 1 (a known tikzposter behaviour for
+non-built-in themes), so the layout uses the built-in `Simple`
+theme with DLR-CD colour overrides (`titlefgcolor`,
+`blocktitlefgcolor`, `blocktitlebgcolor` etc. routed to
+`dlrBlau1` / `dlrBlau5`). Helvetica/Arial fallback; square
+corners; hairline rules. Local `pdflatex` compile: 1 page,
+~430 KB; PNG render at 100 dpi for the Pages site is ~972 KB.
+
+Layout:
+
+- **Top banner** — title + author + ORCID + DLR / Helmholtz /
+  NFDI4Ing / HMC + repo URL.
+- **Left column** — *The gap*, *Reported base rates*
+  (Walters 55 % / 18 %, Magesh 17 -- 34 %), *Why now*.
+- **Centre column** — *The position* (with the hero figure as
+  eye-catcher), *Eight integrated practices*.
+- **Right column** — *Verification ladder, live populations*
+  (with `ladder-populations.png`), *Provenance graph as audit
+  substrate* (with `provenance-topology.png`), *This is the
+  worked example* (URLs + tagline).
+- **Footer** — licence + DRAFT watermark.
+
+Step (b) (run the condenser against the paper with *"the poster
+carries this; the paper need not"* as the new criterion;
+plausible body trim ~3 pp) is a follow-up.
+
+Build-chain extension:
+
+- `slides/Makefile` gains a `poster` target; `all` rule now
+  builds pitch + conference + poster.
+- `.github/workflows/build-slides.yml` extended with a poster
+  compile step (with `continue_on_error` like the decks), a log
+  dump on failure, and the artefact-upload + release-publish
+  steps now include `poster-A0.pdf`. The release tag's name
+  updated to *"latest draft slide decks + poster"*.
+- `CLAUDE.md` primary-artefact list: 4 → 5. The
+  primary-artefact consistency invariant now binds the poster
+  alongside the manuscript, graph, logbook, and slide decks.
+- Schema growth: `fair2r:Poster a owl:Class ; rdfs:subClassOf
+  prov:Entity ;` in the schema block of `doc/provenance.ttl`.
+- `site/index.md` Home CTA row gains a *Conference poster (A0
+  PDF)* button pointing at the rolling release.
+
+Provenance: `act:scaffold-conference-poster`;
+`hc:scaffold-conference-poster` (structural-decision, high
+leverage). `ent:poster-A0` records `prov:used` for hero,
+ladder-populations, and provenance-topology (the three figures
+the poster embeds). Triple count 2257 → 2287 (+30).
