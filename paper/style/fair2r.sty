@@ -26,6 +26,7 @@
 \RequirePackage[T1]{fontenc}
 \RequirePackage[utf8]{inputenc}
 \RequirePackage{textcomp}
+\RequirePackage{amsmath}     % \text{} inside math mode (used by figures/hero.tex)
 \RequirePackage[scaled=1.0]{helvet}
 \renewcommand{\familydefault}{\sfdefault}
 
@@ -46,7 +47,7 @@
 \RequirePackage{ifthen}
 \RequirePackage{draftwatermark}
 \RequirePackage{tikz}
-\usetikzlibrary{arrows.meta, positioning, shapes.geometric}
+\usetikzlibrary{arrows.meta, positioning, shapes.geometric, calc, fit}
 
 % --- DLR colour ramps (subset; expand as needed) -----------------------
 \definecolor{dlrBlau1}{HTML}{00658B}

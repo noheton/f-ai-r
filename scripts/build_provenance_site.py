@@ -52,23 +52,40 @@ PAGES: list[tuple[str, str, Path]] = [
     ("provenance-verification", "Provenance verification", ROOT / "doc" / "research" / "provenance-verification.md"),
 ]
 
-# Order in which nav items appear, with their final slugs.
+# Top-level nav. Kept deliberately small (six items); the rest live in
+# the per-page sidebar (built from the SECTION_GROUPS below) so the
+# header is not a wall of links.
 NAV: list[tuple[str, str]] = [
     ("index",                "Home"),
     ("getting-started",      "Get started"),
     ("methodology",          "Methodology"),
-    ("fair",                 "FAIR"),
-    ("collab",               "Collab"),
-    ("agents",               "Agents"),
-    ("logbook",              "Logbook"),
-    ("user-contributions",   "Contributions"),
-    ("user-observations",    "Observations"),
-    ("reading-queue",        "Reading queue"),
     ("provenance",           "Provenance"),
-    ("provenance-explorer",  "Explorer"),
-    ("provenance-graph",     "Topology"),
-    ("provenance-verification", "Verification"),
+    ("logbook",              "Audit trail"),
     ("submission",           "Submission"),
+]
+
+# Sidebar groups: which pages live "inside" each top-level nav item.
+# The sidebar on every page is rendered from this map, marking the
+# active page and showing siblings as a collapsible-feeling list.
+SECTION_GROUPS: list[tuple[str, list[tuple[str, str]]]] = [
+    ("Methodology", [
+        ("methodology",          "Methodology"),
+        ("fair",                 "FAIR"),
+        ("collab",               "Human-AI collaboration"),
+        ("agents",               "Agent prompts"),
+    ]),
+    ("Provenance", [
+        ("provenance",           "Provenance"),
+        ("provenance-graph",     "Topology"),
+        ("provenance-explorer",  "Explorer"),
+        ("provenance-verification", "Verification"),
+    ]),
+    ("Audit trail", [
+        ("logbook",              "Logbook"),
+        ("user-contributions",   "Contributions"),
+        ("user-observations",    "Observations log"),
+        ("reading-queue",        "Reading queue"),
+    ]),
 ]
 
 MD_EXT = ["fenced_code", "tables", "toc", "sane_lists"]
@@ -119,8 +136,7 @@ TEMPLATE = """<!doctype html>
 </section>
 <main>
   <aside class="sidebar">
-    <h4>On this site</h4>
-    <ul>{sidebar}</ul>
+    {sidebar}
     <h4>External</h4>
     <ul>
       <li><a href="https://github.com/noheton/f-ai-r">GitHub repository</a></li>
@@ -343,11 +359,42 @@ def nav_html(active: str) -> str:
 
 
 def sidebar_html(active: str) -> str:
+    """Render the per-page sidebar as fully-wrapped HTML. Each
+    top-level group from ``SECTION_GROUPS`` becomes a section; the
+    active page's group is rendered first, the others below. Pages
+    not in any group fall back to a single ``On this site`` group
+    listing the top-level NAV."""
+    # Find which group contains the active page (if any).
+    active_group_idx = None
+    for i, (_, items) in enumerate(SECTION_GROUPS):
+        if any(slug == active for slug, _ in items):
+            active_group_idx = i
+            break
+
     parts: list[str] = []
-    for slug, title in NAV:
-        cls = ' class="active"' if slug == active else ""
-        parts.append(f'<li><a href="{slug}.html"{cls}>{title}</a></li>')
-    return "".join(parts)
+    if active_group_idx is None:
+        parts.append('<h4>On this site</h4>\n<ul>')
+        for slug, title in NAV:
+            cls = ' class="active"' if slug == active else ""
+            parts.append(f'<li><a href="{slug}.html"{cls}>{title}</a></li>')
+        parts.append('</ul>')
+
+    # Render the active group first, then the others.
+    order: list[int] = []
+    if active_group_idx is not None:
+        order.append(active_group_idx)
+    order.extend(i for i in range(len(SECTION_GROUPS)) if i != active_group_idx)
+
+    for idx in order:
+        label, items = SECTION_GROUPS[idx]
+        is_active = idx == active_group_idx
+        section_cls = ' class="sidebar-active"' if is_active else ""
+        parts.append(f'<h4{section_cls}>{label}</h4>\n<ul>')
+        for slug, title in items:
+            cls = ' class="active"' if slug == active else ""
+            parts.append(f'<li><a href="{slug}.html"{cls}>{title}</a></li>')
+        parts.append('</ul>')
+    return "\n".join(parts)
 
 
 _CACHE_BUST = ""  # Set by main() once per build.

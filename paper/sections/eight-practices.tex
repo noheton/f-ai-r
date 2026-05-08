@@ -15,13 +15,13 @@ eight, with the pipeline of \S\ref{sec:pipeline} enforcing the seams,
 is sufficient against most and honest about the rest.
 
 \begin{description}[leftmargin=1.2em,itemsep=2pt]
-    \item[1. Transcript preservation
-        (\S\ref{sec:practice-transcripts}).]
+    \item[1. Transcript preservation.]
         Every working session that touches the manuscript exports its
         conversation transcript and commits it under
         \texttt{doc/transcripts/}. Transcripts are bound to the
         manuscript via \texttt{prov:used} on the corresponding
-        authoring activity.
+        authoring activity, typed as \texttt{fair2r:Transcript} in
+        the provenance graph.
     \item[2. Verification-status labelling
         (\S\ref{sec:ladder}).]
         Every claim carries one of the five FSM rungs. The rung is
@@ -29,7 +29,7 @@ is sufficient against most and honest about the rest.
         rung lower than its evidence permits is allowed, a claim
         invoked higher is a defect surfaced by the Aligner.
     \item[3. Per-claim provenance maps
-        (\S\ref{sec:bg-prov}).]
+        (\S\ref{sec:background}).]
         Every named claim has a \texttt{fair2r:Claim} IRI in
         \texttt{doc/provenance.ttl} with at minimum
         \texttt{prov:wasGeneratedBy}, \texttt{prov:wasAttributedTo},
@@ -60,7 +60,7 @@ is sufficient against most and honest about the rest.
         declare the fraction of claims at each rung at submission
         time.
     \item[7. Legal honesty about authorship
-        (\S\ref{sec:bg-norms}).]
+        (\S\ref{sec:background}).]
         AI is acknowledged but is not an author. The position holds
         across Germany (\S2 \emph{UrhG}), the United States, and the
         major medical journals~\cite{icmje2023}: AI cannot hold
