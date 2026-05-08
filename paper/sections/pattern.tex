@@ -37,7 +37,7 @@ sources have been vendored where licensable, and that the redaction
 policy covers what it claims.
 
 \paragraph{I.}
-Authoring commits the provenance graph as PROV-O over Turtle in
+Authoring commits the provenance graph as PROV-O~\cite{w3c2013provo} over Turtle in
 \texttt{doc/provenance.ttl}. Audit validates the Turtle, runs SHACL
 shapes if defined, and verifies every section has a
 \texttt{prov:Activity} record that produced it.
@@ -125,9 +125,11 @@ at the same cost. Splitting the work between the Source Analyzer
 (cheap) and the human (expensive) is the lever that makes the
 practice economically tenable.
 
-\paragraph{Crosswalk.} Retrieval depth maps to PRISMA 2020:
-\textsc{lit-retrieved}\,=\,Identification, \textsc{ai-confirmed}\,=\,Screening,
-\textsc{lit-read}\,=\,Included. Invocation strength maps to GRADE: a
+\paragraph{Crosswalk.} Retrieval depth maps to PRISMA
+2020~\cite{page2021prisma}: \textsc{lit-retrieved}\,=\,Identification,
+\textsc{ai-confirmed}\,=\,Screening,
+\textsc{lit-read}\,=\,Included. Invocation strength maps to
+GRADE~\cite{guyatt2008grade}: a
 claim invoked at \textsc{lit-read} carries a GRADE certainty floor of
 \textsc{moderate}; a claim at \textsc{ai-confirmed} can carry at most
 \textsc{low}. The mapping is a floor, not a ceiling.
@@ -148,17 +150,14 @@ agrees or fails --- is enumerated as practice~4 of \S\ref{sec:eight}.
 
 
 
-\noindent The pattern composes with two forward-looking
-extensions --- domain ontologies (SOSA / SSN, OM-2 / QUDT) for
-sub-discipline value semantics, and provenance-graph
-interconnectivity (the bioinformatics precedent under data-volume
-pressure, restated for LLM-assisted scholarship) --- recorded in
-Appendix~\ref{sec:appendix-pattern-extensions}. Both are off the
-critical path of the eight integrated practices but are how
-F(AI)\textsuperscript{2}R generalises beyond the present case.
-
-\paragraph{Cousins.}
-Read structurally, F(AI)\textsuperscript{2}R borrows more from
+\paragraph{Extensions and cousins.}
+The pattern composes with two forward-looking extensions ---
+domain ontologies (SOSA / SSN, OM-2 / QUDT) for sub-discipline
+value semantics, and provenance-graph interconnectivity (the
+bioinformatics precedent under data-volume pressure, restated
+for LLM-assisted scholarship), both recorded in
+Appendix~\ref{sec:appendix-pattern-extensions}. Read structurally,
+F(AI)\textsuperscript{2}R borrows more from
 formal methods than from the data-management literature. Each
 \texttt{fair2r:Claim} IRI is a conjecture; the verification ladder
 is a proof-state machine; the audit pass is a proof-checker that

@@ -84,6 +84,39 @@ is a defect the FAIR aligner can check for.
 `doc/logbook.md`, `doc/user-contributions.md`.
 *Provenance IRI:* `fair2r:hc-transcript-preservation`
 
+### 2026-05-07 --- Corrective: scrutinizer-pass fix-up (post PR #43)
+*Type:* `corrective-intervention`
+*Leverage:* medium
+*Triggered:* User direction `"run a scrutinizer pass"`. Three
+audit subagents (layout-scrutinizer, readability-reviewer,
+fair-aligner) returned punch lists against the focused-narrative
+trim state. Small / safe items applied here: 8 newly orphaned bib
+entries re-cited in prose (PRISMA / GRADE in pattern.tex
+Crosswalk; PROV-O in pattern.tex axes; Datasheets + Model Cards
+in eight-practices item 3; ACL ARR + ICLR + NeurIPS LLM policies
+in intro.tex venue-policy churn). Three orphan figure labels
+cross-referenced from prose. Conclusion forward-ref to
+sec:research-infrastructure repaired to point at appendix-g.
+Xennial paragraph split. Redundant "None of the eight is novel"
+in conclusion + closing roadmap in Author's Note removed.
+Trim-artefact paragraph in pattern.tex folded into "Extensions
+and cousins". Long-term archivability paragraph in
+limits-and-objections.tex dropped (re-trod earlier paragraph).
+`paper/sections/self-reference.tex` and
+`paper/figures/eight-practices.tex` deleted (orphan files
+retired in earlier passes). Bib `Missing $` warning + slug-match
+heuristic in `scripts/provenance_analysis.py` deferred.
+*Artefacts touched:* `paper/sections/conclusion.tex`,
+`paper/sections/authors-note.tex`, `paper/sections/intro.tex`,
+`paper/sections/pattern.tex`,
+`paper/sections/eight-practices.tex`,
+`paper/sections/limits-and-objections.tex`,
+`paper/sections/self-reference.tex` (deleted),
+`paper/figures/eight-practices.tex` (deleted),
+`doc/provenance.ttl`, `doc/logbook.md`,
+`doc/user-contributions.md`.
+*Provenance IRI:* `fair2r:hc-scrutinizer-pass-fix-up`
+
 ### 2026-05-07 --- Structural: focused-narrative trim pass + update pass
 *Type:* `structural-decision`
 *Leverage:* high

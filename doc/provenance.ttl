@@ -2797,3 +2797,26 @@ hc:trim-pass-focused-narrative  a fair2r:HumanContribution ;
     rdfs:comment "Researcher said: 'generate the focused version. afterwards complete update pass.' against the seven-item triage list returned earlier in the session (filter by narrative load). The cut-and-fold pattern is the trim pass's structural-decision payload; the update pass (provenance, logbook, transcript, site rebuild) is what makes the cut auditable. Body word count 10466 -> 6496 (~38%); PDF page count 38 -> 33."@en ;
     dcterms:created "2026-05-07"^^xsd:date ;
     prov:influenced act:trim-pass-focused-narrative .
+
+#-------------------------------------------------------------------------
+# 2026-05-07 --- Scrutinizer-pass fix-up: apply small / safe fixes from
+# the post-trim audit ensemble (layout, readability, FAIR aligner).
+#-------------------------------------------------------------------------
+
+act:scrutinizer-pass-fix-up  a prov:Activity ;
+    rdfs:label "Scrutinizer-pass fix-up after PR #43 (focused-narrative trim)"@en ;
+    prov:startedAtTime "2026-05-07T00:00:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith agent:human-author , agent:claude-opus-4-7 ;
+    prov:wasInformedBy act:trim-pass-focused-narrative ;
+    rdfs:comment "Applied fixes from three audit subagents (layout-scrutinizer, readability-reviewer, fair-aligner) against the post-trim state. Fixes: (a) conclusion.tex S\\ref{sec:research-infrastructure} -> Appendix\\ref{sec:appendix-pattern-extensions} (after the subsection moved to appendix-g); (b) Xennials paragraph in conclusion.tex split at 'F(AI)^2R is in part an attempt to encode it.' (was 274w single block); (c) duplicate 'None of the eight is novel' in conclusion.tex dropped (still in intro + position + eight-practices); (d) redundant closing roadmap dropped from authors-note.tex (intro carries it); (e) trim-artefact paragraph in pattern.tex folded into the new 'Extensions and cousins' paragraph; (f) Long-term archivability paragraph dropped from limits-and-objections.tex (re-trod frontier-model dependence); (g) 8 newly orphaned bib entries re-cited in prose: PRISMA / GRADE in pattern.tex Crosswalk, PROV-O in pattern.tex axes, Datasheets / Model Cards in eight-practices item 3, ACL ARR / ICLR / NeurIPS LLM policies in intro.tex venue-policy churn; (h) figure cross-refs added so fig:hero, fig:contribution-histogram, fig:failure-mode-coverage are no longer prose-orphan; (i) paper/sections/self-reference.tex and paper/figures/eight-practices.tex (orphan files retired in earlier passes) deleted from disk. Local PDF compile: 34 pages, no undefined references."@en .
+
+ent:section-self-reference  prov:atLocation "removed-from-disk" .
+
+hc:scrutinizer-pass-fix-up  a fair2r:HumanContribution ;
+    rdfs:label "Researcher direction: run a scrutinizer pass; fix-up the small / safe findings"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "corrective-intervention" ;
+    fair2r:contributionLeverage "medium" ;
+    rdfs:comment "User said 'run a scrutinizer pass'. Three audit subagents returned punch lists; small / safe items applied directly here, taste calls (further prose-density tightening, the bib Missing-$ defect) deferred. Re-citing 8 orphaned bib entries in their natural prose locations is the load-bearing repair: the trim removed the dedicated sections that carried these references but the underlying claims still depend on them. The provenance-analysis.py slug-match heuristic warning (sec:appendix-evolution -> ent:section-appendix-evolution-chronology) is acknowledged but not fixed in this commit; that is a script-level fix for a follow-up."@en ;
+    dcterms:created "2026-05-07"^^xsd:date ;
+    prov:influenced act:scrutinizer-pass-fix-up .
