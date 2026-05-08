@@ -2232,6 +2232,7 @@ angle). Both are candidate homes; the choice depends on which
 cooperation rule the paper wants to commit to publishing.
 =======
 >>>>>>> origin/main
+<<<<<<< HEAD
 
 ## 2026-05-07 — Getting-started guide for new adopters + auto-sync from CLAUDE.md
 
@@ -2289,3 +2290,5 @@ is required. If a future adopter forks the repo, they update
 the canonical-reference URL inside the initialization prompt
 in their fork's `site/getting-started.md` — that is the only
 hand-edit step the sync does not cover.
+=======
+>>>>>>> origin/main
