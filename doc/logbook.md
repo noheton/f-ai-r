@@ -2460,3 +2460,40 @@ appends or creates a transcript file before its commit lands; the
 FAIR aligner gains a check that an active session without a
 transcript is a defect. This rule-shape is a candidate addition
 to the *Process evolutions* table on the next pass.
+
+## 2026-05-07 — Transcript update: embed Claude Code session URL as canonical interactive record
+
+*Author:* claude-opus-4-7 (under direction of repo owner)
+*Touched:* `doc/transcripts/2026-05-07-session.md`,
+`doc/transcripts/README.md`, `doc/provenance.ttl`,
+`doc/logbook.md`.
+
+*Decision / outcome.* User direction:
+*"using https://claude.ai/code/session_013WSSBbH74hSBrwHrDHvpzz can
+you update the transcript"*. The Claude Code session URL is the
+canonical interactive transcript for the cooperation; embedded
+prominently at the top of `2026-05-07-session.md` (superseding the
+earlier local-JSONL pointer as the primary canonical), surfaced in
+the *Honest limits* section, and added to the README format spec
+so future sessions follow the same convention. The `WebFetch` tool
+returns 403 against the URL, as expected — the URL is gated to
+session participants — but the file makes that limit explicit and
+notes that the URL is the same trailing reference embedded in every
+commit message produced by this session
+(per the Git instructions in the system prompt).
+
+Schema-level binding: the transcript entity in
+`doc/provenance.ttl` gains `prov:atLocation
+"https://claude.ai/code/session_013WSSBbH74hSBrwHrDHvpzz"`, so the
+graph knows where the canonical record lives, plus an
+`rdfs:comment` documenting the relationship between the URL
+(authoritative for verbatim text) and the file (human-readable
+shadow audited against merged commits). One transcript turn
+appended to the session record itself (this turn). Triple count
+2187 → 2189 (+2).
+
+*Next:* The convention is now documented and the binding is
+queryable. A future SHACL shape for `fair2r:Transcript` could
+require `prov:atLocation` plus `dcterms:source` to be both
+present, making "session URL recorded in the graph" a
+machine-checkable invariant.
