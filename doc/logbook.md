@@ -3014,3 +3014,45 @@ mobile-friendly site, transcript discipline, schema growth):
 Provenance: `act:readme-consistency-pass` (no separate IRI
 minted; this is a corrective edit), `hc:readme-consistency-pass`
 appended.
+
+## 2026-05-08 — Layout-scrutinizer scope expanded; poster flipped to A0 portrait
+
+*Author:* claude-opus-4-7 (under direction of repo owner)
+*Touched:* `agents/layout-scrutinizer.md` (rewritten with
+per-artefact scrutiny rules), `slides/poster-A0.tex`
+(landscape → portrait), `site/static/figures/poster-A0.png`
+(re-rendered at 70 dpi from the portrait PDF), `CLAUDE.md`
+(primary-artefact list 5 — poster orientation note),
+`README.md` (table + tree mentions), `doc/provenance.ttl`
+(rdfs:label / rdfs:comment updates), `doc/logbook.md`,
+`doc/user-contributions.md`.
+
+*Decision / outcome.* Two researcher directions batched.
+
+(1) *"layout scrutinizer should scrutinize slides and poster as
+well"*. `agents/layout-scrutinizer.md` rewritten. The
+binding-scrutiny scope expands from manuscript-only to **all
+five primary artefacts plus the Pages site**. Per-artefact
+rules now explicit: paper (overfull / underfull, page budget,
+label hygiene); slide decks (frame overflow, low-contrast
+pairings, divider-vs-section alignment); conference poster
+(1-page enforcement, column balance, 1-m-distance legibility,
+content discipline); Pages site (LaTeX leakage, table
+rendering, image alt-text, responsive breakpoints, cache-bust
+consistency). Output format: per-artefact verdict line plus a
+markdown punch list with `file:line` (or page reference for
+PDFs / HTML pages).
+
+(2) *"poster should be portrait format not landscape"*.
+`slides/poster-A0.tex` `\documentclass` option flipped from
+`landscape` to `portrait`. Local `pdflatex` still produces a
+clean 1-page A0 PDF (841 × 1189 mm portrait). PNG re-rendered
+at 70 dpi from the portrait PDF and committed to
+`site/static/figures/poster-A0.png`. Landscape-to-portrait
+references propagated to `CLAUDE.md`, `README.md`, and the
+two `rdfs:` labels / comments in `doc/provenance.ttl` that
+previously said landscape.
+
+Provenance: `act:expand-layout-scrutinizer-and-flip-poster`;
+`hc:expand-layout-scrutinizer-and-flip-poster`
+(rule-shape, medium leverage). Triple count 2301 → 2330 (+29).
