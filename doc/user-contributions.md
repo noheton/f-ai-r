@@ -59,6 +59,27 @@ The entries below were reconstructed in one batch on 2026-05-06 from
 the available evidence. Future sessions append in real time.
 
 
+### 2026-05-07 --- Rule shape: transcript preservation (first time honoured)
+*Type:* `rule-shape`
+*Leverage:* high
+*Triggered:* User asked: *"can you keep a full transcript of our
+chat in a separate document?"*. Closes a long-standing gap
+between practice 1 of the eight integrated practices (transcript
+preservation, prescribed since the bootstrap) and the actual
+state of the repository (`doc/transcripts/` did not exist; the
+evolution chronology calls this *"Pipeline as target, not yet as
+practice."*). Created `doc/transcripts/` plus a README and a
+session file `2026-05-07-session.md`. Schema growth: added
+`fair2r:Transcript` class to `doc/provenance.ttl` so transcripts
+bind as typed entities. The discipline is now active for
+subsequent sessions; an active session without a transcript file
+is a defect the FAIR aligner can check for.
+*Artefacts touched:* `doc/transcripts/README.md` (new),
+`doc/transcripts/2026-05-07-session.md` (new),
+`doc/provenance.ttl` (schema + new entities),
+`doc/logbook.md`, `doc/user-contributions.md`.
+*Provenance IRI:* `fair2r:hc-transcript-preservation`
+
 ### 2026-05-07 --- Structural: trim pass 2 — A–D from further-candidates list
 *Type:* `structural-decision`
 *Leverage:* high
