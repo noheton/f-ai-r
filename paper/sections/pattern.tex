@@ -146,107 +146,30 @@ discipline that backs the handback --- every primary artefact has
 a (source, render) pair under version control, the build either
 agrees or fails --- is enumerated as practice~4 of \S\ref{sec:eight}.
 
-\subsection{Extensibility through domain ontologies}
-\label{sec:domain-ontologies}
 
-PROV-O is the spine; it does not have to be the only ontology in
-the graph. The schema we have introduced is compositional: any
-\texttt{fair2r:Claim} can carry additional triples that ground its
-\emph{values} in a domain ontology, alongside the
-\texttt{prov:wasDerivedFrom} edge that grounds its
-\emph{evidence}. The two axes are orthogonal --- provenance asks
-\emph{where did this claim come from?}, domain ontologies ask
-\emph{what does the value of this claim mean?} --- and a manuscript
-that answers both is more reproducible than one that answers only
-the first.
 
-Two examples concrete enough to plug in today:
+\noindent The pattern composes with two forward-looking
+extensions --- domain ontologies (SOSA / SSN, OM-2 / QUDT) for
+sub-discipline value semantics, and provenance-graph
+interconnectivity (the bioinformatics precedent under data-volume
+pressure, restated for LLM-assisted scholarship) --- recorded in
+Appendix~\ref{sec:appendix-pattern-extensions}. Both are off the
+critical path of the eight integrated practices but are how
+F(AI)\textsuperscript{2}R generalises beyond the present case.
 
-\begin{description}[leftmargin=1.2em,itemsep=2pt,topsep=4pt]
-    \item[\textbf{Sensor data: SOSA / SSN.}] The W3C Semantic Sensor
-        Network ontology and its lightweight core
-        SOSA~\cite{janowicz2019sosa}\todo[inline]{verify} expose
-        \texttt{sosa:Observation}, \texttt{sosa:Sensor},
-        \texttt{sosa:FeatureOfInterest}, and the relations between
-        them. A \texttt{fair2r:Claim} that asserts a measurement can
-        carry a \texttt{prov:wasDerivedFrom} pointing at the
-        underlying \texttt{sosa:Observation}, and the audit pass
-        gains the ability to ask \emph{is this measurement well-
-        formed?} as a SHACL query rather than a paragraph of
-        prose.
-    \item[\textbf{Units of measure: OM-2 / QUDT.}] The OM-2 ontology
-        of units of measure~\cite{rijgersberg2013om}\todo[inline]{verify}
-        and the QUDT vocabulary~\cite{qudt}\todo[inline]{verify}
-        expose \texttt{om:Quantity}, \texttt{om:Unit},
-        \texttt{qudt:hasUnit}, and the dimensional relations between
-        units. A claim that asserts a numeric value can carry the
-        unit as an explicit triple rather than as a typographic
-        decoration. Unit consistency is then a graph query, not a
-        manuscript-reading exercise.
-\end{description}
-
-\noindent The class of failure modes this addresses is the one
-prose alone cannot reach: a value that is internally coherent in
-its prose and its citation but \emph{wrong in its units}, or
-\emph{wrong in the dimensional sense it implies}. A reviewer
-catching such a defect today reads the figure caption and the
-methods section and triangulates; an audit pass with a domain
-ontology reads the graph and the SHACL shapes and reports.
-
-The recommendation is open. F(AI)\textsuperscript{2}R does not
-prescribe specific domain ontologies because the right choice is
-discipline-specific. It prescribes that, where a discipline already
-has a \emph{konkrete standardisierte Methode} expressed as an
-ontology, the F(AI)\textsuperscript{2}R repository should adopt it
-and link from \texttt{fair2r:Claim} entities to its terms. NFDI4Ing
-and the Helmholtz Metadata Collaboration are the nearest two
-communities to this paper that maintain such ontologies for
-engineering and metadata respectively, and the integration cost is
-low. The ceiling is the discipline's; the floor is what
-F(AI)\textsuperscript{2}R asks for.
-
-\subsection{Looking forward: provenance graphs as research infrastructure}
-\label{sec:research-infrastructure}
-
-The argument of \S\ref{sec:domain-ontologies} generalises. The
-discipline that pioneered semantic-tagging-as-norm under
-data-volume pressure is bioinformatics: faced with what was, at the
-time, an obscene amount of sequence data, the field standardised
-identifier and annotation schemas (the Gene
-Ontology~\cite{ashburner2000go}\todo[inline]{verify} being the most
-visible example) so that genes, proteins, and their relations could
-be referenced unambiguously across labs, papers, and databases. The
-ontology was not a research output; it was a precondition for
-research that scaled. The community's investment in semantic
-tagging was, in retrospect, what made the next decade of
-bioinformatics possible.
-
-We claim a closer analogy than is sometimes recognised. LLM-assisted
-scholarly writing is producing artefacts at a volume that the
-unaided reviewer pipeline cannot absorb (\S\ref{sec:intro}). The
-response will, on present trajectory, look more like the
-bioinformatics response than like the editorial response: not new
-detection tools but new shared schemas, ontologies, and
-graph-interconnected metadata that let claims, sources, and
-activities reference each other across institutional boundaries.
-\textbf{Future research success may come to depend less on the
-solitary craft of a single manuscript and more on three things the
-F(AI)\textsuperscript{2}R schema is designed to support:} (i)
-provenance models that turn published claims into machine-readable
-hypotheses for the next study; (ii) graph interconnectivity across
-institutional knowledge graphs --- the Helmholtz cross-centre
-graph~\cite{curdt2025hmc} is the proximate example, and a
-fully-instrumented version would let a claim in one centre's
-manuscript be linked, queried, and challenged by claims in another's
-without leaving the linked-data layer; (iii) clever experimental
-validation that uses the graph to identify the next testable
-deviation from the published consensus.
-
-That trajectory is a position the paper is willing to take and a
-direction the eight integrated practices serve. The verification
-ladder feeds (i); the per-claim provenance map and the
-domain-ontology side-arms feed (ii); the recursive case study and
-the audit pass feed (iii). None of this requires F(AI)\textsuperscript{2}R
-to be the standard. It requires only that some standard with these
-properties be adopted, and the present paper is one offer among
-several the community can refine.
+\paragraph{Cousins.}
+Read structurally, F(AI)\textsuperscript{2}R borrows more from
+formal methods than from the data-management literature. Each
+\texttt{fair2r:Claim} IRI is a conjecture; the verification ladder
+is a proof-state machine; the audit pass is a proof-checker that
+verifies structural properties of the graph rather than
+re-discovering them; the SHACL shapes
+(Appendix~\ref{sec:appendix-pattern-extensions}) are invariants;
+the handback discipline is the prover / checker separation that
+model checking and certified-software efforts treat as
+load-bearing~\cite{clarke2009modelchecking,klein2009sel4}\todo[inline]{verify}.
+The analogy is partial --- a manuscript is not a transition
+system, and \textsc{lit-read} is not soundness --- but the
+imports it suggests (counter-example witnesses on retracted claims;
+lemma libraries of vetted claims that successor papers can cite by
+IRI without re-verifying) are flagged as future work.

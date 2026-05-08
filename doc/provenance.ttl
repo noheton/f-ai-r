@@ -2748,3 +2748,52 @@ hc:transcript-preservation  a fair2r:HumanContribution ;
     rdfs:comment "User asked for a transcript of the cooperation, in line with practice 1 of the eight integrated practices. Until 2026-05-07 the practice was prescribed but not honoured --- the evolution chronology calls this 'Pipeline as target, not yet as practice.' This contribution closes that gap by populating doc/transcripts/ for the first time. Treated as rule-shape rather than content-prompt: the contribution is the discipline (per-session transcripts committed to doc/transcripts/), not the document itself."@en ;
     dcterms:created "2026-05-07"^^xsd:date ;
     prov:influenced act:meta-cooperation-2026-05-07-transcript-preservation , ent:transcript-2026-05-07 .
+
+#-------------------------------------------------------------------------
+# 2026-05-07 --- Focused-narrative trim pass: cut background + related
+# from body, fold sustainability + objections into limits-and-objections,
+# move pattern.tex's two forward-looking subsections to appendix-g,
+# tighten authors-note + evolution + provenance-analysis prose.
+#-------------------------------------------------------------------------
+
+act:trim-pass-focused-narrative  a prov:Activity ;
+    rdfs:label "Trim pass focused on the five-beat narrative spine"@en ;
+    prov:startedAtTime "2026-05-07T00:00:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith agent:human-author , agent:claude-opus-4-7 ;
+    prov:wasInformedBy act:trim-pass-2-appendix-routing ;
+    rdfs:comment "Researcher direction: 'generate the focused version. afterwards complete update pass.' Triaged sections by narrative load against the five-beat spine (gap, position, eight integrated practices + pipeline, recursive case study + honest-about-limits, why now). Cut background.tex and related.tex entirely (substrate already covered by intro citations; the formal-methods-cousin paragraph is folded into pattern.tex as 'Cousins.'). Folded sustainability.tex and objections.tex into a new limits-and-objections.tex (~683 w from a combined ~1170 w). Moved pattern.tex §domain-ontologies and §research-infrastructure (~570 w) to a new appendix-g-pattern-extensions.tex; pattern.tex retains a one-paragraph forward pointer. Authors-note tightened ~1010 -> 561 w (chronicle of cooperation events removed; partition + coupling rule kept). Evolution chronology paragraphs collapsed three -> one combined paragraph (1029 -> 896 w). Provenance-analysis trimmed 436 -> 276 w; the two figures carry the beat. PDF compiles to 33 pages (was 38)."@en .
+
+ent:section-background  prov:wasInvalidatedBy act:trim-pass-focused-narrative ;
+    rdfs:comment "Retired in trim-pass-focused-narrative. The substrate (FAIR / FAIR4RS / FAIR4ML / PROV-O / PRISMA / GRADE / ICMJE) is already cited inline by intro.tex and named again where load-bearing in pattern.tex; the dedicated body section restated the citations without adding load-bearing claims."@en .
+
+ent:section-related  prov:wasInvalidatedBy act:trim-pass-focused-narrative ;
+    rdfs:comment "Retired in trim-pass-focused-narrative. Datasheets / Model Cards / FAIR4* family already cited in intro.tex and eight-practices.tex item 8. The formal-methods-cousin paragraph that was load-bearing for the Position is folded into pattern.tex as the 'Cousins.' paragraph; the rest is dropped."@en .
+
+ent:section-sustainability  prov:wasInvalidatedBy act:trim-pass-focused-narrative ;
+    rdfs:comment "Retired in trim-pass-focused-narrative. Folded into limits-and-objections.tex (resource cost + frontier-model dependence + equity + long-term archivability paragraphs)."@en .
+
+ent:section-objections  prov:wasInvalidatedBy act:trim-pass-focused-narrative ;
+    rdfs:comment "Retired in trim-pass-focused-narrative. Folded into limits-and-objections.tex; the five standing objections are stated more compactly under one heading."@en .
+
+ent:section-limits-and-objections  a fair2r:Section ;
+    rdfs:label "Section: Limits, dual-use, and standing objections (merged)"@en ;
+    dcterms:source "paper/sections/limits-and-objections.tex" ;
+    prov:wasGeneratedBy act:trim-pass-focused-narrative ;
+    prov:wasAttributedTo agent:human-author , agent:claude-opus-4-7 ;
+    prov:wasDerivedFrom ent:section-sustainability , ent:section-objections .
+
+ent:section-appendix-pattern-extensions  a fair2r:Section ;
+    rdfs:label "Appendix G: Pattern extensions --- domain ontologies and graph-as-research-infrastructure"@en ;
+    dcterms:source "paper/sections/appendix-g-pattern-extensions.tex" ;
+    prov:wasGeneratedBy act:trim-pass-focused-narrative ;
+    prov:wasAttributedTo agent:human-author , agent:claude-opus-4-7 ;
+    prov:wasDerivedFrom ent:section-pattern .
+
+hc:trim-pass-focused-narrative  a fair2r:HumanContribution ;
+    rdfs:label "Researcher direction: generate the focused version + complete update pass"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "structural-decision" ;
+    fair2r:contributionLeverage "high" ;
+    rdfs:comment "Researcher said: 'generate the focused version. afterwards complete update pass.' against the seven-item triage list returned earlier in the session (filter by narrative load). The cut-and-fold pattern is the trim pass's structural-decision payload; the update pass (provenance, logbook, transcript, site rebuild) is what makes the cut auditable. Body word count 10466 -> 6496 (~38%); PDF page count 38 -> 33."@en ;
+    dcterms:created "2026-05-07"^^xsd:date ;
+    prov:influenced act:trim-pass-focused-narrative .
