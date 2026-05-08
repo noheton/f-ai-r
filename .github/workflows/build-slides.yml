@@ -77,14 +77,32 @@ jobs:
           working_directory: slides
           root_file: poster-A0.tex
           args: -pdf -interaction=nonstopmode -file-line-error
+          extra_system_packages: "py3-pygments"
           continue_on_error: true
 
       - name: Dump poster log on failure
         if: steps.poster.outcome == 'failure'
         run: |
-          echo "::group::poster-A0.log (tail)"
-          tail -200 slides/poster-A0.log || true
+          echo "::group::poster-A0.log (full)"
+          cat slides/poster-A0.log || echo "(no log file)"
           echo "::endgroup::"
+          echo "::group::slides/ contents"
+          ls -la slides/ || true
+          echo "::endgroup::"
+
+      # Always upload the poster log as an artefact so a failed
+      # compile is debuggable from the workflow run page even
+      # without re-running the job locally.
+      - name: Upload poster log as artefact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: poster-log-${{ github.sha }}
+          path: |
+            slides/poster-A0.log
+            slides/poster-A0.aux
+          if-no-files-found: warn
+          retention-days: 14
 
       # Upload + publish run BEFORE the "fail the job" step so a
       # poster compile failure does not skip publication of the
