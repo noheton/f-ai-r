@@ -27,7 +27,10 @@ html, body {
   font-size: var(--type-body);
   line-height: 1.55;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;            /* prevent rogue elements forcing horizontal scroll on phones */
+  -webkit-text-size-adjust: 100%; /* don't auto-inflate text on iOS landscape */
 }
+img, svg, video, iframe, canvas { max-width: 100%; height: auto; }
 
 a {
   color: var(--dlr-link);
@@ -161,7 +164,30 @@ main {
 }
 
 @media (max-width: 900px) {
-  main { grid-template-columns: 1fr; gap: 16px; }
+  /* Tablet portrait: collapse the two-column main into a single
+     column, tighten outer padding, allow nav to wrap. */
+  .header .inner,
+  .nav .inner,
+  .hero .inner,
+  main,
+  footer .inner,
+  .utility .inner { padding-left: 18px; padding-right: 18px; }
+
+  main { grid-template-columns: 1fr; gap: 18px; padding-top: 22px; padding-bottom: 56px; }
+
+  /* Sidebar moves below content on tablets so the article gets
+     full width; sidebar stays useful as a footer-style index. */
+  .sidebar { order: 2; }
+  .content { order: 1; }
+
+  .nav .inner { flex-wrap: wrap; gap: 0; }
+  .nav a { padding: 10px 14px; font-size: 13px; }
+
+  .hero h1 { font-size: 30px; }
+  .hero .lede { font-size: 16px; }
+
+  /* Tables on tablets: still scroll if needed */
+  .content table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
 }
 
 /* ------- Sidebar / breadcrumb-like local nav ----------------- */

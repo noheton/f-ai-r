@@ -73,15 +73,12 @@ jobs:
           tail -200 slides/poster-A0.log || true
           echo "::endgroup::"
 
-      - name: Fail the job if any artefact failed
-        if: steps.pitch.outcome == 'failure' || steps.conf.outcome == 'failure' || steps.poster.outcome == 'failure'
-        run: |
-          echo "Pitch outcome:      ${{ steps.pitch.outcome }}"
-          echo "Conference outcome: ${{ steps.conf.outcome }}"
-          echo "Poster outcome:     ${{ steps.poster.outcome }}"
-          exit 1
-
+      # Upload + publish run BEFORE the "fail the job" step so a
+      # poster compile failure does not skip publication of the
+      # decks that did build cleanly. The job still fails at the
+      # end if any artefact was missing.
       - name: Upload decks + poster as workflow artefact
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: slides-${{ github.sha }}
@@ -89,15 +86,17 @@ jobs:
             slides/pitch-5min.pdf
             slides/conference-30min.pdf
             slides/poster-A0.pdf
-          if-no-files-found: error
+          if-no-files-found: warn
           retention-days: 30
 
       # On main, publish the rendered decks as a rolling
       # 'latest-draft-slides' GitHub Release so the README and the
       # site can link a stable download URL without rerunning CI per
-      # reader. Mirrors the paper-PDF distribution pattern.
+      # reader. Mirrors the paper-PDF distribution pattern. Runs
+      # even if a single artefact failed to compile, so partial
+      # progress still ships.
       - name: Publish rendered decks + poster to 'latest-draft-slides' release
-        if: github.ref == 'refs/heads/main'
+        if: always() && github.ref == 'refs/heads/main'
         uses: softprops/action-gh-release@v2
         with:
           tag_name: latest-draft-slides
@@ -113,7 +112,20 @@ jobs:
             slides/pitch-5min.pdf
             slides/conference-30min.pdf
             slides/poster-A0.pdf
+          fail_on_unmatched_files: false
           prerelease: true
           make_latest: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Final gate: fail the workflow if any artefact failed to
+      # compile, so the red CI badge accurately reflects the state.
+      # Runs LAST so the publish step above has already shipped
+      # whatever did build.
+      - name: Fail the job if any artefact failed
+        if: steps.pitch.outcome == 'failure' || steps.conf.outcome == 'failure' || steps.poster.outcome == 'failure'
+        run: |
+          echo "Pitch outcome:      ${{ steps.pitch.outcome }}"
+          echo "Conference outcome: ${{ steps.conf.outcome }}"
+          echo "Poster outcome:     ${{ steps.poster.outcome }}"
+          exit 1
