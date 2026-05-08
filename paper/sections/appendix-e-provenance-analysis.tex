@@ -1,0 +1,74 @@
+\section{Provenance analysis: queries and worked numbers}
+\label{sec:appendix-provenance-analysis}
+
+The body section (\S\ref{sec:provenance-analysis}) summarises the
+audit; this appendix walks the four diagnostic queries on the live
+graph. The auto-generated tables below are produced by
+\texttt{scripts/provenance\_analysis.py}, which the build pipeline
+re-runs on every commit. They reflect the state of
+\texttt{doc/provenance.ttl} at the time this PDF was compiled and
+are embedded into the prose by the build, not transcribed by hand.
+
+\paragraph{Verification rung distribution.}
+Every claim in the graph carries a
+\texttt{fair2r:verificationState}; we report the fraction at each
+rung at submission time per the sixth integrated practice
+(\S\ref{sec:eight}, item~6). The query is one SPARQL pattern:
+
+\begin{quote}\small
+\texttt{SELECT ?state (COUNT(?c) AS ?n)\\
+WHERE \{ ?c a fair2r:Claim ; fair2r:verificationState ?state \}\\
+GROUP BY ?state}
+\end{quote}
+
+\noindent The result for the present manuscript:
+
+\input{sections/_generated/rung-distribution.tex}
+
+\paragraph{Section-to-claim coverage.}
+Every section in \texttt{paper/main.tex} should appear in the graph
+as a \texttt{fair2r:Section} entity, with at least one
+\texttt{prov:Activity} that produced it and (almost always) at least
+one \texttt{fair2r:Claim} attributed to that activity. A section
+that exists in prose but not in the graph is a defect surfaced by
+the FAIR Aligner.
+
+\input{sections/_generated/section-coverage.tex}
+
+\noindent A coverage row that reads \emph{prose: yes / graph: no} is
+a hard fail; \emph{graph: yes / claims: 0} is a soft warning meaning
+the section has been registered but the claim curation has not
+caught up.
+
+\paragraph{Source invocation strength.}
+Every \texttt{fair2r:Source} entity that the manuscript cites should
+appear as the object of at least one
+\texttt{prov:wasDerivedFrom} edge from a \texttt{fair2r:Claim}. A
+source cited but never linked from a claim is most often a
+\textbf{ghost citation} --- a reference that lives in the
+bibliography because the prose mentions it, but that no claim
+actually relies on. In a healthy F(AI)\textsuperscript{2}R
+manuscript, the count is zero.
+
+\input{sections/_generated/source-strength.tex}
+
+\paragraph{Activity timeline.}
+The \texttt{prov:Activity} nodes form a dated record of every
+substantive change. The most recent five activities, in
+ISO-8601 order, are:
+
+\input{sections/_generated/recent-activities.tex}
+
+\noindent The same data, with one row per session, is the
+human-readable mirror in \texttt{doc/logbook.md}; drift between the
+two is itself a defect (see \S\ref{sec:handback} on the handback
+discipline).
+
+\paragraph{Keep this appendix honest.}
+This appendix is generated against the current graph. If a future
+revision adds a verification rung, a new section, or a new failure
+mode, the corresponding entry here updates automatically on the next
+build; the prose around the figures stays put. The intent is that a
+reader who clones the repository, recompiles the PDF, and re-reads
+this appendix, will see the analysis reflect the manuscript that was
+actually produced --- not a snapshot frozen at draft time.
