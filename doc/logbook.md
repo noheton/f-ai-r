@@ -2907,3 +2907,43 @@ contribution-paragraph trim, position 5-claims tighten) are
 deferred — the user pivoted to a mobile-friendly Pages site;
 the prose-density work is the next iteration of trim, not this
 one.
+
+## 2026-05-07 — Pages site: mobile-friendly CSS
+
+*Author:* claude-opus-4-7 (under direction of repo owner)
+*Touched:* `site/static/style.css`, `doc/provenance.ttl`,
+`doc/logbook.md`, `doc/user-contributions.md`.
+
+*Decision / outcome.* User direction *"make the pages mobile
+friendly"*. Changes are CSS-only (no template change, no JS) so
+the site stays a static-build artefact.
+
+Added to `site/static/style.css`:
+
+- **Responsive defaults** (always on): `img`, `video`, `iframe`
+  inside `.content` get `max-width: 100%; height: auto`;
+  `pre` gets `overflow-x: auto`. Stops figures and code blocks
+  from blowing past the viewport on tablets and landscape
+  phones.
+- **Phone breakpoint at 720 px**: tighter horizontal padding
+  (16 px instead of 32 px); header stacks logo above org-line;
+  utility ribbon wraps; nav wraps to a second row rather than
+  overflowing horizontally; hero H1 26 px (was 36 px); body
+  H1/H2/H3 stepped down; CTAs stack full-width; tables become
+  `display: block; overflow-x: auto` so the evolutions table
+  scrolls horizontally rather than overflowing the viewport;
+  Mermaid blocks scroll on overflow.
+- **Narrow-phone breakpoint at 380 px**: further H1 and
+  nav-item shrink for iPhone-SE-class devices.
+
+The existing breakpoints (`900 px` collapses the sidebar /
+content into a single column; `720 px` collapses the footer +
+card-grid) were preserved alongside the new ones.
+
+The viewport meta tag (`<meta name="viewport"
+content="width=device-width,initial-scale=1">`) was already in
+the page template; no change needed.
+
+Provenance: `act:make-pages-mobile-friendly`;
+`hc:make-pages-mobile-friendly` (corrective-intervention,
+medium). Triple count 2287 → 2301 (+14).

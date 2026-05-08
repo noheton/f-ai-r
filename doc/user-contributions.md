@@ -84,6 +84,23 @@ is a defect the FAIR aligner can check for.
 `doc/logbook.md`, `doc/user-contributions.md`.
 *Provenance IRI:* `fair2r:hc-transcript-preservation`
 
+### 2026-05-07 --- Corrective: mobile-friendly Pages site
+*Type:* `corrective-intervention`
+*Leverage:* medium
+*Triggered:* User direction *"make the pages mobile friendly"*.
+CSS-only fix in `site/static/style.css`: responsive defaults
+(`img`, `video`, `iframe` `max-width: 100%`; `pre`
+`overflow-x: auto`); phone breakpoint at 720 px (tighter
+padding, header stacks, nav wraps, hero H1 26 px, body
+headings stepped down, CTAs stack full-width, tables become
+horizontally scrollable); narrow-phone breakpoint at 380 px.
+Existing 900 px and 720 px breakpoints preserved. No template
+change, no JS.
+*Artefacts touched:* `site/static/style.css`,
+`doc/provenance.ttl`, `doc/logbook.md`,
+`doc/user-contributions.md`.
+*Provenance IRI:* `fair2r:hc-make-pages-mobile-friendly`
+
 ### 2026-05-07 --- Structural: conference poster as fifth primary artefact
 *Type:* `structural-decision`
 *Leverage:* high
