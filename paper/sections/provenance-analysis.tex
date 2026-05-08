@@ -3,13 +3,11 @@
 
 The graph at \texttt{doc/provenance.ttl} is not a passive record;
 it is a queryable structure whose health \emph{is} the audit pass
-on \textbf{Reusable} (\S\ref{sec:axes}). Two figures carry the
-state of the present manuscript:
+on \textbf{Reusable} (\S\ref{sec:axes}).
 Figure~\ref{fig:provenance-topology} renders the schema with the
-current instance counts read at compile time, and
-Figure~\ref{fig:ladder-populations} renders the verification
-ladder with each rung sized in proportion to the number of claims
-currently at that rung. The four diagnostic SPARQL queries the
+current instance counts read at compile time; the populated
+verification ladder is on the conference poster
+(\texttt{slides/poster-A0.tex}). The four diagnostic SPARQL queries the
 audit reads --- rung distribution, section-to-claim coverage,
 source invocation strength, activity timeline --- and the
 auto-generated tables they produce are walked in
@@ -26,18 +24,11 @@ its current instance count.}
 \label{fig:provenance-topology}
 \end{figure}
 
-\begin{figure}[!h]
-\centering
-\includegraphics[width=0.96\linewidth]{figures/ladder-populations.pdf}
-\caption{Verification ladder with live rung populations. Each
-node's area is proportional to the count of
-\texttt{fair2r:Claim} entities currently at that rung. The dotted
-vertical rule marks the model ceiling between agent-deliverable
-and human-only rungs; the dotted yellow back-edge is the only
-legal back-edge --- a retraction recorded as a
-\texttt{prov:Invalidation}, never as a deletion.}
-\label{fig:ladder-populations}
-\end{figure}
+The verification ladder rendered as a finite-state machine with
+live rung populations is on the conference poster
+(\texttt{slides/poster-A0.tex}); the queries that produce those
+populations are walked in
+Appendix~\ref{sec:appendix-provenance-analysis}.
 
 The four queries are diagnostic, not exhaustive. They surface the
 failure modes of \S\ref{sec:failure-modes} that have a graph

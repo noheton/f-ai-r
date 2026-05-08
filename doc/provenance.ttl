@@ -2875,3 +2875,22 @@ hc:scaffold-conference-poster  a fair2r:HumanContribution ;
     rdfs:comment "User said 'go' to a two-step plan: scaffold poster + extend invariant; then run condenser against the paper with 'the poster carries this' as the new criterion. The poster's discipline (one A0 page; what survives the cut) is itself the page-count forcing function. Net plausible paper-body trim once step (b) runs: ~3 pp."@en ;
     dcterms:created "2026-05-07"^^xsd:date ;
     prov:influenced act:scaffold-conference-poster , ent:poster-A0 .
+
+#-------------------------------------------------------------------------
+# 2026-05-07 --- Mobile-friendly CSS: phones + very-narrow phones.
+#-------------------------------------------------------------------------
+
+act:make-pages-mobile-friendly  a prov:Activity ;
+    rdfs:label "Make the Pages site mobile-friendly: add @media breakpoints + responsive image/table defaults"@en ;
+    prov:startedAtTime "2026-05-07T00:00:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith agent:human-author , agent:claude-opus-4-7 ;
+    rdfs:comment "User direction 'make the pages mobile friendly'. site/static/style.css gained: a responsive defaults block (img/video/iframe max-width:100%; pre overflow-x); a phone breakpoint at 720 px (tighter padding, header stacks vertically, nav wraps, hero h1 26 px, body h1/h2/h3 stepped down, CTAs stack full-width, tables scroll horizontally, mermaid scrolls on overflow); a narrow-phone breakpoint at 380 px (further h1 and nav-item shrink). The viewport meta tag was already in the template; the existing 900 px and 720 px breakpoints (sidebar collapse, footer single-column, card-grid single-column) were preserved alongside the new ones."@en .
+
+hc:make-pages-mobile-friendly  a fair2r:HumanContribution ;
+    rdfs:label "Researcher direction: make the Pages site mobile-friendly"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "corrective-intervention" ;
+    fair2r:contributionLeverage "medium" ;
+    rdfs:comment "Phones were getting horizontal overflow on the evolutions table, the verification-ladder table, and any code block; the nav with 6 items was overflowing on viewports under ~600 px; figures sized at 96 % linewidth blew past the viewport on portrait phones. The fix is responsive-CSS-only --- no template change, no JS --- so the site stays a static-build artefact."@en ;
+    dcterms:created "2026-05-07"^^xsd:date ;
+    prov:influenced act:make-pages-mobile-friendly .

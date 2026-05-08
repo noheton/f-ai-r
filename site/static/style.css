@@ -484,6 +484,81 @@ footer .legal a:hover { color: #fff; }
 }
 .prov-info code { font-size: 0.9em; }
 
+/* ------- Responsive defaults: never overflow the viewport ----- */
+.content img,
+.content video,
+.content iframe { max-width: 100%; height: auto; }
+.content pre { overflow-x: auto; }
+.content figure { margin: 16px 0; }
+
+/* ------- Mobile breakpoint (phones) -------------------------- */
+@media (max-width: 720px) {
+  /* Tighter horizontal padding everywhere */
+  .header .inner,
+  .nav .inner,
+  .hero .inner,
+  main,
+  footer .inner,
+  .utility .inner { padding-left: 16px; padding-right: 16px; }
+
+  /* Header: stack logo + org-line, smaller type */
+  .header .inner { flex-direction: column; align-items: flex-start; gap: 10px; padding-top: 12px; padding-bottom: 12px; }
+  .header .logo { height: 40px; }
+  .header .org-line { font-size: 12px; line-height: 1.4; }
+  .header .org-line .big { font-size: 14px; display: block; margin-bottom: 2px; }
+
+  /* Utility ribbon: tighter */
+  .utility .inner { gap: 12px; font-size: 12px; flex-wrap: wrap; }
+
+  /* Nav: allow wrap to a second row rather than overflowing */
+  .nav .inner { flex-wrap: wrap; gap: 0; }
+  .nav a { padding: 10px 12px; font-size: 13px; flex-shrink: 0; }
+
+  /* Hero: smaller h1, tighter padding */
+  .hero .inner { padding: 22px 16px 18px; }
+  .hero h1 { font-size: 26px; }
+  .hero .lede { font-size: 15px; }
+  .hero .eyebrow { font-size: 11px; }
+
+  /* Main: drop the 28px / 32px desktop margins */
+  main { padding: 20px 16px 48px; gap: 12px; }
+
+  /* Article body: smaller headings */
+  .content h1 { font-size: 24px; }
+  .content h2 { font-size: 18px; margin-top: 22px; padding-top: 14px; }
+  .content h3 { font-size: 16px; }
+  .content p { font-size: 15px; }
+
+  /* CTAs: full width on phones, stacked */
+  .cta-row { flex-direction: column; }
+  .cta { width: 100%; text-align: center; box-sizing: border-box; }
+
+  /* Tables: scroll horizontally inside a container rather than
+     blowing the viewport */
+  .content table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    font-size: 13px;
+  }
+  .content table th,
+  .content table td { padding: 6px 8px; }
+
+  /* Mermaid client-side render: scroll on overflow */
+  .mermaid { overflow-x: auto; }
+
+  /* Sidebar typography */
+  .sidebar { font-size: 13px; padding-top: 0; }
+  .sidebar h4 { margin-top: 12px; }
+}
+
+/* ------- Very narrow phones (iPhone SE, ~375 px) ------------- */
+@media (max-width: 380px) {
+  .hero h1 { font-size: 22px; }
+  .nav a { padding: 8px 10px; font-size: 12px; }
+  .header .org-line .big { font-size: 13px; }
+}
+
 /* ------- Print: no DLR footer ribbon, clean ------------------- */
 @media print {
   .nav, footer, .utility { display: none; }

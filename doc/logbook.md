@@ -2871,3 +2871,79 @@ Provenance: `act:scaffold-conference-poster`;
 leverage). `ent:poster-A0` records `prov:used` for hero,
 ladder-populations, and provenance-topology (the three figures
 the poster embeds). Triple count 2257 → 2287 (+30).
+
+## 2026-05-07 — Step (b) of poster + condenser plan: lean cuts
+
+*Author:* claude-opus-4-7 (under direction of repo owner)
+*Touched:* `paper/main.tex` (front-matter hero figure removed),
+`paper/sections/intro.tex` (orphaned `\ref{fig:hero}` cleaned),
+`paper/sections/provenance-analysis.tex` (ladder-populations
+figure removed; pointer to the poster added),
+`doc/logbook.md`.
+
+*Decision / outcome.* User said *"go"* against step (b) of the
+poster plan. Two cuts landed cleanly with the conference poster
+as the new visual heavy-lift:
+
+- Front-matter hero figure dropped from `paper/main.tex`. Paper
+  opens directly with the abstract; the poster
+  (\texttt{slides/poster-A0.tex}) is the eye-catcher. The TikZ
+  source `paper/figures/hero.tex` is preserved on disk and
+  rendered to `paper/figures/hero.png` for the Pages site.
+- `ladder-populations.pdf` figure dropped from
+  `provenance-analysis.tex`. The schema-diagram figure
+  (`provenance-topology.pdf`) stays in the body; the populated
+  ladder is on the poster, with a one-sentence forward pointer
+  in the body prose.
+
+PDF page count: 34 → 33. The trim was front-loaded in the body
+where the front-matter `figure*` and a body-page figure both
+exited; the appendices are now substantial enough that further
+single-figure cuts produce diminishing page returns.
+
+The remaining candidates from the original step-(b) sketch
+(AI² grid resize, failure-mode-coverage to appendix, intro
+contribution-paragraph trim, position 5-claims tighten) are
+deferred — the user pivoted to a mobile-friendly Pages site;
+the prose-density work is the next iteration of trim, not this
+one.
+
+## 2026-05-07 — Pages site: mobile-friendly CSS
+
+*Author:* claude-opus-4-7 (under direction of repo owner)
+*Touched:* `site/static/style.css`, `doc/provenance.ttl`,
+`doc/logbook.md`, `doc/user-contributions.md`.
+
+*Decision / outcome.* User direction *"make the pages mobile
+friendly"*. Changes are CSS-only (no template change, no JS) so
+the site stays a static-build artefact.
+
+Added to `site/static/style.css`:
+
+- **Responsive defaults** (always on): `img`, `video`, `iframe`
+  inside `.content` get `max-width: 100%; height: auto`;
+  `pre` gets `overflow-x: auto`. Stops figures and code blocks
+  from blowing past the viewport on tablets and landscape
+  phones.
+- **Phone breakpoint at 720 px**: tighter horizontal padding
+  (16 px instead of 32 px); header stacks logo above org-line;
+  utility ribbon wraps; nav wraps to a second row rather than
+  overflowing horizontally; hero H1 26 px (was 36 px); body
+  H1/H2/H3 stepped down; CTAs stack full-width; tables become
+  `display: block; overflow-x: auto` so the evolutions table
+  scrolls horizontally rather than overflowing the viewport;
+  Mermaid blocks scroll on overflow.
+- **Narrow-phone breakpoint at 380 px**: further H1 and
+  nav-item shrink for iPhone-SE-class devices.
+
+The existing breakpoints (`900 px` collapses the sidebar /
+content into a single column; `720 px` collapses the footer +
+card-grid) were preserved alongside the new ones.
+
+The viewport meta tag (`<meta name="viewport"
+content="width=device-width,initial-scale=1">`) was already in
+the page template; no change needed.
+
+Provenance: `act:make-pages-mobile-friendly`;
+`hc:make-pages-mobile-friendly` (corrective-intervention,
+medium). Triple count 2287 → 2301 (+14).
