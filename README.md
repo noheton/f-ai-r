@@ -16,7 +16,7 @@ bootstraps an F(AI)²R scaffold on a fresh repository.
 | Artefact | Latest draft (auto-built on every push to `main`) |
 |---|---|
 | **Paper PDF** (DRAFT watermark) | [`releases/download/latest-draft/main.pdf`](https://github.com/noheton/f-ai-r/releases/download/latest-draft/main.pdf) |
-| **Conference poster** (A0 landscape) | [`releases/download/latest-draft-slides/poster-A0.pdf`](https://github.com/noheton/f-ai-r/releases/download/latest-draft-slides/poster-A0.pdf) |
+| **Conference poster** (A0 portrait) | [`releases/download/latest-draft-slides/poster-A0.pdf`](https://github.com/noheton/f-ai-r/releases/download/latest-draft-slides/poster-A0.pdf) |
 | **Pitch deck** (5 min) | [`releases/download/latest-draft-slides/pitch-5min.pdf`](https://github.com/noheton/f-ai-r/releases/download/latest-draft-slides/pitch-5min.pdf) |
 | **Conference deck** (25 + 5 min) | [`releases/download/latest-draft-slides/conference-30min.pdf`](https://github.com/noheton/f-ai-r/releases/download/latest-draft-slides/conference-30min.pdf) |
 
@@ -69,7 +69,7 @@ alongside the source.
 ├── slides/            Beamer decks + tikzposter A0 poster
 │   ├── pitch-5min.tex      5-minute pitch
 │   ├── conference-30min.tex  25 + 5 conference talk
-│   ├── poster-A0.tex       A0 landscape conference poster
+│   ├── poster-A0.tex       A0 portrait conference poster
 │   └── style/         fair2r-beamer.sty (DLR Corporate Design)
 ├── doc/               methodology, FAIR notes, logbook, PROV-O graph → the process
 │   ├── provenance.ttl      PROV-O over Turtle (the audit substrate)

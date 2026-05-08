@@ -1570,7 +1570,7 @@ fair2r:Slidedeck             a owl:Class ; rdfs:subClassOf prov:Entity ;
 
 fair2r:Poster                a owl:Class ; rdfs:subClassOf prov:Entity ;
     rdfs:label "Conference poster / infographic"@en ;
-    rdfs:comment "tikzposter-rendered A0 landscape poster under slides/poster-A0.tex. The fifth primary artefact (alongside paper, slides, graph, logbook); the discipline of writing it forces the paper's spine to declare itself."@en .
+    rdfs:comment "tikzposter-rendered A0 portrait poster under slides/poster-A0.tex. The fifth primary artefact (alongside paper, slides, graph, logbook); the discipline of writing it forces the paper's spine to declare itself."@en .
 
 ent:slidedeck-pitch          a fair2r:Slidedeck ;
     rdfs:label "F(AI)^2R --- 5-minute pitch deck (Beamer)"@en ;
@@ -2853,19 +2853,19 @@ hc:eyecatcher-on-pages  a fair2r:HumanContribution ;
 #-------------------------------------------------------------------------
 
 ent:poster-A0  a fair2r:Poster ;
-    rdfs:label "Conference poster v1: A0 landscape, three-column, DLR CD"@en ;
+    rdfs:label "Conference poster v1: A0 portrait, three-column, DLR CD"@en ;
     dcterms:source "slides/poster-A0.tex" ;
     dcterms:created "2026-05-07"^^xsd:date ;
     prov:wasGeneratedBy act:scaffold-conference-poster ;
     prov:wasAttributedTo agent:human-author , agent:claude-opus-4-7 ;
     prov:used ent:figure-hero , ent:figure-ladder-populations , ent:figure-provenance-topology ;
-    rdfs:comment "Three-column A0 landscape. Left: the gap, base rates, why now. Centre: the position (with hero) and the eight integrated practices. Right: verification ladder with live populations, provenance topology, and the worked-example URL. v1 compiles cleanly via pdflatex; one A0 page; uses tikzposter's Simple theme with DLR-CD colour overrides because custom themes print a debug stamp on page 1."@en .
+    rdfs:comment "Three-column A0 portrait. Left: the gap, base rates, why now. Centre: the position (with hero) and the eight integrated practices. Right: verification ladder with live populations, provenance topology, and the worked-example URL. v1 compiles cleanly via pdflatex; one A0 page; uses tikzposter's Simple theme with DLR-CD colour overrides because custom themes print a debug stamp on page 1."@en .
 
 act:scaffold-conference-poster  a prov:Activity ;
     rdfs:label "Scaffold conference poster as the fifth primary artefact"@en ;
     prov:startedAtTime "2026-05-07T00:00:00Z"^^xsd:dateTime ;
     prov:wasAssociatedWith agent:human-author , agent:claude-opus-4-7 ;
-    rdfs:comment "Researcher direction: 'add another artifact to the build chain a conference poster/Infographic. consider distilling the process to its essentials. how would that change page count for paper'. Step (a) of the two-step plan: scaffold the poster as a build-chain artefact. Step (b) (run the condenser against the paper with the explicit instruction 'the poster carries this; the paper need not') is a follow-up. Schema growth: fair2r:Poster class added (sibling of fair2r:Slidedeck). slides/Makefile gains a 'poster' target. .github/workflows/build-slides.yml extended to compile the poster, fail the job on any artefact failure, upload the poster alongside the decks, and publish to the latest-draft-slides release. Local pdflatex compile: 1 page A0 landscape, ~430 KB."@en .
+    rdfs:comment "Researcher direction: 'add another artifact to the build chain a conference poster/Infographic. consider distilling the process to its essentials. how would that change page count for paper'. Step (a) of the two-step plan: scaffold the poster as a build-chain artefact. Step (b) (run the condenser against the paper with the explicit instruction 'the poster carries this; the paper need not') is a follow-up. Schema growth: fair2r:Poster class added (sibling of fair2r:Slidedeck). slides/Makefile gains a 'poster' target. .github/workflows/build-slides.yml extended to compile the poster, fail the job on any artefact failure, upload the poster alongside the decks, and publish to the latest-draft-slides release. Local pdflatex compile: 1 page A0 portrait, ~430 KB."@en .
 
 hc:scaffold-conference-poster  a fair2r:HumanContribution ;
     rdfs:label "Researcher direction: add a conference poster to the build chain; ask the page-count question that follows"@en ;
@@ -2914,3 +2914,23 @@ hc:readme-consistency-pass  a fair2r:HumanContribution ;
     rdfs:comment "Two-fold direction: surface a CI bug (poster wasn't shipping) and bring the README forward to the post-trim, post-poster, post-transcripts, post-mobile state. The README is the GitHub repo's first-impression artefact; consistency-with-the-state-of-the-tree matters as much for it as for any primary artefact."@en ;
     dcterms:created "2026-05-07"^^xsd:date ;
     prov:influenced act:poster-ci-compile-fix-and-readme .
+
+#-------------------------------------------------------------------------
+# 2026-05-08 --- Layout-scrutinizer agent expanded to cover slides + poster
+# + Pages site; conference poster flipped to A0 portrait.
+#-------------------------------------------------------------------------
+
+act:expand-layout-scrutinizer-and-flip-poster  a prov:Activity ;
+    rdfs:label "Expand layout-scrutinizer scope to all five primary artefacts; flip poster from A0 landscape to A0 portrait"@en ;
+    prov:startedAtTime "2026-05-08T00:00:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith agent:human-author , agent:claude-opus-4-7 ;
+    rdfs:comment "Two researcher directions in one batch. (1) 'layou scrutinizer should scutinize slides and poster as well' --- agents/layout-scrutinizer.md rewritten with explicit per-artefact scrutiny rules: paper (overfull/underfull, page budget, label hygiene), slide decks (frame overflow, low-contrast pairings, divider-vs-section alignment), conference poster (1-page enforcement, column balance, 1-m-distance legibility, content discipline), and Pages site (LaTeX leakage, table rendering, image alt-text, responsive breakpoints, cache-bust consistency). (2) 'poster should be portrait format not landscape' --- slides/poster-A0.tex \\documentclass option flipped from `landscape' to `portrait'; PNG re-rendered at 70 dpi from the new portrait PDF; landscape -> portrait references updated in CLAUDE.md, README.md, doc/provenance.ttl. Local pdflatex still produces a clean 1-page A0 PDF (now 841 x 1189 mm portrait instead of 1189 x 841 mm landscape)."@en .
+
+hc:expand-layout-scrutinizer-and-flip-poster  a fair2r:HumanContribution ;
+    rdfs:label "Researcher direction: scrutinizer covers slides + poster; poster goes portrait"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "rule-shape" ;
+    fair2r:contributionLeverage "medium" ;
+    rdfs:comment "Rule-shape addition because the layout-scrutinizer's binding scrutiny scope expands from manuscript-only to all five primary artefacts plus the public site. The poster orientation flip is a content-prompt change but bundled here because it touches the same family of files; standard conference posters are typically portrait, and the column heights now match a portrait reading flow."@en ;
+    dcterms:created "2026-05-08"^^xsd:date ;
+    prov:influenced act:expand-layout-scrutinizer-and-flip-poster .

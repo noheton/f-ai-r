@@ -123,6 +123,23 @@ change, no JS.
 `doc/user-contributions.md`.
 *Provenance IRI:* `fair2r:hc-make-pages-mobile-friendly`
 
+### 2026-05-08 --- Rule shape: scrutinizer scope expanded; poster flipped to A0 portrait
+*Type:* `rule-shape`
+*Leverage:* medium
+*Triggered:* User direction *"layout scrutinizer should scrutinize
+slides and poster as well"* + *"poster should be portrait format
+not landscape"*. `agents/layout-scrutinizer.md` rewritten with
+explicit per-artefact scrutiny rules for paper / slide decks /
+poster / Pages site. Poster `\documentclass` flipped from
+landscape to portrait; PNG re-rendered; landscape→portrait
+references propagated to `CLAUDE.md`, `README.md`, and
+`doc/provenance.ttl`.
+*Artefacts touched:* `agents/layout-scrutinizer.md`,
+`slides/poster-A0.tex`, `site/static/figures/poster-A0.png`,
+`CLAUDE.md`, `README.md`, `doc/provenance.ttl`,
+`doc/logbook.md`, `doc/user-contributions.md`.
+*Provenance IRI:* `fair2r:hc-expand-layout-scrutinizer-and-flip-poster`
+
 ### 2026-05-07 --- Structural: conference poster as fifth primary artefact
 *Type:* `structural-decision`
 *Leverage:* high
