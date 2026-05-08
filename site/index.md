@@ -8,6 +8,7 @@ and built under the DLR Corporate Design.</p>
 
 <div class="cta-row">
   <a class="cta primary" href="https://github.com/noheton/f-ai-r/releases/download/latest-draft/main.pdf">Read the latest draft (PDF)</a>
+  <a class="cta secondary" href="https://github.com/noheton/f-ai-r/releases/download/latest-draft-slides/poster-A0.pdf">Conference poster (A0 PDF)</a>
   <a class="cta secondary" href="https://github.com/noheton/f-ai-r">View the repository</a>
   <a class="cta tertiary" href="provenance-explorer.html">Open the provenance explorer</a>
 </div>

@@ -7,16 +7,20 @@ LATEXMKOPTS ?= -pdf -interaction=nonstopmode -halt-on-error -file-line-error
 
 PITCH       := pitch-5min
 CONF        := conference-30min
+POSTER      := poster-A0
 
-.PHONY: all pitch conference watch clean distclean check
+.PHONY: all pitch conference poster watch clean distclean check
 
-all: pitch conference
+all: pitch conference poster
 
 pitch: check
 	$(LATEXMK) $(LATEXMKOPTS) $(PITCH).tex
 
 conference: check
 	$(LATEXMK) $(LATEXMKOPTS) $(CONF).tex
+
+poster: check
+	$(LATEXMK) $(LATEXMKOPTS) $(POSTER).tex
 
 watch: check
 	$(LATEXMK) $(LATEXMKOPTS) -pvc $(PITCH).tex
@@ -28,7 +32,7 @@ clean:
 distclean:
 	$(LATEXMK) -C || true
 	rm -f *.bbl *.run.xml *.snm *.nav *.vrb *.toc \
-	      $(PITCH).pdf $(CONF).pdf
+	      $(PITCH).pdf $(CONF).pdf $(POSTER).pdf
 
 check:
 	@command -v $(LATEXMK) >/dev/null 2>&1 || { \

@@ -1566,7 +1566,11 @@ hc:obs-prompt-accretion       a fair2r:MetaContribution ;
 
 fair2r:Slidedeck             a owl:Class ; rdfs:subClassOf prov:Entity ;
     rdfs:label "Slide deck"@en ;
-    rdfs:comment "Marp-rendered slide deck under slides/. Source-of-truth is the .md file; rendered .pdf / .pptx / .html are derived artefacts."@en .
+    rdfs:comment "Beamer-rendered slide deck under slides/ (pitch-5min.tex, conference-30min.tex). Source-of-truth is the .tex file; rendered .pdf is the derived artefact."@en .
+
+fair2r:Poster                a owl:Class ; rdfs:subClassOf prov:Entity ;
+    rdfs:label "Conference poster / infographic"@en ;
+    rdfs:comment "tikzposter-rendered A0 landscape poster under slides/poster-A0.tex. The fifth primary artefact (alongside paper, slides, graph, logbook); the discipline of writing it forces the paper's spine to declare itself."@en .
 
 ent:slidedeck-pitch          a fair2r:Slidedeck ;
     rdfs:label "F(AI)^2R --- 5-minute pitch deck (Beamer)"@en ;
@@ -2841,3 +2845,33 @@ hc:eyecatcher-on-pages  a fair2r:HumanContribution ;
     rdfs:comment "Question implied a defect: the paper had a front-matter hero figure but the Pages Home page surfaced none of the paper's signature visuals. The TikZ-only hero had no PNG export until now; rendering it via the standalone wrapper closes the gap. Same drift-proof pattern as the methodology-page evolutions table: source of truth in paper/figures/, render committed to site/static/figures/, embedding declared in the page Markdown."@en ;
     dcterms:created "2026-05-07"^^xsd:date ;
     prov:influenced act:render-hero-png-for-site .
+
+#-------------------------------------------------------------------------
+# 2026-05-07 --- Conference poster scaffolded as the fifth primary
+# artefact. Schema growth: fair2r:Poster class. Build-chain extension:
+# slides/poster-A0.tex + Makefile target + CI step.
+#-------------------------------------------------------------------------
+
+ent:poster-A0  a fair2r:Poster ;
+    rdfs:label "Conference poster v1: A0 landscape, three-column, DLR CD"@en ;
+    dcterms:source "slides/poster-A0.tex" ;
+    dcterms:created "2026-05-07"^^xsd:date ;
+    prov:wasGeneratedBy act:scaffold-conference-poster ;
+    prov:wasAttributedTo agent:human-author , agent:claude-opus-4-7 ;
+    prov:used ent:figure-hero , ent:figure-ladder-populations , ent:figure-provenance-topology ;
+    rdfs:comment "Three-column A0 landscape. Left: the gap, base rates, why now. Centre: the position (with hero) and the eight integrated practices. Right: verification ladder with live populations, provenance topology, and the worked-example URL. v1 compiles cleanly via pdflatex; one A0 page; uses tikzposter's Simple theme with DLR-CD colour overrides because custom themes print a debug stamp on page 1."@en .
+
+act:scaffold-conference-poster  a prov:Activity ;
+    rdfs:label "Scaffold conference poster as the fifth primary artefact"@en ;
+    prov:startedAtTime "2026-05-07T00:00:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith agent:human-author , agent:claude-opus-4-7 ;
+    rdfs:comment "Researcher direction: 'add another artifact to the build chain a conference poster/Infographic. consider distilling the process to its essentials. how would that change page count for paper'. Step (a) of the two-step plan: scaffold the poster as a build-chain artefact. Step (b) (run the condenser against the paper with the explicit instruction 'the poster carries this; the paper need not') is a follow-up. Schema growth: fair2r:Poster class added (sibling of fair2r:Slidedeck). slides/Makefile gains a 'poster' target. .github/workflows/build-slides.yml extended to compile the poster, fail the job on any artefact failure, upload the poster alongside the decks, and publish to the latest-draft-slides release. Local pdflatex compile: 1 page A0 landscape, ~430 KB."@en .
+
+hc:scaffold-conference-poster  a fair2r:HumanContribution ;
+    rdfs:label "Researcher direction: add a conference poster to the build chain; ask the page-count question that follows"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "structural-decision" ;
+    fair2r:contributionLeverage "high" ;
+    rdfs:comment "User said 'go' to a two-step plan: scaffold poster + extend invariant; then run condenser against the paper with 'the poster carries this' as the new criterion. The poster's discipline (one A0 page; what survives the cut) is itself the page-count forcing function. Net plausible paper-body trim once step (b) runs: ~3 pp."@en ;
+    dcterms:created "2026-05-07"^^xsd:date ;
+    prov:influenced act:scaffold-conference-poster , ent:poster-A0 .

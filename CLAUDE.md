@@ -18,6 +18,11 @@ them lags the others.
    `slides/conference-30min.tex` (Beamer; DLR Corporate Design via
    `slides/style/fair2r-beamer.sty`). Rendered PDFs are derived; the
    `.tex` sources are the primary artefact.
+5. **The conference poster** — `slides/poster-A0.tex` (tikzposter,
+   A0 landscape; DLR Corporate Design colour-overrides on the
+   `Simple` built-in theme). The discipline of writing it forces
+   the paper's spine to declare itself. Rendered PDF is derived;
+   the `.tex` source is the primary artefact.
 
 Concretely, any change that touches one must, in the same commit (or a
 clearly linked follow-up commit before the working session ends), produce

@@ -84,6 +84,44 @@ is a defect the FAIR aligner can check for.
 `doc/logbook.md`, `doc/user-contributions.md`.
 *Provenance IRI:* `fair2r:hc-transcript-preservation`
 
+### 2026-05-07 --- Structural: conference poster as fifth primary artefact
+*Type:* `structural-decision`
+*Leverage:* high
+*Triggered:* User direction *"add another artifact to the build
+chain a conference poster/Infographic. consider distilling the
+process to its essentials. how would that change page count for
+paper"*, followed by *"go"* against a two-step plan. Step (a)
+landed: poster scaffolded (`slides/poster-A0.tex`, tikzposter
+A0 landscape, DLR-CD overrides on the `Simple` theme); Makefile
+`poster` target; CI workflow extended; rolling release publishes
+`poster-A0.pdf` alongside the decks; schema growth
+(`fair2r:Poster` class); `CLAUDE.md` primary-artefact list 4 →
+5; site CTA link added. The discipline of writing the poster is
+the page-count forcing function for step (b).
+*Artefacts touched:* `slides/poster-A0.tex` (new),
+`slides/Makefile`, `slides/poster-A0.png` (render),
+`site/static/figures/poster-A0.png`, `site/index.md`,
+`.github/workflows/build-slides.yml`, `CLAUDE.md`,
+`doc/provenance.ttl`, `doc/logbook.md`,
+`doc/user-contributions.md`.
+*Provenance IRI:* `fair2r:hc-scaffold-conference-poster`
+
+### 2026-05-07 --- Corrective: hero PNG embedded on Pages Home
+*Type:* `corrective-intervention`
+*Leverage:* low
+*Triggered:* User question *"do we have an eyecatcher graphic
+is it also in the pages?"*. PDF carried hero on front matter;
+Pages site did not. Rendered `paper/figures/hero.tex` via the
+existing standalone wrapper to a 200 dpi PNG (after adding
+`\usepackage{amsmath}` to the wrapper); copied to
+`site/static/figures/hero.png`; embedded near the top of
+`site/index.md` between the lede and the CTA row.
+*Artefacts touched:* `paper/figures/hero.standalone.tex`,
+`paper/figures/hero.png`, `site/static/figures/hero.png`,
+`site/index.md`, `doc/provenance.ttl`, `doc/logbook.md`,
+`doc/user-contributions.md`.
+*Provenance IRI:* `fair2r:hc-eyecatcher-on-pages`
+
 ### 2026-05-07 --- Corrective: scrutinizer-pass fix-up (post PR #43)
 *Type:* `corrective-intervention`
 *Leverage:* medium
