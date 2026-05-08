@@ -30,6 +30,12 @@
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta, positioning, shapes.geometric, calc, fit}
 \usepackage{graphicx}
+% Resolve image references both when compiled in the slides/
+% directory (CI: the build-slides workflow copies the paper PNGs
+% into slides/ before compile) and when compiled standalone with
+% the source tree intact (local: latexmk -pdf poster-A0.tex from
+% slides/, with paper/figures/ as a sibling).
+\graphicspath{{./}{../paper/figures/}{paper/figures/}}
 \usepackage{enumitem}
 
 % --- DLR colour ramps (mirror of paper/style/fair2r.sty) -------------
@@ -137,7 +143,7 @@ through them, \textbf{squared}: each axis demands two passes
 2$\times$2 of writer $\times$ reader.\\[2mm]
 \normalsize\color{black}\mdseries
 \begin{center}
-\includegraphics[width=0.95\linewidth]{../paper/figures/hero.png}
+\includegraphics[width=0.95\linewidth]{hero.png}
 \end{center}
 \itshape Multiplicative, not appended. \emph{4AI hei{\ss}t alles}.
 }
@@ -166,7 +172,7 @@ Specialisation reduces hallucination at the seam.
 
 \block{Verification ladder, live populations}{
 \begin{center}
-\includegraphics[width=0.96\linewidth]{../paper/figures/ladder-populations.png}
+\includegraphics[width=0.96\linewidth]{ladder-populations.png}
 \end{center}
 A finite-state machine; node area $\propto$ count of
 \texttt{fair2r:Claim} entities at that rung in
@@ -177,7 +183,7 @@ human-only rungs to the right.
 
 \block{Provenance graph as audit substrate}{
 \begin{center}
-\includegraphics[width=0.96\linewidth]{../paper/figures/provenance-topology.png}
+\includegraphics[width=0.96\linewidth]{provenance-topology.png}
 \end{center}
 Five PROV-O lanes plus a Contribution satellite band. Every
 node carries its current instance count. \textbf{An audit run

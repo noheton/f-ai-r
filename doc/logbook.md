@@ -2947,3 +2947,70 @@ the page template; no change needed.
 Provenance: `act:make-pages-mobile-friendly`;
 `hc:make-pages-mobile-friendly` (corrective-intervention,
 medium). Triple count 2287 → 2301 (+14).
+
+## 2026-05-07 — README updated for consistency; poster CI compile fixed
+
+*Author:* claude-opus-4-7 (under direction of repo owner)
+*Touched:* `README.md`, `.gitignore`, `slides/poster-A0.tex`,
+`.github/workflows/build-slides.yml`, `doc/logbook.md`,
+`doc/user-contributions.md`, `doc/provenance.ttl`.
+
+*Decision / outcome.* User flagged *"poster link not working"*
+and then *"update readme as well and keep consistent"*. Two
+fixes shipped in tandem.
+
+**Poster CI compile.** The `latest-draft-slides` release was
+publishing the decks but no `poster-A0.pdf` after the workflow
+fix in PR #47 (publish step now runs `if: always()`). Diagnosis:
+the poster's `\includegraphics{../paper/figures/...}` calls
+likely fail to resolve in the `xu-cheng/latex-action@v3`
+container's path-traversal policy, even though local
+`pdflatex` succeeds. Two-line fix:
+
+- `slides/poster-A0.tex` switched from
+  `\includegraphics{../paper/figures/hero.png}` to plain
+  `\includegraphics{hero.png}`, with
+  `\graphicspath{{./}{../paper/figures/}{paper/figures/}}` as
+  a fallback chain so the same source compiles whether the
+  PNGs sit in `slides/` (CI) or `paper/figures/` (local).
+- `.github/workflows/build-slides.yml` gains a *Stage figures
+  for the poster* step at the top of the job that copies
+  `paper/figures/{hero,ladder-populations,provenance-topology}.png`
+  into `slides/` before any latex-action step runs. Logs the
+  staging output so a future failure is easy to diagnose.
+
+`.gitignore` extended to ignore the staged PNG copies under
+`slides/` so local builds don't accidentally commit duplicates
+of the figures.
+
+**README consistency pass.** The `README.md` had drifted
+behind the recent structural changes (poster as 5th primary
+artefact, focused-narrative trim, Get-started page,
+mobile-friendly site, transcript discipline, schema growth):
+
+- *Read on the web* mentions the mobile-friendly site and
+  points at the *Get started* page.
+- *Download the artefacts* table gains a row for
+  `poster-A0.pdf`; surrounding prose names the **five**
+  primary artefacts and points at `CLAUDE.md` for the
+  consistency invariant.
+- *Layout* tree updated: `slides/` now lists pitch +
+  conference + poster; `doc/` lists transcripts/,
+  user-contributions.md, user-observations-log.md, sources.md;
+  `scripts/` lists the three new ones; root lists `CLAUDE.md`.
+- *Build* updated: `make -C slides all` now builds pitch +
+  conference + poster.
+- *Provenance* paragraph names the additional schema classes
+  (`fair2r:Slidedeck`, `fair2r:Poster`, `fair2r:Transcript`,
+  `fair2r:Contribution`), the triple count
+  (~2300+), and the no-parentless-claim invariant.
+- *Logbook* renamed to *Logbook + transcripts* and lists the
+  per-session transcript convention.
+- New *Adopting F(AI)²R for your own paper* section pointing
+  at the auto-synced Get-started page.
+- *Design* section drops the *(forthcoming) the slide deck*
+  caveat (decks + poster are real now).
+
+Provenance: `act:readme-consistency-pass` (no separate IRI
+minted; this is a corrective edit), `hc:readme-consistency-pass`
+appended.

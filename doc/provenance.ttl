@@ -2894,3 +2894,23 @@ hc:make-pages-mobile-friendly  a fair2r:HumanContribution ;
     rdfs:comment "Phones were getting horizontal overflow on the evolutions table, the verification-ladder table, and any code block; the nav with 6 items was overflowing on viewports under ~600 px; figures sized at 96 % linewidth blew past the viewport on portrait phones. The fix is responsive-CSS-only --- no template change, no JS --- so the site stays a static-build artefact."@en ;
     dcterms:created "2026-05-07"^^xsd:date ;
     prov:influenced act:make-pages-mobile-friendly .
+
+#-------------------------------------------------------------------------
+# 2026-05-07 --- README consistency pass + poster CI compile fix.
+#-------------------------------------------------------------------------
+
+act:poster-ci-compile-fix-and-readme  a prov:Activity ;
+    rdfs:label "Fix poster CI compile (graphicspath + staging step) + README consistency pass"@en ;
+    prov:startedAtTime "2026-05-07T00:00:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith agent:human-author , agent:claude-opus-4-7 ;
+    prov:wasInformedBy act:scaffold-conference-poster ;
+    rdfs:comment "User flagged 'poster link not working' and 'update readme as well and keep consistent'. (1) Poster CI fix: slides/poster-A0.tex switched to plain filename includegraphics + graphicspath fallback chain ({./}{../paper/figures/}{paper/figures/}); .github/workflows/build-slides.yml gains a 'Stage figures for the poster' step that copies the three needed PNGs into slides/ before latex-action runs. .gitignore extended so the staged copies are not committed. (2) README updated to mention the poster as the fifth primary artefact, the mobile-friendly site, the Get-started page, the transcript directory, the schema-growth class list, and the no-parentless-claim invariant; the layout tree is current."@en .
+
+hc:readme-consistency-pass  a fair2r:HumanContribution ;
+    rdfs:label "Researcher direction: poster link broken; update README and keep consistent"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "corrective-intervention" ;
+    fair2r:contributionLeverage "medium" ;
+    rdfs:comment "Two-fold direction: surface a CI bug (poster wasn't shipping) and bring the README forward to the post-trim, post-poster, post-transcripts, post-mobile state. The README is the GitHub repo's first-impression artefact; consistency-with-the-state-of-the-tree matters as much for it as for any primary artefact."@en ;
+    dcterms:created "2026-05-07"^^xsd:date ;
+    prov:influenced act:poster-ci-compile-fix-and-readme .
