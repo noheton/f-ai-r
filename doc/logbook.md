@@ -2871,3 +2871,39 @@ Provenance: `act:scaffold-conference-poster`;
 leverage). `ent:poster-A0` records `prov:used` for hero,
 ladder-populations, and provenance-topology (the three figures
 the poster embeds). Triple count 2257 → 2287 (+30).
+
+## 2026-05-07 — Step (b) of poster + condenser plan: lean cuts
+
+*Author:* claude-opus-4-7 (under direction of repo owner)
+*Touched:* `paper/main.tex` (front-matter hero figure removed),
+`paper/sections/intro.tex` (orphaned `\ref{fig:hero}` cleaned),
+`paper/sections/provenance-analysis.tex` (ladder-populations
+figure removed; pointer to the poster added),
+`doc/logbook.md`.
+
+*Decision / outcome.* User said *"go"* against step (b) of the
+poster plan. Two cuts landed cleanly with the conference poster
+as the new visual heavy-lift:
+
+- Front-matter hero figure dropped from `paper/main.tex`. Paper
+  opens directly with the abstract; the poster
+  (\texttt{slides/poster-A0.tex}) is the eye-catcher. The TikZ
+  source `paper/figures/hero.tex` is preserved on disk and
+  rendered to `paper/figures/hero.png` for the Pages site.
+- `ladder-populations.pdf` figure dropped from
+  `provenance-analysis.tex`. The schema-diagram figure
+  (`provenance-topology.pdf`) stays in the body; the populated
+  ladder is on the poster, with a one-sentence forward pointer
+  in the body prose.
+
+PDF page count: 34 → 33. The trim was front-loaded in the body
+where the front-matter `figure*` and a body-page figure both
+exited; the appendices are now substantial enough that further
+single-figure cuts produce diminishing page returns.
+
+The remaining candidates from the original step-(b) sketch
+(AI² grid resize, failure-mode-coverage to appendix, intro
+contribution-paragraph trim, position 5-claims tighten) are
+deferred — the user pivoted to a mobile-friendly Pages site;
+the prose-density work is the next iteration of trim, not this
+one.
