@@ -65,9 +65,11 @@ fair2r:repairs           a owl:ObjectProperty ;
 # Verification ladder (rungs as individuals)
 verif:unverified       a fair2r:VerificationState ; rdfs:label "unverified"@en .
 verif:needs-research   a fair2r:VerificationState ; rdfs:label "needs research"@en .
+verif:lit-retrieved    a fair2r:VerificationState ; rdfs:label "lit-retrieved"@en .
 verif:ai-confirmed     a fair2r:VerificationState ; rdfs:label "AI-confirmed"@en .
 verif:human-confirmed  a fair2r:VerificationState ; rdfs:label "human-confirmed"@en .
 verif:source-vendored  a fair2r:VerificationState ; rdfs:label "source vendored"@en .
+verif:lit-read         a fair2r:VerificationState ; rdfs:label "lit-read"@en .
 
 #-------------------------------------------------------------------------
 # Agents
@@ -2934,3 +2936,63 @@ hc:expand-layout-scrutinizer-and-flip-poster  a fair2r:HumanContribution ;
     rdfs:comment "Rule-shape addition because the layout-scrutinizer's binding scrutiny scope expands from manuscript-only to all five primary artefacts plus the public site. The poster orientation flip is a content-prompt change but bundled here because it touches the same family of files; standard conference posters are typically portrait, and the column heights now match a portrait reading flow."@en ;
     dcterms:created "2026-05-08"^^xsd:date ;
     prov:influenced act:expand-layout-scrutinizer-and-flip-poster .
+
+#-------------------------------------------------------------------------
+# 2026-05-08 --- Provenance graph hygiene pass: fix unconnected entities
+# surfaced by the audit. Two declarations missing (verif:lit-retrieved,
+# verif:lit-read), one section IRI was referenced as wasDerivedFrom but
+# never typed (ent:section-implementation in its body role), one
+# orphan activity (act:invalidate-discussion-section), four unused
+# agent IRIs, one unused transcript. The 28 ghost sources are
+# documented expected behaviour (the verification scoping doc reports
+# this number explicitly); the 13 unused observations are by design at
+# hypothesis stage.
+#-------------------------------------------------------------------------
+
+ent:section-implementation  a fair2r:Section ;
+    rdfs:label "Section: Implementation (retired body role)"@en ;
+    rdfs:comment "Pre-trim body section paper/sections/implementation.tex; retired in act:trim-pass-2-appendix-routing and superseded by ent:section-appendix-implementation. Declared here so the prov:wasDerivedFrom edge from the new appendix points at a typed entity rather than a dangling IRI."@en .
+
+# Orphan activity from an early reconcile pass: it removed a 'Discussion'
+# section that no longer exists. Connect it explicitly to its target.
+act:invalidate-discussion-section  prov:wasInformedBy act:rev-reconcile-and-illustrate ;
+    rdfs:comment "Early reconcile activity that retired a Discussion section. The target section IRI was never declared as a fair2r:Section because the section was removed from the manuscript before it was ever curated; the activity is preserved here as the audit-trail record of the removal."@en .
+
+# Connect the four unused agent IRIs to activities that did use them in
+# practice but referenced agent:claude-opus-4-7 / agent:human-author
+# rather than the per-role agent IRI. Each agent has its prompt under
+# agents/<role>.md and is named in the manuscript's pipeline section.
+act:bootstrap                       prov:wasAssociatedWith agent:orchestrator .
+act:rev-verification-pass           prov:wasAssociatedWith agent:source-analyzer .
+act:trim-pass-focused-narrative     prov:wasAssociatedWith agent:condenser .
+act:add-illustrations-pass-4        prov:wasAssociatedWith agent:presentation .
+
+# Bind the session transcript to the activities that used it.
+act:meta-cooperation-2026-05-07-transcript-preservation  prov:used ent:transcript-2026-05-07 .
+
+act:provenance-graph-hygiene-pass  a prov:Activity ;
+    rdfs:label "Provenance graph hygiene pass after audit"@en ;
+    prov:startedAtTime "2026-05-08T00:00:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith agent:human-author , agent:claude-opus-4-7 , agent:provenance-curator ;
+    rdfs:comment "Researcher direction: 'validate provenance i think there are some unconnected entites'. Ran a 9-query audit (parentless claims, ghost sources, orphan activities, orphan sections, unused figures, contributions without prov:influenced, unused agents, unused transcripts, untyped IRIs). Fixes applied: (a) verif:lit-retrieved + verif:lit-read declared with a fair2r:VerificationState type (the other rungs were already declared; these two had been overlooked); (b) ent:section-implementation typed as a fair2r:Section so the prov:wasDerivedFrom edge from ent:section-appendix-implementation points at a typed entity; (c) act:invalidate-discussion-section connected to act:rev-reconcile-and-illustrate via prov:wasInformedBy with an rdfs:comment naming the now-removed Discussion section; (d) four agent IRIs (orchestrator, source-analyzer, condenser, presentation) connected via prov:wasAssociatedWith to activities that used them in practice; (e) ent:transcript-2026-05-07 bound to its parent activity via prov:used. Documented but unfixed: 28 ghost sources (the verification scoping doc names this number; ghost-cite tolerance is intentional) and 13 unused observations (hypothesis-stage by design, will gain prov:influenced when they graduate)."@en .
+
+hc:provenance-graph-hygiene-pass  a fair2r:HumanContribution ;
+    rdfs:label "Researcher direction: validate provenance, fix unconnected entities"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "corrective-intervention" ;
+    fair2r:contributionLeverage "medium" ;
+    rdfs:comment "Audit + fix pass. The audit's 9 queries are now checkable invariants: parentless claims (was 0, still 0); ghost sources (28, documented); orphan activities (was 1, now 0); orphan sections (0); unused figures (8, all with prov:wasGeneratedBy --- query was over-strict); contributions without prov:influenced (13, all hypothesis-stage observations); unused agents (was 4, now 0); unused transcripts (was 1, now 0); untyped IRIs (was 2, now 0)."@en ;
+    dcterms:created "2026-05-08"^^xsd:date ;
+    prov:influenced act:provenance-graph-hygiene-pass .
+
+# Hygiene-pass follow-up: declare ent:section-discussion (the section
+# the orphan activity invalidated) and connect it explicitly so the
+# graph carries the tombstone.
+ent:section-discussion  a fair2r:Section ;
+    rdfs:label "Section: Discussion (retired before curation)"@en ;
+    prov:wasInvalidatedBy act:invalidate-discussion-section ;
+    rdfs:comment "Originally drafted in an early reconcile pass; removed from main.tex before being curated. Declared here so act:invalidate-discussion-section has a typed target rather than a dangling reference."@en .
+
+act:invalidate-discussion-section  prov:invalidated ent:section-discussion ;
+    prov:wasAssociatedWith agent:claude-opus-4-7 ;
+    prov:wasGeneratedBy act:rev-reconcile-and-illustrate .
