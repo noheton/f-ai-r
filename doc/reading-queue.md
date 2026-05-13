@@ -85,7 +85,7 @@ Once a source has been read, advance its rung in `doc/provenance.ttl` and (optio
 
 **Open via URL:** <https://docs.mlcommons.org/croissant/docs/croissant-spec.html>
 
-**Note from the bib.** Schema.org / JSON-LD vocabulary for ML datasets (FileObject, FileSet, RecordSet, Field) with an RAI extension. Cited in limits-and-objections.tex as adjacent dataset-side standard; cross-referenced from appendix-g as a schema.org-based extension precedent. Distinct from F(AI)^2R's PROV-O-based authorship spine. Rung: ai-confirmed (source-analyzer 2026-05-13).
+**Note from the bib.** Schema.org / JSON-LD vocabulary for ML datasets (FileObject, FileSet, RecordSet, Field) with an RAI extension. Cited in limits-and-objections.tex as adjacent dataset-side standard; cross-referenced from appendix-g as a schema.org-based extension precedent. Distinct from F(AI)2R's PROV-O-based authorship spine. Rung: ai-confirmed (source-analyzer 2026-05-13).
 
 ---
 
@@ -99,7 +99,7 @@ Once a source has been read, advance its rung in `doc/provenance.ttl` and (optio
 
 **Open via DOI:** <https://doi.org/10.1145/1592761.1592781>
 
-**Note from the bib.** Joint Turing-award lecture. Canonical accessible introduction to model checking. Cited in §11 as a structural cousin of the F(AI)^2R audit pass (TODO-VERIFY exact title and pagination at lit-read).
+**Note from the bib.** Joint Turing-award lecture. Canonical accessible introduction to model checking. Cited in §11 as a structural cousin of the F(AI)2R audit pass (TODO-VERIFY exact title and pagination at lit-read).
 
 ---
 
@@ -207,7 +207,7 @@ Once a source has been read, advance its rung in `doc/provenance.ttl` and (optio
 
 **Open via DOI:** <https://doi.org/10.1016/j.websem.2018.06.003>
 
-**Note from the bib.** The lightweight core of the W3C Semantic Sensor Network (SSN) ontology. Cited in §3.5 as a candidate domain ontology for plugging measurement claims into the F(AI)^2R schema (TODO-VERIFY at lit-read).
+**Note from the bib.** The lightweight core of the W3C Semantic Sensor Network (SSN) ontology. Cited in §3.5 as a candidate domain ontology for plugging measurement claims into the F(AI)2R schema (TODO-VERIFY at lit-read).
 
 ---
 
@@ -263,7 +263,7 @@ Once a source has been read, advance its rung in `doc/provenance.ttl` and (optio
 
 **Open via arXiv:** <https://arxiv.org/abs/2604.24658>
 
-**Note from the bib.** Introduces the Agent-Native Research Artifact (Ara) protocol: four-layer agent-executable package (scientific logic, executable code, exploration graph, evidence). Cited in limits-and-objections.tex as the maximalist counterposition to F(AI)^2R's minimalist PROV-O-spine approach. Rung: ai-confirmed (source-analyzer 2026-05-13).
+**Note from the bib.** Introduces the Agent-Native Research Artifact (Ara) protocol: four-layer agent-executable package (scientific logic, executable code, exploration graph, evidence). Cited in limits-and-objections.tex as the maximalist counterposition to F(AI)2R's minimalist PROV-O-spine approach. Rung: ai-confirmed (source-analyzer 2026-05-13).
 
 ---
 
@@ -319,7 +319,7 @@ Once a source has been read, advance its rung in `doc/provenance.ttl` and (optio
 
 **Open via DOI:** <https://doi.org/10.3233/SW-2012-0069>
 
-**Note from the bib.** OM-2 ontology for units of measure. Cited in §3.5 as a candidate domain ontology for grounding numeric values in the F(AI)^2R schema (TODO-VERIFY at lit-read).
+**Note from the bib.** OM-2 ontology for units of measure. Cited in §3.5 as a candidate domain ontology for grounding numeric values in the F(AI)2R schema (TODO-VERIFY at lit-read).
 
 ---
 
