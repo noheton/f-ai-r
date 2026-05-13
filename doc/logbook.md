@@ -3248,3 +3248,40 @@ Provenance: `act:integrate-external-2026-05-13`
 specific class of standing objection the paper would
 otherwise answer ad hoc in review).
 Triple count 2379 → 2395 (+16).
+
+## 2026-05-13 --- Condenser pass: body trimmed from 15 to 12 pages
+
+Ran the condenser agent against the body (§1--§9). Target was
+10--12 pp; landed at **12 body pages** (pp 3--14, with §9
+conclusion bleeding briefly into p 15). Total PDF: 32 pp
+(was 33).
+
+**Where the lines came from.** §6 Evolution lost the most
+(opening paragraphs collapsed to a single intro; the
+`Three threads` paragraph compressed; five pipeline-plumbing
+rows dropped from the digest table --- Marp retirement,
+DLR-CD pinning, illustration-toolset opening, Pages-source
+switch, LaTeX-fragment stripper --- all still recorded in
+Appendix D chronology and the full graph). §3 Pattern lost
+the long FSM-rung and crosswalk expositions, the
+`Extensions and cousins` paragraph collapsed, and the
+handback subsection tightened. §8 Limits compressed the
+resource-cost, equity, Ara, Croissant, and standing-objections
+paragraphs (Ara and Croissant integrations preserved per the
+external-positioning constraint; all five standing objections
+preserved as a single block). §9 Conclusion shortened the
+xennials/bridge paragraph by half. §1 Intro shortened the
+FAIR4AI-rejection paragraph. §4 Eight Integrated Practices
+trimmed every item but kept all eight.
+
+**Constraints honoured.** All eight integrated practices
+survive in §4 and §8. The recursive case-study commitment
+(§6) survives. The Ara / Vaswani / Croissant external-work
+sentences all survive. Every `\todo[inline]{verify}` marker
+survives. No load-bearing citation was dropped; no
+`fair2r:Claim` triple required retirement (the cuts were
+prose compressions and digest-table plumbing rows, not
+deletions of claim-corresponding sentences). The condenser
+agent's recursive-case-study commitment to its own discipline
+holds: this entry documents the cut, and the commit lands as
+a single concern.

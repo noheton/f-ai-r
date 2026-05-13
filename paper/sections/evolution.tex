@@ -1,26 +1,15 @@
 \section{Process Evolution During Cooperative Writing}
 \label{sec:evolution}
 
-This section is a candid record of how the F(AI)\textsuperscript{2}R
-pipeline itself changed while this paper was being written. The
-manuscript was produced under the same pipeline it documents (the
-fifth integrated practice, \S\ref{sec:eight}, item~5); the goal here
-is transparency about how the paper came to be and how researcher
-and AI interacted. The record is reconstructed from
-\texttt{doc/logbook.md} and \texttt{doc/provenance.ttl}.
-
-\paragraph{Summary of evolutions.}
-Table~\ref{tab:evolutions} synthesises the changes the cooperation
-imposed on its own scaffolding while the paper was being written.
-Five classes of evolution show up: \emph{rules} (binding constraints
-added to one or more agent prompts), \emph{agents} (a new specialised
-agent added to \texttt{agents/}), \emph{schema} (a class or property
-added to \texttt{doc/provenance.ttl}), \emph{pipeline} (a build,
-deployment, or rendering change), and \emph{manuscript} (a structural
-reframing of the paper itself). The full chronology lives in
-\texttt{doc/logbook.md}; the table below is a deduplicated digest of
-the structurally-significant evolutions and is auditable against the
-forty-eight typed entries in \texttt{doc/user-contributions.md}.
+This section records how the F(AI)\textsuperscript{2}R pipeline
+itself changed while the paper was being written --- the fifth
+integrated practice (\S\ref{sec:eight}, item~5) made visible. The
+record is reconstructed from \texttt{doc/logbook.md} and
+\texttt{doc/provenance.ttl}; Table~\ref{tab:evolutions} is a
+deduplicated digest covering five classes (rules, agents, schema,
+pipeline, manuscript), auditable against the forty-eight typed
+entries in \texttt{doc/user-contributions.md}. The per-step
+chronology lives in Appendix~\ref{sec:appendix-evolution}.
 
 \renewcommand{\arraystretch}{1.15}
 \begin{longtable}{@{}p{1.55cm}p{1.4cm}p{4.2cm}p{6.6cm}@{}}
@@ -53,34 +42,23 @@ When & Class & What changed & Trigger / impact \\
 2026-05-06 & Agent      & \texttt{presentation} agent added to \texttt{agents/}. & Slides became binding artefact; new prompt minted rather than overloading \texttt{scientific-writer}. \\
 2026-05-06 & Manuscript & Position-paper reframing (Position + Objections sections). & Researcher direction \emph{``fair should be more a position paper''}; reshaped the contribution narrative. \\
 2026-05-06 & Manuscript & Author's Note carried over from \texttt{noheton/Obscurity-Is-Dead}. & Voice-and-stance anchor; the methodology's first-person register lives there only. \\
-2026-05-06 & Pipeline   & Static site builder \(+\) Pages workflow \(+\) paper-build CI. & Made the artefact public from day one; cache-bust on the deployed site followed when staleness surfaced. \\
-2026-05-06 & Pipeline   & Marp slide pipeline retired; Beamer-only. & Researcher direction \emph{``only ship beamer''}; one toolchain to maintain instead of two. \\
-2026-05-07 & Rule       & DLR Corporate Design pinned for every illustrator tool. & Default tool theming counts as an unfinished figure; written above the tool list, not below. \\
-2026-05-07 & Rule       & Illustration toolset opened beyond TikZ (matplotlib, mermaid, networkx, graphviz, \dots). & Researcher direction; \texttt{ladder-populations} and \texttt{contribution-histogram} matplotlib figures unlocked. \\
+2026-05-06 & Pipeline   & Static site builder \(+\) Pages workflow \(+\) paper-build CI. & Made the artefact public from day one. \\
 2026-05-07 & Rule       & No-parentless-claim rule (every claim must name a generating activity). & Eight-claim defect found by the verification example; rule landed by the curator pass to prevent recurrence. \\
 2026-05-07 & Schema     & \texttt{fair2r:repairs} object property. & Curator pass: per-claim repair activity carries the reason as \texttt{rdfs:comment}; reasons are queryable. \\
 2026-05-07 & Agent      & \texttt{research-protocol} agent added to \texttt{agents/}. & Standalone prompt for verification-axis research notes; produced \texttt{provenance-verification.md}. \\
-2026-05-07 & Pipeline   & Pages source switched from branch deploy to GitHub Actions. & Default branch became \texttt{main}; CI is single source of truth for the live site. \\
-2026-05-07 & Pipeline   & LaTeX-fragment stripper in the site builder. & Markdown sources embedded \verb|\emph{}|, \verb|\textsc{}|, \verb|\begin{enumerate}|; the rendered Pages site needed a clean prose pass. \\
 \end{longtable}
 
-\paragraph{Chronology.}
-The per-step chronology --- which prompt triggered each row, what
-the change unlocked downstream, and why the cooperation imposed it
-on its own scaffolding rather than working around it --- lives in
-Appendix~\ref{sec:appendix-evolution}. Three threads from that
-chronology are load-bearing for the position taken in
-\S\ref{sec:position}: \emph{researcher-as-corrector} (the
-correction work is the human's --- catching wrong DOIs, drift
-between claim and evidence, attribution slips --- and the volume
-of it across this paper's history is itself an argument for the
-verification ladder, which gives every correction a canonical home
-as a state transition on a named claim);
-\emph{pipeline-as-target-not-yet-as-practice} (the ten-stage
-pipeline of \S\ref{sec:pipeline} is enforced on this manuscript by
-the discipline of the human author rather than by software, and
-the gap between architecture and automation is recorded honestly
-rather than papered over); and \emph{logbook-as-conscience} (the
-append-only logbook is the index back into the provenance graph,
-and a session that produces no logbook entry produced no
-consequential work --- by definition).
+\paragraph{Three threads.}
+Three threads from the chronology
+(Appendix~\ref{sec:appendix-evolution}) are load-bearing for the
+position of \S\ref{sec:position}.
+\emph{Researcher-as-corrector}: the volume of correction work
+(wrong DOIs, claim--evidence drift, attribution slips) is itself
+an argument for the verification ladder, which gives every
+correction a canonical home as a state transition.
+\emph{Pipeline-as-target-not-yet-as-practice}: the ten-stage
+pipeline of \S\ref{sec:pipeline} is enforced on this manuscript
+by the human author's discipline rather than by software; the
+gap is recorded rather than papered over.
+\emph{Logbook-as-conscience}: a session that produces no logbook
+entry produced no consequential work, by definition.

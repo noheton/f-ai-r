@@ -6,109 +6,84 @@ what F(AI)\textsuperscript{2}R consumes, what it depends on, and
 what the standing objections to it look like.
 
 \paragraph{Resource cost and frontier-model dependence.}
-Every authoring pass and every audit pass burns compute, and the
-verification ladder amplifies this: a contested claim is read by
-an agent, by a human, sometimes by a second agent during
-readability review, and again by the FAIR aligner. The energy and
-water footprint of frontier-model inference is non-trivial and is
-paid by someone, somewhere, regardless of who pays for the API
-call~\cite{strubell2019energy,patterson2021carbon,luccioni2024power,li2023thirsty}\todo[inline]{verify}.
-We add the following request to the sixth integrated practice
-(\S\ref{sec:eight}, item~6): disclosure should
+Every authoring and audit pass burns compute, and the verification
+ladder amplifies it: a contested claim is read by an agent, a
+human, sometimes a second agent, and the FAIR aligner. The energy
+and water footprint of frontier-model inference is paid by someone,
+somewhere~\cite{strubell2019energy,patterson2021carbon,luccioni2024power,li2023thirsty}\todo[inline]{verify}.
+We extend practice~6 (\S\ref{sec:eight}): disclosure should
 \emph{include the order-of-magnitude inference budget consumed by
 the manuscript}, declared at submission time alongside the rung
-distribution. Effective behaviour also depends on the underlying
-model and shifts as models change~\cite{chen2023drift}\todo[inline]{verify};
-the transcripts of practice~1 and the version manifest in
-\texttt{doc/provenance.ttl} are partial mitigation, and any
-\texttt{fair2r:Activity} record should carry an explicit
-\texttt{fair2r:modelId} property pinned to a stable identifier so
-that a deprecated agent at minimum has a known headstone.
+distribution. Model behaviour also drifts as models
+change~\cite{chen2023drift}\todo[inline]{verify}; the transcripts
+of practice~1 and an explicit \texttt{fair2r:modelId} on every
+\texttt{fair2r:Activity} are partial mitigation, giving a
+deprecated agent a known headstone.
 
 \paragraph{Equity.}
-Research groups without access to frontier models cannot apply
-this pattern at the same effective rung; the verification ladder
-requires an AI agent at \textsc{ai-confirmed} to actually
-understand the source it has read, and the floor for ``understands''
-is set by the state of the art. F(AI)\textsuperscript{2}R
-\emph{describes} the work; it does not \emph{equalise} access to
+Groups without frontier-model access cannot apply this pattern at
+the same effective rung; the floor for ``\textsc{ai-confirmed}
+understands the source'' is set by the state of the
+art. F(AI)\textsuperscript{2}R \emph{describes} the work; it does
+not \emph{equalise} access to
 it~\cite{bender2021stochastic,birhane2022values}\todo[inline]{verify}.
-We name this honestly and offer two partial mitigations:
-smaller-model fallbacks for routine audit passes (layout,
-hedging-density, list-of-lists detection) that do not need
-frontier-grade reasoning; and the structural property that an
-honestly-declared lower-rung distribution at submission time is
-preferable to a forged higher-rung distribution from a
-richer group, with the verification ladder making the difference
-legible to the reviewer.
+Two partial mitigations: smaller-model fallbacks for routine
+audit passes (layout, hedging-density, list-of-lists detection);
+and the structural property that an honestly-declared lower-rung
+distribution is preferable to a forged higher-rung one, with the
+ladder making the difference legible to the reviewer.
 
 \paragraph{Adjacent proposals and adjacent vocabularies.}
-A concurrent maximalist proposal, the \emph{Agent-Native Research
-Artifact} (Ara) of \textcite{liu2026ara}, replaces the narrative
-paper with a four-layer package --- scientific logic, executable
-code with full specifications, an exploration graph of failed
-branches, and evidence grounding every claim --- and reports
+The concurrent \emph{Agent-Native Research Artifact} (Ara) of
+\textcite{liu2026ara} replaces the narrative paper with a
+four-layer package (logic, executable code, exploration graph of
+failed branches, claim-evidence grounding) and reports
 reproduction-success and QA-accuracy gains on PaperBench and
-RE-Bench. F(AI)\textsuperscript{2}R declines that bargain. We
+RE-Bench. F(AI)\textsuperscript{2}R declines that bargain: we
 keep the human-readable manuscript as the primary artefact and
-ride a PROV-O graph alongside it; Ara's exploration layer is a
-strict superset of our logbook plus claim-graph, and indicates a
-credible upper bound for what the same substrate could carry if
-a venue ever demanded it.
-
+ride a PROV-O graph alongside it. Ara's exploration layer is a
+strict superset of our logbook plus claim-graph and indicates a
+credible upper bound for what the same substrate could carry.
 F(AI)\textsuperscript{2}R is also sometimes mistaken for a
-dataset-metadata proposal. It is not. The dataset-metadata slot
-is already occupied by MLCommons Croissant~1.0
-\cite{benjelloun2024croissant}, a schema.org/JSON-LD vocabulary
-for ML datasets and their responsible-AI annotations. Croissant
-describes the \emph{thing learned from}; F(AI)\textsuperscript{2}R
-describes the \emph{authoring process} that produces a paper.
-The two compose: a Croissant record can be referenced from a
-\texttt{fair2r:Source} triple, but neither schema subsumes the
-other.
+dataset-metadata proposal; the dataset-metadata slot is already
+occupied by MLCommons Croissant~1.0
+\cite{benjelloun2024croissant}. Croissant describes the
+\emph{thing learned from}, F(AI)\textsuperscript{2}R the
+\emph{authoring process}; the two compose --- a Croissant record
+can be referenced from a \texttt{fair2r:Source} triple --- but
+neither subsumes the other.
 
-\paragraph{Standing objections.} A position paper that does not
-name the objections it expects has not committed to a position.
-
-\emph{``This is just FAIR with extra steps.''}
-Two prior re-readings (FAIR4RS~\cite{chuehong2022fair4rs},
+\paragraph{Standing objections.}
+\emph{``Just FAIR with extra steps.''} Two prior re-readings
+(FAIR4RS~\cite{chuehong2022fair4rs},
 FAIR4ML~\cite{ravi2024fair4ml}) judged that adding sub-principles
-for new artefact classes was preferable to absorbing them. We
-follow that precedent; the audit pass on \textbf{Reusable} is the
-load-bearing case --- replaying a writing pipeline is materially
-different from replaying a build.
-
+for new artefact classes was preferable to absorbing them; the
+audit pass on \textbf{Reusable} is the load-bearing case ---
+replaying a writing pipeline is materially different from replaying
+a build.
 \emph{``Eight practices on day one is too expensive.''} Eight is
-the \emph{minimum}: the failure-modes table
-(Table~\ref{tab:failure-modes}) shows that dropping any one
-exposes a specific failure mode the others do not cover. The
-\textsc{ai-confirmed} rung was introduced exactly to attack the
-verification-overhead bottleneck (\S\ref{sec:ladder}).
-
-\emph{``Provenance graphs do not prevent fraud.''} Correct, and
-we never claim otherwise. The graph aims to make fraud
-\emph{detectable by inspection}: a bad-faith adoption leaves a
-graph whose edges contradict the prose, whose claims reference
-non-existent sources, or whose
-\texttt{prov:wasGeneratedBy} activities have no transcript. Each
-of those is a checkable defect; the contrast is with unstructured
-AI-assisted writing, where the same fraud leaves no artefact a
-third party can point at.
-
+the \emph{minimum}: Table~\ref{tab:failure-modes} shows dropping
+any one exposes a specific failure mode the others do not cover,
+and the \textsc{ai-confirmed} rung was introduced exactly to
+attack the verification-overhead bottleneck (\S\ref{sec:ladder}).
+\emph{``Provenance graphs do not prevent fraud.''} Correct; the
+graph aims to make fraud \emph{detectable by inspection} ---
+graph-prose contradictions, claims referencing non-existent
+sources, \texttt{prov:wasGeneratedBy} without a transcript are all
+checkable defects, in contrast to unstructured AI-assisted writing
+where the same fraud leaves no artefact a third party can point
+at.
 \emph{``You cannot check the model's reasoning, only its
-output.''} Yes; we never claim otherwise. The discipline makes
-the \emph{output's relationship to the input} checkable, even
-when the model's internals are not. That is what the verification
-ladder, the Source Analyzer hand-off, and the human-reader rung
-are for.
-
+output.''} Yes; the discipline makes the \emph{output's
+relationship to the input} checkable, even when the model's
+internals are not --- that is what the ladder, the Source
+Analyzer hand-off, and the human-reader rung are for.
 \emph{``A position paper should not also be a worked example.''}
-The fifth integrated practice (\S\ref{sec:eight}, item~5) requires
-that a paper which prescribes a discipline have been written
-under it. The recursive case study is not an aesthetic choice; it
-is how the position can be checked.
+Practice~5 requires that a paper prescribing a discipline have
+been written under it; the recursive case study is how the
+position can be checked.
 
-\bigskip
-\noindent The objections F(AI)\textsuperscript{2}R cannot answer
---- pre-publication leakage, audience fatigue, adversarial review
---- sit in \S\ref{sec:fm-residual} as residual.
+\smallskip\noindent
+What F(AI)\textsuperscript{2}R cannot answer --- pre-publication
+leakage, audience fatigue, adversarial review --- sits in
+\S\ref{sec:fm-residual} as residual.

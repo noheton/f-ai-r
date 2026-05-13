@@ -1,15 +1,12 @@
 \section{Provenance Analysis}
 \label{sec:provenance-analysis}
 
-The graph at \texttt{doc/provenance.ttl} is not a passive record;
-it is a queryable structure whose health \emph{is} the audit pass
-on \textbf{Reusable} (\S\ref{sec:axes}).
-Figure~\ref{fig:provenance-topology} renders the schema with the
-current instance counts read at compile time; the populated
-verification ladder is on the conference poster
-(\texttt{slides/poster-A0.tex}). The four diagnostic SPARQL queries the
-audit reads --- rung distribution, section-to-claim coverage,
-source invocation strength, activity timeline --- and the
+The graph at \texttt{doc/provenance.ttl} is a queryable structure
+whose health \emph{is} the audit pass on \textbf{Reusable}
+(\S\ref{sec:axes}). Figure~\ref{fig:provenance-topology} renders
+the schema with live instance counts read at compile time. Four
+diagnostic SPARQL queries (rung distribution, section-to-claim
+coverage, source invocation strength, activity timeline) and the
 auto-generated tables they produce are walked in
 Appendix~\ref{sec:appendix-provenance-analysis}.
 
@@ -24,19 +21,14 @@ its current instance count.}
 \label{fig:provenance-topology}
 \end{figure}
 
-The verification ladder rendered as a finite-state machine with
-live rung populations is on the conference poster
-(\texttt{slides/poster-A0.tex}); the queries that produce those
-populations are walked in
-Appendix~\ref{sec:appendix-provenance-analysis}.
-
-The four queries are diagnostic, not exhaustive. They surface the
-failure modes of \S\ref{sec:failure-modes} that have a graph
-signature --- ghost citations, drift between prose and graph,
-sections without curated claims --- and explicitly do not surface
-\textbf{semantic} drift (a claim correctly recorded in the graph
-whose prose has shifted away from its evidence). That is the
-readability scrutinizer's job (\S\ref{sec:pipeline}). A live
-interactive view of the graph is published at
+The queries are diagnostic, not exhaustive. They surface the
+failure modes of \S\ref{sec:failure-modes} with a graph signature
+(ghost citations, prose--graph drift, sections without curated
+claims) and explicitly do not surface \textbf{semantic} drift ---
+a claim correctly recorded but whose prose has shifted away from
+its evidence --- which is the readability scrutinizer's job
+(\S\ref{sec:pipeline}). A live interactive view is published at
 \href{https://noheton.github.io/f-ai-r/provenance.html}{the
-\textbf{Provenance} tab of the public site}.
+\textbf{Provenance} tab of the public site}; the populated
+verification-ladder FSM is on the conference poster
+(\texttt{slides/poster-A0.tex}).

@@ -12,69 +12,47 @@ ladders, structured redaction policies, and per-claim provenance maps.
 
 This is not a hypothetical gap. Anyone now writing a paper with an
 LLM in the room is producing those artefacts, whether or not they
-preserve them. If they vanish, two things follow. First, the audit
-trail is gone --- a reader cannot ask \emph{who wrote this sentence,
-what evidence supports this claim, and how was the claim
-verified?}~\cite{krebs2026obscurity}. Second, the work is more
-exposed to the documented failure modes of LLM-assisted writing,
-which sit on top of a reproducibility baseline that is already poor
-in many fields~\cite{ioannidis2005,pineau2021reproducibility}\todo[inline]{verify}:
-fabricated citations, drift between claim and evidence,
-sloppification, and the gradual flattening of an argument as hedges
-accrete. Reported base rates are not anecdotal: Walters and
-Wilder~\cite{walters2023fabrication} report 55\% fabrication for
-GPT-3.5 and 18\% for GPT-4 across general-purpose generation;
-Magesh et al.~\cite{magesh2024legal} report 17--34\% hallucination
-for retrieval-augmented legal-research tools. The numbers are not
-directly comparable --- one grades full citations, the other grades
-RAG-anchored answers --- but they are the same order of magnitude,
-and it is the kind of number that turns a methodological
-inconvenience into a disqualifying one.
+preserve them. If they vanish, the audit trail goes with them ---
+a reader cannot ask \emph{who wrote this sentence, what evidence
+supports this claim, and how was the claim
+verified?}~\cite{krebs2026obscurity} --- and the work sits exposed
+to the documented failure modes of LLM-assisted writing on top of
+an already-poor reproducibility
+baseline~\cite{ioannidis2005,pineau2021reproducibility}\todo[inline]{verify}:
+fabricated citations, claim--evidence drift, sloppification,
+hedging chains. Reported base rates are
+order-of-magnitude-disqualifying: 18--55\% fabrication for
+general-purpose
+generation~\cite{walters2023fabrication}, 17--34\% hallucination
+for retrieval-augmented legal-research
+tools~\cite{magesh2024legal}.
 
-The volume problem compounds the per-paper one. The fraction of
-journal and arXiv submissions that contain LLM-generated or
-LLM-assisted prose has risen sharply since
-2023~\cite{liang2024mapping,vannoorden2023chatgpt}; detection studies
-report measurable increases across computer science, biomedicine, and
-the social sciences~\cite{kobak2024delving}. Editors at major venues
-have publicly described AI-shaped text as a load they cannot review
-out of submissions one paragraph at a time, and have asked for
-provenance \emph{from} the authors instead of post-hoc detection
-\emph{against} them~\cite{else2023chatgpt,thorp2023chatgpt}\todo[inline]{verify}. Paper mills, fabricated
-literatures, and the boilerplate flattening of disclosure pages are
-the symptoms; what is missing is a discipline that authors can adopt
-on day one rather than a forensic regime that reviewers apply on the
-back end. Detection alone is, on present evidence, an arms-race the
+The volume problem compounds it. The fraction of journal and arXiv
+submissions containing LLM-assisted prose has risen sharply since
+2023~\cite{liang2024mapping,vannoorden2023chatgpt,kobak2024delving};
+editors have asked for provenance \emph{from} the authors instead
+of post-hoc detection \emph{against}
+them~\cite{else2023chatgpt,thorp2023chatgpt}\todo[inline]{verify},
+and detection alone is, on present evidence, an arms-race the
 reviewer side does not
-win~\cite{sadasivan2023reliably}\todo[inline]{verify}; an
-authoring-side discipline is the cheaper, sturdier complement. The
-pattern this paper proposes is meant to be that discipline.
+win~\cite{sadasivan2023reliably}\todo[inline]{verify}. The pattern
+this paper proposes is meant to be the authoring-side complement.
 
 \paragraph{The journal as distribution channel may be in decline.}
-The strain is not only on the per-paper review pipeline; it is on
-the format itself. The original concept of the journal --- a
-periodical bundling vetted articles for distribution to subscribers
---- pre-dates the internet by three centuries, and the network has,
-on aggregate, weakened the case for bundling. Preprint servers,
-overlay journals, registered reports, open-science platforms, and
-artefact-versioned repositories now cover much of what journals
-historically did, often faster and more
-openly~\cite{eisen2018preprints,tennant2016open}\todo[inline]{verify}.
-The arrival of LLM-generated submissions on top of a system that
-was already showing format strain is what tips a slow drift into a
-visible crisis: editors face submission queues swollen by
-AI-fabricated content~\cite{conroy2023sleuths}\todo[inline]{verify}
-at the same time that authors face venue-policy
+The strain is not only on per-paper review; it is on the format
+itself. Preprint servers, overlay journals, registered reports,
+and artefact-versioned repositories now cover much of what
+journals historically
+did~\cite{eisen2018preprints,tennant2016open}\todo[inline]{verify},
+and the arrival of LLM-generated submissions on top of an already
+strained system~\cite{conroy2023sleuths}\todo[inline]{verify} ---
+amid venue-policy
 churn~\cite{aclrr_llm_policy,iclr_llm_policy,neurips_llm_policy}
-and reviewers
-face capacity exhaustion. We do not claim the journal is dead ---
-the position would be over-strong, and many fields still need the
-curation work journals do. We do claim that the assumption that the
-journal is the unproblematic default for scholarly distribution can
-no longer be taken for granted, and that an authoring-side
-discipline whose primary outputs are the \emph{repository, the
-provenance graph, and the manuscript bundled together} is at least
-as well-suited to the emerging communication ecosystem as it is to
+--- tips a slow drift into a visible crisis. We do not claim the
+journal is dead; we claim its default-ness can no longer be taken
+for granted, and that an authoring-side discipline whose primary
+outputs are the \emph{repository, the provenance graph, and the
+manuscript bundled together} fits the emerging ecosystem as well as
 the legacy one. F(AI)\textsuperscript{2}R is designed to fit both.
 
 Since~\textcite{vaswani2017attention} put scaled dot-product attention
@@ -84,15 +62,13 @@ degree; FAIR's 2016 vintage predates that shift by a year, and its
 operational vocabulary still assumes that the agent at the keyboard
 is a person.
 
-We propose \emph{F(AI)\textsuperscript{2}R}, read \emph{F-A-I-A-I-R}:
-the canonical FAIR axes with an additional \emph{(AI)} factor
-multiplied through them, squared because each axis demands two passes
-over every artefact, an authoring pass and an audit pass. An earlier
-draft used \emph{FAIR4AI}; we discarded it after observing that
-\emph{4AI heißt alles} --- a suffix denotes nothing about how the
-principles change. Folding \emph{(AI)} into the acronym, multiplied
-through, asserts the extension is internal to FAIR rather than
-external to it.
+We propose \emph{F(AI)\textsuperscript{2}R}, read
+\emph{F-A-I-A-I-R}: the canonical FAIR axes with an \emph{(AI)}
+factor multiplied through them, squared because each axis demands
+two passes --- authoring and audit. An earlier \emph{FAIR4AI}
+draft was discarded as \emph{4AI heißt alles}: a suffix denotes
+nothing about how the principles change. Folding \emph{(AI)} in
+asserts the extension is internal to FAIR rather than external.
 
 \paragraph{Contribution.} The contribution is not the name. It is the
 integration of eight individually unoriginal practices into a single
@@ -108,21 +84,17 @@ claim is new. \emph{The pipeline is the team; the team is the
 methodology.}
 
 \paragraph{Roadmap.}
-\S\ref{sec:position} states the F(AI)\textsuperscript{2}R position
-in five numbered claims. \S\ref{sec:pattern} states the pattern
-itself: the axes, the ten-stage pipeline, the verification ladder
-as a finite-state machine, and the handback discipline.
-\S\ref{sec:eight} treats the eight integrated practices.
+\S\ref{sec:position} states the position in five numbered claims.
+\S\ref{sec:pattern} states the pattern: axes, ten-stage pipeline,
+verification ladder, handback discipline. \S\ref{sec:eight}
+treats the eight integrated practices.
 \S\ref{sec:provenance-analysis} reports the audit pass on the live
-graph; \S\ref{sec:evolution} narrates how the pipeline itself
-evolved during cooperative writing. \S\ref{sec:failure-modes}
-names the failure modes the pattern resists and is honest about
-which it does not. \S\ref{sec:limits-and-objections} addresses the
-dual-use surface, equity, and the standing objections;
+graph; \S\ref{sec:evolution} narrates how the pipeline evolved
+during cooperative writing. \S\ref{sec:failure-modes} names the
+failure modes; \S\ref{sec:limits-and-objections} addresses
+dual-use, equity, and standing objections;
 \S\ref{sec:conclusion} states the conditions for
 community-recommendation submission. Seven appendices supply the
-verification-ladder specification, the prompt taxonomy, the
-F(AI)\textsuperscript{2}R cell mapping, the process-evolution
-chronology, the provenance-analysis queries, the implementation
-notes, and the pattern's two forward-looking extensions (domain
-ontologies and graph-as-research-infrastructure).
+ladder specification, prompt taxonomy, cell mapping, evolution
+chronology, provenance-query walkthrough, implementation notes,
+and forward-looking pattern extensions.
