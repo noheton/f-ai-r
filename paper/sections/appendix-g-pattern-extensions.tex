@@ -23,6 +23,17 @@ the graph. The schema we have introduced is compositional: any
 that answers both is more reproducible than one that answers only
 the first.
 
+A neighbouring vocabulary worth naming explicitly is MLCommons
+Croissant~1.0~\cite{benjelloun2024croissant}, the schema.org /
+JSON-LD vocabulary for ML datasets and their responsible-AI
+annotations. Croissant occupies the dataset-metadata slot
+(\S\ref{sec:limits-and-objections}) and composes cleanly with the
+F(AI)\textsuperscript{2}R schema: a \texttt{fair2r:Source} can
+reference a Croissant record so that the provenance graph for a
+manuscript and the dataset metadata for the data it sits on top of
+read as a single linked-data graph rather than two disconnected
+ones.
+
 Two examples concrete enough to plug in today:
 
 \begin{description}[leftmargin=1.2em,itemsep=2pt,topsep=4pt]

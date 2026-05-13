@@ -1,0 +1,24 @@
+The FAIR Guiding Principles for scientific data management were drafted
+for data, then extended to research software (FAIR4RS) and machine-
+learning models (FAIR4ML). Neither extension yet covers the artefact
+classes that LLM-assisted scholarly writing produces: exportable
+conversation transcripts, versioned prompt files, tool-and-model
+version manifests, verification-status ladders, and per-claim
+provenance maps. We propose F(AI)^2R, read F-A-I-A-I-R: the canonical
+FAIR axes with an (AI) factor multiplied through them, squared because
+each axis demands two passes over every artefact -- an authoring pass
+and an audit pass -- and because the factor unpacks into a 2x2 of
+writer x reader. The contribution is the integration of eight
+individually unoriginal practices into a single discipline enforced by
+a ten-stage agent pipeline with strict separation between prose-owning
+and audit-owning agents: transcript preservation, verification-status
+labelling, per-claim provenance maps, mirror discipline, recursive
+meta-process documentation, base-rate-anchored disclosure, legal
+honesty about authorship, and FAIR alignment as precondition. The
+paper is its own case study: the manuscript, the prompts, the
+provenance graph (PROV-O over Turtle), the logbook, the slide decks,
+and the conference poster are all in the public repository, and the
+cooperation that produced them is narrated and chronicled. The
+pattern is offered for community contestation; some standard with
+these properties is becoming load-bearing for the next decade of
+scholarship under volume pressure from LLM-assisted submission.

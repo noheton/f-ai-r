@@ -455,6 +455,40 @@ snippets and the section of the manuscript each one underwrites.
 - **Used in.** `intro.tex` (ML-specific reproducibility anchor
   alongside `ioannidis2005`).
 
+### `neurips_llm_policy` --- lit-retrieved
+
+- **Citation.** Neural Information Processing Systems Foundation,
+  "NeurIPS LLM Policy" (per-cycle conference policy page),
+  <https://neurips.cc/>.
+- **Used in.** `background.tex` line 25 — cited via the
+  `\cite{aclrr_llm_policy,iclr_llm_policy,neurips_llm_policy}` group
+  as one of three reviewer-and-author AI-use policies at major ML
+  venues.
+- **Verification.** `lit-retrieved`. **Escalated.** The conference
+  homepage returns only navigational chrome at the current year;
+  the canonical year-specific policy URL was not on the path that
+  resolves and the abstract is therefore insufficient. The entry
+  remains on `doc/sources-needing-institutional-access.md` so the
+  human author can capture the per-cycle policy text. Mirrors
+  `src:neurips_llm_policy` in the graph at `lit-retrieved`. Bib
+  defect: this `lit-retrieved` row matches the bib key used in the
+  manuscript; a separate, more specific `neurips2024llmpolicy` entry
+  is described in §"Proposed additions" but is not the citation
+  currently in use.
+
+### `iclr_llm_policy` --- lit-retrieved
+
+- **Citation.** International Conference on Learning Representations,
+  "ICLR author and reviewer guidelines on the use of AI tools"
+  (per-cycle), <https://iclr.cc/>.
+- **Used in.** `background.tex` line 25 — same `\cite` group as
+  `neurips_llm_policy`.
+- **Verification.** `lit-retrieved`. **Escalated.** Same defect as
+  `neurips_llm_policy`: the conference homepage does not surface a
+  per-cycle stable policy URL. On
+  `doc/sources-needing-institutional-access.md`. Mirrors
+  `src:iclr_llm_policy` in the graph at `lit-retrieved`.
+
 ### `aclrr_llm_policy` --- ai-confirmed
 
 - **Quoted snippet (verbatim from the ACL Rolling Review CFP).**

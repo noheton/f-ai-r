@@ -42,6 +42,31 @@ preferable to a forged higher-rung distribution from a
 richer group, with the verification ladder making the difference
 legible to the reviewer.
 
+\paragraph{Adjacent proposals and adjacent vocabularies.}
+A concurrent maximalist proposal, the \emph{Agent-Native Research
+Artifact} (Ara) of \textcite{liu2026ara}, replaces the narrative
+paper with a four-layer package --- scientific logic, executable
+code with full specifications, an exploration graph of failed
+branches, and evidence grounding every claim --- and reports
+reproduction-success and QA-accuracy gains on PaperBench and
+RE-Bench. F(AI)\textsuperscript{2}R declines that bargain. We
+keep the human-readable manuscript as the primary artefact and
+ride a PROV-O graph alongside it; Ara's exploration layer is a
+strict superset of our logbook plus claim-graph, and indicates a
+credible upper bound for what the same substrate could carry if
+a venue ever demanded it.
+
+F(AI)\textsuperscript{2}R is also sometimes mistaken for a
+dataset-metadata proposal. It is not. The dataset-metadata slot
+is already occupied by MLCommons Croissant~1.0
+\cite{benjelloun2024croissant}, a schema.org/JSON-LD vocabulary
+for ML datasets and their responsible-AI annotations. Croissant
+describes the \emph{thing learned from}; F(AI)\textsuperscript{2}R
+describes the \emph{authoring process} that produces a paper.
+The two compose: a Croissant record can be referenced from a
+\texttt{fair2r:Source} triple, but neither schema subsumes the
+other.
+
 \paragraph{Standing objections.} A position paper that does not
 name the objections it expects has not committed to a position.
 

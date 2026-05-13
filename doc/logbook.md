@@ -3166,3 +3166,85 @@ Provenance: `act:fix-poster-density-and-scrutinizer-rule`
 `hc:fix-poster-density-and-scrutinizer-rule` (rule-shape, high
 leverage --- catches a recurring defect class).
 Triple count 2363 → 2379 (+16).
+
+## 2026-05-13 --- Integrate three external works; vendor paper PDF; slide scrutinizer fixes; venue research.
+
+Researcher direction listed three external works to position
+against (Liu et al. 2026 "Ara", Vaswani et al. 2017
+"Attention Is All You Need", MLCommons Croissant 1.0). Each
+landed on a distinct part of the position argument:
+
+- **Ara** (arXiv 2604.24658): concurrent maximalist proposal
+  --- four-layer agent-native package replacing the narrative
+  paper. Added a paragraph to `paper/sections/limits-and-objections.tex`
+  under a new *Adjacent proposals and adjacent vocabularies*
+  block. F(AI)²R declines the bargain: we keep the manuscript
+  as primary artefact and ride a PROV-O graph alongside;
+  Ara's exploration layer is a credible upper bound for what
+  the same substrate could carry.
+- **Vaswani 2017**: historical pivot. Inserted at the end of
+  `paper/sections/intro.tex` between the journal-as-distribution
+  paragraph and the F(AI)²R proposal --- FAIR's 2016 vintage
+  predates the Transformer pivot by a year, which makes the
+  operational-vocabulary gap load-bearing.
+- **Croissant 1.0**: dataset-metadata vocabulary that F(AI)²R
+  is sometimes mistaken for. Added one paragraph to
+  `limits-and-objections.tex` and a cross-reference from
+  `paper/sections/appendix-g-pattern-extensions.tex`. The two
+  compose (a `fair2r:Source` can reference a Croissant
+  record); neither subsumes the other.
+
+Three new `fair2r:Source` entities, three new `fair2r:Claim`
+entities (with `prov:wasGeneratedBy` back to a new parent
+activity `act:integrate-external-2026-05-13`), and one
+`hc:integrate-external-2026-05-13` `fair2r:HumanContribution`
+entity recording the researcher direction. Three new bib
+entries in `paper/references.bib` (`liu2026ara`,
+`vaswani2017attention`, `benjelloun2024croissant`).
+
+**Slide scrutinizer fixes** applied in the same pass:
+
+- `slides/pitch-5min.tex`: hero figure reduced from 0.85 to
+  0.70 `\textwidth`; (AI)² grid split off into its own frame
+  at 0.92 `\linewidth` so the Position frame doesn't try to
+  carry both block and grid.
+- `slides/conference-30min.tex`: ladder-fsm gained an
+  explicit `height=0.62\textheight, keepaspectratio`
+  constraint to stop the 368 pt overfull \vbox at page 13;
+  ladder-populations narrowed from 0.96 to 0.86 `\textwidth`
+  to stop the 21 pt overfull at page 37; axes-table columns
+  widened from `p{2.6cm}` to `p{3.0cm}` for uniform breathing
+  room. Section-divider titles for §5 / §6 reworded to
+  acknowledge the deck's actual structure (appendix-G
+  material as forward arc; recursive case study covers
+  provenance analysis + process evolution in compressed
+  form); agenda items synchronised.
+- `slides/poster-A0.tex`: Reported-base-rates table column
+  spec `rl` → `rp{0.55\linewidth}` to stop the 178.9 pt
+  overfull \hbox.
+
+**Vendored `paper/main.pdf`** into the repository. Both
+`.gitignore` files no longer ignore the file; `make -C paper
+pdf` rebuilds it. Adopters and reviewers can now read the
+draft (with the watermark) without invoking CI. The draft
+notice is on; publication is still gated on
+`paper/publication-consent.md`.
+
+**Venue research** (in response to the user's RDA P27
+question + ranked-by-acceptance-and-impact follow-up):
+shortlist refreshed in `doc/submission-plan.md`. Top three
+recommendations: (1) arXiv as the citable anchor; (2) RIO
+Journal as the formal record (methods paper, no novelty
+gate); (3) RDA P27 BoF + poster for community traction.
+For P27 specifically: the recommended format is a **BoF
+session** (90 min) + **poster** (late-breaking, ~Jul 2026
+deadline) + **A4 one-page handout**, with WG-chair outreach
+this week since the formal sessions CfP closed in November.
+
+Provenance: `act:integrate-external-2026-05-13`
+(`prov:wasAssociatedWith` `agent:human-author` +
+`agent:claude-opus-4-7`); `hc:integrate-external-2026-05-13`
+(content-prompt, high leverage --- each work closes a
+specific class of standing objection the paper would
+otherwise answer ad hoc in review).
+Triple count 2379 → 2395 (+16).
