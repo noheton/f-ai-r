@@ -46,6 +46,7 @@ TTL = ROOT / "doc" / "provenance.ttl"
 BIB = ROOT / "paper" / "references.bib"
 OUT = ROOT / "doc" / "reading-queue.md"
 OUT_DETAILS = ROOT / "doc" / "reading-queue-details.md"
+VERDICTS = ROOT / "doc" / "reading-queue-verdicts.md"
 
 PROV = Namespace("http://www.w3.org/ns/prov#")
 DCT = Namespace("http://purl.org/dc/terms/")
@@ -164,6 +165,127 @@ def intervention_note(rung: str, n_claims: int) -> str:
     return "no intervention needed"
 
 
+VERDICT_LINE = re.compile(
+    r"^\s*(?P<key>[A-Za-z0-9_:.\-]+)\s*:\s*"
+    r"(?P<verdict>advance|hold|retire|pending)\b"
+    r"(?:\s*[-—]\s*(?P<note>.*))?$"
+)
+
+VALID_VERDICTS = {"advance", "hold", "retire", "pending"}
+
+
+def parse_verdicts(path: Path) -> dict[str, dict[str, str]]:
+    """Read ``doc/reading-queue-verdicts.md``, returning ``{bibkey: {verdict, note}}``.
+
+    Format is one line per source::
+
+        bibkey: <advance|hold|retire|pending> — optional free-text note
+
+    Lines that do not match are skipped silently; the file may carry a
+    Markdown preamble. Missing file is treated as "no verdicts yet".
+    """
+    out: dict[str, dict[str, str]] = {}
+    if not path.exists():
+        return out
+    for line in path.read_text(encoding="utf-8").splitlines():
+        m = VERDICT_LINE.match(line)
+        if not m:
+            continue
+        key = m.group("key")
+        verdict = m.group("verdict")
+        note = (m.group("note") or "").strip()
+        out[key] = {"verdict": verdict, "note": note}
+    return out
+
+
+def render_questions(claims: list[tuple[str, str]], limit: int = 110) -> str:
+    """One verification question per dependent claim, joined for a table cell."""
+    if not claims:
+        return "*(retire / wire-up question)*"
+    qs: list[str] = []
+    for slug, label in claims:
+        # Trim multi-clause labels to a leading clause for readability.
+        head = label.split(".")[0].split(";")[0].strip()
+        if len(head) > 90:
+            head = head[:87].rstrip() + "…"
+        qs.append(f"`{slug}`: does the source support — *{head}*?")
+    joined = "<br>".join(qs)
+    if len(joined) > limit * 2:  # generous cap; questions are the point.
+        joined = joined[: limit * 2 - 1].rstrip() + "…"
+    return joined
+
+
+def render_verdict(verdict_row: dict[str, str] | None) -> str:
+    """Final-column rendering for a single source's verdict."""
+    if not verdict_row:
+        return "*(pending)*"
+    v = verdict_row.get("verdict", "pending")
+    note = verdict_row.get("note", "").strip()
+    if v == "advance":
+        body = "**advance** ✓"
+    elif v == "hold":
+        body = "hold"
+    elif v == "retire":
+        body = "retire"
+    else:
+        body = "*(pending)*"
+    if note:
+        body = f"{body} — {md_escape_cell(note)}"
+    return body
+
+
+VERDICTS_PREAMBLE = """# Reading-queue verdicts
+
+Human-edited companion to [`reading-queue.md`](reading-queue.md).
+Each line records the author's verdict on whether a source can advance from
+`ai-confirmed` (or `lit-retrieved`) to `lit-read`.
+
+## Format
+
+```
+bibkey: <advance|hold|retire|pending> — optional free-text note
+```
+
+- `advance` — the source supports every dependent claim as stated; once
+  set, also update the rung in `doc/provenance.ttl` to `verif:lit-read`
+  and drop the `\\todo[inline]{verify}` marker in the manuscript.
+- `hold` — the source has been examined but the verdict is not yet
+  clear; the note explains what is outstanding.
+- `retire` — the source does not support the claims it is attached to;
+  remove the `prov:wasDerivedFrom` edges in `doc/provenance.ttl` (the
+  bib entry may stay for historical accuracy).
+- `pending` — no verdict yet (the default for newly-added sources).
+
+New sources receive a `pending` line automatically on the next build of
+`scripts/build_reading_queue.py`; pre-existing lines are preserved.
+
+## Verdicts (one per source, sorted alphabetically)
+
+"""
+
+
+def regenerate_verdicts_file(path: Path, bibkeys: list[str]) -> dict[str, dict[str, str]]:
+    """Ensure every source in the queue has a verdict line.
+
+    Reads the existing file (if any), preserves manual edits, and appends
+    a ``pending`` line for any newly-introduced source. Returns the merged
+    dictionary.
+    """
+    existing = parse_verdicts(path)
+    merged = {k: existing.get(k, {"verdict": "pending", "note": ""}) for k in bibkeys}
+    lines: list[str] = [VERDICTS_PREAMBLE.rstrip("\n"), ""]
+    for k in sorted(merged):
+        row = merged[k]
+        v = row.get("verdict", "pending")
+        note = row.get("note", "").strip()
+        if note:
+            lines.append(f"{k}: {v} — {note}")
+        else:
+            lines.append(f"{k}: {v}")
+    path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    return merged
+
+
 def main(argv) -> int:
     g = Graph()
     g.parse(TTL, format="turtle")
@@ -201,6 +323,14 @@ def main(argv) -> int:
     n_ai_confirmed = sum(1 for _, _, r, _ in queue if r == "ai-confirmed")
     n_no_rung = sum(1 for _, _, r, _ in queue if r == "no-rung")
 
+    # Human verdicts: read the editable companion file, append `pending`
+    # lines for any newly-introduced source, write the merged file back.
+    verdicts = regenerate_verdicts_file(VERDICTS, [k for k, _, _, _ in queue])
+    n_advance = sum(1 for v in verdicts.values() if v.get("verdict") == "advance")
+    n_hold = sum(1 for v in verdicts.values() if v.get("verdict") == "hold")
+    n_retire = sum(1 for v in verdicts.values() if v.get("verdict") == "retire")
+    n_pending = sum(1 for v in verdicts.values() if v.get("verdict") == "pending")
+
     # --- Compact table in reading-queue.md ---------------------------------
     table: list[str] = []
     table.append("# Reading queue")
@@ -221,36 +351,43 @@ def main(argv) -> int:
     table.append(f"- `ai-confirmed` (abstract / agent-confirmed only): {n_ai_confirmed}")
     table.append(f"- `no-rung` (graph-cleanliness defect): {n_no_rung}")
     table.append("")
+    table.append(f"**Verdict roll-up** (from "
+                 f"[`reading-queue-verdicts.md`](reading-queue-verdicts.md)): "
+                 f"**{n_advance}** advance, **{n_hold}** hold, "
+                 f"**{n_retire}** retire, **{n_pending}** pending.")
+    table.append("")
     table.append("**How to read the table.** Sources are ranked by the "
                  "number of dependent `fair2r:Claim` entries that cite "
                  "them. *Open* gives a one-click link (DOI, arXiv, or "
                  "publisher URL). *Rung* is the verification state in "
-                 "`doc/provenance.ttl`; *Intervention* names the next "
-                 "human action required to advance the source to "
-                 "`lit-read`. *Claims* lists the slugs of the "
-                 "`fair2r:Claim` entries that depend on the source.")
+                 "`doc/provenance.ttl`. *Questions to verify* lists, one "
+                 "per dependent claim, the question the author must "
+                 "answer on full reading. *Verdict* is read from "
+                 "[`reading-queue-verdicts.md`](reading-queue-verdicts.md) "
+                 "— edit that file (one line per source: "
+                 "`bibkey: <advance|hold|retire|pending> — note`) to "
+                 "record the answer; the table regenerates on the next "
+                 "build of `scripts/build_reading_queue.py`. A source "
+                 "with a verdict of *advance* is cleared to move to "
+                 "`verif:lit-read` in `doc/provenance.ttl`.")
     table.append("")
-    table.append("| # | Source | Year | Open | Rung | Claims | Depends-on (slugs) | Intervention |")
-    table.append("|---|--------|------|------|------|--------|--------------------|--------------|")
+    table.append("| # | Source | Year | Open | Rung | Claims | Questions to verify | Verdict |")
+    table.append("|---|--------|------|------|------|--------|--------------------|---------|")
 
     for idx, (bibkey, _src_iri, rung, _title) in enumerate(queue, 1):
         b = bib.get(bibkey, {})
-        n = len(deps.get(bibkey, []))
+        claim_list = deps.get(bibkey, [])
+        n = len(claim_list)
         author = md_escape_cell(short_author(b)) if b else f"`{bibkey}`"
         year = md_escape_cell(b.get("year", "—"))
         url = open_url(b) if b else None
         open_cell = f"[link]({url})" if url else "—"
-        claim_slugs = ", ".join(f"`{c}`" for c, _ in deps.get(bibkey, []))
-        if not claim_slugs:
-            claim_slugs = "*(none)*"
-        # truncate to keep the cell readable; the full list is in details.
-        if len(claim_slugs) > 80:
-            claim_slugs = claim_slugs[:77].rstrip(", ") + ", …"
         rung_cell = f"`{rung}`"
-        intervention = md_escape_cell(intervention_note(rung, n))
+        questions_cell = md_escape_cell(render_questions(claim_list))
+        verdict_cell = md_escape_cell(render_verdict(verdicts.get(bibkey)))
         table.append(
             f"| {idx} | {author} `{bibkey}` | {year} | {open_cell} | "
-            f"{rung_cell} | **{n}** | {claim_slugs} | {intervention} |"
+            f"{rung_cell} | **{n}** | {questions_cell} | {verdict_cell} |"
         )
 
     table.append("")
