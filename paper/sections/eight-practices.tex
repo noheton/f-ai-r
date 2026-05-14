@@ -8,80 +8,63 @@
 % which already reads the eight practices as columns and shows
 % which practice carries the load for each named failure mode.
 
-Each practice below is individually unoriginal. The argument is that
-adopting any one in isolation is insufficient against the failure
-modes catalogued in \S\ref{sec:failure-modes}, while adopting all
-eight, with the pipeline of \S\ref{sec:pipeline} enforcing the
-seams, is sufficient against most and honest about the rest.
+Each practice below is individually unoriginal. The argument is
+that adopting any in isolation is insufficient against the failure
+modes of \S\ref{sec:failure-modes}, while adopting all eight ---
+with the pipeline of \S\ref{sec:pipeline} enforcing the seams ---
+is sufficient against most and honest about the rest.
 Figure~\ref{fig:failure-mode-coverage} reads the eight as columns
-against the failure modes as rows, showing which practice carries
-the load for each.
+against the failure modes as rows.
 
 \begin{description}[leftmargin=1.2em,itemsep=2pt]
-    \item[1. Transcript preservation.]
-        Every working session that touches the manuscript exports its
-        conversation transcript and commits it under
-        \texttt{doc/transcripts/}. Transcripts are bound to the
-        manuscript via \texttt{prov:used} on the corresponding
-        authoring activity, typed as \texttt{fair2r:Transcript} in
-        the provenance graph.
+    \item[1. Transcript preservation.] Every session touching the
+        manuscript exports its transcript under
+        \texttt{doc/transcripts/}, bound via \texttt{prov:used} on
+        the authoring activity and typed
+        \texttt{fair2r:Transcript}.
     \item[2. Verification-status labelling
-        (\S\ref{sec:ladder}).]
-        Every claim carries one of the five FSM rungs. The rung is
-        recorded in the graph, not in the prose; a claim invoked at a
-        rung lower than its evidence permits is allowed, a claim
-        invoked higher is a defect surfaced by the Aligner.
-    \item[3. Per-claim provenance maps.]
-        Every named claim has a \texttt{fair2r:Claim} IRI in
-        \texttt{doc/provenance.ttl} with at minimum
+        (\S\ref{sec:ladder}).] Every claim carries one of the five
+        FSM rungs in the graph (not the prose); invoking lower than
+        the evidence permits is allowed, higher is a defect.
+    \item[3. Per-claim provenance maps.] Every named claim has a
+        \texttt{fair2r:Claim} IRI with at minimum
         \texttt{prov:wasGeneratedBy}, \texttt{prov:wasAttributedTo},
         \texttt{prov:wasDerivedFrom}, and
-        \texttt{fair2r:verificationState}. A retraction is a
-        \texttt{prov:Invalidation} activity, never a deletion. The
-        per-claim discipline is the structured-documentation
-        descendant of Datasheets for
+        \texttt{fair2r:verificationState}; retraction is a
+        \texttt{prov:Invalidation}, never a deletion. This is the
+        structured-documentation descendant of Datasheets for
         Datasets~\cite{gebru2021datasheets} and Model
-        Cards~\cite{mitchell2019modelcards}, applied at
-        claim granularity rather than at artefact level.
-    \item[4. Mirror discipline (\S\ref{sec:handback}).]
-        Every primary artefact has a (source, render) pair under
-        version control. The build either agrees or fails.
-        \emph{Asset honesty over asset completeness}: a placeholder
-        is allowed and encouraged, but it must visibly identify
-        itself as AI-authored and pending.
+        Cards~\cite{mitchell2019modelcards} at claim granularity.
+    \item[4. Mirror discipline (\S\ref{sec:handback}).] Every
+        primary artefact has a (source, render) pair; the build
+        either agrees or fails. \emph{Asset honesty over asset
+        completeness}: placeholders are allowed but must visibly
+        identify themselves as AI-authored and pending.
     \item[5. Recursive meta-process documentation
-        (\S\ref{sec:evolution}).]
-        A paper that prescribes a discipline must have been written
-        under that discipline. This paper is its own case study ---
-        the manuscript, the agent prompts, the provenance graph, the
-        logbook, and the build pipeline are all in the public
-        repository, and the cooperation that produced them is
-        narrated in \S\ref{sec:evolution} and chronicled in
-        Appendix~\ref{sec:appendix-evolution}.
-    \item[6. Base-rate-anchored AI disclosure.]
-        Disclosure is anchored to numeric base rates for the failure
-        modes that the rungs are supposed to mitigate. For
-        fabricated citations specifically, we cite the figures that
-        motivated the rung's
-        existence~\cite{walters2023fabrication,magesh2024legal} and
-        declare the fraction of claims at each rung at submission
-        time.
-    \item[7. Legal honesty about authorship.]
-        AI is acknowledged but is not an author. The position holds
-        across Germany (\S2 \emph{UrhG}), the United States, and the
-        major medical journals~\cite{icmje2023}: AI cannot hold
-        copyright, cannot consent to publication, cannot be held
-        accountable. The \texttt{CITATION.cff} lists humans only;
-        the graph attributes activities to AI agents but never
-        promotes them to authors.
-    \item[8. FAIR alignment as precondition.]
-        \emph{Do not retrofit FAIR.} The eight practices, adopted on
-        day one, supply the four FAIR axes at low marginal cost.
-        Adopted at submission time, the cost dominates: the
-        manuscript has to be re-decomposed into claims, transcripts
-        reconstructed if not preserved, rungs assigned in retrospect
-        with the verification overhead now maximally expensive.
+        (\S\ref{sec:evolution}).] A paper prescribing a discipline
+        must have been written under it. The manuscript, prompts,
+        graph, logbook, and pipeline are all public; the
+        cooperation that produced them is narrated in
+        \S\ref{sec:evolution} and
+        \companionref{sec:appendix-evolution}{Appendix~D:
+        Process Evolution Chronology}.
+    \item[6. Base-rate-anchored AI disclosure.] Disclosure is
+        anchored to numeric base rates for the failure modes the
+        rungs mitigate~\cite{walters2023fabrication,magesh2024legal};
+        the fraction of claims at each rung is declared at
+        submission time.
+    \item[7. Legal honesty about authorship.] AI is acknowledged
+        but is not an author. The position holds across Germany
+        (\S2 \emph{UrhG}), the United States, and the major medical
+        journals~\cite{icmje2023}: AI cannot hold copyright, consent
+        to publication, or be held accountable. The
+        \texttt{CITATION.cff} lists humans only.
+    \item[8. FAIR alignment as precondition.] \emph{Do not retrofit
+        FAIR.} The eight practices on day one supply the four axes
+        at low marginal cost; at submission time the manuscript has
+        to be re-decomposed into claims, transcripts reconstructed,
+        rungs assigned in retrospect at maximum verification
+        overhead.
 \end{description}
 
-\noindent The integration is the contribution. None of the eight is
-new on its own.
+\noindent The integration is the contribution.

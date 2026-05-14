@@ -19,8 +19,8 @@
 *.ilg
 *.ind
 
-# Built artefacts (PDFs are reproduced from source)
-paper/main.pdf
+# Built artefacts. paper/main.pdf is vendored (draft watermark on)
+# so adopters and reviewers can read without CI; rebuilt by latexmk.
 paper/main-condensed.pdf
 paper/build/
 

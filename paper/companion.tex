@@ -1,0 +1,88 @@
+% F(AI)^2R --- Companion Technical Report.
+%
+% Carries the seven appendices that were split out of paper/main.tex
+% to keep the position paper within its page budget. Same style file,
+% same bibliography, same draft-watermark gate. The .tex source is the
+% primary artefact; the rendered PDF is derived. Build:
+%
+%   make -C paper companion
+%
+% which mirrors the 'pdf' target. Sections inherit their existing
+% \label{sec:appendix-*} identifiers; the main paper references them
+% via \companionref{}{} (see paper/style/fair2r.sty).
+
+\documentclass[11pt,a4paper]{article}
+
+% Mirror the draft toggle in main.tex. When "true",
+% paper/style/fair2r.sty applies the "DRAFT --- not yet peer-reviewed"
+% watermark to every page. Flip to "false" in lockstep with main.tex
+% at submission time.
+\def\faiarDraft{true}
+
+\usepackage{style/fair2r}        % DLR-aligned typography, colours, layout
+
+\usepackage{graphicx}
+\usepackage[backend=biber,style=numeric,sorting=none]{biblatex}
+\usepackage{todonotes}
+\usepackage{xr-hyper}
+
+% Cross-document \ref{} resolution. The appendix files reference body
+% labels (\S\ref{sec:ladder}, \S\ref{sec:eight}, etc.) that live in
+% main.tex. We pull main's .aux so those refs resolve to numbers and
+% hyperlink across documents. If main.aux is absent (clean checkout
+% before the main paper has been built), the references degrade to
+% the usual "??" without breaking compilation.
+\IfFileExists{main.aux}{\externaldocument[M-]{main}}{}
+
+\addbibresource{references.bib}
+
+\title{\faiar:\ Companion Technical Report\\
+       \large Appendices, Ladder Specification, Pipeline Prompts,\\
+       Provenance Analysis, Implementation Notes}
+\author{%
+  Florian Krebs\\[2pt]
+  \small ORCID: \href{https://orcid.org/0000-0001-6033-801X}{0000-0001-6033-801X}\\
+  \small \href{mailto:florian.krebs@dlr.de}{florian.krebs@dlr.de}\\[4pt]
+  \small DLR Zentrum für Leichtbauproduktionstechnologie (ZLP), Augsburg\\
+  \small Helmholtz-Gemeinschaft \,--\, NFDI4Ing \,--\, HMC%
+}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This is the companion technical report to the \faiar\ position paper
+\todo{insert main-paper DOI once \texttt{paper/publication-consent.md}
+is signed off}. The position paper argues that FAIR is insufficient
+for LLM-assisted scholarly writing and proposes a multiplicative
+extension --- F(AI)\textsuperscript{2}R --- enforced by eight
+integrated practices and a ten-stage agent pipeline; this companion
+carries the artefacts the argument leans on. Seven sections cover, in
+order, the verification-ladder specification used by the Source
+Analyzer and Aligner stages, the prompt taxonomy under
+\texttt{agents/}, the F(AI)\textsuperscript{2}R cell-mapping
+crosswalk (FAIR sub-principles \(\times\) AI passes), the per-step
+process-evolution chronology, the four diagnostic SPARQL queries on
+the live \texttt{doc/provenance.ttl} graph with worked numbers, the
+repository implementation (layout, CI, replay), and two forward-looking
+pattern extensions (domain ontologies and graph interconnectivity).
+The seven sections are referenced from the main paper via
+\texttt{\textbackslash companionref}; their \texttt{fair2r:Claim}
+IRIs continue to resolve in the same shared
+\texttt{doc/provenance.ttl} graph, which spans both documents.
+\end{abstract}
+
+\tableofcontents
+
+\input{sections/appendix-a-ladder}
+\input{sections/appendix-b-prompts}
+\input{sections/appendix-c-fair-cells}
+\input{sections/appendix-d-evolution-chronology}
+\input{sections/appendix-e-provenance-analysis}
+\input{sections/appendix-f-implementation}
+\input{sections/appendix-g-pattern-extensions}
+
+\printbibliography
+
+\end{document}

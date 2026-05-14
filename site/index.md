@@ -14,10 +14,60 @@ and built under the DLR Corporate Design.</p>
 </div>
 
 <div class="callout">
-The PDF is auto-built on every push to <code>main</code>. It carries a
-<strong>DRAFT — not yet peer-reviewed</strong> watermark until a
-published version is explicitly authorised. Replay it locally with
-<code>make -C paper pdf</code> and compare; any difference is a defect.
+The PDF is auto-built on every push to <code>main</code>, and a
+copy is vendored at <a href="https://github.com/noheton/f-ai-r/blob/main/paper/main.pdf"><code>paper/main.pdf</code></a>
+in the repository tree so it's downloadable without CI. Each PDF
+carries a <strong>DRAFT — not yet peer-reviewed</strong>
+watermark until publication is explicitly authorised in
+<a href="https://github.com/noheton/f-ai-r/blob/main/paper/publication-consent.md"><code>paper/publication-consent.md</code></a>.
+Replay locally with <code>make -C paper pdf</code> and compare;
+any difference is a defect.
+</div>
+
+## The paper in one screen
+
+> *FAIR is insufficient for LLM-assisted scholarly writing in its
+> current form; the required extension is multiplicative, not
+> appended; eight integrated practices enforced by a ten-stage agent
+> pipeline are the minimum discipline; this paper is the worked
+> example.*
+
+1. **The gap.** FAIR was drafted for data, then extended to research
+   software and ML models. Neither extension covers what LLM-assisted
+   *writing* produces — transcripts, prompt files, model + tool
+   manifests, verification-status ladders, per-claim provenance
+   maps. If they vanish, the audit trail is gone.
+
+2. **The position.** F(AI)²R, read *F-A-I-A-I-R*: the canonical FAIR
+   axes with an *(AI)* factor multiplied through them, **squared**
+   because each axis demands two passes (authoring + audit) and
+   because *(AI)²* unpacks into a 2×2 of writer × reader.
+
+3. **The eight integrated practices.** Each individually unoriginal —
+   transcript preservation, verification-status labelling, per-claim
+   provenance maps, mirror discipline, recursive meta-process,
+   base-rate-anchored disclosure, legal honesty about authorship,
+   FAIR-as-precondition. The integration is the contribution.
+   *Specialisation reduces hallucination at the seam.*
+
+4. **The case study.** This paper was produced by the pipeline it
+   prescribes. The manuscript, the agent prompts, the provenance
+   graph, the logbook, the slide decks, the conference poster, and
+   the build pipeline are all here.
+
+5. **Why now.** Some standard with these properties is becoming
+   load-bearing for the next decade of scholarship — the
+   bioinformatics precedent (semantic tagging under data-volume
+   pressure) shows where the trajectory leads. F(AI)²R is one offer.
+
+## Walk the artefacts
+
+<div class="cta-row">
+  <a class="cta secondary" href="methodology.html">Methodology</a>
+  <a class="cta secondary" href="getting-started.html">Get started in your own repository</a>
+  <a class="cta secondary" href="provenance.html">Provenance graph (browse)</a>
+  <a class="cta tertiary" href="provenance-explorer.html">Provenance graph (interactive)</a>
+  <a class="cta tertiary" href="logbook.html">Logbook</a>
 </div>
 
 ## Slide decks

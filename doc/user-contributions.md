@@ -1324,3 +1324,41 @@ the no-parentless-claim rule: parent activity
 `doc/provenance.ttl`, `doc/reading-queue.md` (regenerated),
 `doc/user-contributions.md`, `doc/logbook.md`.
 *Provenance IRI:* `fair2r:ac-verification-pass-3-2026-05-07`
+
+### HC-2026-05-13 --- Integrate Ara, Vaswani, Croissant; venue research
+
+*Type:* content-prompt + responsibility-uptake
+*Leverage:* high
+*Date:* 2026-05-13
+*Researcher direction:* "Compare to https://arxiv.org/abs/2604.24658,
+integrate. Historical: since https://arxiv.org/abs/1706.03762 things
+have changed. Croissant
+https://docs.mlcommons.org/croissant/docs/croissant-spec.html.
+Potential venue for f-(ai)2-r:
+https://www.rd-alliance.org/plenaries/p27/ what format would you
+suggest? Also research other venues sort by chance of acceptance
+and impact."
+*Outcome:* Three external works named-and-positioned (Liu 2026
+Ara as adjacent maximalist proposal F(AI)²R declines; Vaswani
+2017 as historical pivot at the end of `intro.tex`; Croissant
+1.0 as adjacent vocabulary that composes rather than competes,
+in `limits-and-objections.tex` + cross-ref from
+`appendix-g-pattern-extensions.tex`). Three new bib entries,
+three new `fair2r:Source`s, three new `fair2r:Claim`s with
+`prov:wasGeneratedBy` back to
+`act:integrate-external-2026-05-13`. Venue shortlist refreshed
+in `doc/submission-plan.md`, ranked by `(acceptance × impact)`
+with fit as tie-break; top three are arXiv, RIO Journal, and
+RDA P27 (BoF + poster). For RDA P27 specifically, the
+recommended format is a BoF + poster + A4 handout with WG-chair
+outreach this week since formal sessions CfP closed in Nov 2025.
+*Artefacts touched:* `paper/sections/intro.tex`,
+`paper/sections/limits-and-objections.tex`,
+`paper/sections/appendix-g-pattern-extensions.tex`,
+`paper/references.bib`, `doc/provenance.ttl`,
+`doc/submission-plan.md`, `doc/logbook.md`,
+`doc/user-contributions.md`, plus slide-scrutinizer
+dimensional fixes in `slides/pitch-5min.tex`,
+`slides/conference-30min.tex`, `slides/poster-A0.tex` and
+vendored `paper/main.pdf`.
+*Provenance IRI:* `hc:integrate-external-2026-05-13`

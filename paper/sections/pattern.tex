@@ -25,17 +25,15 @@ monotonically along the diagonal.}
 \end{figure}
 
 We retain the four canonical FAIR axes and read each in two passes
-(Figure~\ref{fig:axes}). The (AI)\textsuperscript{2} factor itself
-unpacks into the four cells of writer-vs-reader
-(Figure~\ref{fig:ai-squared-grid}): a manuscript that will be both
-written and read by humans only needs the manuscript proper, while a
-manuscript whose readers include AI agents needs every artefact in
-the F(AI)\textsuperscript{2}R bundle. The authoring pass (AI\textsubscript{1})
-produces the artefact for that axis. The audit pass
-(AI\textsubscript{2}) verifies the artefact against the axis after
-the fact, never in the same role and never in the same commit. The
-two passes are what justifies the squared notation. The (AI) factor
-is multiplied through every axis.
+(Figure~\ref{fig:axes}). The (AI)\textsuperscript{2} factor unpacks
+into a writer/reader grid (Figure~\ref{fig:ai-squared-grid}): a
+human-only manuscript needs only the manuscript proper, while one
+whose readers include AI agents needs every artefact in the
+F(AI)\textsuperscript{2}R bundle. The authoring pass
+(AI\textsubscript{1}) produces the artefact for an axis; the audit
+pass (AI\textsubscript{2}) verifies it afterwards, never in the
+same role and never in the same commit. The two passes justify the
+squared notation; the (AI) factor is multiplied through every axis.
 
 \paragraph{F.}
 Authoring mints persistent identifiers (DOI via Zenodo, ORCID for
@@ -124,67 +122,54 @@ non-decreasing modulo explicit retraction:
 \(\to\) \textsc{lit-read}
 \end{quote}
 
-\noindent \textsc{lit-retrieved}: a candidate URL or DOI that
-resolves. \textsc{ai-confirmed}: an AI agent has read the source and
-confirmed it supports the claim, with a quoted snippet preserved in
-\texttt{doc/sources.md}. \textsc{lit-read}: a human has read the
-source and confirmed both that it supports the claim and that the
-inference from source to claim is sound. A claim may invoke a source
-at its current rung or below; load-bearing or contested claims still
-require \textsc{lit-read}.
-
-The \textsc{ai-confirmed} rung exists because verification overhead
-is real and dominates writer cycles. Most retrieved entries are
-obvious from the abstract; a small minority anchor contested claims;
-the single-tier gate forced the human reader through both populations
-at the same cost. Splitting the work between the Source Analyzer
+\noindent \textsc{lit-retrieved} is a resolving URL or DOI;
+\textsc{ai-confirmed} adds an AI-read snippet in
+\texttt{doc/sources.md}; \textsc{lit-read} requires a human reader
+who has confirmed both source and inference. A claim may invoke a
+source at or below its current rung; load-bearing or contested
+claims still require \textsc{lit-read}. The
+\textsc{ai-confirmed} rung exists because the single-tier gate
+forced the human through obvious-from-abstract and contested cases
+at the same cost; splitting the work between the Source Analyzer
 (cheap) and the human (expensive) is the lever that makes the
-practice economically tenable.
-
-\paragraph{Crosswalk.} Retrieval depth maps to PRISMA
-2020~\cite{page2021prisma}: \textsc{lit-retrieved}\,=\,Identification,
-\textsc{ai-confirmed}\,=\,Screening,
-\textsc{lit-read}\,=\,Included. Invocation strength maps to
-GRADE~\cite{guyatt2008grade}: a
-claim invoked at \textsc{lit-read} carries a GRADE certainty floor of
-\textsc{moderate}; a claim at \textsc{ai-confirmed} can carry at most
-\textsc{low}. The mapping is a floor, not a ceiling.
+practice economically tenable. Retrieval depth maps to PRISMA
+2020~\cite{page2021prisma} (Identification, Screening, Included);
+invocation strength sets a GRADE~\cite{guyatt2008grade} floor
+(\textsc{lit-read}\,\(\to\)\,\textsc{moderate};
+\textsc{ai-confirmed}\,\(\to\)\,at most \textsc{low}). Full
+specification: \companionref{sec:appendix-ladder}{Appendix~A:
+Verification Ladder Specification}.
 
 \subsection{Handback discipline}
 \label{sec:handback}
 
-The four scrutinizing stages --- Source Analyzer, Layout Scrutinizer,
-Readability \& Novelty Scrutinizer, Aligner --- never edit source.
-They write \emph{Defect Registries} under
-\texttt{doc/handbacks/}; the repair lands in a subsequent commit by
-a prose-owning agent. The cost is one extra commit boundary per
-cycle. The payoff is that ``what did the scrutinizer actually flag?''
-has a single canonical answer in the git history. The mirror
-discipline that backs the handback --- every primary artefact has
-a (source, render) pair under version control, the build either
-agrees or fails --- is enumerated as practice~4 of \S\ref{sec:eight}.
+The four scrutinizing stages (Source Analyzer, Layout, Readability,
+Aligner) never edit source. They write \emph{Defect Registries}
+under \texttt{doc/handbacks/}; repairs land in a subsequent commit
+by a prose-owning agent. The cost is one extra commit boundary per
+cycle; the payoff is that ``what did the scrutinizer flag?'' has a
+single canonical answer in the git history. The backing mirror
+discipline --- every artefact has a (source, render) pair, the
+build either agrees or fails --- is practice~4 of
+\S\ref{sec:eight}.
 
 
 
 \paragraph{Extensions and cousins.}
-The pattern composes with two forward-looking extensions ---
-domain ontologies (SOSA / SSN, OM-2 / QUDT) for sub-discipline
-value semantics, and provenance-graph interconnectivity (the
-bioinformatics precedent under data-volume pressure, restated
-for LLM-assisted scholarship), both recorded in
-Appendix~\ref{sec:appendix-pattern-extensions}. Read structurally,
-F(AI)\textsuperscript{2}R borrows more from
-formal methods than from the data-management literature. Each
-\texttt{fair2r:Claim} IRI is a conjecture; the verification ladder
-is a proof-state machine; the audit pass is a proof-checker that
-verifies structural properties of the graph rather than
-re-discovering them; the SHACL shapes
-(Appendix~\ref{sec:appendix-pattern-extensions}) are invariants;
-the handback discipline is the prover / checker separation that
-model checking and certified-software efforts treat as
+Two forward-looking extensions --- domain ontologies (SOSA / SSN,
+OM-2 / QUDT) for sub-discipline value semantics, and
+provenance-graph interconnectivity (the bioinformatics precedent
+under data-volume pressure) --- are recorded in
+\companionref{sec:appendix-pattern-extensions}{Appendix~G:
+Pattern Extensions}. Read structurally,
+F(AI)\textsuperscript{2}R borrows more from formal methods than
+from the data-management literature: each \texttt{fair2r:Claim}
+IRI is a conjecture, the verification ladder a proof-state
+machine, the audit pass a proof-checker, the SHACL shapes
+invariants, and the handback discipline the prover/checker
+separation that model checking and certified-software efforts
+treat as
 load-bearing~\cite{clarke2009modelchecking,klein2009sel4}\todo[inline]{verify}.
-The analogy is partial --- a manuscript is not a transition
-system, and \textsc{lit-read} is not soundness --- but the
-imports it suggests (counter-example witnesses on retracted claims;
-lemma libraries of vetted claims that successor papers can cite by
-IRI without re-verifying) are flagged as future work.
+The analogy is partial; the imports it suggests --- counter-example
+witnesses on retracted claims, lemma libraries of vetted claims ---
+are flagged as future work.

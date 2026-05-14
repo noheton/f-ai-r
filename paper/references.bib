@@ -233,7 +233,7 @@
   pages   = {1--10},
   year    = {2019},
   doi     = {10.1016/j.websem.2018.06.003},
-  note    = {The lightweight core of the W3C Semantic Sensor Network (SSN) ontology. Cited in §3.5 as a candidate domain ontology for plugging measurement claims into the F(AI)^2R schema (TODO-VERIFY at lit-read).}
+  note    = {The lightweight core of the W3C Semantic Sensor Network (SSN) ontology. Cited in §3.5 as a candidate domain ontology for plugging measurement claims into the F(AI)2R schema (TODO-VERIFY at lit-read).}
 }
 
 @article{rijgersberg2013om,
@@ -245,7 +245,7 @@
   pages   = {3--13},
   year    = {2013},
   doi     = {10.3233/SW-2012-0069},
-  note    = {OM-2 ontology for units of measure. Cited in §3.5 as a candidate domain ontology for grounding numeric values in the F(AI)^2R schema (TODO-VERIFY at lit-read).}
+  note    = {OM-2 ontology for units of measure. Cited in §3.5 as a candidate domain ontology for grounding numeric values in the F(AI)2R schema (TODO-VERIFY at lit-read).}
 }
 
 @misc{qudt,
@@ -310,7 +310,7 @@
   pages   = {74--84},
   year    = {2009},
   doi     = {10.1145/1592761.1592781},
-  note    = {Joint Turing-award lecture. Canonical accessible introduction to model checking. Cited in §11 as a structural cousin of the F(AI)^2R audit pass (TODO-VERIFY exact title and pagination at lit-read).}
+  note    = {Joint Turing-award lecture. Canonical accessible introduction to model checking. Cited in §11 as a structural cousin of the F(AI)2R audit pass (TODO-VERIFY exact title and pagination at lit-read).}
 }
 
 @inproceedings{klein2009sel4,
@@ -567,4 +567,55 @@
   howpublished = {GOOD Magazine},
   url          = {https://www.good.is/articles/generation-xennial},
   note         = {Original popularisation of the ``Xennial'' bridge-generation framing (micro-generation born between 1979 and 1983; analog childhood, digital adulthood). Cited as a generational analogue for senior researchers who span pre-LLM and LLM-era scholarship and who, like Xennials, can articulate the disciplines a tooling-native cohort cannot reconstruct unaided. Bibkey kept stable for citation-key continuity; author and title corrected during verification-pass 6 (2026-05-07) --- the article is by Stankorb and Oelbaum, not ``Shafer''; the canonical title is the dual-byline form, not ``Generation Xennial''.}
+}
+
+@misc{liu2026ara,
+  title  = {The Last Human-Written Paper: Agent-Native Research Artifacts},
+  author = {Liu, Jiachen and Pei, Jiaxin and Huang, Jintao and Si, Chenglei
+            and Qu, Ao and Tang, Xiangru and others},
+  year   = {2026},
+  eprint = {2604.24658},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.DL},
+  url    = {https://arxiv.org/abs/2604.24658},
+  note   = {Introduces the Agent-Native Research Artifact (Ara) protocol: four-layer agent-executable package (scientific logic, executable code, exploration graph, evidence). Cited in limits-and-objections.tex as the maximalist counterposition to F(AI)2R's minimalist PROV-O-spine approach. Rung: ai-confirmed (source-analyzer 2026-05-13).}
+}
+
+@inproceedings{vaswani2017attention,
+  title     = {Attention Is All You Need},
+  author    = {Vaswani, Ashish and Shazeer, Noam and Parmar, Niki and Uszkoreit, Jakob and Jones, Llion and Gomez, Aidan N. and Kaiser, {\L}ukasz and Polosukhin, Illia},
+  booktitle = {Advances in Neural Information Processing Systems 30 (NeurIPS)},
+  year      = {2017},
+  eprint    = {1706.03762},
+  archivePrefix = {arXiv},
+  url       = {https://arxiv.org/abs/1706.03762},
+  note      = {Transformer architecture; historical pivot anchoring the "since 2017" framing in intro.tex. Rung: ai-confirmed (abstract verified, 2026-05-13).}
+}
+
+@techreport{benjelloun2024croissant,
+  title  = {Croissant Format Specification, Version 1.0},
+  author = {Benjelloun, Omar and Simperl, Elena and Marcenac, Pierre and Ruyssen, Pierre and Conforti, Costanza and Kuchnik, Michael and van der Velde, Jos and Oala, Luis and Vogler, Steffen and Akthar, Mubashara and Jain, Nitisha and Tykhonov, Slava},
+  institution = {MLCommons},
+  year   = {2024},
+  month  = mar,
+  url    = {https://docs.mlcommons.org/croissant/docs/croissant-spec.html},
+  note   = {Schema.org / JSON-LD vocabulary for ML datasets (FileObject, FileSet, RecordSet, Field) with an RAI extension. Cited in limits-and-objections.tex as adjacent dataset-side standard; cross-referenced from appendix-g as a schema.org-based extension precedent. Distinct from F(AI)2R's PROV-O-based authorship spine. Rung: ai-confirmed (source-analyzer 2026-05-13).}
+}
+
+@misc{krebs2026faiarcompanion,
+  title        = {{F(AI)\textsuperscript{2}R}: Companion Technical Report -- Appendices, Ladder Specification, Pipeline Prompts, Provenance Analysis, Implementation Notes},
+  author       = {Krebs, Florian},
+  year         = {2026},
+  howpublished = {Companion to F(AI)\textsuperscript{2}R, same repository},
+  url          = {https://github.com/noheton/f-ai-r},
+  note         = {Standalone technical report carrying the seven appendices (verification ladder specification, pipeline prompt taxonomy, FAIR cell mapping, evolution chronology, provenance-graph analysis, implementation layout, pattern extensions) split out of the main manuscript to keep the position paper within its page budget. \texttt{paper/companion.tex} in the same repository as the main paper. DOI pending publication consent (\texttt{paper/publication-consent.md}).}
+}
+
+@misc{krebs2026faiarmain,
+  title        = {{F(AI)\textsuperscript{2}R}: FAIR Research with AI in the Loop, Twice},
+  author       = {Krebs, Florian},
+  year         = {2026},
+  howpublished = {Position paper, F(AI)\textsuperscript{2}R repository},
+  url          = {https://github.com/noheton/f-ai-r},
+  note         = {The main F(AI)\textsuperscript{2}R position paper; \texttt{paper/main.tex} in the same repository. The companion technical report (\texttt{krebs2026faiarcompanion}) carries the appendices. DOI pending publication consent (\texttt{paper/publication-consent.md}).}
 }

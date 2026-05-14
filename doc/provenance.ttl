@@ -3016,3 +3016,67 @@ hc:fix-poster-density-and-scrutinizer-rule  a fair2r:HumanContribution ;
     rdfs:comment "Two-step contribution: (a) the screenshot exposed the density defect that the scrutinizer rules I had just landed didn't catch; (b) the user direction promoted that catch into a permanent scrutinizer rule. The rule-shape leverage is high because the same defect class will recur whenever a poster's content is sized for one orientation and rendered into another --- the scrutinizer now catches it without a re-discovery."@en ;
     dcterms:created "2026-05-08"^^xsd:date ;
     prov:influenced act:fix-poster-density-and-scrutinizer-rule .
+
+#-------------------------------------------------------------------------
+# 2026-05-13 --- Integrate three external works (Ara, Vaswani, Croissant).
+#-------------------------------------------------------------------------
+
+src:liu2026ara  a fair2r:Source ;
+    dcterms:title "The Last Human-Written Paper: Agent-Native Research Artifacts"@en ;
+    dcterms:creator "Liu et al." ;
+    dcterms:identifier "arXiv:2604.24658" ;
+    fair2r:verificationState verif:ai-confirmed ;
+    rdfs:comment "Concurrent maximalist proposal for agent-native research artefacts (four layers: scientific logic, executable code with specifications, exploration graph of failed branches, evidence grounding every claim). Reports reproduction-success and QA-accuracy gains on PaperBench and RE-Bench. Cited in sections/limits-and-objections.tex as the adjacent proposal F(AI)²R declines (we keep the narrative paper as primary artefact). Rung at ai-confirmed pending human read of full paper."@en .
+
+src:vaswani2017attention  a fair2r:Source ;
+    dcterms:title "Attention Is All You Need"@en ;
+    dcterms:creator "Vaswani et al." ;
+    dcterms:identifier "arXiv:1706.03762" ;
+    fair2r:verificationState verif:human-read ;
+    rdfs:comment "Foundational Transformer paper (NeurIPS 2017); cited in sections/intro.tex as the historical pivot after which the population of plausible authors of a scientific paragraph changed in kind. FAIR's 2016 vintage predates this shift by a year --- the framing makes the gap argument load-bearing. Human-read rung because the historical claim is general knowledge and does not require re-reading the paper to verify."@en .
+
+src:benjelloun2024croissant  a fair2r:Source ;
+    dcterms:title "Croissant: A Metadata Format for ML-Ready Datasets"@en ;
+    dcterms:creator "Benjelloun et al." ;
+    dcterms:identifier "MLCommons techreport, https://docs.mlcommons.org/croissant/docs/croissant-spec.html" ;
+    fair2r:verificationState verif:ai-confirmed ;
+    rdfs:comment "MLCommons Croissant 1.0: schema.org/JSON-LD vocabulary for ML datasets and their responsible-AI annotations. Cited in sections/limits-and-objections.tex and sections/appendix-g-pattern-extensions.tex as the dataset-metadata slot that composes with (rather than competes against) F(AI)²R. Rung at ai-confirmed pending human read of the spec."@en .
+
+claim:transformer-pivot  a fair2r:Claim ;
+    rdfs:label "Since Vaswani et al. 2017, the population of plausible authors of a scientific paragraph has changed in kind"@en ;
+    fair2r:verificationState verif:human-read ;
+    prov:wasGeneratedBy act:integrate-external-2026-05-13 ;
+    prov:wasAttributedTo agent:human-author , agent:claude-opus-4-7 ;
+    prov:wasDerivedFrom src:vaswani2017attention ;
+    rdfs:comment "Historical framing inserted into sections/intro.tex between the journal-as-distribution-channel paragraph and the F(AI)²R proposal. FAIR's 2016 vintage predates the Transformer pivot by a year, making the operational-vocabulary gap load-bearing for the position paper."@en .
+
+claim:ara-maximalist-alternative  a fair2r:Claim ;
+    rdfs:label "F(AI)²R declines Ara's bargain: narrative manuscript stays primary; PROV-O rides alongside"@en ;
+    fair2r:verificationState verif:ai-confirmed ;
+    prov:wasGeneratedBy act:integrate-external-2026-05-13 ;
+    prov:wasAttributedTo agent:human-author , agent:claude-opus-4-7 ;
+    prov:wasDerivedFrom src:liu2026ara ;
+    rdfs:comment "Position claim added to sections/limits-and-objections.tex under 'Adjacent proposals and adjacent vocabularies'. Ara replaces the paper with a four-layer agent-native package; F(AI)²R keeps the human-readable manuscript and accepts a graph alongside. Ara's exploration layer is a strict superset of our logbook + claim-graph and indicates a credible upper bound for what the same substrate could carry."@en .
+
+claim:croissant-not-overlap  a fair2r:Claim ;
+    rdfs:label "Croissant occupies the dataset-metadata slot; F(AI)²R describes the authoring process; the two compose"@en ;
+    fair2r:verificationState verif:ai-confirmed ;
+    prov:wasGeneratedBy act:integrate-external-2026-05-13 ;
+    prov:wasAttributedTo agent:human-author , agent:claude-opus-4-7 ;
+    prov:wasDerivedFrom src:benjelloun2024croissant ;
+    rdfs:comment "Disambiguation claim added to sections/limits-and-objections.tex and cross-referenced from sections/appendix-g-pattern-extensions.tex. Croissant 1.0 describes the thing learned from; F(AI)²R describes the authoring process. A fair2r:Source can reference a Croissant record so the two read as a single linked-data graph."@en .
+
+act:integrate-external-2026-05-13  a prov:Activity ;
+    rdfs:label "Integrate three external works (Ara, Vaswani, Croissant) into the manuscript"@en ;
+    prov:startedAtTime "2026-05-13T00:00:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith agent:human-author , agent:claude-opus-4-7 ;
+    rdfs:comment "Researcher direction listed three external works to position against: (i) Liu et al. 2026 'Ara' (arXiv 2604.24658) --- compared as concurrent maximalist proposal in sections/limits-and-objections.tex under 'Adjacent proposals'; (ii) Vaswani et al. 2017 'Attention Is All You Need' (arXiv 1706.03762) --- inserted as the historical pivot at the end of sections/intro.tex; (iii) MLCommons Croissant 1.0 --- positioned in sections/limits-and-objections.tex as the dataset-metadata slot that composes with F(AI)²R, with cross-ref from sections/appendix-g-pattern-extensions.tex. Three new src: triples, three new claim: triples (with prov:wasGeneratedBy back to this activity), three new bib entries in paper/references.bib. No new figures; no slide-deck claim added at this stage (the slides keep their existing position-paper spine)."@en .
+
+hc:integrate-external-2026-05-13  a fair2r:HumanContribution ;
+    rdfs:label "Researcher direction: position F(AI)²R against Ara, Vaswani, Croissant"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "content-prompt" ;
+    fair2r:contributionLeverage "high" ;
+    rdfs:comment "Researcher named three works to integrate by URL. High-leverage because each lands on a distinct part of the position argument (historical pivot, adjacent maximalist proposal, adjacent vocabulary that is mistaken for overlap) and each closes a class of standing objection the paper would otherwise have to answer ad-hoc in review."@en ;
+    dcterms:created "2026-05-13"^^xsd:date ;
+    prov:influenced act:integrate-external-2026-05-13 .
