@@ -150,4 +150,33 @@
 % --- Convenience macros -----------------------------------------------
 \newcommand{\faiar}{F(AI)\textsuperscript{2}R}
 
+% \companionref{label}{human-readable-name}
+% Renders an italicised name plus a footnote (or parenthetical, when
+% used in a moving argument such as a caption) pointing readers at
+% the companion technical report. The {label} argument is retained
+% as the target of cross-document linkage (zrefcheck/xr) for future
+% tooling but does not resolve to a number in the main paper:
+% appendices live in companion.tex and only that document numbers
+% them. Used wherever the body refers a reader into the companion.
+%
+% The macro is declared with \DeclareRobustCommand so it survives
+% inside \caption{}, \section{}, and other moving arguments. The
+% companion citation goes through \protect\cite to keep biblatex
+% happy in the .aux file.
+\DeclareRobustCommand{\companionref}[2]{%
+  \emph{#2}\footnote{See the section \emph{#2} in the F(AI)\textsuperscript{2}R
+    companion technical report~\protect\cite{krebs2026faiarcompanion}.}}
+
+% \paperref{label}{human-readable-name}
+% The companion-side counterpart of \companionref: refers from the
+% companion technical report back into the main F(AI)^2R position
+% paper. Used by the appendix files when they reference body
+% sections (e.g. \S\ref{sec:ladder}) that no longer share a document.
+% The argument is the section name as the reader will recognise it
+% in the main paper. Like \companionref it is robust and safe inside
+% captions.
+\DeclareRobustCommand{\paperref}[2]{%
+  \emph{#2}\footnote{See the section \emph{#2} in the main
+    F(AI)\textsuperscript{2}R position paper~\protect\cite{krebs2026faiarmain}.}}
+
 \endinput

@@ -6,15 +6,23 @@ LATEXMK     ?= latexmk
 LATEXMKOPTS ?= -pdf -interaction=nonstopmode -halt-on-error -file-line-error
 
 MAIN        := main
+COMPANION   := companion
 PAGE_BUDGET ?= 10
 
-.PHONY: all pdf provenance watch clean distclean arxiv check pages
+.PHONY: all pdf companion provenance watch clean distclean arxiv check pages
 
-all: pdf
+all: pdf companion
 
 # Always regenerate provenance fragments before compiling.
 pdf: check provenance
 	$(LATEXMK) $(LATEXMKOPTS) $(MAIN).tex
+
+# Companion technical report (paper/companion.tex). Carries the seven
+# appendices split out of main.tex to keep the position paper within
+# its page budget. Mirrors the 'pdf' target: same latexmk + biber
+# toolchain, same provenance regeneration, same style file.
+companion: check provenance
+	$(LATEXMK) $(LATEXMKOPTS) $(COMPANION).tex
 
 # Re-run the provenance analysis script. Generates four LaTeX fragments
 # under paper/sections/_generated/ that provenance-analysis.tex inputs;
@@ -33,7 +41,7 @@ clean:
 
 distclean:
 	$(LATEXMK) -C || true
-	rm -f *.bbl *.run.xml $(MAIN).pdf
+	rm -f *.bbl *.run.xml $(MAIN).pdf $(COMPANION).pdf
 
 arxiv: pdf
 	@mkdir -p build/arxiv

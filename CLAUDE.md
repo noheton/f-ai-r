@@ -123,8 +123,11 @@ holds.
 ## Pages source
 
 GitHub Pages is configured with **Source = GitHub Actions**, not
-"Deploy from a branch". The site deploys exclusively via
-[`.github/workflows/pages.yml`](.github/workflows/pages.yml), which
-uploads `_site/` as a Pages artefact and runs `actions/deploy-pages`
-on the merge commit. No legacy `gh-pages` branch exists or is
-required.
+"Deploy from a branch". The site deploys exclusively via the
+consolidated CI workflow
+[`.github/workflows/build.yml`](.github/workflows/build.yml) (the
+`site` and `deploy` jobs), which uploads `_site/` as a Pages
+artefact and runs `actions/deploy-pages` on the merge commit. The
+same workflow also carries the `paper` and `slides` jobs; a
+`changes` path-filter gates each so doc-only commits don't fire
+LaTeX. No legacy `gh-pages` branch, no per-artefact workflow file.

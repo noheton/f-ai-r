@@ -50,7 +50,8 @@ surface but does not retract the recorded artefact.
 
 - **GitHub Pages site at `https://noheton.github.io/f-ai-r/`** —
   authorised implicitly by the public nature of the GitHub repository
-  and the `pages.yml` workflow that deploys on every push to `main`.
+  and the consolidated `build.yml` workflow (the `site` + `deploy`
+  jobs) that deploys on every push to `main`.
   The site carries a watermarked DRAFT note on the linked PDF. It
   does **not** count as a peer-reviewed publication.
 - **The DRAFT-watermarked PDF on the `latest-draft` GitHub release** ---

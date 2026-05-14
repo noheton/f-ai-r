@@ -1,7 +1,7 @@
 \section{Provenance analysis: queries and worked numbers}
 \label{sec:appendix-provenance-analysis}
 
-The body section (\S\ref{sec:provenance-analysis}) summarises the
+The \paperref{sec:provenance-analysis}{provenance-analysis section of the main paper} summarises the
 audit; this appendix walks the four diagnostic queries on the live
 graph. The auto-generated tables below are produced by
 \texttt{scripts/provenance\_analysis.py}, which the build pipeline
@@ -13,7 +13,7 @@ are embedded into the prose by the build, not transcribed by hand.
 Every claim in the graph carries a
 \texttt{fair2r:verificationState}; we report the fraction at each
 rung at submission time per the sixth integrated practice
-(\S\ref{sec:eight}, item~6). The query is one SPARQL pattern:
+(\paperref{sec:eight}{eight integrated practices}, item~6). The query is one SPARQL pattern:
 
 \begin{quote}\small
 \texttt{SELECT ?state (COUNT(?c) AS ?n)\\
@@ -61,8 +61,7 @@ ISO-8601 order, are:
 
 \noindent The same data, with one row per session, is the
 human-readable mirror in \texttt{doc/logbook.md}; drift between the
-two is itself a defect (see \S\ref{sec:handback} on the handback
-discipline).
+two is itself a defect (see the \paperref{sec:handback}{handback-discipline subsection of the main paper}).
 
 \paragraph{Keep this appendix honest.}
 This appendix is generated against the current graph. If a future

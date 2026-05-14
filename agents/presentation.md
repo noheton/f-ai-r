@@ -14,8 +14,8 @@ the logbook:
 Both render to PDF via Beamer + `latexmk`, using the DLR Corporate
 Design style file `slides/style/fair2r-beamer.sty` (the slide
 companion to `paper/style/fair2r.sty`). `slides/Makefile` and
-`.github/workflows/build-slides.yml` are the canonical build entry
-points; the toolchain is identical to the paper's
+the `slides` job in `.github/workflows/build.yml` are the canonical
+build entry points; the toolchain is identical to the paper's
 (`xu-cheng/latex-action`).
 
 ## Primary-artifact consistency (binding)

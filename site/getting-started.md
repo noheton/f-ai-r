@@ -100,11 +100,13 @@ Your task — execute one item at a time, propose then commit:
    domain (or fewer if my domain genuinely needs fewer; the
    number is not load-bearing, the integration is).
 
-7. Create the CI workflows: .github/workflows/build-paper.yml
-   (latexmk on every push to main; rolling latest-draft
-   release of paper/main.pdf), .github/workflows/pages.yml
-   (build the static site from doc/ and publish to GitHub
-   Pages with Source = GitHub Actions).
+7. Create one consolidated CI workflow at
+   .github/workflows/build.yml with a `changes` path-filter
+   job that gates four parallel jobs (paper / slides / site /
+   deploy): latexmk on every push that touches paper sources;
+   rolling `latest-draft` release of paper/main.pdf; the static
+   site is built from doc/ and published to GitHub Pages with
+   Source = GitHub Actions.
 
 8. Add scripts/build_provenance_site.py and
    scripts/build_reading_queue.py from noheton/f-ai-r/scripts/.

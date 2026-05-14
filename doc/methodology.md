@@ -124,7 +124,8 @@ stateDiagram-v2
 from feature branches into `main`; direct pushes to `main` require
 explicit human-author instruction. The repository's GitHub Pages site
 is configured with **Source = GitHub Actions**, deploying via
-`.github/workflows/pages.yml` on every push to `main`. No legacy
+the consolidated `.github/workflows/build.yml` (`site` + `deploy`
+jobs) on every push to `main`. No legacy
 `gh-pages` branch is used.
 
 ## Form factor and page budget
