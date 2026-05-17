@@ -1362,3 +1362,19 @@ dimensional fixes in `slides/pitch-5min.tex`,
 `slides/conference-30min.tex`, `slides/poster-A0.tex` and
 vendored `paper/main.pdf`.
 *Provenance IRI:* `hc:integrate-external-2026-05-13`
+
+### 2026-05-17 --- Conviction: true novelty is a human quality LLMs do not match yet
+*Type:* `content-prompt`
+*Leverage:* high
+*Triggered:* New paragraph "What I still believe the work is for"
+in `paper/sections/authors-note.tex` (after the coupling-rule
+paragraph, before *Tokens out, tokens in.*). The researcher
+supplied the substantive belief and its careful hedge (*yet*,
+not *never*); the model drafted it into the Author's Note voice
+and tied it to the existing "would the abstraction have been
+thinkable without the model?" diagnostic.
+*Artefacts touched:* `paper/sections/authors-note.tex`,
+`doc/provenance.ttl` (claim + activity + contribution +
+`agent:claude-sonnet-4-6` declared), `doc/logbook.md`,
+`doc/user-contributions.md`.
+*Provenance IRI:* `hc:authors-note-novelty-conviction`
