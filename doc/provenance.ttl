@@ -83,6 +83,10 @@ agent:claude-opus-4-7    a fair2r:AIAgent ;
     foaf:name "Claude Opus 4.7" ;
     rdfs:comment "Anthropic LLM, invoked via Claude Code." .
 
+agent:claude-sonnet-4-6  a fair2r:AIAgent ;
+    foaf:name "Claude Sonnet 4.6" ;
+    rdfs:comment "Anthropic LLM, invoked via Claude Code." .
+
 agent:orchestrator       a fair2r:AIAgent ;
     foaf:name "Orchestrator" ;
     prov:actedOnBehalfOf agent:human-author .
@@ -3080,3 +3084,30 @@ hc:integrate-external-2026-05-13  a fair2r:HumanContribution ;
     rdfs:comment "Researcher named three works to integrate by URL. High-leverage because each lands on a distinct part of the position argument (historical pivot, adjacent maximalist proposal, adjacent vocabulary that is mistaken for overlap) and each closes a class of standing objection the paper would otherwise have to answer ad-hoc in review."@en ;
     dcterms:created "2026-05-13"^^xsd:date ;
     prov:influenced act:integrate-external-2026-05-13 .
+
+#-------------------------------------------------------------------------
+# 2026-05-17 --- Author's Note: "What I still believe the work is for".
+#-------------------------------------------------------------------------
+
+act:authors-note-novelty-conviction  a prov:Activity ;
+    rdfs:label "Add the human author's novelty conviction to the Author's Note"@en ;
+    prov:startedAtTime "2026-05-17T00:00:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith agent:human-author , agent:claude-sonnet-4-6 ;
+    rdfs:comment "Researcher stated a personal conviction for inclusion in the front-matter Author's Note: future science remains driven by creativity, tenacity and curiosity; an LLM makes overview and state-of-the-art cheap, but true novelty is a human quality the models do not match yet. Drafted into paper/sections/authors-note.tex as the paragraph 'What I still believe the work is for', placed after the coupling-rule paragraph and before 'Tokens out, tokens in.'. The hedge 'yet' is kept and explicitly framed as a dated present-tense claim (consistent with the version-manifest discipline), not a metaphysical guarantee."@en .
+
+claim:human-novelty-not-yet-matched  a fair2r:Claim ;
+    rdfs:label "Future science remains driven by creativity, tenacity and curiosity; an LLM can make overview and state-of-the-art cheap, but true novelty (the unasked question, the not-yet-thinkable abstraction) is a human quality the models do not match yet --- a dated present-tense claim, not a metaphysical guarantee."@en ;
+    prov:wasGeneratedBy act:authors-note-novelty-conviction ;
+    prov:wasAttributedTo agent:human-author ;
+    fair2r:verificationState verif:human-confirmed ;
+    rdfs:comment "First-person conviction in the Author's Note (the one section where second/first person is a documented genre exception, claim:authors-note-voice-exception). Ties to the existing 'would the abstraction have been thinkable without the model?' diagnostic: the conviction is the normative reason that diagnostic matters. verif:human-confirmed because it is the human author's own stated belief, not a literature claim; the 'yet' hedge dates it to the version manifest."@en ;
+    dcterms:created "2026-05-17"^^xsd:date .
+
+hc:authors-note-novelty-conviction  a fair2r:HumanContribution ;
+    rdfs:label "Researcher conviction: true novelty is a human quality LLMs do not match yet"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "content-prompt" ;
+    fair2r:contributionLeverage "high" ;
+    rdfs:comment "The researcher supplied the substantive belief and its careful hedge ('yet', not 'never'); the model drafted it into the Author's Note voice. High leverage because it states the normative ground the whole pattern stands on --- the eight practices exist to keep the human-novelty contribution attributable --- and because it is a responsibility-uptake-adjacent statement made under the published name."@en ;
+    dcterms:created "2026-05-17"^^xsd:date ;
+    prov:influenced act:authors-note-novelty-conviction .

@@ -3285,3 +3285,31 @@ deletions of claim-corresponding sentences). The condenser
 agent's recursive-case-study commitment to its own discipline
 holds: this entry documents the cut, and the commit lands as
 a single concern.
+
+## 2026-05-17 --- Author's Note: "What I still believe the work is for".
+
+Researcher stated a personal conviction for the front-matter
+Author's Note: future science remains driven by creativity,
+tenacity and curiosity; an LLM makes the overview cheap and the
+state of the art easy to assemble, but true novelty --- the
+unasked question, the not-yet-thinkable abstraction --- is a
+human quality the models do not match *yet*. Drafted into
+`paper/sections/authors-note.tex` as a new paragraph placed
+after the coupling-rule paragraph and before *Tokens out,
+tokens in.*
+
+The hedge *yet* is kept and explicitly framed as a dated
+present-tense claim (consistent with the version-manifest
+discipline), not a metaphysical guarantee. The paragraph ties
+to the existing *"would the abstraction have been thinkable
+without the model?"* diagnostic: the conviction is the
+normative reason that diagnostic matters.
+
+Provenance: `claim:human-novelty-not-yet-matched`
+(`verif:human-confirmed`, `prov:wasGeneratedBy
+act:authors-note-novelty-conviction`, attributed to
+`agent:human-author`); `hc:authors-note-novelty-conviction`
+(content-prompt, high leverage). New `agent:claude-sonnet-4-6`
+`fair2r:AIAgent` declared (this session's model; was previously
+undeclared). No slide change: this is a first-person Author's
+Note coda, not one of the five load-bearing position claims.
