@@ -268,7 +268,21 @@ Order matches the compact table (highest-leverage first).
 
 ---
 
-### 20. `pineau2021reproducibility` --- rung: `ai-confirmed`, dependent claims: **1**
+### 20. `oecd2023aiscience` --- rung: `ai-confirmed`, dependent claims: **1**
+
+**Citation.** {OECD}. (2023). "Artificial Intelligence in Science: Challenges, Opportunities and the Future of Research". DOI: [10.1787/a8d820bd-en](https://doi.org/10.1787/a8d820bd-en)
+
+**Dependent claims** (advancing this source to `lit-read` would unblock):
+
+- `equity-not-neutral` --- Research groups without access to frontier models cannot apply F(AI)^2R at the same effective rung; the pattern describes the work but does not equalise access to it.
+
+**Open via DOI:** <https://doi.org/10.1787/a8d820bd-en>
+
+**Note from the bib.** OECD report (26 June 2023). Cited in limits-and-objections.tex on the equity claim: the report explicitly states that less well-funded research groups could fall behind on state-of-the-art HPC/AI and makes the case for greatly increased AI-in-science funding for sub-Saharan Africa and other developing regions. Also relevant to the shallow-work / narrowing-novelty themes (the report warns LLMs could lead to more shallow work and that thematic diversity in AI research is narrowing). DOI follows the OECD iLibrary 10.1787/<id> convention; rung ai-confirmed pending human read (TODO-VERIFY at lit-read).
+
+---
+
+### 21. `pineau2021reproducibility` --- rung: `ai-confirmed`, dependent claims: **1**
 
 **Citation.** Pineau, Joelle and Vincent-Lamarre, Philippe and Sinha, Koustuv and Larivi\`{e}re, Vincent and Beygelzimer, Alina and d'Alch\'{e}-Buc, Florence and Fox, Emily and Larochelle, Hugo. (2021). "Improving Reproducibility in Machine Learning Research (a Report from the {NeurIPS} 2019 Reproducibility Program)". *Journal of Machine Learning Research*. <https://jmlr.org/papers/v22/20-303.html>
 
@@ -282,7 +296,7 @@ Order matches the compact table (highest-leverage first).
 
 ---
 
-### 21. `qudt` --- rung: `ai-confirmed`, dependent claims: **1**
+### 22. `qudt` --- rung: `ai-confirmed`, dependent claims: **1**
 
 **Citation.** {QUDT.org}. (2024). "{QUDT}: Quantities, Units, Dimensions and Types ontology". *Linked-data vocabulary*. <https://www.qudt.org/>
 
@@ -296,7 +310,7 @@ Order matches the compact table (highest-leverage first).
 
 ---
 
-### 22. `rijgersberg2013om` --- rung: `ai-confirmed`, dependent claims: **1**
+### 23. `rijgersberg2013om` --- rung: `ai-confirmed`, dependent claims: **1**
 
 **Citation.** Rijgersberg, Hajo and {van Assem}, Mark and Top, Jan. (2013). "Ontology of units of {Measure} and related concepts". *Semantic Web*. DOI: [10.3233/SW-2012-0069](https://doi.org/10.3233/SW-2012-0069)
 
@@ -310,7 +324,7 @@ Order matches the compact table (highest-leverage first).
 
 ---
 
-### 23. `shafer2014xennials` --- rung: `ai-confirmed`, dependent claims: **1**
+### 24. `shafer2014xennials` --- rung: `ai-confirmed`, dependent claims: **1**
 
 **Citation.** Stankorb, Sarah and Oelbaum, Jed. (2014). "Reasonable People Disagree about the Post-{G}en {X}, Pre-{M}illennial Generation". *GOOD Magazine*. <https://www.good.is/articles/generation-xennial>
 
@@ -324,7 +338,7 @@ Order matches the compact table (highest-leverage first).
 
 ---
 
-### 24. `tennant2016open` --- rung: `ai-confirmed`, dependent claims: **1**
+### 25. `tennant2016open` --- rung: `ai-confirmed`, dependent claims: **1**
 
 **Citation.** Tennant, Jonathan P. and Waldner, Fran\c{c}ois and Jacques, Damien C. and Masuzzo, Paola and Collister, Lauren B. and Hartgerink, Chris H. J.. (2016). "The academic, economic and societal impacts of {Open Access}: an evidence-based review". *F1000Research*. DOI: [10.12688/f1000research.8460.3](https://doi.org/10.12688/f1000research.8460.3)
 
@@ -338,7 +352,7 @@ Order matches the compact table (highest-leverage first).
 
 ---
 
-### 25. `vannoorden2023chatgpt` --- rung: `lit-retrieved`, dependent claims: **1**
+### 26. `vannoorden2023chatgpt` --- rung: `lit-retrieved`, dependent claims: **1**
 
 **Citation.** {Van Noorden}, Richard and Webb, Richard. (2023). "{ChatGPT} and science: the 2023 {AI} system was a force in research that can no longer be ignored". *Nature*. DOI: [10.1038/d41586-023-03930-6](https://doi.org/10.1038/d41586-023-03930-6)
 
@@ -352,7 +366,7 @@ Order matches the compact table (highest-leverage first).
 
 ---
 
-### 26. `wilkinson2016fair` --- rung: `ai-confirmed`, dependent claims: **1**
+### 27. `wilkinson2016fair` --- rung: `ai-confirmed`, dependent claims: **1**
 
 **Citation.** Wilkinson, Mark D. and Dumontier, Michel and Aalbersberg, IJsbrand Jan and others. (2016). "The {FAIR} Guiding Principles for scientific data management and stewardship". *Scientific Data*. DOI: [10.1038/sdata.2016.18](https://doi.org/10.1038/sdata.2016.18)
 
@@ -364,7 +378,7 @@ Order matches the compact table (highest-leverage first).
 
 ---
 
-### 27. `alemohammad2023mad` --- rung: `ai-confirmed`, dependent claims: **0**
+### 28. `alemohammad2023mad` --- rung: `ai-confirmed`, dependent claims: **0**
 
 **Citation.** Alemohammad, Sina and Casco-Rodriguez, Josue and Luzi, Lorenzo and Humayun, Ahmed Imtiaz and Babaei, Hossein and LeJeune, Daniel and Siahkoohi, Ali and Baraniuk, Richard G.. (2023). "Self-Consuming Generative Models Go {MAD}". *arXiv preprint*. arXiv: [2307.01850](https://arxiv.org/abs/2307.01850)
 
@@ -376,7 +390,7 @@ Order matches the compact table (highest-leverage first).
 
 ---
 
-### 28. `anderson2024homogenization` --- rung: `ai-confirmed`, dependent claims: **0**
+### 29. `anderson2024homogenization` --- rung: `ai-confirmed`, dependent claims: **0**
 
 **Citation.** Anderson, Barrett R. and Shah, Jash Hemant and Kreminski, Max. (2024). "Homogenization Effects of Large Language Models on Human Creative Ideation". *Proceedings of the 16th Conference on Creativity \& Cognition*. DOI: [10.1145/3635636.3656204](https://doi.org/10.1145/3635636.3656204)
 
@@ -388,7 +402,7 @@ Order matches the compact table (highest-leverage first).
 
 ---
 
-### 29. `bender2021stochastic` --- rung: `ai-confirmed`, dependent claims: **0**
+### 30. `bender2021stochastic` --- rung: `ai-confirmed`, dependent claims: **0**
 
 **Citation.** Bender, Emily M. and Gebru, Timnit and McMillan-Major, Angelina and Shmitchell, Shmargaret. (2021). "On the Dangers of Stochastic Parrots: Can Language Models Be Too Big?". *Proceedings of the Conference on Fairness, Accountability, and Transparency (FAccT)*. DOI: [10.1145/3442188.3445922](https://doi.org/10.1145/3442188.3445922)
 
@@ -398,7 +412,7 @@ Order matches the compact table (highest-leverage first).
 
 ---
 
-### 30. `birhane2022values` --- rung: `ai-confirmed`, dependent claims: **0**
+### 31. `birhane2022values` --- rung: `ai-confirmed`, dependent claims: **0**
 
 **Citation.** Birhane, Abeba and Kalluri, Pratyusha and Card, Dallas and Agnew, William and Dotan, Ravit and Bao, Michelle. (2022). "The Values Encoded in Machine Learning Research". *Proceedings of the 2022 ACM Conference on Fairness, Accountability, and Transparency (FAccT)*. DOI: [10.1145/3531146.3533083](https://doi.org/10.1145/3531146.3533083)
 
@@ -410,7 +424,7 @@ Order matches the compact table (highest-leverage first).
 
 ---
 
-### 31. `chen2023drift` --- rung: `ai-confirmed`, dependent claims: **0**
+### 32. `chen2023drift` --- rung: `ai-confirmed`, dependent claims: **0**
 
 **Citation.** Chen, Lingjiao and Zaharia, Matei and Zou, James. (2023). "How Is {ChatGPT}'s Behavior Changing over Time?". *arXiv preprint*. arXiv: [2307.09009](https://arxiv.org/abs/2307.09009)
 
@@ -422,7 +436,7 @@ Order matches the compact table (highest-leverage first).
 
 ---
 
-### 32. `chuehong2022fair4rs` --- rung: `ai-confirmed`, dependent claims: **0**
+### 33. `chuehong2022fair4rs` --- rung: `ai-confirmed`, dependent claims: **0**
 
 **Citation.** {Chue Hong}, Neil P. and Katz, Daniel S. and Barker, Michelle and Lamprecht, Anna-Lena and Martinez, Carlos and others. (2022). "{FAIR} Principles for Research Software (FAIR4RS Principles)". *Research Data Alliance*. DOI: [10.15497/RDA00068](https://doi.org/10.15497/RDA00068)
 
@@ -434,7 +448,7 @@ Order matches the compact table (highest-leverage first).
 
 ---
 
-### 33. `clark1998extended` --- rung: `ai-confirmed`, dependent claims: **0**
+### 34. `clark1998extended` --- rung: `ai-confirmed`, dependent claims: **0**
 
 **Citation.** Clark, Andy and Chalmers, David. (1998). "The Extended Mind". *Analysis*. DOI: [10.1093/analys/58.1.7](https://doi.org/10.1093/analys/58.1.7)
 
@@ -446,7 +460,7 @@ Order matches the compact table (highest-leverage first).
 
 ---
 
-### 34. `clark2025extending` --- rung: `ai-confirmed`, dependent claims: **0**
+### 35. `clark2025extending` --- rung: `ai-confirmed`, dependent claims: **0**
 
 **Citation.** Clark, Andy. (2025). "Extending Minds with Generative {AI}". *Nature Communications*. DOI: [10.1038/s41467-025-59906-9](https://doi.org/10.1038/s41467-025-59906-9)
 
@@ -458,7 +472,7 @@ Order matches the compact table (highest-leverage first).
 
 ---
 
-### 35. `gebru2021datasheets` --- rung: `ai-confirmed`, dependent claims: **0**
+### 36. `gebru2021datasheets` --- rung: `ai-confirmed`, dependent claims: **0**
 
 **Citation.** Gebru, Timnit and Morgenstern, Jamie and Vecchione, Briana and Vaughan, Jennifer Wortman and Wallach, Hanna and {Daum\'e III}, Hal and Crawford, Kate. (2021). "Datasheets for Datasets". *Communications of the ACM*. DOI: [10.1145/3458723](https://doi.org/10.1145/3458723)
 
@@ -468,7 +482,7 @@ Order matches the compact table (highest-leverage first).
 
 ---
 
-### 36. `guyatt2008grade` --- rung: `ai-confirmed`, dependent claims: **0**
+### 37. `guyatt2008grade` --- rung: `ai-confirmed`, dependent claims: **0**
 
 **Citation.** Guyatt, Gordon H. and Oxman, Andrew D. and Vist, Gunn E. and Kunz, Regina and Falck-Ytter, Yngve and Alonso-Coello, Pablo and Sch\"unemann, Holger J.. (2008). "{GRADE}: an emerging consensus on rating quality of evidence and strength of recommendations". *BMJ*. DOI: [10.1136/bmj.39489.470347.AD](https://doi.org/10.1136/bmj.39489.470347.AD)
 
@@ -478,7 +492,7 @@ Order matches the compact table (highest-leverage first).
 
 ---
 
-### 37. `hutchins1995cognition` --- rung: `ai-confirmed`, dependent claims: **0**
+### 38. `hutchins1995cognition` --- rung: `ai-confirmed`, dependent claims: **0**
 
 **Citation.** Hutchins, Edwin. (1995). "Cognition in the Wild"
 
@@ -489,7 +503,7 @@ Order matches the compact table (highest-leverage first).
 
 ---
 
-### 38. `kuteeva2024diversity` --- rung: `ai-confirmed`, dependent claims: **0**
+### 39. `kuteeva2024diversity` --- rung: `ai-confirmed`, dependent claims: **0**
 
 **Citation.** Kuteeva, Maria and Andersson, Marta. (2024). "Diversity and Standards in Writing for Publication in the Age of {AI}---Between a Rock and a Hard Place". *Applied Linguistics*. DOI: [10.1093/applin/amae025](https://doi.org/10.1093/applin/amae025)
 
@@ -501,7 +515,7 @@ Order matches the compact table (highest-leverage first).
 
 ---
 
-### 39. `li2023thirsty` --- rung: `ai-confirmed`, dependent claims: **0**
+### 40. `li2023thirsty` --- rung: `ai-confirmed`, dependent claims: **0**
 
 **Citation.** Li, Pengfei and Yang, Jianyi and Islam, Mohammad A. and Ren, Shaolei. (2023). "Making {AI} Less ``Thirsty'': Uncovering and Addressing the Secret Water Footprint of {AI} Models". *arXiv preprint*. DOI: [10.1145/3724499](https://doi.org/10.1145/3724499)
 
@@ -513,7 +527,7 @@ Order matches the compact table (highest-leverage first).
 
 ---
 
-### 40. `liu2023prompt` --- rung: `ai-confirmed`, dependent claims: **0**
+### 41. `liu2023prompt` --- rung: `ai-confirmed`, dependent claims: **0**
 
 **Citation.** Liu, Pengfei and Yuan, Weizhe and Fu, Jinlan and Jiang, Zhengbao and Hayashi, Hiroaki and Neubig, Graham. (2023). "Pre-train, Prompt, and Predict: A Systematic Survey of Prompting Methods in Natural Language Processing". *ACM Computing Surveys*. DOI: [10.1145/3560815](https://doi.org/10.1145/3560815)
 
@@ -525,7 +539,7 @@ Order matches the compact table (highest-leverage first).
 
 ---
 
-### 41. `luccioni2024power` --- rung: `ai-confirmed`, dependent claims: **0**
+### 42. `luccioni2024power` --- rung: `ai-confirmed`, dependent claims: **0**
 
 **Citation.** Luccioni, Alexandra Sasha and Jernite, Yacine and Strubell, Emma. (2024). "Power Hungry Processing: Watts Driving the Cost of {AI} Deployment?". *Proceedings of the 2024 ACM Conference on Fairness, Accountability, and Transparency (FAccT)*. DOI: [10.1145/3630106.3658542](https://doi.org/10.1145/3630106.3658542)
 
@@ -537,7 +551,7 @@ Order matches the compact table (highest-leverage first).
 
 ---
 
-### 42. `mitchell2019modelcards` --- rung: `ai-confirmed`, dependent claims: **0**
+### 43. `mitchell2019modelcards` --- rung: `ai-confirmed`, dependent claims: **0**
 
 **Citation.** Mitchell, Margaret and Wu, Simone and Zaldivar, Andrew and Barnes, Parker and Vasserman, Lucy and Hutchinson, Ben and Spitzer, Elena and Raji, Inioluwa Deborah and Gebru, Timnit. (2019). "Model Cards for Model Reporting". *Proceedings of the Conference on Fairness, Accountability, and Transparency (FAccT)*. DOI: [10.1145/3287560.3287596](https://doi.org/10.1145/3287560.3287596)
 
@@ -547,7 +561,7 @@ Order matches the compact table (highest-leverage first).
 
 ---
 
-### 43. `page2021prisma` --- rung: `ai-confirmed`, dependent claims: **0**
+### 44. `page2021prisma` --- rung: `ai-confirmed`, dependent claims: **0**
 
 **Citation.** Page, Matthew J. and McKenzie, Joanne E. and Bossuyt, Patrick M. and Boutron, Isabelle and Hoffmann, Tammy C. and others. (2021). "The {PRISMA 2020} statement: an updated guideline for reporting systematic reviews". *BMJ*. DOI: [10.1136/bmj.n71](https://doi.org/10.1136/bmj.n71)
 
@@ -557,7 +571,7 @@ Order matches the compact table (highest-leverage first).
 
 ---
 
-### 44. `patterson2021carbon` --- rung: `ai-confirmed`, dependent claims: **0**
+### 45. `patterson2021carbon` --- rung: `ai-confirmed`, dependent claims: **0**
 
 **Citation.** Patterson, David and Gonzalez, Joseph and Le, Quoc and Liang, Chen and Munguia, Lluis-Miquel and Rothchild, Daniel and So, David and Texier, Maud and Dean, Jeff. (2021). "Carbon Emissions and Large Neural Network Training". *arXiv preprint*. arXiv: [2104.10350](https://arxiv.org/abs/2104.10350)
 
@@ -569,7 +583,7 @@ Order matches the compact table (highest-leverage first).
 
 ---
 
-### 45. `ravi2024fair4ml` --- rung: `ai-confirmed`, dependent claims: **0**
+### 46. `ravi2024fair4ml` --- rung: `ai-confirmed`, dependent claims: **0**
 
 **Citation.** Castro, Leyla Jael and Garijo, Daniel and {RDA FAIR for Machine Learning Working Group}. (2024). "{FAIR4ML}-schema, version 0.1.0". DOI: [10.5281/zenodo.14002310](https://doi.org/10.5281/zenodo.14002310)
 
@@ -581,7 +595,7 @@ Order matches the compact table (highest-leverage first).
 
 ---
 
-### 46. `reynolds2021prompt` --- rung: `ai-confirmed`, dependent claims: **0**
+### 47. `reynolds2021prompt` --- rung: `ai-confirmed`, dependent claims: **0**
 
 **Citation.** Reynolds, Laria and McDonell, Kyle. (2021). "Prompt Programming for Large Language Models: Beyond the Few-Shot Paradigm". *Extended Abstracts of the 2021 CHI Conference on Human Factors in Computing Systems*. DOI: [10.1145/3411763.3451760](https://doi.org/10.1145/3411763.3451760)
 
@@ -593,7 +607,7 @@ Order matches the compact table (highest-leverage first).
 
 ---
 
-### 47. `sadasivan2023reliably` --- rung: `ai-confirmed`, dependent claims: **0**
+### 48. `sadasivan2023reliably` --- rung: `ai-confirmed`, dependent claims: **0**
 
 **Citation.** Sadasivan, Vinu Sankar and Kumar, Aounon and Balasubramanian, Sriram and Wang, Wenxiao and Feizi, Soheil. (2023). "Can {AI}-Generated Text be Reliably Detected?". *arXiv preprint*. arXiv: [2303.11156](https://arxiv.org/abs/2303.11156)
 
@@ -605,7 +619,7 @@ Order matches the compact table (highest-leverage first).
 
 ---
 
-### 48. `schmitt2020nfdi4ing` --- rung: `ai-confirmed`, dependent claims: **0**
+### 49. `schmitt2020nfdi4ing` --- rung: `ai-confirmed`, dependent claims: **0**
 
 **Citation.** Schmitt, Robert H. and Anthofer, Volker and Auer, S{\"o}ren and others. (2020). "{NFDI4Ing} --- the National Research Data Infrastructure for Engineering Sciences". DOI: [10.5281/zenodo.4015201](https://doi.org/10.5281/zenodo.4015201)
 
@@ -617,7 +631,7 @@ Order matches the compact table (highest-leverage first).
 
 ---
 
-### 49. `shumailov2024collapse` --- rung: `ai-confirmed`, dependent claims: **0**
+### 50. `shumailov2024collapse` --- rung: `ai-confirmed`, dependent claims: **0**
 
 **Citation.** Shumailov, Ilia and Shumaylov, Zakhar and Zhao, Yiren and Papernot, Nicolas and Anderson, Ross and Gal, Yarin. (2024). "{AI} models collapse when trained on recursively generated data". *Nature*. DOI: [10.1038/s41586-024-07566-y](https://doi.org/10.1038/s41586-024-07566-y)
 
@@ -629,7 +643,7 @@ Order matches the compact table (highest-leverage first).
 
 ---
 
-### 50. `strubell2019energy` --- rung: `ai-confirmed`, dependent claims: **0**
+### 51. `strubell2019energy` --- rung: `ai-confirmed`, dependent claims: **0**
 
 **Citation.** Strubell, Emma and Ganesh, Ananya and McCallum, Andrew. (2019). "Energy and Policy Considerations for Deep Learning in {NLP}". *Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics (ACL)*. DOI: [10.18653/v1/P19-1355](https://doi.org/10.18653/v1/P19-1355)
 
@@ -641,7 +655,7 @@ Order matches the compact table (highest-leverage first).
 
 ---
 
-### 51. `thorp2023chatgpt` --- rung: `ai-confirmed`, dependent claims: **0**
+### 52. `thorp2023chatgpt` --- rung: `ai-confirmed`, dependent claims: **0**
 
 **Citation.** Thorp, H. Holden. (2023). "{ChatGPT} is fun, but not an author". *Science*. DOI: [10.1126/science.adg7879](https://doi.org/10.1126/science.adg7879)
 
@@ -653,7 +667,7 @@ Order matches the compact table (highest-leverage first).
 
 ---
 
-### 52. `urhg2` --- rung: `ai-confirmed`, dependent claims: **0**
+### 53. `urhg2` --- rung: `ai-confirmed`, dependent claims: **0**
 
 **Citation.** {Bundesministerium der Justiz}. (1965). "Gesetz \"uber Urheberrecht und verwandte Schutzrechte (Urheberrechtsgesetz, UrhG), \S\,2 Gesch\"utzte Werke". *Bundesgesetzblatt (last amended 2021)*. <https://www.gesetze-im-internet.de/urhg/__2.html>
 
@@ -665,7 +679,7 @@ Order matches the compact table (highest-leverage first).
 
 ---
 
-### 53. `usco2023ai` --- rung: `ai-confirmed`, dependent claims: **0**
+### 54. `usco2023ai` --- rung: `ai-confirmed`, dependent claims: **0**
 
 **Citation.** {U.S. Copyright Office}. (2023). "Copyright Registration Guidance: Works Containing Material Generated by Artificial Intelligence". *88 Fed. Reg. 16190 (16 March 2023)*. <https://www.federalregister.gov/documents/2023/03/16/2023-05321/copyright-registration-guidance-works-containing-material-generated-by-artificial-intelligence>
 
@@ -677,7 +691,7 @@ Order matches the compact table (highest-leverage first).
 
 ---
 
-### 54. `w3c2013provo` --- rung: `no-rung`, dependent claims: **0**
+### 55. `w3c2013provo` --- rung: `no-rung`, dependent claims: **0**
 
 **Citation.** {W3C}. (2013). "{PROV-O}: The {PROV} Ontology". *W3C Recommendation*. <https://www.w3.org/TR/prov-o/>
 

@@ -1378,3 +1378,21 @@ thinkable without the model?" diagnostic.
 `agent:claude-sonnet-4-6` declared), `doc/logbook.md`,
 `doc/user-contributions.md`.
 *Provenance IRI:* `hc:authors-note-novelty-conviction`
+
+### 2026-05-17 --- RDA P27 Ideas Pitch draft + OECD AI-in-Science source
+*Type:* `content-prompt`
+*Leverage:* medium
+*Triggered:* `doc/rda-p27-ideas-pitch.md` (fill-in-ready P27
+Ideas Pitch submission draft, thematic area = Engineering and
+technology per the author's selection); OECD report added to the
+source pool — `paper/references.bib` (`oecd2023aiscience`),
+`doc/provenance.ttl` (`src:oecd2023aiscience` + a
+`prov:wasDerivedFrom` edge on `claim:equity-not-neutral` +
+activity + contribution), `\cite` in
+`paper/sections/limits-and-objections.tex` Equity paragraph,
+new `doc/sources.md` §13 entry.
+*Artefacts touched:* `doc/rda-p27-ideas-pitch.md`,
+`paper/references.bib`, `paper/sections/limits-and-objections.tex`,
+`doc/provenance.ttl`, `doc/sources.md`, `doc/logbook.md`,
+`doc/user-contributions.md`.
+*Provenance IRI:* `hc:add-oecd-aiscience-source`

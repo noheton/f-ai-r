@@ -1523,6 +1523,36 @@ the second pass. See §8 above.
 
 ---
 
+## 13. AI-in-science policy context (added 2026-05-17)
+
+### `oecd2023aiscience`
+
+- **Citation.** OECD. *Artificial Intelligence in Science:
+  Challenges, Opportunities and the Future of Research*. OECD
+  Publishing, Paris, 26 June 2023.
+  DOI: [10.1787/a8d820bd-en](https://doi.org/10.1787/a8d820bd-en).
+  URL: <https://www.oecd.org/en/publications/artificial-intelligence-in-science_a8d820bd-en.html>.
+- **What it says.** OECD policy report on AI in science. Relevant
+  passages: less well-funded research groups risk falling behind on
+  state-of-the-art HPC/AI ("unrealistically expensive" for academics
+  on commercial cloud); a strong case for greatly increased AI-in-
+  science funding for sub-Saharan Africa and other developing
+  regions; warnings that LLMs could lead to more shallow work and
+  that the thematic diversity of AI research is narrowing.
+- **How the paper uses it.** Cited in `limits-and-objections.tex`
+  (Equity paragraph) as the policy-body anchor for
+  `claim:equity-not-neutral`, alongside `bender2021stochastic` and
+  `birhane2022values`. The shallow-work / narrowing-novelty
+  material also corroborates the Author's-Note novelty conviction
+  (`claim:human-novelty-not-yet-matched`), though the formal
+  `prov:wasDerivedFrom` edge is on the equity claim only.
+- **Verification.** `ai-confirmed` — the OECD landing page resolves;
+  title, corporate author, date and abstract confirmed. The DOI
+  follows the OECD iLibrary `10.1787/<id>` convention (id
+  `a8d820bd-en`); to be confirmed by the human author at `lit-read`.
+
+---
+
 ## Summary of corrections needed in `references.bib`
 
 (Per the task constraint, the `.bib` file was not modified. These are

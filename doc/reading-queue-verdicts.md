@@ -59,6 +59,7 @@ luccioni2024power: pending
 magesh2024legal: pending
 mitchell2019modelcards: pending
 neurips_llm_policy: pending
+oecd2023aiscience: pending
 page2021prisma: pending
 patterson2021carbon: pending
 pineau2021reproducibility: pending
