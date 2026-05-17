@@ -3313,3 +3313,42 @@ act:authors-note-novelty-conviction`, attributed to
 `fair2r:AIAgent` declared (this session's model; was previously
 undeclared). No slide change: this is a first-person Author's
 Note coda, not one of the five load-bearing position claims.
+
+## 2026-05-17 --- RDA P27 Ideas Pitch draft; add OECD AI-in-Science source.
+
+Two researcher directions in one session.
+
+**RDA P27 Ideas Pitch.** Generated `doc/rda-p27-ideas-pitch.md`,
+a fill-in-ready draft matching the live submission form's field
+order (contact applicant; title ≤10 words; ~350-word overview;
+USP; from-idea-to-RDA-group; links; thematic area; presenter;
+acknowledgements). Thematic area set to *Engineering and
+technology* per the author's choice (aligns with the
+DLR/NFDI4Ing home community and the data-infrastructure thrust).
+The doc explicitly records that an Ideas Pitch is a
+community-presentation submission and does **not** flip
+`paper/publication-consent.md`.
+
+**OECD source.** Added `oecd2023aiscience` (OECD,
+*Artificial Intelligence in Science: Challenges, Opportunities
+and the Future of Research*, OECD Publishing, 26 June 2023,
+doi:10.1787/a8d820bd-en). New `paper/references.bib` entry; new
+`src:oecd2023aiscience` triple at `verif:ai-confirmed`; a
+`prov:wasDerivedFrom` edge added to `claim:equity-not-neutral`
+(the report is direct policy-body evidence for the equity
+claim — it states less well-funded groups risk falling behind
+and argues for greatly increased AI-in-science funding for
+developing regions); `\cite{oecd2023aiscience}` added to the
+Equity paragraph of `paper/sections/limits-and-objections.tex`
+alongside `bender2021stochastic`, `birhane2022values`; new row
+in `doc/sources.md` §13. The shallow-work / narrowing-novelty
+material in the report also corroborates the Author's-Note
+novelty conviction, noted in the source comment but not given a
+separate `prov:wasDerivedFrom` edge (the formal edge is on the
+equity claim only).
+
+Provenance: `act:add-oecd-aiscience-source`
+(`prov:used src:oecd2023aiscience`);
+`hc:add-oecd-aiscience-source` (content-prompt, medium
+leverage). DOI follows the OECD iLibrary `10.1787/<id>`
+convention; rung `ai-confirmed` pending human read.

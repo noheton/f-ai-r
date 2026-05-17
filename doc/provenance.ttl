@@ -677,6 +677,7 @@ claim:equity-not-neutral  a fair2r:Claim ;
     rdfs:label "Research groups without access to frontier models cannot apply F(AI)^2R at the same effective rung; the pattern describes the work but does not equalise access to it."@en ;
     prov:wasAttributedTo agent:human-author ;
     prov:wasGeneratedBy  act:rev-short-form-pivot ;
+    prov:wasDerivedFrom  src:oecd2023aiscience ;
     fair2r:verificationState verif:human-confirmed ;
     dcterms:created "2026-05-06"^^xsd:date .
 
@@ -3111,3 +3112,30 @@ hc:authors-note-novelty-conviction  a fair2r:HumanContribution ;
     rdfs:comment "The researcher supplied the substantive belief and its careful hedge ('yet', not 'never'); the model drafted it into the Author's Note voice. High leverage because it states the normative ground the whole pattern stands on --- the eight practices exist to keep the human-novelty contribution attributable --- and because it is a responsibility-uptake-adjacent statement made under the published name."@en ;
     dcterms:created "2026-05-17"^^xsd:date ;
     prov:influenced act:authors-note-novelty-conviction .
+
+#-------------------------------------------------------------------------
+# 2026-05-17 --- Add OECD "Artificial Intelligence in Science" source.
+#-------------------------------------------------------------------------
+
+src:oecd2023aiscience  a fair2r:Source ;
+    dcterms:title "Artificial Intelligence in Science: Challenges, Opportunities and the Future of Research"@en ;
+    dcterms:creator "OECD" ;
+    dcterms:identifier "doi:10.1787/a8d820bd-en" ;
+    fair2r:verificationState verif:ai-confirmed ;
+    rdfs:comment "OECD Publishing, Paris, 26 June 2023. Bound to claim:equity-not-neutral via prov:wasDerivedFrom: the report explicitly states less well-funded research groups could fall behind on state-of-the-art HPC/AI and makes the case for greatly increased AI-in-science funding for sub-Saharan Africa and other developing regions --- direct evidence for the equity claim. Also relevant to the shallow-work / narrowing-novelty themes (the report warns LLMs could lead to more shallow work and that thematic diversity in AI research is narrowing), which touch the Author's Note novelty conviction. DOI follows the OECD iLibrary 10.1787/<id> convention; rung ai-confirmed pending human read."@en .
+
+act:add-oecd-aiscience-source  a prov:Activity ;
+    rdfs:label "Add OECD Artificial Intelligence in Science to the source pool"@en ;
+    prov:startedAtTime "2026-05-17T00:00:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith agent:human-author , agent:claude-sonnet-4-6 ;
+    prov:used src:oecd2023aiscience ;
+    rdfs:comment "Researcher supplied the OECD publication URL and directed it be added to sources. Added paper/references.bib entry oecd2023aiscience, this src: triple, a prov:wasDerivedFrom edge on claim:equity-not-neutral (the report is direct evidence for the equity claim), a \\cite key in paper/sections/limits-and-objections.tex equity paragraph, and a row in doc/sources.md."@en .
+
+hc:add-oecd-aiscience-source  a fair2r:HumanContribution ;
+    rdfs:label "Researcher direction: add the OECD AI-in-Science report to sources"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "content-prompt" ;
+    fair2r:contributionLeverage "medium" ;
+    rdfs:comment "Researcher named the source by URL. Medium leverage: it supplies an authoritative policy-body citation for the equity claim that was previously carried only by bender2021stochastic and birhane2022values, and it strengthens the shallow-work / narrowing-novelty discussion the Author's Note conviction depends on."@en ;
+    dcterms:created "2026-05-17"^^xsd:date ;
+    prov:influenced act:add-oecd-aiscience-source .
