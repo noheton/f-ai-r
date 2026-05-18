@@ -13,13 +13,26 @@
 # via a Docker action, and a full TeX Live apt install is gigabytes, so
 # the hook reports its absence rather than failing the session on it.
 #
-# Synchronous, idempotent, non-interactive. Web-only.
+# Asynchronous, idempotent, non-interactive. Web-only.
+#
+# Async mode: the session starts immediately while this script
+# installs deps in the background. Trade-off vs. synchronous: faster
+# session start, but a brief window at the very start of the session
+# where rdflib/markdown/matplotlib may not yet be importable. The
+# install is fast (wheels, warm cache) so the window is small; any
+# command that races it will fail loudly rather than silently.
 set -euo pipefail
 
-# Only run in the Claude Code web/remote environment.
+# Only run in the Claude Code web/remote environment. This guard runs
+# before the async directive so a local session is a clean no-op
+# rather than a backgrounded one.
 if [ "${CLAUDE_CODE_REMOTE:-}" != "true" ]; then
   exit 0
 fi
+
+# Tell the harness to start the session now and run the rest in the
+# background. asyncTimeout is generous (5 min) for a cold pip cache.
+echo '{"async": true, "asyncTimeout": 300000}'
 
 ROOT="${CLAUDE_PROJECT_DIR:-$(pwd)}"
 cd "$ROOT"
