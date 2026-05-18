@@ -3471,3 +3471,45 @@ No undefined references or citations in any deck. Provenance:
 (content-prompt, medium, `agent:claude-sonnet-4-6`).
 `doc/provenance.ttl` re-parses via rdflib (2569 triples);
 reading queue unchanged (no source/claim added).
+
+## 2026-05-18 --- Adjacent-proposals positioning diagram (conference deck)
+
+Researcher standing direction: use a visual on the slides where
+it helps the message, no photorealism. No image-generation
+connector is available in this environment (verified
+exhaustively across the session, including after a restart); the
+prudent substitute under the DLR Corporate Design and
+no-fabrication rules is a deterministic TikZ diagram in the
+repository's existing figure convention.
+
+Assessment of the 2026-05-18 reconciliation changes: exactly
+one frame is text-dense conceptual positioning that a schematic
+clarifies in a talk --- the new conference frame *Adjacent
+proposals and adjacent vocabularies* (two long bullets: Ara
+replaces the paper / F(AI)^2R keeps-and-rides / Croissant
+composes / neither subsumes). The other landed changes (a
+Vaswani clause, an artefact-list line, corrected numbers, a
+closing aphorism) are inherently textual; adding figures there
+would be decorative bloat against the institutional-voice and
+no-bloat rules. No figures added elsewhere.
+
+`paper/figures/adjacent-proposals.tex` created (tikzpicture-only,
+DLR palette, square corners, hairlines, no gradients; same
+`\providecommand` text-macro pattern as
+`figures/ai-squared-grid.tex` --- the first compile hit the
+TikZ-style-vs-text-macro pitfall that file documents and it was
+fixed the same way). The conference frame's two bullets were
+replaced by the figure plus a one-line caption; the claims are
+unchanged (still mirror `paper/sections/limits-and-objections.tex`).
+Frame rendered to PNG and inspected before landing. Conference
+deck recompiles clean (exit 0, 39 pp; largest overfull 39.6pt,
+within the pre-existing baseline class --- no new overfull from
+the figure).
+
+Provenance: `act:adjacent-proposals-figure-2026-05-18`;
+`ent:figure-adjacent-proposals`;
+`ent:slidedeck-conference-r3` (`prov:wasRevisionOf`
+`ent:slidedeck-conference-r2`, `prov:used`
+`ent:figure-adjacent-proposals`);
+`hc:`/`ai:adjacent-proposals-figure-2026-05-18`. ttl re-parses
+(2607 triples).

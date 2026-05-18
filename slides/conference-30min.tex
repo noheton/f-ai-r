@@ -373,22 +373,14 @@
 % ===================================================================
 
 \begin{frame}{Adjacent proposals and adjacent vocabularies}
-  \begin{itemize}
-    \item \textbf{Ara} --- the \emph{Agent-Native Research Artifact}
-          (Liu et al.\ 2026) replaces the narrative paper with a four-layer
-          package (logic, executable code, exploration graph of failed
-          branches, claim--evidence grounding). F(AI)\textsuperscript{2}R
-          \textbf{declines that bargain}: we keep the human-readable
-          manuscript primary and ride a PROV-O graph alongside it. Ara's
-          exploration layer is a strict superset of our logbook plus
-          claim-graph --- a credible upper bound, not a refutation.
-    \item \textbf{MLCommons Croissant 1.0} (Benjelloun et al.\ 2024)
-          occupies the dataset-metadata slot. Croissant describes the
-          \emph{thing learned from}; F(AI)\textsuperscript{2}R the
-          \emph{authoring process}. The two \textbf{compose} --- a Croissant
-          record can be referenced from a \texttt{fair2r:Source} triple ---
-          and neither subsumes the other.
-  \end{itemize}
+  \begin{center}
+    \resizebox{0.92\linewidth}{!}{\input{../paper/figures/adjacent-proposals.tex}}
+  \end{center}
+
+  \vspace{0.3em}
+  {\footnotesize Ara (Liu et al.\ 2026) is the maximalist neighbour;
+  Croissant 1.0 (Benjelloun et al.\ 2024) the orthogonal one. We decline
+  the first's bargain and compose with the second.}
 \end{frame}
 
 \begin{frame}{Six objections we have heard}

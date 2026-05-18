@@ -1450,3 +1450,21 @@ side of this content contribution is mirrored in
 `doc/provenance.ttl`, `doc/logbook.md`,
 `doc/user-contributions.md`.
 *Provenance IRI:* `hc:reconcile-slides-2026-05-18`
+
+### 2026-05-18 --- Slide visual where it helps the message (adjacent-proposals diagram)
+*Type:* `content-prompt`
+*Leverage:* low
+*Triggered:* Standing direction to use a non-photorealistic
+visual on slides where it strengthens the message. Confirmed no
+image-generation connector exists; built
+`paper/figures/adjacent-proposals.tex` (deterministic TikZ, DLR
+Corporate Design) and converted the conference *Adjacent
+proposals and adjacent vocabularies* frame from two dense
+bullets to the positioning diagram + one-line caption. Judged
+the rest of the 2026-05-18 reconciliation changes textual by
+nature and added no figures elsewhere (no-bloat).
+*Artefacts touched:* `paper/figures/adjacent-proposals.tex`
+(new), `slides/conference-30min.tex`, `doc/provenance.ttl`,
+`doc/logbook.md`, `doc/user-contributions.md`.
+*Provenance IRI:* `hc:adjacent-proposals-figure-2026-05-18`
+(AI mirror `ai:adjacent-proposals-figure-2026-05-18`)
