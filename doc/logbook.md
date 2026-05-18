@@ -3406,3 +3406,68 @@ medium); `ai:verification-pass-7-2026-05-18`
 (corrective-intervention, medium). Reading queue regenerated;
 `doc/provenance.ttl` re-parses via rdflib (2517 triples);
 `make -C paper pdf` clean-builds with no undefined citations.
+
+## 2026-05-18 --- Slide-deck reconciliation with the post-split manuscript
+
+The three slide artefacts had drifted after a session that split
+the appendices into a standalone companion technical report,
+integrated three external works, and added a new Author's Note
+conviction. Brought all three back into consistency
+(`presentation` agent; deck-downstream-of-manuscript rule
+observed --- every slide claim traces to current paper text).
+
+**Companion split.** `slides/pitch-5min.tex` "Worked example"
+artefact list and `slides/poster-A0.tex` worked-example block
+now name the companion technical report and the A0 poster;
+`slides/conference-30min.tex` "Recursive attestation" folds in
+the position-paper (~22 pp) + companion (~14 pp) split (page
+counts confirmed via `pdfinfo paper/main.pdf` = 22,
+`paper/companion.pdf` = 14).
+
+**Stale numbers corrected** in "Recursive attestation", each
+verified against the live repo: `1300+ triples` ->
+`2500+ triples` (rdflib `len` = 2517 at edit time; qualitative
+`>2500` chosen deliberately so the figure stays true as the
+graph grows --- this very bookkeeping took it to 2569);
+`50 bib entries` -> `59` (`grep -c '^@' paper/references.bib`);
+reading queue `45+ entries` -> `55 sources`
+(`doc/reading-queue.md` state header); `25-page Pages site` ->
+`multi-page Pages site` (27 `*.html` in `_site/` at edit time
+but build-variable, so qualitative per the no-fabrication rule
+rather than a new precise-but-fragile number).
+
+**Three external works** mirrored from the paper wording (no
+new claim): Vaswani et al. 2017 as the historical pivot --- one
+sentence in conference §1 Motivation, one clause in the pitch
+problem frame (from `paper/sections/intro.tex`); a new
+conference §8 frame "Adjacent proposals and adjacent
+vocabularies" carrying Ara (Liu et al. 2026 --- "F(AI)²R
+declines that bargain"; Ara's exploration layer a credible
+upper bound) and MLCommons Croissant 1.0 (Benjelloun et al.
+2024 --- composes with, neither subsumes), both from
+`paper/sections/limits-and-objections.tex`; OECD 2023 added as
+the policy-body anchor on the conference equity bullet.
+
+**Closing conviction.** The Author's Note paragraph "What I
+still believe the work is for" surfaced as the closing message
+on both Thank-you frames and the poster worked-example block,
+with the `yet` hedge and the dated-not-metaphysical framing
+preserved (mirrored from `paper/sections/authors-note.tex`).
+
+Bib keys cited on the slides (`vaswani2017attention`,
+`liu2026ara`, `benjelloun2024croissant`, `oecd2023aiscience`)
+confirmed present in `paper/references.bib`. Build:
+`make -C slides all` clean --- pitch 10 pp / 0 overfull boxes;
+conference 39 pp (baseline 38, +1 new frame) with no new
+overfull boxes vs the 3 pre-existing baseline boxes; poster 1
+page, vertical fill 97.8% (PNG scan-row method per
+`agents/layout-scrutinizer.md`), columns balanced within ~1%.
+No undefined references or citations in any deck. Provenance:
+`act:reconcile-slides-2026-05-18`
+(`prov:wasRevisionOf` edges on the three slide entities ---
+`ent:slidedeck-pitch-r2`, `ent:slidedeck-conference-r2`,
+`ent:poster-A0-r2`); `hc:reconcile-slides-2026-05-18`
+(content-prompt, medium); `ai:reconcile-slides-2026-05-18`
+(content-prompt, medium, `agent:claude-sonnet-4-6`).
+`doc/provenance.ttl` re-parses via rdflib (2569 triples);
+reading queue unchanged (no source/claim added).

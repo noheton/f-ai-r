@@ -65,7 +65,10 @@
   \end{itemize}
 
   \vspace{0.4em}
-  A third FAIR re-reading is required.
+  Since \textbf{Vaswani et al.\ (2017)} put scaled dot-product attention at
+  the centre of sequence modelling, the population of plausible authors of a
+  paragraph changed \emph{in kind}; FAIR's 2016 vintage predates that shift
+  by a year. \textbf{A third FAIR re-reading is required.}
 \end{frame}
 
 \begin{frame}{The base rates are not anecdotal}
@@ -310,9 +313,12 @@
 \begin{frame}{Recursive attestation}
   \begin{itemize}
     \item Repository: \texttt{noheton/f-ai-r}. Public Pages site. CI-built draft PDF.
+    \item Position paper (\textsuperscript{$\sim$}22\,pp) plus a standalone
+          \textbf{companion technical report} (\textsuperscript{$\sim$}14\,pp)
+          carrying the appendices; same bibliography, same draft gate.
     \item Every section has a \texttt{fair2r:Section} IRI; every named claim a \texttt{fair2r:Claim} IRI.
-    \item 1300+ triples in \texttt{doc/provenance.ttl}. 50 bib entries. 25-page Pages site.
-    \item Reading queue auto-regenerated from the graph: 45+ entries (highest-leverage first).
+    \item \textbf{2500+ triples} in \texttt{doc/provenance.ttl}; \textbf{59 bib entries}; multi-page Pages site.
+    \item Reading queue auto-regenerated from the graph: \textbf{55 sources} (highest-leverage first).
     \item Replay: \texttt{git clone \dots\ \&\&\ make -C paper pdf} $\to$ identical PDF, or you found a defect.
   \end{itemize}
 \end{frame}
@@ -357,7 +363,7 @@
   \begin{itemize}
     \item Inference burns compute (Strubell, Patterson, Luccioni, Li). Disclosure should include the order-of-magnitude inference budget.
     \item Frontier-model dependence is a \textbf{stranded-asset risk}. Receipts preserved; capability not portable.
-    \item Equity: groups without frontier-model access cannot apply F(AI)\textsuperscript{2}R at the same rung.
+    \item Equity: groups without frontier-model access cannot apply F(AI)\textsuperscript{2}R at the same rung (OECD 2023 on AI in science as the policy-body anchor).
     \item Smaller-model fallbacks for routine audit passes; an honestly-declared lower-rung distribution is preferable to a forged higher-rung one.
   \end{itemize}
 \end{frame}
@@ -365,6 +371,25 @@
 % ===================================================================
 \sectiondivider{8. Anticipated objections}
 % ===================================================================
+
+\begin{frame}{Adjacent proposals and adjacent vocabularies}
+  \begin{itemize}
+    \item \textbf{Ara} --- the \emph{Agent-Native Research Artifact}
+          (Liu et al.\ 2026) replaces the narrative paper with a four-layer
+          package (logic, executable code, exploration graph of failed
+          branches, claim--evidence grounding). F(AI)\textsuperscript{2}R
+          \textbf{declines that bargain}: we keep the human-readable
+          manuscript primary and ride a PROV-O graph alongside it. Ara's
+          exploration layer is a strict superset of our logbook plus
+          claim-graph --- a credible upper bound, not a refutation.
+    \item \textbf{MLCommons Croissant 1.0} (Benjelloun et al.\ 2024)
+          occupies the dataset-metadata slot. Croissant describes the
+          \emph{thing learned from}; F(AI)\textsuperscript{2}R the
+          \emph{authoring process}. The two \textbf{compose} --- a Croissant
+          record can be referenced from a \texttt{fair2r:Source} triple ---
+          and neither subsumes the other.
+  \end{itemize}
+\end{frame}
 
 \begin{frame}{Six objections we have heard}
   \footnotesize
@@ -422,12 +447,19 @@
   \textbf{Site.} \texttt{noheton.github.io/f-ai-r}\\
   \textbf{Draft PDF.} \texttt{github.com/noheton/f-ai-r/releases}
 
-  \vspace{0.8em}
+  \vspace{0.6em}
   \emph{The pipeline is the team; the team is the methodology.}\\
   \emph{Specialisation reduces hallucination at the seam.}\\
   \emph{Naming what we are already doing is the first step toward surrendering it to peer scrutiny.}
 
-  \vspace{0.8em}
+  \vspace{0.6em}
+  An LLM makes the overview cheap and the state of the art easy to assemble;
+  \textbf{true novelty --- the unasked question, the not-yet-thinkable
+  abstraction --- remains a human quality the models do not match \emph{yet}}.
+  The hedge in \emph{yet} is deliberate: a claim about the present, dated by
+  the version manifest, not a metaphysical guarantee.
+
+  \vspace{0.6em}
   Questions and discussion welcome.
 \end{frame}
 

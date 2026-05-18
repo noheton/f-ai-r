@@ -38,6 +38,9 @@
 \begin{frame}{The problem}
   \begin{itemize}
     \item FAIR was drafted for \textbf{data}; FAIR4RS for software; FAIR4ML for models.
+    \item Since scaled dot-product attention (Vaswani et al.\ 2017), the
+          population of plausible authors of a paragraph changed in kind;
+          FAIR's 2016 vintage predates that shift by a year.
     \item LLM-assisted scholarly writing produces \textbf{new artefact classes}:
           transcripts, prompts, version manifests, verification ladders,
           redaction policies, \emph{per-claim provenance maps}.
@@ -98,7 +101,9 @@
   \begin{itemize}
     \item Ten-stage agent pipeline (orchestrator, writer, source-analyser, scrutinizers, curator, site agent) with \textbf{handback discipline}.
     \item Verification ladder as a \textbf{finite-state machine}.
-    \item Repository ships: prompts, build CI, PROV-O graph, public site, draft PDF, slide decks.
+    \item Repository ships: prompts, build CI, PROV-O graph, public site,
+          draft PDF, the \textbf{companion technical report}, two slide decks,
+          and the \textbf{A0 conference poster}.
     \item \texttt{github.com/noheton/f-ai-r}\quad\textbf{|}\quad\texttt{noheton.github.io/f-ai-r}
   \end{itemize}
 
@@ -121,6 +126,13 @@
   We invite a second case study --- by a different author, on a different
   paper, in a different domain --- as the precondition for community-
   recommendation submission.
+
+  \vspace{0.6em}
+  An LLM makes the overview cheap and the state of the art easy to assemble.
+  But \textbf{true novelty} --- the question no one thought to ask, the
+  abstraction not yet thinkable --- remains a human quality the models do not
+  match \emph{yet}: a claim about the present, dated by the version manifest,
+  not a metaphysical guarantee.
 
   \vspace{0.6em}
   \emph{Naming what we are already doing is the first step toward surrendering

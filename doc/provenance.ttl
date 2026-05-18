@@ -3182,3 +3182,60 @@ ai:verification-pass-7-2026-05-18  a fair2r:AIContribution ;
     rdfs:comment "Source-analyzer subagent (claude-opus-4-7[1m] under the source-analyzer prompt) executed the sources-validation-loop prompt using the Exa web_search/web_fetch and academic-search MCP tools. Material output: (1) src:vannoorden2023chatgpt graph mirror corrected --- wrong DOI d41586-023-03907-5 -> d41586-023-03930-6, both creators added, title completed, rung lit-retrieved -> ai-confirmed; (2) src:benjelloun2024croissant graph title aligned to the cited spec @techreport; (3) paper/references.bib: iclr_llm_policy url updated to the stable https://iclr.cc/FAQ/LLM policy page, icmje2023 note added recording the January-2026 revision and the AI-specific topic-page URL; (4) ravi2024fair4ml, oecd2023aiscience, liu2026ara, vaswani2017attention, icmje2023 re-confirmed against live records with no change required. No fabrication; no source could not be resolved; nothing downgraded to needs-research. doc/sources.md seventh-pass log appended; reading queue regenerated; ttl re-parsed; paper rebuilt clean. Logged here as the AI mirror per the no-parentless-contribution rule; parent activity act:meta-cooperation-2026-05-18-verification-pass-7."@en ;
     dcterms:created "2026-05-18"^^xsd:date ;
     prov:influenced act:meta-cooperation-2026-05-18-verification-pass-7 .
+
+#-------------------------------------------------------------------------
+# 2026-05-18 --- Slide-deck reconciliation: bring the three slide
+# artefacts back into consistency with the manuscript after the
+# companion split, the three integrated external works, and the
+# Author's Note novelty conviction.
+#-------------------------------------------------------------------------
+
+act:reconcile-slides-2026-05-18  a prov:Activity ;
+    rdfs:label "Reconcile pitch, conference deck, and A0 poster with the post-split manuscript"@en ;
+    prov:startedAtTime "2026-05-18T00:00:00Z"^^xsd:dateTime ;
+    prov:endedAtTime   "2026-05-18T00:00:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith agent:presentation , agent:claude-sonnet-4-6 , agent:human-author ;
+    prov:wasInformedBy act:authors-note-novelty-conviction ,
+                       act:add-oecd-aiscience-source ,
+                       act:integrate-external-2026-05-13 ;
+    prov:used ent:slidedeck-pitch , ent:slidedeck-conference , ent:poster-A0 ;
+    rdfs:comment "The decks had drifted after a session of substantial paper changes. Four reconciliations, each backed by current manuscript content (no slide claim argues ahead of the paper): (1) Companion split --- the pitch 'Worked example' artefact list and the poster 'worked example' block now name the companion technical report and the A0 poster; the conference 'Recursive attestation' frame folds in the position-paper (~22 pp) + companion (~14 pp) split. (2) Stale numbers in 'Recursive attestation' corrected against the live repo: '1300+ triples' -> '2500+ triples' (rdflib len = 2517 at edit time; qualitative >2500 chosen so the figure stays true as the graph grows with this very bookkeeping); '50 bib entries' -> '59' (grep -c '^@' paper/references.bib); 'Reading queue 45+ entries' -> '55 sources' (doc/reading-queue.md state header); '25-page Pages site' -> 'multi-page Pages site' (27 *.html in _site/ at edit time but build-variable, so qualitative per the no-fabrication rule). (3) Three external works mirrored from paper wording: Vaswani et al. 2017 as the historical pivot in conference Motivation and one clause in the pitch problem frame; a new conference frame 'Adjacent proposals and adjacent vocabularies' carrying Ara (Liu et al. 2026 --- F(AI)^2R declines that bargain; Ara's exploration layer a credible upper bound) and MLCommons Croissant 1.0 (Benjelloun et al. 2024 --- composes with, neither subsumes); OECD 2023 added as the policy-body anchor on the conference equity bullet. (4) The Author's Note conviction 'true novelty remains a human quality the models do not match yet --- dated, not a guarantee' added as the closing message on both Thank-you frames and the poster worked-example block, with the 'yet' hedge and the dated-not-metaphysical framing preserved verbatim in sense. Build: make -C slides all clean; pitch 10 pp / 0 overfull, conference 39 pp / no new overfull vs the 3 pre-existing baseline boxes, poster 1 page / 97.8% vertical fill / columns balanced within ~1%. ttl re-parses via rdflib."@en .
+
+ent:slidedeck-pitch-r2  a fair2r:Slidedeck ;
+    rdfs:label "pitch-5min.tex after the 2026-05-18 reconciliation (artefact set + Vaswani clause + closing conviction)"@en ;
+    dcterms:source <slides/pitch-5min.tex> ;
+    prov:wasRevisionOf ent:slidedeck-pitch ;
+    prov:wasGeneratedBy act:reconcile-slides-2026-05-18 ;
+    prov:wasAttributedTo agent:presentation , agent:human-author .
+
+ent:slidedeck-conference-r2  a fair2r:Slidedeck ;
+    rdfs:label "conference-30min.tex after the 2026-05-18 reconciliation (numbers + paper/companion split + Vaswani/Ara/Croissant/OECD + closing conviction)"@en ;
+    dcterms:source <slides/conference-30min.tex> ;
+    prov:wasRevisionOf ent:slidedeck-conference ;
+    prov:wasGeneratedBy act:reconcile-slides-2026-05-18 ;
+    prov:wasAttributedTo agent:presentation , agent:human-author .
+
+ent:poster-A0-r2  a fair2r:Poster ;
+    rdfs:label "poster-A0.tex after the 2026-05-18 reconciliation (artefact set + closing conviction in the worked-example block; 97.8% vertical fill preserved)"@en ;
+    dcterms:source "slides/poster-A0.tex" ;
+    prov:wasRevisionOf ent:poster-A0 ;
+    prov:wasGeneratedBy act:reconcile-slides-2026-05-18 ;
+    prov:wasAttributedTo agent:presentation , agent:human-author .
+
+hc:reconcile-slides-2026-05-18  a fair2r:HumanContribution ;
+    rdfs:label "Researcher direction: bring the three slide artefacts back into consistency with the post-split manuscript and do the mandatory bookkeeping"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "content-prompt" ;
+    fair2r:contributionLeverage "medium" ;
+    rdfs:comment "The researcher directed a presentation-agent reconciliation pass after a session that split the appendices into a companion technical report, integrated three external works (Vaswani 2017, Liu 2026 Ara, Benjelloun 2024 Croissant) and OECD 2023, and added the Author's Note novelty conviction. Medium leverage: it keeps the primary-artefact consistency invariant from going stale (the decks were under-reporting the artefact set and carrying numbers off by ~1200 triples / 9 bib entries / 10 reading-queue rows) without introducing any new claim. The directive also bound the no-fabrication rule (qualitative wording where a precise figure is build-variable) and the deck-downstream-of-manuscript rule."@en ;
+    dcterms:created "2026-05-18"^^xsd:date ;
+    prov:influenced act:reconcile-slides-2026-05-18 .
+
+ai:reconcile-slides-2026-05-18  a fair2r:AIContribution ;
+    rdfs:label "Presentation agent: three slide artefacts reconciled with the post-split manuscript; stale numbers corrected against the live repo; closing conviction surfaced"@en ;
+    fair2r:contributedBy agent:presentation , agent:claude-sonnet-4-6 ;
+    fair2r:contributionType "content-prompt" ;
+    fair2r:contributionLeverage "medium" ;
+    rdfs:comment "Presentation agent (claude-opus-4-7[1m] under agents/presentation.md) executed the reconciliation. Verified every number against the live repo before editing: doc/provenance.ttl 2517 triples via rdflib; 59 bib entries via grep -c '^@' paper/references.bib; 55 sources from doc/reading-queue.md; 27 *.html in _site/; paper/main.pdf 22 pp and paper/companion.pdf 14 pp via pdfinfo. Edits: pitch 'The problem' (+Vaswani clause), pitch 'Worked example' (artefact set), pitch 'Thank you' (closing conviction); conference 'FAIR for data...' (+Vaswani), 'Recursive attestation' (numbers + paper/companion split), new frame 'Adjacent proposals and adjacent vocabularies' (Ara + Croissant), 'Sustainability is not a footnote' (+OECD on equity), 'Thank you' (closing conviction); poster 'This is the worked example' block (artefact set + conviction). External-work wording mirrored from paper/sections/intro.tex and paper/sections/limits-and-objections.tex; the conviction mirrored from paper/sections/authors-note.tex with the 'yet' hedge and dated-not-metaphysical framing preserved. No fabrication: build-variable figures (triple count, site page count) given honest qualitative phrasing. Compiled clean: pitch 0 overfull, conference no new overfull vs the 3 pre-existing baseline boxes, poster 1 page at 97.8% vertical fill, columns within ~1%. Mirrors the human content-prompt per the no-parentless-contribution rule; parent activity act:reconcile-slides-2026-05-18."@en ;
+    dcterms:created "2026-05-18"^^xsd:date ;
+    prov:influenced act:reconcile-slides-2026-05-18 .
