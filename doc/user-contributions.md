@@ -1420,3 +1420,33 @@ mirrored in `doc/provenance.ttl` as
 `doc/user-contributions.md`, `doc/reading-queue*.md`
 (regenerated).
 *Provenance IRI:* `hc:verification-pass-7-prompt-2026-05-18`
+
+### 2026-05-18 --- Slide-deck reconciliation with the post-split manuscript
+*Type:* `content-prompt`
+*Leverage:* medium
+*Triggered:* a `presentation`-agent reconciliation pass after a
+session that split the appendices into a standalone companion
+technical report, integrated three external works (Vaswani 2017,
+Liu 2026 Ara, Benjelloun 2024 Croissant) and OECD 2023, and added
+the Author's Note conviction "What I still believe the work is
+for". All three slide artefacts brought back into consistency:
+companion + A0 poster added to the pitch/poster artefact lists;
+the conference "Recursive attestation" frame's stale numbers
+corrected against the live repo (`1300+`→`2500+` triples,
+`50`→`59` bib entries, `45+`→`55` reading-queue sources, precise
+site page-count replaced with honest qualitative wording) and the
+~22 pp paper / ~14 pp companion split folded in; Vaswani as the
+historical pivot in conference §1 and the pitch problem frame; a
+new conference §8 frame for Ara and Croissant framed exactly as
+`paper/sections/limits-and-objections.tex` frames them; OECD as
+the policy-body equity anchor; the novelty conviction (with its
+`yet` hedge intact) surfaced as the closing message on both
+Thank-you frames and the poster. No new slide-only claim. The AI
+side of this content contribution is mirrored in
+`doc/provenance.ttl` as `ai:reconcile-slides-2026-05-18`
+(`agent:claude-sonnet-4-6`).
+*Artefacts touched:* `slides/pitch-5min.tex`,
+`slides/conference-30min.tex`, `slides/poster-A0.tex`,
+`doc/provenance.ttl`, `doc/logbook.md`,
+`doc/user-contributions.md`.
+*Provenance IRI:* `hc:reconcile-slides-2026-05-18`
