@@ -146,15 +146,15 @@ Order matches the compact table (highest-leverage first).
 
 ### 11. `iclr_llm_policy` --- rung: `lit-retrieved`, dependent claims: **1**
 
-**Citation.** {ICLR}. (2024). "{ICLR} author and reviewer guidelines on the use of {AI} tools". *Conference author and reviewer guide*. <https://iclr.cc/>
+**Citation.** {ICLR}. (2024). "{ICLR} author and reviewer guidelines on the use of {AI} tools". *Conference author and reviewer guide*. <https://iclr.cc/FAQ/LLM>
 
 **Dependent claims** (advancing this source to `lit-read` would unblock):
 
 - `reviewer-side-ai-policies` --- Major ML venues (NeurIPS, ICLR, ACL Rolling Review) have published explicit author-and-reviewer AI policies, going beyond the editorial-level disclosure norms of the medical journals.
 
-**Open via URL:** <https://iclr.cc/>
+**Open via URL:** <https://iclr.cc/FAQ/LLM>
 
-**Note from the bib.** Cited in §2 as a sibling policy to neurips\_llm\_policy. URL kept stable; TODO-VERIFY the exact policy URL at lit-read.
+**Note from the bib.** Cited in §2 as a sibling policy to neurips\_llm\_policy. Stable canonical policy page \url{https://iclr.cc/FAQ/LLM} confirmed by source-analyzer 2026-05-18 (Exa web\_search): LLM use must be disclosed; authors/reviewers remain responsible for contributions; LLM-generated reviews and prompt-injection collusion are Code-of-Ethics violations. URL updated from the bare iclr.cc homepage to this stable policy page; rung kept at lit-retrieved pending human capture of the exact per-cycle policy text.
 
 ---
 
@@ -167,6 +167,8 @@ Order matches the compact table (highest-leverage first).
 - `practice-legal` --- Legal honesty about authorship: AI is acknowledged but not an author; CITATION.cff lists humans only.
 
 **Open via URL:** <https://www.icmje.org/recommendations/>
+
+**Note from the bib.** Living document; the canonical page resolves (source-analyzer 2026-05-18, Exa web\_fetch) and now reads ``Updated January 2026'' (was January 2024 at the sixth-pass check). The AI-specific guidance lives at \url{https://www.icmje.org/recommendations/browse/roles-and-responsibilities/defining-the-role-of-authors-and-contributors.html}. Bibkey and year 2023 kept stable for citation continuity; the disclosure / no-AI-authorship substance is unchanged across revisions.
 
 ---
 
@@ -352,7 +354,7 @@ Order matches the compact table (highest-leverage first).
 
 ---
 
-### 26. `vannoorden2023chatgpt` --- rung: `lit-retrieved`, dependent claims: **1**
+### 26. `vannoorden2023chatgpt` --- rung: `ai-confirmed`, dependent claims: **1**
 
 **Citation.** {Van Noorden}, Richard and Webb, Richard. (2023). "{ChatGPT} and science: the 2023 {AI} system was a force in research that can no longer be ignored". *Nature*. DOI: [10.1038/d41586-023-03930-6](https://doi.org/10.1038/d41586-023-03930-6)
 

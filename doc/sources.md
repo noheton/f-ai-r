@@ -1,7 +1,89 @@
 # Sources
 
 Index of sources cited or vendored for the F(AI)²R paper. Maintained by
-`agents/source-analyzer.md`. Last updated 2026-05-07 (sixth pass).
+`agents/source-analyzer.md`. Last updated 2026-05-18 (seventh pass).
+
+## Seventh-pass log (2026-05-18)
+
+The seventh pass ran a live-web verification loop (Exa
+`web_search` / `web_fetch` MCP tools and the academic-search MCP
+tool) over the known-defect list at the foot of this file and over
+the recently-added, never-human-checked sources. The agent is
+`claude-opus-4-7[1m]` operating under the source-analyzer prompt.
+
+**One material correction, in the graph.** `src:vannoorden2023chatgpt`:
+the `paper/references.bib` entry had already been corrected in an
+earlier pass to DOI `10.1038/d41586-023-03930-6` with authors Van
+Noorden + Webb, but the `doc/provenance.ttl` mirror still carried
+the **wrong identifier** `doi:10.1038/d41586-023-03907-5` (which
+resolves to an unrelated India-economics article) and was still
+pinned at `verif:lit-retrieved`. Confirmed the correct record via
+the Nature landing page and PubMed (PMID 38093061, *Nature*
+624(7992):509, 2023-12-13, "ChatGPT and science: the AI system
+was a force in 2023 --- for good and bad", Richard Van Noorden &
+Richard Webb). The graph triple was corrected (DOI, both
+`dcterms:creator`s, full `dcterms:title`) and advanced
+`verif:lit-retrieved -> verif:ai-confirmed`. This closes
+correction item 1 of the summary list below; the long-standing
+escalation entry for this source is now resolved.
+
+**One graph title alignment.** `src:benjelloun2024croissant`
+carried the NeurIPS-paper title "Croissant: A Metadata Format for
+ML-Ready Datasets" while the bib key points to the MLCommons
+`@techreport` "Croissant Format Specification, Version 1.0"
+(published 2024-03-01, first author Omar Benjelloun, full author
+list matching the spec). The graph `dcterms:title` was aligned to
+the cited spec title; identifier (MLCommons techreport URL) was
+already correct.
+
+**Two bib `note` improvements (non-defect, safe).**
+`iclr_llm_policy`: a stable canonical policy page
+<https://iclr.cc/FAQ/LLM> was located and confirmed (LLM use must
+be disclosed; authors/reviewers remain responsible; LLM-generated
+reviews and prompt-injection collusion are Code-of-Ethics
+violations). The bib `url` was updated from the bare `iclr.cc`
+homepage to this stable page; the rung was **kept** at
+`lit-retrieved` (per-cycle text capture stays on the
+institutional-access escalation list --- conservative, no
+upgrade I could not fully justify). `icmje2023`: the
+canonical page resolves and now reads "Updated January 2026"
+(was January 2024 at the sixth-pass check); a `note` was added
+recording this and the AI-specific topic-page URL. Bibkey and
+year `2023` kept stable for citation continuity.
+
+**Re-confirmed correct, no change required:**
+
+- `ravi2024fair4ml` --- Zenodo `10.5281/zenodo.14002310`
+  resolves; title "FAIR4ML-schema, version 0.1.0"; author block
+  Castro (Leyla-Jael), Garijo (Daniel), RDA FAIR4ML Working Group
+  matches the live record. Closes correction item 2 below (the
+  bib was already fixed in a prior pass; confirmed accurate).
+- `oecd2023aiscience` --- DOI `10.1787/a8d820bd-en` and the OECD
+  landing page resolve; corporate author OECD; 26 June 2023; the
+  equity ("less well-funded research groups could fall behind",
+  "strong case for sub-Saharan Africa ... much greater funding")
+  and shallow-work / narrowing-novelty passages were confirmed
+  verbatim on the OECD executive summary.
+- `liu2026ara` --- arXiv:2604.24658 resolves; title "The Last
+  Human-Written Paper: Agent-Native Research Artifacts"; first
+  author Jiachen Liu; 2026.
+- `vaswani2017attention` --- arXiv:1706.03762 resolves; title
+  "Attention Is All You Need"; first author Ashish Vaswani;
+  NeurIPS 2017. Rung kept at `verif:human-read` per the
+  documented general-knowledge rationale (the historical-pivot
+  claim does not require re-reading the paper).
+- `krebs2026faiarmain` / `krebs2026faiarcompanion` --- self-cites;
+  confirmed internally coherent against `paper/main.tex`,
+  `paper/companion.tex` and the manuscript cross-references; no
+  external lookup performed and (by design) no `src:` graph
+  entity exists for the paper's own self-citations.
+
+No source was downgraded to `verif:needs-research`; no source was
+left unresolvable; no identifier was invented. The reading queue
+was regenerated, the graph re-parses via rdflib, and
+`make -C paper pdf` clean-builds with no undefined citations.
+
+---
 
 ## Sixth-pass log (2026-05-07)
 
@@ -1024,15 +1106,16 @@ ceiling an LLM agent can deliver on its own.
   exposure, retraction record, journal policy responses.
 - **How the paper uses it.** Backdrop reference in `intro.tex` line 30
   (alongside `liang2024mapping`) for the volume-problem claim.
-- **Verification.** `lit-retrieved`. **Two corrections to the bib file
-  are needed:** (1) the DOI in `references.bib` is currently
-  `d41586-023-03907-5`, which actually points to a *different* article
-  ("Where science meets Indian economics: in five charts"); the correct
-  DOI is `d41586-023-03930-6`. (2) The second author is Webb, not
-  Perkel. Pages are `509`, not `S2–S3`. These need fixing in the .bib —
-  per the task constraint, no changes were made here; flagged for the
-  human author. Until corrected, the bib entry is **`unverifiable` as
-  written**.
+- **Verification.** `ai-confirmed` (advanced 2026-05-18, seventh
+  pass). The `references.bib` entry was corrected in an earlier
+  pass; the seventh pass confirmed the correct record against the
+  Nature landing page and PubMed (DOI
+  `10.1038/d41586-023-03930-6`, authors Richard Van Noorden &
+  Richard Webb, *Nature* 624(7992):509, 2023-12-13, PMID
+  38093061) and corrected the lagging `provenance.ttl` mirror,
+  which had still carried the wrong DOI `d41586-023-03907-5` at
+  `lit-retrieved`. Human author must still read the full
+  (paywalled) news article before `lit-read`.
 
 ### `liang2024mapping`
 
@@ -1558,15 +1641,25 @@ the second pass. See §8 above.
 (Per the task constraint, the `.bib` file was not modified. These are
 flagged for the human author.)
 
-1. **`vannoorden2023chatgpt`**: DOI is wrong (`d41586-023-03907-5` points
-   to an unrelated India-economics article). Correct is
-   `10.1038/d41586-023-03930-6`. Second author is Webb, not Perkel.
-   Pages are `509`, not `S2–S3`.
-2. **`ravi2024fair4ml`**: `author = {TODO-VERIFY}` should be filled in
-   with Castro, L. J., Garijo, D., et al.; canonical artefact is the
-   FAIR4ML-schema on Zenodo (10.5281/zenodo.14002310).
-3. **`icmje2023`** is fine but the most current revision is January 2024;
-   consider updating the year and adding the AI-specific topic page URL.
+1. **`vannoorden2023chatgpt`**: ✅ **RESOLVED (seventh pass,
+   2026-05-18).** The `references.bib` entry was corrected in an
+   earlier pass to DOI `10.1038/d41586-023-03930-6` with authors
+   Van Noorden + Webb and page `509`; the seventh pass found the
+   `provenance.ttl` mirror still carried the wrong identifier
+   `d41586-023-03907-5` at `lit-retrieved` and corrected it
+   (DOI, both creators, full title, advanced to `ai-confirmed`).
+   Confirmed against the Nature landing page and PubMed (PMID
+   38093061).
+2. **`ravi2024fair4ml`**: ✅ **RESOLVED.** `author` is filled in
+   with `Castro, Leyla Jael and Garijo, Daniel and {RDA FAIR for
+   Machine Learning Working Group}`; canonical artefact is the
+   FAIR4ML-schema on Zenodo (10.5281/zenodo.14002310). Re-confirmed
+   accurate against the live Zenodo record in the seventh pass.
+3. **`icmje2023`** is fine; the most current revision is now
+   **January 2026** (seventh-pass live check; was January 2024 at
+   the sixth-pass check). A `note` recording the current revision
+   and the AI-specific topic-page URL was added to the bib entry;
+   bibkey and year `2023` kept stable for citation continuity.
 4. **UrhG §2** is cited in `background.tex` without a bib entry — needs
    one.
 5. **USCO 2023** is cited in `background.tex` without a bib entry —

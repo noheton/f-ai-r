@@ -593,9 +593,11 @@ src:else2023chatgpt  a fair2r:Source ;
     fair2r:verificationState verif:ai-confirmed .
 
 src:vannoorden2023chatgpt  a fair2r:Source ;
-    dcterms:title "ChatGPT and science: the AI system was a force in 2023"@en ;
-    dcterms:identifier "doi:10.1038/d41586-023-03907-5" ;
-    fair2r:verificationState verif:lit-retrieved .
+    dcterms:title "ChatGPT and science: the AI system was a force in 2023 --- for good and bad"@en ;
+    dcterms:creator "Richard Van Noorden" , "Richard Webb" ;
+    dcterms:identifier "doi:10.1038/d41586-023-03930-6" ;
+    fair2r:verificationState verif:ai-confirmed ;
+    rdfs:comment "Nature 624(7992):509 (2023-12-13), PMID 38093061. Source-analyzer verification pass 2026-05-18: the bib DOI had already been corrected to d41586-023-03930-6 in an earlier pass, but this graph mirror still carried the wrong identifier d41586-023-03907-5 (which resolves to an unrelated India-economics article) and was stuck at verif:lit-retrieved. Confirmed correct DOI, both authors (Richard Van Noorden, Richard Webb), title, volume/issue/page, and PMID via Nature landing page and PubMed (Exa web_search). Advanced to verif:ai-confirmed (identifier + title + authorship confirmed from resolved record); not lit-read (human-only)."@en .
 
 # Section: Sustainability and Frontier-Model Dependence
 ent:section-sustainability  a fair2r:Section ;
@@ -3041,11 +3043,11 @@ src:vaswani2017attention  a fair2r:Source ;
     rdfs:comment "Foundational Transformer paper (NeurIPS 2017); cited in sections/intro.tex as the historical pivot after which the population of plausible authors of a scientific paragraph changed in kind. FAIR's 2016 vintage predates this shift by a year --- the framing makes the gap argument load-bearing. Human-read rung because the historical claim is general knowledge and does not require re-reading the paper to verify."@en .
 
 src:benjelloun2024croissant  a fair2r:Source ;
-    dcterms:title "Croissant: A Metadata Format for ML-Ready Datasets"@en ;
+    dcterms:title "Croissant Format Specification, Version 1.0"@en ;
     dcterms:creator "Benjelloun et al." ;
     dcterms:identifier "MLCommons techreport, https://docs.mlcommons.org/croissant/docs/croissant-spec.html" ;
     fair2r:verificationState verif:ai-confirmed ;
-    rdfs:comment "MLCommons Croissant 1.0: schema.org/JSON-LD vocabulary for ML datasets and their responsible-AI annotations. Cited in sections/limits-and-objections.tex and sections/appendix-g-pattern-extensions.tex as the dataset-metadata slot that composes with (rather than competes against) F(AI)²R. Rung at ai-confirmed pending human read of the spec."@en .
+    rdfs:comment "MLCommons Croissant 1.0: schema.org/JSON-LD vocabulary for ML datasets and their responsible-AI annotations. Cited in sections/limits-and-objections.tex and sections/appendix-g-pattern-extensions.tex as the dataset-metadata slot that composes with (rather than competes against) F(AI)²R. Source-analyzer verification pass 2026-05-18: confirmed the cited artefact is the MLCommons \"Croissant Format Specification, Version 1.0\" (published 2024/03/01, first author Omar Benjelloun, MLCommons), matching the paper/references.bib @techreport entry; the graph title previously carried the distinct NeurIPS-paper title \"Croissant: A Metadata Format for ML-Ready Datasets\" and was aligned to the spec title. Rung at ai-confirmed pending human read of the spec."@en .
 
 claim:transformer-pivot  a fair2r:Claim ;
     rdfs:label "Since Vaswani et al. 2017, the population of plausible authors of a scientific paragraph has changed in kind"@en ;
@@ -3139,3 +3141,44 @@ hc:add-oecd-aiscience-source  a fair2r:HumanContribution ;
     rdfs:comment "Researcher named the source by URL. Medium leverage: it supplies an authoritative policy-body citation for the equity claim that was previously carried only by bender2021stochastic and birhane2022values, and it strengthens the shallow-work / narrowing-novelty discussion the Author's Note conviction depends on."@en ;
     dcterms:created "2026-05-17"^^xsd:date ;
     prov:influenced act:add-oecd-aiscience-source .
+
+#-------------------------------------------------------------------------
+# 2026-05-18 --- Source-analyzer verification pass: live-web re-check of
+# the known-defect list and the recently-added, never-human-checked
+# sources.
+#-------------------------------------------------------------------------
+
+act:meta-cooperation-2026-05-18-verification-pass-7  a prov:Activity ;
+    rdfs:label "Seventh source-analyzer pass: re-check known-defect list and recently-added sources against live records"@en ;
+    prov:startedAtTime "2026-05-18T00:00:00Z"^^xsd:dateTime ;
+    prov:endedAtTime   "2026-05-18T00:00:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith agent:source-analyzer-subagent ,
+                           agent:claude-opus-4-7 ,
+                           agent:human-author ;
+    prov:wasInformedBy act:meta-cooperation-2026-05-07-verification-pass-3 ;
+    prov:used src:vannoorden2023chatgpt ,
+              src:ravi2024fair4ml ,
+              src:icmje2023 ,
+              src:oecd2023aiscience ,
+              src:liu2026ara ,
+              src:vaswani2017attention ,
+              src:benjelloun2024croissant ;
+    rdfs:comment "Source-analyzer subagent (claude-opus-4-7[1m] under the source-analyzer prompt) ran a live-web verification loop (Exa web_search + web_fetch MCP tools, academic-search MCP). Confirmed-and-corrected: src:vannoorden2023chatgpt --- the bib DOI had been corrected in an earlier pass but this graph mirror still carried the wrong identifier doi:10.1038/d41586-023-03907-5 (resolves to an unrelated India-economics article) and was stuck at verif:lit-retrieved; corrected to doi:10.1038/d41586-023-03930-6, added both creators (Richard Van Noorden, Richard Webb), full title, and advanced verif:lit-retrieved -> verif:ai-confirmed (Nature 624(7992):509, PMID 38093061, confirmed via Nature landing page + PubMed). src:benjelloun2024croissant --- graph title carried the distinct NeurIPS-paper title; aligned to the cited @techreport artefact title 'Croissant Format Specification, Version 1.0' (MLCommons, 2024-03-01, first author Omar Benjelloun). Confirmed-correct, no change needed: src:ravi2024fair4ml (Zenodo 10.5281/zenodo.14002310 resolves; Castro/Garijo author block correct), src:icmje2023 (page resolves; living document now 'Updated January 2026'; bib note added), src:oecd2023aiscience (DOI 10.1787/a8d820bd-en + landing page resolve; equity / shallow-work / narrowing-novelty passages confirmed verbatim), src:liu2026ara (arXiv:2604.24658 resolves; first author Jiachen Liu; title confirmed), src:vaswani2017attention (arXiv:1706.03762 resolves; first author Ashish Vaswani; NeurIPS 2017; rung kept verif:human-read per documented general-knowledge rationale). Self-cites krebs2026faiarmain / krebs2026faiarcompanion confirmed internally coherent (no external lookup; no graph src: entity by design). iclr_llm_policy: a stable canonical policy page https://iclr.cc/FAQ/LLM was found and confirmed; bib url updated from the bare homepage; rung kept verif:lit-retrieved (per-cycle text capture still on the institutional-access escalation list, conservative). No source downgraded to verif:needs-research; no source left unresolvable. ttl re-parsed via rdflib; reading queue regenerated; make -C paper pdf clean-built with no undefined citations."@en .
+
+hc:verification-pass-7-prompt-2026-05-18  a fair2r:HumanContribution ;
+    rdfs:label "Researcher prompt: run a sources validation loop with live web research and apply the safe corrections"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "responsibility-uptake" ;
+    fair2r:contributionLeverage "medium" ;
+    rdfs:comment "User dispatched a source-analyzer subagent run with the binding discipline that the validation pass itself is a material (corrective) contribution to be logged on both sides, that lit-read remains human-only, and that an unresolvable identifier must go to verif:needs-research rather than be invented. Responsibility-uptake because the prompt is about closing audit gaps in the citation spine under the published name, not producing new content."@en ;
+    dcterms:created "2026-05-18"^^xsd:date ;
+    prov:influenced act:meta-cooperation-2026-05-18-verification-pass-7 .
+
+ai:verification-pass-7-2026-05-18  a fair2r:AIContribution ;
+    rdfs:label "Source-analyzer subagent: seventh verification pass --- one graph DOI/rung corrected, one graph title aligned, six sources re-confirmed"@en ;
+    fair2r:contributedBy agent:source-analyzer-subagent , agent:claude-opus-4-7 ;
+    fair2r:contributionType "corrective-intervention" ;
+    fair2r:contributionLeverage "medium" ;
+    rdfs:comment "Source-analyzer subagent (claude-opus-4-7[1m] under the source-analyzer prompt) executed the sources-validation-loop prompt using the Exa web_search/web_fetch and academic-search MCP tools. Material output: (1) src:vannoorden2023chatgpt graph mirror corrected --- wrong DOI d41586-023-03907-5 -> d41586-023-03930-6, both creators added, title completed, rung lit-retrieved -> ai-confirmed; (2) src:benjelloun2024croissant graph title aligned to the cited spec @techreport; (3) paper/references.bib: iclr_llm_policy url updated to the stable https://iclr.cc/FAQ/LLM policy page, icmje2023 note added recording the January-2026 revision and the AI-specific topic-page URL; (4) ravi2024fair4ml, oecd2023aiscience, liu2026ara, vaswani2017attention, icmje2023 re-confirmed against live records with no change required. No fabrication; no source could not be resolved; nothing downgraded to needs-research. doc/sources.md seventh-pass log appended; reading queue regenerated; ttl re-parsed; paper rebuilt clean. Logged here as the AI mirror per the no-parentless-contribution rule; parent activity act:meta-cooperation-2026-05-18-verification-pass-7."@en ;
+    dcterms:created "2026-05-18"^^xsd:date ;
+    prov:influenced act:meta-cooperation-2026-05-18-verification-pass-7 .
