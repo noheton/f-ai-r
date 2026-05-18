@@ -3239,3 +3239,47 @@ ai:reconcile-slides-2026-05-18  a fair2r:AIContribution ;
     rdfs:comment "Presentation agent (claude-opus-4-7[1m] under agents/presentation.md) executed the reconciliation. Verified every number against the live repo before editing: doc/provenance.ttl 2517 triples via rdflib; 59 bib entries via grep -c '^@' paper/references.bib; 55 sources from doc/reading-queue.md; 27 *.html in _site/; paper/main.pdf 22 pp and paper/companion.pdf 14 pp via pdfinfo. Edits: pitch 'The problem' (+Vaswani clause), pitch 'Worked example' (artefact set), pitch 'Thank you' (closing conviction); conference 'FAIR for data...' (+Vaswani), 'Recursive attestation' (numbers + paper/companion split), new frame 'Adjacent proposals and adjacent vocabularies' (Ara + Croissant), 'Sustainability is not a footnote' (+OECD on equity), 'Thank you' (closing conviction); poster 'This is the worked example' block (artefact set + conviction). External-work wording mirrored from paper/sections/intro.tex and paper/sections/limits-and-objections.tex; the conviction mirrored from paper/sections/authors-note.tex with the 'yet' hedge and dated-not-metaphysical framing preserved. No fabrication: build-variable figures (triple count, site page count) given honest qualitative phrasing. Compiled clean: pitch 0 overfull, conference no new overfull vs the 3 pre-existing baseline boxes, poster 1 page at 97.8% vertical fill, columns within ~1%. Mirrors the human content-prompt per the no-parentless-contribution rule; parent activity act:reconcile-slides-2026-05-18."@en ;
     dcterms:created "2026-05-18"^^xsd:date ;
     prov:influenced act:reconcile-slides-2026-05-18 .
+
+#-------------------------------------------------------------------------
+# 2026-05-18 --- Adjacent-proposals positioning diagram (conference deck).
+#-------------------------------------------------------------------------
+
+act:adjacent-proposals-figure-2026-05-18  a prov:Activity ;
+    prov:startedAtTime "2026-05-18T00:00:00Z"^^xsd:dateTime ;
+    prov:endedAtTime   "2026-05-18T00:00:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith agent:claude-sonnet-4-6 , agent:human-author ;
+    prov:wasInformedBy act:reconcile-slides-2026-05-18 ;
+    prov:used ent:slidedeck-conference-r2 ;
+    rdfs:comment "Researcher standing direction: 'use image generation for slides if it helps with message (no photorealism / charts and the like)'. No image-generation tool is connected in this environment (verified exhaustively); the prudent substitute under the DLR Corporate Design and no-fabrication rules is a deterministic TikZ diagram in the repository's existing figure convention. Assessment: of the 2026-05-18 reconciliation changes, exactly one frame's message is text-dense conceptual positioning that a schematic clarifies in a talk --- the new conference frame 'Adjacent proposals and adjacent vocabularies' (two long bullets: Ara replaces / F(AI)^2R keeps-and-rides / Croissant composes / neither subsumes). The other landed changes (a Vaswani clause, an artefact-list line, corrected numbers, a closing aphorism) are inherently textual; adding figures there would be decorative bloat against the institutional-voice and no-bloat rules. paper/figures/adjacent-proposals.tex created (tikzpicture-only, DLR palette, square corners, hairlines, no gradients; same \\providecommand text-macro pattern as figures/ai-squared-grid.tex). The frame's two bullets were replaced by the figure plus a one-line caption; claims unchanged (still mirrors paper/sections/limits-and-objections.tex). Conference deck recompiles clean (exit 0, 39 pp, largest overfull 39.6pt --- within the pre-existing baseline class, no new overfull from the figure)."@en .
+
+ent:figure-adjacent-proposals  a fair2r:Figure ;
+    rdfs:label "Adjacent proposals and adjacent vocabularies (Ara / F(AI)^2R / Croissant positioning)"@en ;
+    dcterms:source <paper/figures/adjacent-proposals.tex> ;
+    prov:wasGeneratedBy act:adjacent-proposals-figure-2026-05-18 ;
+    prov:wasAttributedTo agent:claude-sonnet-4-6 , agent:human-author .
+
+ent:slidedeck-conference-r3  a fair2r:Slidedeck ;
+    rdfs:label "conference-30min.tex after the adjacent-proposals frame was converted from two text bullets to the positioning diagram"@en ;
+    dcterms:source <slides/conference-30min.tex> ;
+    prov:wasRevisionOf ent:slidedeck-conference-r2 ;
+    prov:wasGeneratedBy act:adjacent-proposals-figure-2026-05-18 ;
+    prov:used ent:figure-adjacent-proposals ;
+    prov:wasAttributedTo agent:claude-sonnet-4-6 , agent:human-author .
+
+hc:adjacent-proposals-figure-2026-05-18  a fair2r:HumanContribution ;
+    rdfs:label "Researcher standing direction: use a visual for slides where it helps the message, no photorealism"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "content-prompt" ;
+    fair2r:contributionLeverage "low" ;
+    rdfs:comment "Standing instruction to add a visual where it strengthens a slide's message, constrained to non-photorealistic charts/diagrams. Low leverage as a single-figure change, but it set the policy under which the conference positioning frame was converted from text to schematic and under which no decorative figures were added elsewhere."@en ;
+    dcterms:created "2026-05-18"^^xsd:date ;
+    prov:influenced act:adjacent-proposals-figure-2026-05-18 .
+
+ai:adjacent-proposals-figure-2026-05-18  a fair2r:AIContribution ;
+    rdfs:label "TikZ positioning diagram built for the conference 'Adjacent proposals and adjacent vocabularies' frame; no decorative figures added elsewhere"@en ;
+    fair2r:contributedBy agent:claude-sonnet-4-6 ;
+    fair2r:contributionType "illustration" ;
+    fair2r:contributionLeverage "low" ;
+    rdfs:comment "Confirmed no image-generation connector is available and stated so rather than substituting one. Judged that exactly one of the reconciliation frames benefits from a visual and that the rest are textual by nature; built paper/figures/adjacent-proposals.tex accordingly (DLR Corporate Design, deterministic TikZ, the repository figure convention) and declined to add figures elsewhere on no-bloat grounds. Caught and fixed the TikZ-style-vs-text-macro pitfall (\\hdr/\\sub used as in-node text) using the \\providecommand pattern documented in figures/ai-squared-grid.tex. Rendered the frame to PNG and inspected it before landing. Mirrors the human standing direction per the no-parentless-contribution rule; parent activity act:adjacent-proposals-figure-2026-05-18."@en ;
+    dcterms:created "2026-05-18"^^xsd:date ;
+    prov:influenced act:adjacent-proposals-figure-2026-05-18 .

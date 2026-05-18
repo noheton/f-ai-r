@@ -1,0 +1,68 @@
+% F(AI)^2R: adjacent proposals and adjacent vocabularies.
+% A positioning schematic for the conference deck's related-work beat:
+% where Ara (Liu et al. 2026) and MLCommons Croissant 1.0 sit relative
+% to F(AI)^2R. The vertical axis is "what is the primary artefact?":
+% Ara replaces the paper with an agent-native package; F(AI)^2R keeps
+% the human-readable manuscript and rides a PROV-O graph alongside;
+% Croissant is not a paper at all --- it is the dataset-metadata layer
+% the paper sits on top of, and it composes rather than competes.
+% tikzpicture-only by repository convention (cf. figures/ai-squared-grid.tex);
+% the slide wraps it in a frame. DLR Corporate Design palette only.
+% Text-format macros for node bodies. These are NOT TikZ styles (a
+% TikZ style colours the node, not the text inside it); they are plain
+% LaTeX font-and-colour switches used inside the node-text braces, the
+% same pattern as figures/ai-squared-grid.tex.
+\providecommand{\hdr}{\sffamily\bfseries\footnotesize\color{black}}
+\providecommand{\sub}{\sffamily\itshape\footnotesize\color{dlrGrau1}}
+\begin{tikzpicture}[
+  every node/.style={font=\sffamily\footnotesize, align=center,
+                     inner sep=4pt},
+  box/.style={draw, line width=0.5pt, minimum width=92mm,
+              minimum height=15mm, text width=88mm, align=left,
+              fill=white, anchor=center, draw=dlrGrau1},
+  ara/.style={fill=white,      draw=dlrGrau1, line width=0.6pt, dashed},
+  fair/.style={fill=dlrBlau5,  draw=dlrBlau1, line width=0.9pt},
+  croi/.style={fill=dlrGruen5, draw=dlrGruen1, line width=0.6pt},
+  rel/.style={font=\sffamily\footnotesize, text=dlrBlau1, align=left},
+  sub/.style={font=\sffamily\itshape\footnotesize, text=dlrGrau1},
+  axislbl/.style={font=\sffamily\bfseries\footnotesize, text=dlrGrau1},
+]
+% --- Three positioned bands ---------------------------------------
+\node[box, ara]  (ARA) at (0, 2.55) {%
+  {\hdr Ara --- agent-native package} \hfill {\sub maximalist}\\[2pt]
+  {\sub logic $\cdot$ executable code $\cdot$ exploration graph of
+   failed branches $\cdot$ claim--evidence grounding}};
+\node[box, fair] (FAIR) at (0, 0.0) {%
+  {\hdr F(AI)\textsuperscript{2}R} \hfill {\sub this paper}\\[2pt]
+  {\sub human-readable manuscript \textbf{(primary)} \; + \;
+   PROV-O graph \emph{alongside} it}};
+\node[box, croi] (CROI) at (0, -2.55) {%
+  {\hdr MLCommons Croissant 1.0} \hfill {\sub adjacent, not rival}\\[2pt]
+  {\sub dataset metadata --- the \emph{thing learned from}, not the
+   authoring process}};
+
+% --- Relation: Ara ⊇ F(AI)^2R's logbook+claim-graph ---------------
+\draw[draw=dlrGrau1, line width=0.5pt, {Stealth[length=2mm]}-{Stealth[length=2mm]}]
+  (FAIR.north) -- (ARA.south);
+\node[rel, anchor=west] at (4.95, 1.30)
+  {Ara's exploration layer\\$\supseteq$ our logbook + claim-graph:\\
+   a \textbf{credible upper bound},\\not a refutation.\\[2pt]
+   F(AI)\textsuperscript{2}R \textbf{declines}\\the bargain --- the
+   paper\\stays the primary artefact.};
+
+% --- Relation: Croissant composes via fair2r:Source ---------------
+\draw[draw=dlrGruen1, line width=0.5pt, {Stealth[length=2mm]}-{Stealth[length=2mm]}]
+  (FAIR.south) -- (CROI.north);
+\node[rel, text=dlrGruen1, anchor=west] at (4.95, -1.30)
+  {\textbf{Composes}, not competes:\\a Croissant record is referenced\\
+   from a \texttt{fair2r:Source} triple.\\
+   Neither schema subsumes\\the other.};
+
+% --- Left axis: "primary artefact?" -------------------------------
+\draw[draw=dlrGrau3, line width=0.3pt, -{Stealth[length=2mm]}]
+  (-5.55, -3.35) -- (-5.55, 3.35);
+\node[axislbl, rotate=90] at (-5.95, 0.0) {what is the primary artefact?};
+\node[sub, anchor=east] at (-4.75,  2.55) {the package};
+\node[sub, anchor=east] at (-4.75,  0.0)  {the manuscript};
+\node[sub, anchor=east] at (-4.75, -2.55) {(not a paper)};
+\end{tikzpicture}
