@@ -3352,3 +3352,57 @@ Provenance: `act:add-oecd-aiscience-source`
 `hc:add-oecd-aiscience-source` (content-prompt, medium
 leverage). DOI follows the OECD iLibrary `10.1787/<id>`
 convention; rung `ai-confirmed` pending human read.
+
+## 2026-05-18 --- Seventh source-analyzer verification pass
+
+Ran a live-web sources validation loop (Exa `web_search` /
+`web_fetch` MCP tools + academic-search MCP) over the
+known-defect list and the recently-added, never-human-checked
+sources. Agent: `claude-opus-4-7[1m]` under the source-analyzer
+prompt.
+
+**Material correction (graph).** `src:vannoorden2023chatgpt`:
+`paper/references.bib` had already been corrected in an earlier
+pass to DOI `10.1038/d41586-023-03930-6` (Van Noorden + Webb,
+*Nature* 624(7992):509), but the `doc/provenance.ttl` mirror
+still carried the wrong identifier `doi:10.1038/d41586-023-03907-5`
+(an unrelated India-economics article) and was stuck at
+`verif:lit-retrieved`. Confirmed the correct record via the
+Nature landing page and PubMed (PMID 38093061); corrected the
+graph triple (DOI, both `dcterms:creator`s, full
+`dcterms:title`) and advanced `verif:lit-retrieved ->
+verif:ai-confirmed`. This resolves the long-standing
+correction-list item 1 and clears the source's
+institutional-access escalation.
+
+**Graph title alignment.** `src:benjelloun2024croissant` title
+aligned from the NeurIPS-paper title to the cited
+`@techreport` title "Croissant Format Specification, Version 1.0"
+(MLCommons, 2024-03-01, first author Omar Benjelloun).
+
+**Safe bib `note` updates.** `iclr_llm_policy` `url` updated from
+the bare `iclr.cc` homepage to the confirmed stable policy page
+`https://iclr.cc/FAQ/LLM`; rung kept at `lit-retrieved`
+(per-cycle text capture still escalated --- conservative).
+`icmje2023` `note` added recording the now-"Updated January
+2026" revision and the AI-specific topic-page URL; bibkey/year
+2023 kept stable.
+
+**Re-confirmed correct, no change:** `ravi2024fair4ml` (Zenodo
+14002310, Castro/Garijo), `oecd2023aiscience`
+(`10.1787/a8d820bd-en`; equity / shallow-work passages verbatim),
+`liu2026ara` (arXiv:2604.24658, Jiachen Liu),
+`vaswani2017attention` (arXiv:1706.03762, Ashish Vaswani, kept
+`verif:human-read`), `icmje2023` (page resolves); self-cites
+`krebs2026faiarmain` / `krebs2026faiarcompanion` internally
+coherent.
+
+No source downgraded to `verif:needs-research`; no source
+unresolvable; no identifier fabricated. Provenance:
+`act:meta-cooperation-2026-05-18-verification-pass-7`
+(`prov:used` the seven re-checked sources);
+`hc:verification-pass-7-prompt-2026-05-18` (responsibility-uptake,
+medium); `ai:verification-pass-7-2026-05-18`
+(corrective-intervention, medium). Reading queue regenerated;
+`doc/provenance.ttl` re-parses via rdflib (2517 triples);
+`make -C paper pdf` clean-builds with no undefined citations.

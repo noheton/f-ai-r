@@ -7,8 +7,8 @@ Compact one-row-per-source table for verification triage. Per-source narrative b
 ## State at the time of this build
 
 - Sources in queue: **55**
-- `lit-retrieved` (full text not yet fetched): 3
-- `ai-confirmed` (abstract / agent-confirmed only): 51
+- `lit-retrieved` (full text not yet fetched): 2
+- `ai-confirmed` (abstract / agent-confirmed only): 52
 - `no-rung` (graph-cleanliness defect): 1
 
 **Verdict roll-up** (from [`reading-queue-verdicts.md`](reading-queue-verdicts.md)): **0** advance, **0** hold, **0** retire, **55** pending.
@@ -27,7 +27,7 @@ Compact one-row-per-source table for verification triage. Per-source narrative b
 | 8 | Curdt et al. `curdt2025hmc` | 2025 | [link](https://doi.org/10.5281/zenodo.15113717) | `ai-confirmed` | **1** | `future-research-infrastructure`: does the source support — *Future research success may depend less on the solitary craft of a single manuscript an…*? | *(pending)* |
 | 9 | Eisen et al. `eisen2018preprints` | 2020 | [link](https://doi.org/10.7554/eLife.64910) | `ai-confirmed` | **1** | `journal-as-distribution-in-decline`: does the source support — *Traditional publishing is under stress*? | *(pending)* |
 | 10 | Else `else2023chatgpt` | 2023 | [link](https://doi.org/10.1038/d41586-023-00191-1) | `ai-confirmed` | **1** | `ai-rise-motivation`: does the source support — *The rising fraction of LLM-modified prose in scholarly venues makes a discipline of aut…*? | *(pending)* |
-| 11 | ICLR `iclr_llm_policy` | 2024 | [link](https://iclr.cc/) | `lit-retrieved` | **1** | `reviewer-side-ai-policies`: does the source support — *Major ML venues (NeurIPS, ICLR, ACL Rolling Review) have published explicit author-and-…*? | *(pending)* |
+| 11 | ICLR `iclr_llm_policy` | 2024 | [link](https://iclr.cc/FAQ/LLM) | `lit-retrieved` | **1** | `reviewer-side-ai-policies`: does the source support — *Major ML venues (NeurIPS, ICLR, ACL Rolling Review) have published explicit author-and-…*? | *(pending)* |
 | 12 | International Committee of Medical Journal Editors `icmje2023` | 2023 | [link](https://www.icmje.org/recommendations/) | `ai-confirmed` | **1** | `practice-legal`: does the source support — *Legal honesty about authorship: AI is acknowledged but not an author*? | *(pending)* |
 | 13 | Ioannidis `ioannidis2005` | 2005 | [link](https://doi.org/10.1371/journal.pmed.0020124) | `ai-confirmed` | **1** | `reproducibility-baseline-poor`: does the source support — *The LLM-assisted writing failure modes sit on top of a reproducibility baseline that is…*? | *(pending)* |
 | 14 | Janowicz et al. `janowicz2019sosa` | 2019 | [link](https://doi.org/10.1016/j.websem.2018.06.003) | `ai-confirmed` | **1** | `domain-ontologies-extension`: does the source support — *Domain ontologies (SOSA / SSN for sensor data, OM-2 / QUDT for units of measure) plug i…*? | *(pending)* |
@@ -42,7 +42,7 @@ Compact one-row-per-source table for verification triage. Per-source narrative b
 | 23 | Rijgersberg et al. `rijgersberg2013om` | 2013 | [link](https://doi.org/10.3233/SW-2012-0069) | `ai-confirmed` | **1** | `domain-ontologies-extension`: does the source support — *Domain ontologies (SOSA / SSN for sensor data, OM-2 / QUDT for units of measure) plug i…*? | *(pending)* |
 | 24 | Stankorb et al. `shafer2014xennials` | 2014 | [link](https://www.good.is/articles/generation-xennial) | `ai-confirmed` | **1** | `senior-researcher-bridge`: does the source support — *Senior researchers --- analogous to the Xennial bridge generation --- carry a responsib…*? | *(pending)* |
 | 25 | Tennant et al. `tennant2016open` | 2016 | [link](https://doi.org/10.12688/f1000research.8460.3) | `ai-confirmed` | **1** | `journal-as-distribution-in-decline`: does the source support — *Traditional publishing is under stress*? | *(pending)* |
-| 26 | Van Noorden et al. `vannoorden2023chatgpt` | 2023 | [link](https://doi.org/10.1038/d41586-023-03930-6) | `lit-retrieved` | **1** | `ai-rise-motivation`: does the source support — *The rising fraction of LLM-modified prose in scholarly venues makes a discipline of aut…*? | *(pending)* |
+| 26 | Van Noorden et al. `vannoorden2023chatgpt` | 2023 | [link](https://doi.org/10.1038/d41586-023-03930-6) | `ai-confirmed` | **1** | `ai-rise-motivation`: does the source support — *The rising fraction of LLM-modified prose in scholarly venues makes a discipline of aut…*? | *(pending)* |
 | 27 | Wilkinson et al. `wilkinson2016fair` | 2016 | [link](https://doi.org/10.1038/sdata.2016.18) | `ai-confirmed` | **1** | `practice-fair-precondition`: does the source support — *FAIR alignment as precondition: do not retrofit FAIR*? | *(pending)* |
 | 28 | Alemohammad et al. `alemohammad2023mad` | 2023 | [link](https://arxiv.org/abs/2307.01850) | `ai-confirmed` | **0** | *(retire / wire-up question)* | *(pending)* |
 | 29 | Anderson et al. `anderson2024homogenization` | 2024 | [link](https://doi.org/10.1145/3635636.3656204) | `ai-confirmed` | **0** | *(retire / wire-up question)* | *(pending)* |

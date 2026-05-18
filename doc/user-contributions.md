@@ -1396,3 +1396,27 @@ new `doc/sources.md` §13 entry.
 `doc/provenance.ttl`, `doc/sources.md`, `doc/logbook.md`,
 `doc/user-contributions.md`.
 *Provenance IRI:* `hc:add-oecd-aiscience-source`
+
+### 2026-05-18 --- Seventh source-analyzer verification pass
+*Type:* `responsibility-uptake`
+*Leverage:* medium
+*Triggered:* a source-analyzer subagent run with a live-web
+research loop over the known-defect list and the
+recently-added, never-human-checked sources. Found and
+corrected the lagging `src:vannoorden2023chatgpt` graph mirror
+(wrong DOI `d41586-023-03907-5` -> `d41586-023-03930-6`, both
+creators added, full title, rung `lit-retrieved` ->
+`ai-confirmed`); aligned the `src:benjelloun2024croissant`
+graph title to the cited spec `@techreport`; updated the
+`iclr_llm_policy` bib `url` to the confirmed stable policy page
+and added an `icmje2023` `note` for the January-2026 revision;
+re-confirmed `ravi2024fair4ml`, `oecd2023aiscience`,
+`liu2026ara`, `vaswani2017attention` against live records with
+no change. The AI side of this corrective contribution is
+mirrored in `doc/provenance.ttl` as
+`ai:verification-pass-7-2026-05-18`.
+*Artefacts touched:* `paper/references.bib`,
+`doc/provenance.ttl`, `doc/sources.md`, `doc/logbook.md`,
+`doc/user-contributions.md`, `doc/reading-queue*.md`
+(regenerated).
+*Provenance IRI:* `hc:verification-pass-7-prompt-2026-05-18`
