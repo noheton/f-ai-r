@@ -1468,3 +1468,24 @@ nature and added no figures elsewhere (no-bloat).
 `doc/logbook.md`, `doc/user-contributions.md`.
 *Provenance IRI:* `hc:adjacent-proposals-figure-2026-05-18`
 (AI mirror `ai:adjacent-proposals-figure-2026-05-18`)
+
+### 2026-05-22 --- HAICON26 World Café topic proposal (draft)
+*Type:* `content-prompt`
+*Leverage:* medium
+*Triggered:* Researcher asked whether F(AI)²R fits HAICON26.
+Live page fetched via Exa `web_fetch`; scientific-abstract and
+workshops tracks already closed; AI World Café open until 2
+June 2026 and the better format for a position paper that
+invites contestation. Three guiding-question options offered;
+researcher chose the partition framing ("Where should the
+human–AI partition sit in scholarly writing?"). Drafted
+`doc/haicon26-world-cafe.md` mirroring the
+`doc/rda-p27-ideas-pitch.md` structure; proposed
+discussion-starter visual is `paper/figures/coupling-rule.tex`
+at A1 or smaller. Submission does not flip
+`paper/publication-consent.md`.
+*Artefacts touched:* `doc/haicon26-world-cafe.md` (new),
+`doc/provenance.ttl`, `doc/logbook.md`,
+`doc/user-contributions.md`.
+*Provenance IRI:* `hc:haicon26-world-cafe-draft-2026-05-22`
+(AI mirror `ai:haicon26-world-cafe-draft-2026-05-22`)

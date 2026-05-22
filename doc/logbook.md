@@ -3513,3 +3513,49 @@ Provenance: `act:adjacent-proposals-figure-2026-05-18`;
 `ent:figure-adjacent-proposals`);
 `hc:`/`ai:adjacent-proposals-figure-2026-05-18`. ttl re-parses
 (2607 triples).
+
+## 2026-05-22 --- HAICON26 World Café topic proposal (draft)
+
+Researcher asked whether F(AI)²R would fit HAICON26
+contributions ([haicon.cc/contributions](https://haicon.cc/contributions/)).
+Live page fetched via Exa `web_fetch`; the four tracks
+enumerated. Scientific-abstract (closed 15 March 2026) and
+workshops/tutorials (closed 24 February 2026) are past
+deadline. The **AI World Café topic-proposal track** is open
+until **2 June 2026** and is the better format for a position
+paper that invites contestation — a discussion table beats a
+one-way oral slot for the eight-practices argument.
+
+Fit assessment: strong. HAICON26 is the home community
+(Helmholtz/DLR/NFDI4Ing/HMC); the "Ethics, Fairness,
+Sustainability" track aligns with F(AI)²R's substance; the
+in-person attendance requirement (8–11 June 2026, Munich) is
+the binding constraint.
+
+Researcher chose the guiding question from three options:
+*"Where should the human–AI partition sit in scholarly
+writing?"* — foregrounding the coupling-rule diagnostic from
+the Author's Note ("would the abstraction have been thinkable
+without the model?") with the *accelerator / cultural blender*
+framing. Drafted `doc/haicon26-world-cafe.md` as a
+fill-in-ready proposal mirroring the
+`doc/rda-p27-ideas-pitch.md` structure (Title, Description,
+optional Poster, Hosts, plus a notes-before-submitting
+checklist). Proposed discussion-starter visual:
+`paper/figures/coupling-rule.tex` (already in the manuscript)
+at A1 or smaller — explicitly NOT the dense A0 conference
+poster, which is sized for science-track display, not for
+discussion tables.
+
+The doc records that a World Café topic proposal is a
+community-discussion submission and does **not** flip
+`paper/publication-consent.md`. Recommended a co-host slot
+(ideally non-DLR Helmholtz) be added before submitting; the
+table is stronger with two voices.
+
+Provenance: `act:haicon26-world-cafe-draft-2026-05-22`;
+`ent:haicon26-world-cafe-doc`;
+`claim:haicon-world-cafe-fit` (`verif:ai-confirmed`);
+`hc:`/`ai:haicon26-world-cafe-draft-2026-05-22`. No paper or
+slide changes (this is a venue-submission doc only). ttl
+re-parses (2643 triples).
