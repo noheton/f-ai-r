@@ -3283,3 +3283,45 @@ ai:adjacent-proposals-figure-2026-05-18  a fair2r:AIContribution ;
     rdfs:comment "Confirmed no image-generation connector is available and stated so rather than substituting one. Judged that exactly one of the reconciliation frames benefits from a visual and that the rest are textual by nature; built paper/figures/adjacent-proposals.tex accordingly (DLR Corporate Design, deterministic TikZ, the repository figure convention) and declined to add figures elsewhere on no-bloat grounds. Caught and fixed the TikZ-style-vs-text-macro pitfall (\\hdr/\\sub used as in-node text) using the \\providecommand pattern documented in figures/ai-squared-grid.tex. Rendered the frame to PNG and inspected it before landing. Mirrors the human standing direction per the no-parentless-contribution rule; parent activity act:adjacent-proposals-figure-2026-05-18."@en ;
     dcterms:created "2026-05-18"^^xsd:date ;
     prov:influenced act:adjacent-proposals-figure-2026-05-18 .
+
+#-------------------------------------------------------------------------
+# 2026-05-22 --- HAICON26 World Café topic proposal (draft).
+#-------------------------------------------------------------------------
+
+act:haicon26-world-cafe-draft-2026-05-22  a prov:Activity ;
+    prov:startedAtTime "2026-05-22T00:00:00Z"^^xsd:dateTime ;
+    prov:endedAtTime   "2026-05-22T00:00:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith agent:claude-sonnet-4-6 , agent:human-author ;
+    rdfs:comment "Researcher asked whether F(AI)^2R would fit HAICON26 contributions. Assessment: yes, strong fit. HAICON26 (Helmholtz AI Conference, 8-11 June 2026, Munich) is the author's home community (DLR/Helmholtz/NFDI4Ing/HMC). Scientific-abstract and workshop tracks already closed (15 March / 24 February 2026); the AI World Café topic-proposal track is open until 2 June 2026 and is the better format for a position paper that explicitly invites contestation. Drafted doc/haicon26-world-cafe.md as a fill-in-ready proposal mirroring the live form (Title, Description, optional Poster, Hosts). Guiding question chosen by the researcher: 'Where should the human-AI partition sit in scholarly writing?' --- foregrounds the coupling-rule diagnostic from authors-note.tex ('would the abstraction have been thinkable without the model?') with the accelerator/cultural-blender framing. The proposed discussion-starter visual is paper/figures/coupling-rule.tex (already in the manuscript), explicitly NOT the dense A0 conference poster which is sized for science-track display, not World Caf\\'e tables. The doc records that the submission does not flip paper/publication-consent.md (a community-discussion proposal is not a DOI-minting release) and notes the binding in-person requirement and a recommended co-host slot."@en .
+
+ent:haicon26-world-cafe-doc  a fair2r:Section ;
+    rdfs:label "doc/haicon26-world-cafe.md --- HAICON26 AI World Caf\\'e topic proposal (draft)"@en ;
+    dcterms:source <doc/haicon26-world-cafe.md> ;
+    prov:wasGeneratedBy act:haicon26-world-cafe-draft-2026-05-22 ;
+    prov:wasAttributedTo agent:claude-sonnet-4-6 , agent:human-author .
+
+claim:haicon-world-cafe-fit  a fair2r:Claim ;
+    rdfs:label "F(AI)^2R fits the HAICON26 AI World Caf\\'e topic-proposal track: home community (Helmholtz/DLR), open submission window (until 2 June 2026), and a discussion format that suits a position paper built to be argued with."@en ;
+    prov:wasGeneratedBy act:haicon26-world-cafe-draft-2026-05-22 ;
+    prov:wasAttributedTo agent:human-author , agent:claude-sonnet-4-6 ;
+    fair2r:verificationState verif:ai-confirmed ;
+    rdfs:comment "Position assessment, attributed to the researcher (who initiated the question and chose the guiding question) jointly with the model (which drafted the fit analysis and the proposal). Rung ai-confirmed: HAICON26 contribution page resolves and the four tracks were enumerated from the live page (Exa web_fetch 2026-05-22); the in-person requirement, the 2 June 2026 deadline, the World Caf\\'e visual-poster guidance, and the four scientific-abstract tracks were read directly from haicon.cc/contributions/. Pending human confirmation of fit and of in-person availability."@en ;
+    dcterms:created "2026-05-22"^^xsd:date .
+
+hc:haicon26-world-cafe-draft-2026-05-22  a fair2r:HumanContribution ;
+    rdfs:label "Researcher direction: assess HAICON26 fit and (on confirmation) draft a World Caf\\'e proposal around the human-AI partition question"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "content-prompt" ;
+    fair2r:contributionLeverage "medium" ;
+    rdfs:comment "Two-step contribution: (a) researcher asked whether F(AI)^2R would be interesting as a HAICON contribution (a venue-discovery prompt); (b) on the model's recommendation, chose the partition-question framing for the World Caf\\'e table over two alternatives (the receipts-of-an-LLM-assisted-paper framing and the novelty-conviction framing). Medium leverage: it adds a second concrete community-presentation submission to the repository's venue plan (the first being doc/rda-p27-ideas-pitch.md), without entangling the publication-consent gate."@en ;
+    dcterms:created "2026-05-22"^^xsd:date ;
+    prov:influenced act:haicon26-world-cafe-draft-2026-05-22 .
+
+ai:haicon26-world-cafe-draft-2026-05-22  a fair2r:AIContribution ;
+    rdfs:label "HAICON26 fit assessment + fill-in-ready World Caf\\'e proposal draft"@en ;
+    fair2r:contributedBy agent:claude-sonnet-4-6 ;
+    fair2r:contributionType "content-prompt" ;
+    fair2r:contributionLeverage "medium" ;
+    rdfs:comment "Fetched haicon.cc/contributions/ via Exa web_fetch, enumerated the four contribution tracks, established that scientific-abstract (closed 15 March) and workshops (closed 24 February) are already past deadline and that AI World Caf\\'e (open until 2 June) is the only practical option. Recommended the table format on the grounds that a position paper invites contestation and a discussion format suits it better than a one-way oral slot. Offered three guiding-question alternatives; on the researcher's choice, drafted doc/haicon26-world-cafe.md mirroring the rda-p27-ideas-pitch.md structure. Reused existing repository assets (coupling-rule figure, project URLs, the eight-practices framing); no new claims beyond what the paper already states. Mirrors the human content-prompt per the no-parentless-contribution rule."@en ;
+    dcterms:created "2026-05-22"^^xsd:date ;
+    prov:influenced act:haicon26-world-cafe-draft-2026-05-22 .
