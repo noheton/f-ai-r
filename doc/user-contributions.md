@@ -1489,3 +1489,22 @@ at A1 or smaller. Submission does not flip
 `doc/user-contributions.md`.
 *Provenance IRI:* `hc:haicon26-world-cafe-draft-2026-05-22`
 (AI mirror `ai:haicon26-world-cafe-draft-2026-05-22`)
+
+### 2026-06-15 --- Speaker-bio scaffolds
+*Type:* `content-prompt`
+*Leverage:* low
+*Triggered:* Researcher asked for a short speaker CV.
+Repository-verifiable fields filled; ORCID public profile
+attempted via Exa `web_fetch` but JS-rendered (no static
+content); unverifiable biographical details (role/title, ZLP
+research focus, education) left as `<TODO>` rather than
+fabricated. Four length variants in `doc/speaker-bio.md`:
+chair-intro one-liner; HAICON26 50–60 words (combined bio-and-
+talk, reaches 57 words on role-placeholder fill); ~150-word
+short bio (RDA P27 / programme); ~250-word extended profile
+(workshop / panel chair card).
+*Artefacts touched:* `doc/speaker-bio.md` (new),
+`doc/provenance.ttl`, `doc/logbook.md`,
+`doc/user-contributions.md`.
+*Provenance IRI:* `hc:speaker-bio-draft-2026-06-15`
+(AI mirror `ai:speaker-bio-draft-2026-06-15`)
