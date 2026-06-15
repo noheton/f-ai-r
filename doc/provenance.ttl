@@ -3325,3 +3325,39 @@ ai:haicon26-world-cafe-draft-2026-05-22  a fair2r:AIContribution ;
     rdfs:comment "Fetched haicon.cc/contributions/ via Exa web_fetch, enumerated the four contribution tracks, established that scientific-abstract (closed 15 March) and workshops (closed 24 February) are already past deadline and that AI World Caf\\'e (open until 2 June) is the only practical option. Recommended the table format on the grounds that a position paper invites contestation and a discussion format suits it better than a one-way oral slot. Offered three guiding-question alternatives; on the researcher's choice, drafted doc/haicon26-world-cafe.md mirroring the rda-p27-ideas-pitch.md structure. Reused existing repository assets (coupling-rule figure, project URLs, the eight-practices framing); no new claims beyond what the paper already states. Mirrors the human content-prompt per the no-parentless-contribution rule."@en ;
     dcterms:created "2026-05-22"^^xsd:date ;
     prov:influenced act:haicon26-world-cafe-draft-2026-05-22 .
+
+#-------------------------------------------------------------------------
+# 2026-06-15 --- Speaker bio scaffolds (multiple lengths).
+#-------------------------------------------------------------------------
+
+act:speaker-bio-draft-2026-06-15  a prov:Activity ;
+    prov:startedAtTime "2026-06-15T00:00:00Z"^^xsd:dateTime ;
+    prov:endedAtTime   "2026-06-15T00:00:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith agent:claude-sonnet-4-6 , agent:human-author ;
+    prov:wasInformedBy act:haicon26-world-cafe-draft-2026-05-22 ,
+                       act:add-oecd-aiscience-source ;
+    rdfs:comment "Researcher asked for a short speaker CV. Attempted to ground biographical details from the public ORCID profile (0000-0001-6033-801X) via Exa web_fetch; the rendered ORCID page is JS-driven and the public data was not extractable through the static fetch. Per the no-fabrication rule the bio was therefore scaffolded only from what is verifiable in this repository (name, affiliation block, communities, ORCID, contact, project) with explicit `<TODO>` placeholders for everything else (role/title, ZLP research focus, education). Four length variants drafted in doc/speaker-bio.md to cover the venues currently in the venue plan: (a) chair-intro one-liner, (b) HAICON26 50-60 word combined bio-and-talk introduction, (c) ~150-word short bio for the RDA P27 short-bio link or a conference programme entry, (d) ~250-word extended profile for a workshop or panel chair card. The (b) variant reaches 57 words once the role placeholder is filled and so meets the HAICON form constraint precisely."@en .
+
+ent:speaker-bio-doc  a fair2r:Section ;
+    rdfs:label "doc/speaker-bio.md --- speaker-bio scaffolds (one-liner / 50-60 / ~150 / ~250 word variants)"@en ;
+    dcterms:source <doc/speaker-bio.md> ;
+    prov:wasGeneratedBy act:speaker-bio-draft-2026-06-15 ;
+    prov:wasAttributedTo agent:claude-sonnet-4-6 , agent:human-author .
+
+hc:speaker-bio-draft-2026-06-15  a fair2r:HumanContribution ;
+    rdfs:label "Researcher direction: produce a short speaker CV"@en ;
+    fair2r:contributedBy agent:human-author ;
+    fair2r:contributionType "content-prompt" ;
+    fair2r:contributionLeverage "low" ;
+    rdfs:comment "Researcher asked for a short speaker CV. Low leverage as a content artefact (a bio is venue boilerplate) but useful infrastructure: the four variants and the placeholder list let any future venue submission reuse the same source. Implicitly reaffirmed the no-fabrication rule --- biographical details not grounded in the repository or in a verifiable public source were left as `<TODO>` for the author to fill."@en ;
+    dcterms:created "2026-06-15"^^xsd:date ;
+    prov:influenced act:speaker-bio-draft-2026-06-15 .
+
+ai:speaker-bio-draft-2026-06-15  a fair2r:AIContribution ;
+    rdfs:label "Speaker-bio scaffolds (one-liner, 50-60 words, ~150 words, ~250 words) grounded only in repository-verifiable facts; missing biographical details marked `<TODO>` rather than fabricated"@en ;
+    fair2r:contributedBy agent:claude-sonnet-4-6 ;
+    fair2r:contributionType "content-prompt" ;
+    fair2r:contributionLeverage "low" ;
+    rdfs:comment "Reused author identity, affiliation, communities, ORCID, contact, and the F(AI)^2R project description that are already in this repository (CLAUDE.md, README.md, doc/rda-p27-ideas-pitch.md, doc/haicon26-world-cafe.md, paper/main.tex front matter). Attempted to enrich from the public ORCID profile via Exa web_fetch; the page is JS-rendered and no biographical content was returned in the static extract. Declined to invent the unverifiable details (role/title, ZLP research focus, degrees); marked them explicitly as `<TODO>` so the human author fills them once and the four variants reflow consistently. The HAICON 50-60 word variant is counted to 57 words once the role placeholder is one or two words. Mirrors the human content-prompt per the no-parentless-contribution rule."@en ;
+    dcterms:created "2026-06-15"^^xsd:date ;
+    prov:influenced act:speaker-bio-draft-2026-06-15 .

@@ -3559,3 +3559,41 @@ Provenance: `act:haicon26-world-cafe-draft-2026-05-22`;
 `hc:`/`ai:haicon26-world-cafe-draft-2026-05-22`. No paper or
 slide changes (this is a venue-submission doc only). ttl
 re-parses (2643 triples).
+
+## 2026-06-15 --- Speaker-bio scaffolds (one-liner / 50–60 / ~150 / ~250 words)
+
+Researcher asked for a short speaker CV. Attempted to enrich
+the public ORCID profile (0000-0001-6033-801X) via Exa
+`web_fetch`; the rendered ORCID page is JS-driven and no
+biographical content was returned in the static extract. Per
+the no-fabrication rule, biographical details not grounded in
+the repository or in a verifiable public source were left as
+`<TODO>` for the human author to fill, rather than invented.
+
+Grounded from the repository (CLAUDE.md, README.md,
+`doc/rda-p27-ideas-pitch.md`, `doc/haicon26-world-cafe.md`,
+the paper front matter): name, DLR/ZLP affiliation,
+Helmholtz/NFDI4Ing/HMC communities, ORCID, contact, and the
+F(AI)²R project description. Left as `<TODO>` for the author:
+role/title, ZLP research focus, education.
+
+Four length variants drafted in `doc/speaker-bio.md` to cover
+the venues currently in the venue plan: (a) chair-intro
+one-liner / slide footer; (b) HAICON26 50–60-word combined
+bio-and-talk introduction (reaches 57 words once the role
+placeholder is one or two words, meeting the form constraint
+precisely); (c) ~150-word short bio for the RDA P27 short-bio
+link or a conference programme entry; (d) ~250-word extended
+profile for a workshop or panel chair card.
+
+Caught a dangling-IRI defect in the same pass: the speaker-bio
+activity initially referenced
+`act:rda-p27-ideas-pitch-draft-2026-05-13`, which never existed
+(the P27 pitch doc was actually produced under the bundled
+`act:add-oecd-aiscience-source`). Fixed the reference before
+committing.
+
+Provenance: `act:speaker-bio-draft-2026-06-15`;
+`ent:speaker-bio-doc`;
+`hc:`/`ai:speaker-bio-draft-2026-06-15`. No paper or slide
+changes. ttl re-parses (2673 triples).
